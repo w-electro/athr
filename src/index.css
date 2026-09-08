@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-night-800 font-sans text-night-700 antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* الأرقام اللاتينية أوضح للقراءة في السياق العربي التقني (المسافات، الأوقات) */
+  .num {
+    font-feature-settings: 'tnum';
+    direction: ltr;
+    display: inline-block;
+  }
+}
+
+@layer components {
+  /* الإطار الرئيسي: موبايل-فيرست، ويتحوّل على الشاشات الكبيرة إلى هاتف معروض */
+  .app-frame {
+    @apply mx-auto flex min-h-screen w-full max-w-md flex-col bg-sand-50 shadow-lift sm:min-h-[100dvh];
+  }
+
+  .screen-pad {
+    @apply px-5 pb-28 pt-4;
+  }
+
+  .card {
+    @apply rounded-3xl bg-white shadow-card;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition;
+  }
+
+  .btn-primary {
+    @apply flex w-full items-center justify-center gap-2 rounded-2xl bg-terracotta px-5 py-4 text-base font-bold text-white
+           shadow-card transition active:scale-[0.98] disabled:opacity-40 disabled:active:scale-100;
+  }
+
+  .btn-ghost {
+    @apply flex items-center justify-center gap-2 rounded-2xl border border-night-100 bg-white px-4 py-3
+           text-sm font-medium text-night-600 transition active:scale-[0.98];
+  }
+
+  .section-title {
+    @apply text-lg font-extrabold text-night-700;
+  }
+}
+
+/* شريط تمرير أفقي بلا مؤشّر مرئي (لصفوف التصنيفات) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
