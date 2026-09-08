@@ -114,19 +114,37 @@ npm install @huggingface/transformers
 
 ---
 
-## النشر (مجاني)
+## النشر
+
+**الموقع الحيّ:** https://w-electro.github.io/athr/
+
+### تحديث الموقع بعد أي تعديل
 
 ```bash
-npm i -g vercel
-vercel          # معاينة
-vercel --prod   # إنتاج
+npm run deploy
 ```
 
-`vercel.json` و `public/_redirects` موجودان مسبقًا لتوجيه المسارات إلى
-`index.html` — بدونهما يعطي تحديث الصفحة على `/scan` خطأ 404.
+أمر واحد: يبني المشروع ويدفع مجلد `dist` إلى فرع `gh-pages`، وGitHub Pages
+يقدّمه مباشرة. التحديث يظهر خلال دقيقة تقريبًا.
 
-Netlify و Cloudflare Pages يعملان بالإعدادات نفسها:
-أمر البناء `npm run build`، ومجلد النشر `dist`.
+### لماذا النشر يدوي لا تلقائي؟
+
+ملف `.github/workflows/deploy.yml` جاهز للنشر التلقائي عند كل دفعة، لكنه
+معطّل حاليًا لأن حساب GitHub مقفل بسبب مشكلة فوترة فلا تعمل الـ Actions.
+بعد حلها (وهي مجانية بلا حدود للمستودعات العامة): أعِد تفعيل محفّز `push`
+في الملف، وغيّر مصدر Pages إلى GitHub Actions من `Settings → Pages`.
+
+### ملاحظة على التوجيه
+
+على GitHub Pages نستخدم `HashRouter` (روابط مثل `#/scan`) لأن الاستضافة
+الساكنة بلا إعادة توجيه من الخادم، فتحديث الصفحة على مسار عادي يعطي 404.
+
+إن انتقلت لاحقًا إلى Vercel أو Netlify — و`vercel.json` و`public/_redirects`
+جاهزان لهما — يمكنك العودة إلى `BrowserRouter` في `src/main.jsx` لروابط أنظف:
+
+```bash
+npm i -g vercel && vercel --prod
+```
 
 ---
 

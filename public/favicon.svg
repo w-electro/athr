@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="أثر">
+  <rect width="64" height="64" rx="14" fill="#1A2233"/>
+  <!-- شكل مستوحى من نقوش جبة: وعل بقرون مقوّسة -->
+  <g fill="none" stroke="#C97A4A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 44 h20 v-12 h-20 z"/>
+    <path d="M18 44 v8 M38 44 v8 M22 32 v-6 M34 32 v-6"/>
+    <path d="M38 32 l8-6"/>
+    <path d="M46 26 q6-7 11-1" stroke="#D98E4A"/>
+  </g>
+  <circle cx="46" cy="24" r="2.4" fill="#D98E4A"/>
+</svg>

@@ -1,9 +1,19 @@
 name: Build, test and deploy to GitHub Pages
 
+# ⚠️ معطّل مؤقتًا عن التشغيل التلقائي.
+#
+# حساب GitHub الحالي مقفل بسبب مشكلة فوترة، فلا تعمل الـ Actions إطلاقًا،
+# وكل دفعة كانت ستنتج تشغيلًا فاشلًا ورسالة بريد. النشر يتم حاليًا يدويًا:
+#
+#     npm run deploy
+#
+# وهو يبني المشروع ويدفع مجلد dist إلى فرع gh-pages مباشرة بلا Actions.
+#
+# بعد حل مشكلة الفوترة (Actions مجانية بلا حدود للمستودعات العامة):
+#   1) أعِد تفعيل محفّز push أدناه
+#   2) غيّر مصدر Pages إلى GitHub Actions من Settings → Pages
 on:
-  push:
-    branches: [main]
-  workflow_dispatch: # يتيح إعادة النشر يدويًا من تبويب Actions
+  workflow_dispatch: # تشغيل يدوي فقط من تبويب Actions حاليًا
 
 permissions:
   contents: read
