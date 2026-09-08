@@ -4,7 +4,8 @@
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
+    --peck-len: 400;
   }
 
   html,
@@ -14,60 +15,171 @@
   }
 
   body {
-    @apply bg-night-800 font-sans text-night-700 antialiased;
+    @apply bg-basalt font-sans text-sand antialiased;
     -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
   }
 
-  /* الأرقام اللاتينية أوضح للقراءة في السياق العربي التقني (المسافات، الأوقات) */
+  /* العناوين بالكوفي: زاويّة ومحفورة، صدى لنقوش الصخر */
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+
+  /* الأرقام بخط الآلة دائمًا — مسافات، أوقات، نسب ثقة، إحداثيات.
+     `direction: ltr` يمنع انقلاب الأرقام داخل النص العربي. */
   .num {
-    font-feature-settings: 'tnum';
+    @apply font-mono;
+    font-variant-numeric: tabular-nums;
     direction: ltr;
     display: inline-block;
+  }
+
+  /* تسمية علوية صغيرة — تحمل معلومة حقيقية (حقبة، تصنيف) لا زخرفة */
+  .eyebrow {
+    @apply text-eyebrow uppercase text-sand-faint;
+  }
+
+  /*
+   * تباعد الأحرف وخط الآلة للكتابات غير المتصلة فقط.
+   *
+   * العربية والفارسية والأردية كتابات متّصلة: الحرف يلتحم بما بعده.
+   * تطبيق letter-spacing عليها يفكّ هذا الالتحام فتتحول الكلمة إلى حروف
+   * متناثرة غير مقروءة. هذا ليس تفضيلًا جماليًا بل خطأ إملائي فعلي.
+   */
+  :root:not([lang='ar']):not([lang='fa']):not([lang='ur']) .eyebrow {
+    @apply font-mono;
+    letter-spacing: 0.18em;
+  }
+
+  :root[lang='ar'] .eyebrow,
+  :root[lang='fa'] .eyebrow,
+  :root[lang='ur'] .eyebrow {
+    @apply font-arabic font-medium;
+    letter-spacing: normal;
+  }
+
+  /* القاعدة نفسها للأرقام: الأرقام تبقى بخط الآلة، لكن لا نمدّها على نص عربي */
+  :root[lang='ar'] .num,
+  :root[lang='fa'] .num,
+  :root[lang='ur'] .num {
+    letter-spacing: normal;
+  }
+
+  ::selection {
+    @apply bg-terracotta text-basalt;
+  }
+
+  /* وصول: مؤشر تركيز واضح على أرضية داكنة */
+  :focus-visible {
+    @apply outline-none ring-2 ring-terracotta-bright ring-offset-2 ring-offset-basalt;
   }
 }
 
 @layer components {
-  /* الإطار الرئيسي: موبايل-فيرست، ويتحوّل على الشاشات الكبيرة إلى هاتف معروض */
+  /* الإطار: موبايل أولًا، ويتحول على الشاشات الكبيرة إلى عمود مركزي */
   .app-frame {
-    @apply mx-auto flex min-h-screen w-full max-w-md flex-col bg-sand-50 shadow-lift sm:min-h-[100dvh];
+    @apply relative mx-auto flex min-h-[100dvh] w-full max-w-[26rem] flex-col bg-basalt;
   }
 
   .screen-pad {
-    @apply px-5 pb-28 pt-4;
+    @apply px-5 pb-32 pt-5;
   }
 
-  .card {
-    @apply rounded-3xl bg-white shadow-card;
-  }
-
-  .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition;
+  /* السطح المرتفع — حافة علوية فاتحة تحاكي ضوءًا يسقط من أعلى */
+  .surface {
+    @apply relative rounded-2xl bg-night-800 shadow-raise;
+    box-shadow:
+      inset 0 1px 0 0 rgba(232, 220, 200, 0.06),
+      0 2px 24px -8px rgba(0, 0, 0, 0.6);
   }
 
   .btn-primary {
-    @apply flex w-full items-center justify-center gap-2 rounded-2xl bg-terracotta px-5 py-4 text-base font-bold text-white
-           shadow-card transition active:scale-[0.98] disabled:opacity-40 disabled:active:scale-100;
+    @apply flex w-full items-center justify-center gap-2.5 rounded-xl bg-terracotta px-5 py-4
+           text-[0.9375rem] font-bold text-basalt transition-all duration-200 ease-athr
+           active:scale-[0.98] active:bg-terracotta-deep
+           disabled:pointer-events-none disabled:opacity-35;
   }
 
-  .btn-ghost {
-    @apply flex items-center justify-center gap-2 rounded-2xl border border-night-100 bg-white px-4 py-3
-           text-sm font-medium text-night-600 transition active:scale-[0.98];
+  .btn-quiet {
+    @apply flex w-full items-center justify-center gap-2 rounded-xl border border-night-500
+           bg-night-800 px-4 py-3.5 text-sm font-medium text-sand-dim
+           transition-all duration-200 ease-athr active:scale-[0.98] active:border-night-400;
   }
 
-  .section-title {
-    @apply text-lg font-extrabold text-night-700;
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-micro font-medium transition-all duration-200 ease-athr;
+  }
+
+  .chip-quiet {
+    @apply chip border border-night-500 bg-night-800/80 text-sand-dim;
+  }
+
+  .chip-on {
+    @apply chip border border-terracotta bg-terracotta text-basalt;
+  }
+
+  /* خط فاصل يتلاشى عند الطرفين — يوحي بطبقة صخرية لا بجدول */
+  .stratum-rule {
+    @apply h-px w-full;
+    background: linear-gradient(
+      to left,
+      transparent,
+      rgba(217, 142, 74, 0.35) 20%,
+      rgba(217, 142, 74, 0.35) 80%,
+      transparent
+    );
   }
 }
 
-/* شريط تمرير أفقي بلا مؤشّر مرئي (لصفوف التصنيفات) */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+@layer utilities {
+  /* حُبيبات دقيقة فوق الأسطح — تمنع الإحساس بالمسطح الرقمي البارد.
+     مولّدة بـ SVG داخل الـCSS: صفر طلبات شبكة، صفر بايت إضافية. */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E");
+  }
+
+  /* حجاب متدرّج أسفل الصور — يضمن قراءة النص فوق أي صورة مهما اختلفت */
+  .scrim {
+    background: linear-gradient(
+      to top,
+      rgba(11, 15, 23, 0.96) 0%,
+      rgba(11, 15, 23, 0.72) 28%,
+      rgba(11, 15, 23, 0.15) 62%,
+      rgba(11, 15, 23, 0.35) 100%
+    );
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* تأخير متدرّج لظهور العناصر تباعًا */
+  .stagger > * {
+    animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .stagger > *:nth-child(1) { animation-delay: 0.04s; }
+  .stagger > *:nth-child(2) { animation-delay: 0.10s; }
+  .stagger > *:nth-child(3) { animation-delay: 0.16s; }
+  .stagger > *:nth-child(4) { animation-delay: 0.22s; }
+  .stagger > *:nth-child(5) { animation-delay: 0.28s; }
+  .stagger > *:nth-child(6) { animation-delay: 0.34s; }
+  .stagger > *:nth-child(7) { animation-delay: 0.40s; }
+  .stagger > *:nth-child(8) { animation-delay: 0.46s; }
 }
 
+/* احترام تفضيل تقليل الحركة — شرط جودة لا خيار */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -75,5 +187,6 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

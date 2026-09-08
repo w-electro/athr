@@ -1,26 +1,25 @@
 /**
  * محرّك بناء مسار الرحلة.
  *
- * دوال خالصة (pure) بلا أي اعتماد على React — لذلك تُختبر مباشرة وتُعاد
- * كتابتها لاحقًا بنموذج ذكاء اصطناعي دون لمس الواجهة.
+ * دوال خالصة (pure) بلا أي اعتماد على React أو على لغة معيّنة — لذلك
+ * تُختبر مباشرة، وتعمل مع الـ28 لغة دون نسخة لكل واحدة.
  *
- * المدخلات: تفضيلات المستخدم + توقّعات الطقس.
- * المخرجات: أيام مرتّبة، كل يوم فيه محطات لها وقت بداية ونهاية وسبب اختيار.
+ * القاعدة: هذا الملف لا يُنتج نصًا بشريًا. يُرجع مفاتيح ترجمة، والواجهة تترجم.
  */
 
-import { getAllSites, formatDuration } from '../data/sites.js'
+import { getAllSites } from '../data/sites.js'
 
 /** إيقاع الرحلة → الدقائق المتاحة للزيارة في اليوم الواحد. */
 export const PACES = {
-  relaxed: { id: 'relaxed', label: 'متأنٍّ', hint: 'موقع أو اثنان في اليوم', capacity: 240 },
-  balanced: { id: 'balanced', label: 'متوازن', hint: 'يوم مليء بلا إرهاق', capacity: 340 },
-  packed: { id: 'packed', label: 'مكثّف', hint: 'أقصى تغطية ممكنة', capacity: 460 },
+  relaxed: { id: 'relaxed', capacity: 240 },
+  balanced: { id: 'balanced', capacity: 360 },
+  packed: { id: 'packed', capacity: 460 },
 }
 
 export const DURATION_OPTIONS = [
-  { days: 1, label: 'يوم واحد' },
-  { days: 2, label: 'يومان' },
-  { days: 3, label: 'ثلاثة أيام' },
+  { days: 1, labelKey: 'days.one' },
+  { days: 2, labelKey: 'days.two' },
+  { days: 3, labelKey: 'days.three' },
 ]
 
 /** ترتيب أفضلية الوقت خلال اليوم. */
@@ -35,13 +34,13 @@ const MIDDAY_END = 16 * 60
 
 /**
  * يحسب درجة ملاءمة الموقع لاهتمامات المستخدم.
- * التقاطع الأكبر = أولوية أعلى. مواقع اليونسكو تأخذ دفعة صغيرة لأنها
- * الأثر الأهم في المنطقة ولا يليق أن تسقط من رحلة قصيرة.
+ * مواقع اليونسكو تأخذ دفعة صغيرة لأنها الأثر الأهم في المنطقة ولا يليق
+ * أن تسقط من رحلة قصيرة.
  */
 export function scoreSite(site, interests = []) {
-  const overlap = site.interests.filter((i) => interests.includes(i)).length
+  const overlap = site.interests.filter((interest) => interests.includes(interest)).length
   const unescoBoost = site.unesco ? 1.5 : 0
-  const coverageBoost = interests.length === 0 ? 1 : 0 // بلا اهتمامات: الكل متساوٍ
+  const coverageBoost = interests.length === 0 ? 1 : 0
   return overlap * 2 + unescoBoost + coverageBoost
 }
 
@@ -49,25 +48,20 @@ export function scoreSite(site, interests = []) {
 export function travelMinutesBetween(fromSite, toSite) {
   if (!fromSite) return 0
   const deltaKm = Math.abs(toSite.distanceFromHailKm - fromSite.distanceFromHailKm)
-  // متوسط 1.1 كم/دقيقة على طرق المنطقة، مع حد أدنى 15 دقيقة للتنقل داخل المدينة
   return Math.max(15, Math.round(deltaKm / 1.1))
 }
 
 /**
  * يرتّب محطات اليوم الواحد.
- * القاعدة: في يوم حار أو مغبر، تُدفع المواقع المكشوفة إلى الصباح
- * والمواقع المغلقة إلى الظهيرة. غير ذلك نحترم الوقت المثالي لكل موقع.
+ * في يوم حار أو مغبر تُدفع المواقع المكشوفة إلى الصباح والمغلقة إلى الظهيرة.
  */
 export function orderStopsForDay(sites, weather) {
   const shiftOutdoor = Boolean(weather?.avoidMiddayOutdoor || weather?.windyWarning)
 
   return [...sites].sort((a, b) => {
-    if (shiftOutdoor && a.outdoor !== b.outdoor) {
-      return a.outdoor ? -1 : 1 // المكشوف أولًا (صباحًا)
-    }
+    if (shiftOutdoor && a.outdoor !== b.outdoor) return a.outdoor ? -1 : 1
     const orderDiff = (TIME_ORDER[a.bestTime] ?? 1) - (TIME_ORDER[b.bestTime] ?? 1)
     if (orderDiff !== 0) return orderDiff
-    // الأبعد أولًا لتجنّب الذهاب والعودة مرتين
     return b.distanceFromHailKm - a.distanceFromHailKm
   })
 }
@@ -78,7 +72,6 @@ function distributeAcrossDays(sites, days, capacity) {
   const leftovers = []
 
   for (const site of sites) {
-    // نضعه في اليوم الأقل امتلاءً الذي يتسع له
     const candidate = buckets
       .filter((bucket) => bucket.used + site.durationMinutes + 30 <= capacity)
       .sort((a, b) => a.used - b.used)[0]
@@ -97,17 +90,14 @@ function distributeAcrossDays(sites, days, capacity) {
 /**
  * يبني الرحلة الكاملة.
  *
- * @param {object} prefs
- * @param {string[]} prefs.interests
- * @param {number} prefs.days
- * @param {string} prefs.pace
- * @param {Array} forecast - ناتج fetchForecast (قد يكون null قبل الفحص)
+ * @param {{ interests?: string[], days?: number, pace?: string, language?: string }} prefs
+ * @param {Array|null} forecast - ناتج fetchForecast
  */
 export function buildItinerary(prefs, forecast = null) {
-  const { interests = [], days = 2, pace = 'balanced' } = prefs
+  const { interests = [], days = 2, pace = 'balanced', language = 'ar' } = prefs
   const capacity = (PACES[pace] || PACES.balanced).capacity
 
-  const ranked = getAllSites()
+  const ranked = getAllSites(language)
     .map((site) => ({ site, score: scoreSite(site, interests) }))
     .sort((a, b) => b.score - a.score || a.site.durationMinutes - b.site.durationMinutes)
     .map((entry) => entry.site)
@@ -125,13 +115,8 @@ export function buildItinerary(prefs, forecast = null) {
       const travel = travelMinutesBetween(previous, site)
       clock += travel
 
-      // إن كان الموقع مكشوفًا والطقس يحذّر، لا نبدأه داخل نافذة الظهيرة
-      if (
-        weather?.avoidMiddayOutdoor &&
-        site.outdoor &&
-        clock >= MIDDAY_START &&
-        clock < MIDDAY_END
-      ) {
+      // موقع مكشوف في يوم حار لا يبدأ داخل نافذة الظهيرة
+      if (weather?.avoidMiddayOutdoor && site.outdoor && clock >= MIDDAY_START && clock < MIDDAY_END) {
         clock = MIDDAY_END
       }
 
@@ -147,17 +132,15 @@ export function buildItinerary(prefs, forecast = null) {
         endMinutes: end,
         startLabel: formatClock(start),
         endLabel: formatClock(end),
-        durationLabel: formatDuration(site.durationMinutes),
         reason: buildReason(site, interests, weather),
       }
     })
 
     return {
       day: index + 1,
-      dayLabel: weather?.dayLabel || `اليوم ${index + 1}`,
       weather,
       stops,
-      totalMinutes: stops.reduce((sum, s) => sum + s.durationMinutes || 0, 0),
+      totalMinutes: stops.reduce((sum, stop) => sum + stop.site.durationMinutes, 0),
     }
   })
 
@@ -168,45 +151,45 @@ export function buildItinerary(prefs, forecast = null) {
   }
 }
 
-/** جملة قصيرة تشرح لماذا وُضع هذا الموقع في هذا الوقت. */
+/**
+ * يُرجع سبب اختيار المحطة كمفتاح ترجمة + بياناته.
+ * الواجهة تترجم عبر renderReason أدناه.
+ */
 function buildReason(site, interests, weather) {
-  const matched = site.interests.filter((i) => interests.includes(i))
+  const matched = site.interests.filter((interest) => interests.includes(interest))
 
-  if (weather?.windyWarning && site.outdoor) {
-    return 'قدّمناه إلى الصباح الباكر تفاديًا للرياح والأتربة بعد الظهر.'
-  }
-  if (weather?.avoidMiddayOutdoor && !site.outdoor) {
-    return 'موقع مغلق ومكيّف — وضعناه في أحرّ ساعات اليوم.'
-  }
-  if (weather?.avoidMiddayOutdoor && site.outdoor) {
-    return 'موقع مكشوف، جدولناه خارج نافذة الظهيرة الحارة.'
-  }
-  if (matched.length > 0) {
-    return `يناسب اهتمامك بـ${matched.map(interestLabel).join(' و')}.`
-  }
-  if (site.unesco) {
-    return 'موقع تراث عالمي — لا تكتمل زيارة حائل بدونه.'
-  }
-  return `أفضل وقت لزيارته: ${bestTimeLabel(site.bestTime)}.`
+  if (weather?.windyWarning && site.outdoor) return { key: 'reason.wind' }
+  if (weather?.avoidMiddayOutdoor && !site.outdoor) return { key: 'reason.indoor' }
+  if (weather?.avoidMiddayOutdoor && site.outdoor) return { key: 'reason.outdoor' }
+  if (matched.length > 0) return { key: 'reason.interest', interests: matched }
+  if (site.unesco) return { key: 'reason.unesco' }
+  return { key: 'reason.bestTime', time: site.bestTime }
 }
 
-const INTEREST_LABELS = {
-  history: 'التاريخ',
-  nature: 'الطبيعة',
-  photography: 'التصوير',
-  culture: 'الثقافة',
-  family: 'الأنشطة العائلية',
+/**
+ * يحوّل كائن السبب إلى جملة بلغة المستخدم.
+ * @param {object} reason - ناتج buildReason
+ * @param {(key: string, vars?: object) => string} t
+ */
+export function renderReason(reason, t) {
+  if (reason.interests) {
+    const joined = reason.interests
+      .map((interest) => t(`interestShort.${interest}`))
+      .join(` ${t('common.and')} `)
+    return t(reason.key, { interests: joined })
+  }
+  if (reason.time) {
+    return t(reason.key, { time: t(`time.${reason.time}`) })
+  }
+  return t(reason.key)
 }
 
-function interestLabel(id) {
-  return INTEREST_LABELS[id] || id
+/** مفتاح ترجمة أفضل وقت للزيارة. */
+export function bestTimeKey(bestTime) {
+  return `time.${bestTime in TIME_ORDER ? bestTime : 'any'}`
 }
 
-export function bestTimeLabel(bestTime) {
-  return { morning: 'الصباح', afternoon: 'بعد الظهر', evening: 'قبل الغروب' }[bestTime] || 'أي وقت'
-}
-
-/** 510 → "8:30 ص" */
+/** 510 → "8:30 ص" (الرمز يأتي من مفاتيح غير مترجمة عمدًا: ص/م عالميّة في السياق). */
 export function formatClock(totalMinutes) {
   const normalized = ((totalMinutes % 1440) + 1440) % 1440
   const hours24 = Math.floor(normalized / 60)
@@ -214,4 +197,22 @@ export function formatClock(totalMinutes) {
   const period = hours24 < 12 ? 'ص' : 'م'
   const hours12 = hours24 % 12 === 0 ? 12 : hours24 % 12
   return `${hours12}:${String(minutes).padStart(2, '0')} ${period}`
+}
+
+/**
+ * يختار صيغة الساعة المناسبة للغة.
+ * العربية والفارسية والأردية تستخدم ص/م؛ البقية 24 ساعة (الأوضح عالميًا).
+ */
+export function formatClockFor(totalMinutes, language) {
+  return ['ar', 'fa', 'ur'].includes(language)
+    ? formatClock(totalMinutes)
+    : formatClock24(totalMinutes)
+}
+
+/** صيغة 24 ساعة — أوضح للغات غير العربية. */
+export function formatClock24(totalMinutes) {
+  const normalized = ((totalMinutes % 1440) + 1440) % 1440
+  const hours = Math.floor(normalized / 60)
+  const minutes = normalized % 60
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`
 }

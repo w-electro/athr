@@ -12,6 +12,17 @@
  * لاحقًا استبدال المصدر بـ API أو قاعدة بيانات دون تعديل الواجهة.
  */
 
+import EN_CONTENT from './content/en.js'
+
+/**
+ * مسار الصور. نمرّ عبر BASE_URL لأن التطبيق يُنشر على مسار فرعي
+ * (‎/athr/‎) على GitHub Pages — مسار مطلق مثل '/photos/x.jpg' سينكسر هناك.
+ */
+const PHOTO_BASE = import.meta.env?.BASE_URL ?? '/'
+function photo(file) {
+  return `${PHOTO_BASE}photos/${file}`
+}
+
 export const CATEGORIES = {
   rockArt: { id: 'rockArt', label: 'نقوش صخرية', icon: '𓂀' },
   fort: { id: 'fort', label: 'قصور وقلاع', icon: '🏰' },
@@ -46,9 +57,14 @@ export const SITES = [
     interests: ['history', 'photography', 'nature'],
     ticket: 'تذكرة رمزية · يُفضّل الحجز المسبق للمرشد',
     art: { from: '#C97A4A', to: '#61361E', glyph: '𓃵', pattern: 'rock' },
-    // ضع هنا مسارات صورك من الموقع: '/reference/jubbah/01.jpg'
-    // تُستخدم في الواجهة كصورة غلاف، وكمرجع للتعرّف المحلي بـ CLIP.
-    photos: [],
+    // أضف صورك من الموقع هنا — تصبح الغلاف تلقائيًا، وتُستخدم كمرجع
+    // للتعرّف المحلي بـ CLIP. الترتيب مهم: الأولى هي الغلاف.
+    photos: [photo('jubbah-01.jpg')],
+    photoCredit: {
+      author: 'Heritage Commission',
+      license: 'CC BY-SA 4.0',
+      source: 'Wikimedia Commons',
+    },
     story: [
       {
         heading: 'حين كانت الصحراء بحيرة',
@@ -121,7 +137,8 @@ export const SITES = [
     interests: ['history', 'photography', 'culture', 'family'],
     ticket: 'الدخول مجاني · القشلة تفتح مساءً',
     art: { from: '#D98E4A', to: '#874B2A', glyph: '🏯', pattern: 'brick' },
-    photos: [],
+    photos: [photo('qishlah-02.jpg'), photo('qishlah-03.jpg')],
+    photoCredit: { author: 'saudipics', license: 'CC BY-SA 4.0', source: 'Wikimedia Commons' },
     story: [
       {
         heading: 'عين حائل التي لا تنام',
@@ -193,7 +210,8 @@ export const SITES = [
     interests: ['nature', 'photography', 'history'],
     ticket: 'الوصول حر · بعض المسارات تحتاج دفعًا رباعيًا',
     art: { from: '#33415A', to: '#0D111A', glyph: '⛰', pattern: 'peaks' },
-    photos: [],
+    photos: [photo('aja-01.jpg'), photo('aja-02.jpg')],
+    photoCredit: { author: 'saudipics', license: 'CC BY-SA 4.0', source: 'Wikimedia Commons' },
     story: [
       {
         heading: 'أجا وسلمى: جبلان وقصة حب',
@@ -265,7 +283,16 @@ export const SITES = [
     interests: ['history', 'culture', 'family'],
     ticket: 'الدخول مجاني · مغلق يوم الجمعة صباحًا',
     art: { from: '#4E5F7D', to: '#131926', glyph: '⚱', pattern: 'grid' },
-    photos: [],
+    // لا توجد صورة حرة للمتحف نفسه على المشاع؛ نستخدم مؤقتًا معلمًا تراثيًا
+    // في حائل ليلًا. استبدلها بصورتك عند أول زيارة.
+    photos: [photo('hail-night-01.jpg')],
+    photoCredit: {
+      author: 'Pointedstick',
+      license: 'CC0',
+      source: 'Wikimedia Commons',
+      note: 'معلم تراثي في حائل — ليس مبنى المتحف',
+      noteEn: 'A heritage landmark in Hail — not the museum building',
+    },
     story: [
       {
         heading: 'لماذا تبدأ من هنا',
@@ -320,23 +347,64 @@ export const SITES = [
   },
 ]
 
-/** كل المواقع. مغلّفة بدالة ليسهُل استبدال المصدر لاحقًا بـ fetch. */
-export function getAllSites() {
-  return SITES
+/* ────────────────────────── الوصول متعدد اللغات ────────────────────────── */
+
+/**
+ * المحتوى النصي المترجم بالكامل.
+ * العربية هي الأساس (مكتوبة داخل SITES أعلاه)، والباقي طبقات فوقها.
+ */
+const CONTENT_BY_LANGUAGE = { en: EN_CONTENT }
+
+/**
+ * يدمج النص المترجم فوق البنية المشتركة.
+ *
+ * الحقول البنيوية (الإحداثيات، المدة، التصنيف، الصور) لا تُترجم أبدًا —
+ * فلا يمكن أن تتباعد بين اللغات. النص وحده هو ما يُستبدل.
+ */
+function localize(site, language) {
+  const overlay = CONTENT_BY_LANGUAGE[language]?.[site.id]
+  if (!overlay) return site
+
+  return {
+    ...site,
+    ...overlay,
+    // السرد: نأخذ النص المترجم مع الإبقاء على التوقيت والمدة الأصليين
+    narration: {
+      ...site.narration,
+      ...overlay.narration,
+      totalSeconds: site.narration.totalSeconds,
+    },
+    // المسح: الكلمات المفتاحية ودرجة الثقة بنيوية، والنص مترجم
+    scan: { ...site.scan, ...overlay.scan },
+  }
+}
+
+/** كل المواقع باللغة المطلوبة. */
+export function getAllSites(language = 'ar') {
+  return SITES.map((site) => localize(site, language))
 }
 
 /** موقع واحد بالمعرّف، أو undefined إن لم يوجد. */
-export function getSiteById(id) {
-  return SITES.find((site) => site.id === id)
+export function getSiteById(id, language = 'ar') {
+  const site = SITES.find((entry) => entry.id === id)
+  return site ? localize(site, language) : undefined
 }
 
-/** ترجمة المدة بالدقائق إلى نص عربي مختصر: 150 → "ساعتان ونصف". */
-export function formatDuration(minutes) {
+/**
+ * يصيغ المدة بلغة الواجهة: 150 → "ساعتان ونصف" / "2 hours 30 min".
+ * @param {number} minutes
+ * @param {(key: string, vars?: object) => string} t
+ */
+export function formatDuration(minutes, t) {
   const hours = Math.floor(minutes / 60)
   const rest = minutes % 60
+
+  if (hours === 0) return t('common.minutes', { n: rest })
+
   const hourText =
-    hours === 0 ? '' : hours === 1 ? 'ساعة' : hours === 2 ? 'ساعتان' : `${hours} ساعات`
-  const restText = rest === 0 ? '' : rest === 30 ? 'ونصف' : `و${rest} دقيقة`
-  if (!hourText) return `${rest} دقيقة`
-  return [hourText, restText].filter(Boolean).join(' ')
+    hours === 1 ? t('common.hour') : hours === 2 ? t('common.twoHours') : t('common.hours', { n: hours })
+
+  if (rest === 0) return hourText
+  if (rest === 30) return `${hourText} ${t('common.half')}`
+  return `${hourText} ${t('common.minutes', { n: rest })}`
 }
