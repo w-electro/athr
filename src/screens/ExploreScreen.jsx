@@ -34,7 +34,9 @@ export default function ExploreScreen() {
     <div className="screen-pad">
       <header className="mb-6 flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <h1 className="font-display text-hero text-sand">أثر</h1>
+          <h1 aria-label={t('welcome.title')} className="font-display text-hero text-sand">
+            أثر
+          </h1>
           <p className="mt-1 text-body text-sand-dim">{t('app.tagline')}</p>
         </div>
         <Link

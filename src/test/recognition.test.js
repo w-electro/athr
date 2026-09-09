@@ -64,8 +64,8 @@ describe('طبقة التعرّف على الصور', () => {
   })
 
   it('لا ينهار عند فشل مزوّد حقيقي بل يعيد نتيجة واضحة', async () => {
-    // claudeProvider يرمي حين لا توجد صورة — والغلاف يجب أن يلتقط الخطأ
-    const result = await recognizeSite({}, { provider: 'claude' })
+    // المزوّد المحلي يرمي حين لا توجد صورة — والغلاف يجب أن يلتقط الخطأ
+    const result = await recognizeSite({}, { provider: 'local' })
 
     expect(result.error).toBe(true)
     expect(result.status).toBe('no-match')

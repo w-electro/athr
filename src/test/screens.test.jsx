@@ -36,8 +36,17 @@ describe('شاشة اختيار اللغة', () => {
         </MemoryRouter>
       </I18nProvider>,
     )
-    expect(screen.getByRole('heading', { name: 'أثر', level: 1 })).toBeInTheDocument()
+    // العلامة معروضة بالعربية دائمًا، لكن اسمها الميسَّر بلغة المستخدم
+    // (لغة الجهاز في بيئة الاختبار إنجليزية)
+    expect(screen.getByRole('heading', { name: 'Athr', level: 1 })).toHaveTextContent('أثر')
     expect(screen.getByRole('button', { name: /Start|ابدأ/ })).toBeInTheDocument()
+  })
+
+  it('ينطق قارئ الشاشة اسم العلامة بلغة المستخدم', () => {
+    renderApp('/explore', 'ja')
+    // النص المعروض عربي، والاسم الميسَّر بلغة الواجهة
+    const wordmark = screen.getByRole('heading', { name: 'Athr', level: 1 })
+    expect(wordmark).toHaveTextContent('أثر')
   })
 
   it('تعرض كل اللغات الـ28 باسمها الأصلي', () => {

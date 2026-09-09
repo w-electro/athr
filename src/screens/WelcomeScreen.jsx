@@ -64,7 +64,11 @@ export default function WelcomeScreen({ onDone }) {
             loop
             title="أثر"
           />
-          <h1 className="font-display text-monument leading-none text-sand">أثر</h1>
+          {/* العلامة تبقى بالعربية دائمًا (اسم علم لا يُترجم)، لكن قارئ
+              الشاشة ينطقها باسمها في لغة المستخدم بدل تهجئة حروف عربية */}
+          <h1 aria-label={t('welcome.title')} className="font-display text-monument leading-none text-sand">
+            أثر
+          </h1>
           <p className="mt-3 max-w-[21rem] text-body text-sand-dim">{t('welcome.subtitle')}</p>
         </header>
 

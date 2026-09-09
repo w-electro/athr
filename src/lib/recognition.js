@@ -6,14 +6,17 @@
  * فقط وتنتظر نتيجة بشكل ثابت (RecognitionResult). أسفل هذه الدالة يوجد
  * "سجل مزوّدين" (providers registry):
  *
- *   mock   → محاكاة محلية للعرض في الهاكاثون (لا تحتاج إنترنت ولا مفاتيح)
- *   claude → تعرّف حقيقي عبر Claude Vision خلف دالة خادمية
+ *   mock  → محاكاة محلية للعرض والتطوير (لا تحتاج إنترنت ولا مفاتيح)
+ *   local → تعرّف حقيقي بـ DINOv3 داخل متصفح الزائر — مجاني وبلا خادم
  *
- * للانتقال إلى التعرّف الحقيقي لاحقًا:
- *   1) ضع ANTHROPIC_API_KEY في بيئة الخادم (وليس في المتصفح).
- *   2) انشر الدالة الخادمية api/recognize.js.
- *   3) اضبط VITE_RECOGNITION_PROVIDER=claude في .env
+ * للانتقال إلى التعرّف الحقيقي:
+ *   1) npm install @huggingface/transformers
+ *   2) ابنِ فهرس المرجع بدفتر Kaggle (انظر notebooks/README.md)
+ *   3) اضبط VITE_RECOGNITION_PROVIDER=local في .env
  * لا يحتاج أي كومبوننت إلى تعديل.
+ *
+ * ولإضافة مزوّد خارجي لاحقًا: أضف دالة إلى PROVIDERS تُرجع الشكل الموحّد
+ * أدناه. لا شيء آخر في التطبيق يتغيّر.
  *
  * ── شكل النتيجة الموحّد ────────────────────────────────────────────────
  * {
@@ -31,8 +34,8 @@
  * الموقع بلغة المستخدم. لو أعاد هذا الملف نصًا جاهزًا لظهرت نتيجة المسح
  * بالعربية دائمًا مهما كانت لغة الواجهة — وهو خطأ وقعنا فيه فعلًا وأصلحناه.
  *
- * الاستثناء الوحيد: مزوّد حيّ (Claude) يولّد وصفًا حرًّا بلغة المستخدم، فله
- * أن يملأ label/evidence مباشرة. الواجهة تفضّل نصّه إن وُجد.
+ * الاستثناء الوحيد: مزوّد يولّد وصفًا حرًّا بلغة المستخدم (نموذج لغوي مثلًا)
+ * له أن يملأ label/evidence مباشرة. الواجهة تفضّل نصّه إن وُجد.
  */
 
 import { getAllSites, getSiteById } from '../data/sites.js'
@@ -108,60 +111,10 @@ export function resetMockCursor() {
   mockCursor = 0
 }
 
-/* ─────────────────────── مزوّد Claude Vision (حقيقي) ─────────────────────── */
-
-/**
- * ينادي دالة خادمية تمرّر الصورة إلى Claude Vision.
- * المفتاح يبقى على الخادم؛ المتصفح لا يراه أبدًا.
- *
- * @param {{ imageBase64: string, mediaType?: string, signal?: AbortSignal }} input
- */
-async function claudeProvider(input = {}) {
-  const started = nowMs()
-
-  if (!input.imageBase64) {
-    throw new Error('claudeProvider يحتاج imageBase64')
-  }
-
-  const endpoint = import.meta.env?.VITE_RECOGNITION_ENDPOINT || '/api/recognize'
-
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    signal: input.signal,
-    body: JSON.stringify({
-      imageBase64: input.imageBase64,
-      mediaType: input.mediaType || 'image/jpeg',
-      // نمرّر المواقع المعروفة ليقيّد النموذج إجابته بها بدل التخمين الحر
-      candidates: getAllSites().map((site) => ({
-        id: site.id,
-        name: site.name,
-        keywords: site.scan.keywords,
-      })),
-    }),
-  })
-
-  if (!response.ok) {
-    throw new Error(`فشل التعرّف: ${response.status}`)
-  }
-
-  const data = await response.json()
-
-  return {
-    status: data.siteId ? 'match' : 'no-match',
-    siteId: data.siteId ?? null,
-    label: data.label ?? 'نتيجة غير محددة',
-    confidence: typeof data.confidence === 'number' ? data.confidence : 0,
-    evidence: Array.isArray(data.evidence) ? data.evidence : [],
-    provider: 'claude',
-    elapsedMs: nowMs() - started,
-  }
-}
-
 /* ──────────────────────────── السجل والواجهة ──────────────────────────── */
 
 /**
- * مزوّد التعرّف المحلي (CLIP في المتصفح) — مجاني وبلا خادم.
+ * مزوّد التعرّف المحلي (DINOv3 في المتصفح) — مجاني وبلا خادم.
  * يُحمَّل ديناميكيًا حتى لا تدخل مكتبة النماذج في الحزمة إلا عند استخدامه.
  */
 async function localProvider(input = {}) {
@@ -172,7 +125,6 @@ async function localProvider(input = {}) {
 const PROVIDERS = {
   mock: mockProvider,
   local: localProvider,
-  claude: claudeProvider,
 }
 
 /** المزوّد الافتراضي من متغيرات البيئة، مع الرجوع إلى المحاكاة. */
@@ -184,7 +136,7 @@ export function getActiveProviderName() {
 /**
  * نقطة الدخول الوحيدة للواجهة.
  * @param {object} input - { imageBase64?, hint?, siteId?, instant?, signal? }
- * @param {object} options - { provider?: 'mock' | 'claude' }
+ * @param {object} options - { provider?: 'mock' | 'local' }
  */
 export async function recognizeSite(input = {}, options = {}) {
   const name = options.provider || getActiveProviderName()

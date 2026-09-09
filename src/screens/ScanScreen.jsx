@@ -343,9 +343,9 @@ function ResultPanel({ result, site, snapshot, onRetry, t, contentDir }) {
 
   /*
    * من أين يأتي النص؟
-   * المزوّد الحيّ (Claude) يولّد وصفه بلغة المستخدم، فنعرض نصّه كما هو.
-   * أما المحاكاة والتعرّف المحلي فيُرجعان المعرّف فقط، فنقرأ الاسم والأدلة
-   * من بيانات الموقع بلغة المحتوى الحالية.
+   * مزوّد يولّد وصفًا حرًّا بلغة المستخدم نعرض نصّه كما هو. أما المحاكاة
+   * والتعرّف المحلي فيُرجعان المعرّف فقط، فنقرأ الاسم والأدلة من بيانات
+   * الموقع بلغة المحتوى الحالية.
    */
   const label = result.label ?? site?.scan.matchLabel
   const evidence = result.evidence?.length ? result.evidence : (site?.scan.evidence ?? [])
