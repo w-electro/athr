@@ -255,7 +255,9 @@ function Plan({ itinerary, onRestart }) {
             {day.weather && (
               <span className="chip-quiet">
                 <span aria-hidden="true">{day.weather.icon}</span>
-                {t(day.weather.labelKey)} · <span className="num">{day.weather.highC}</span>°
+                {/* الدرجة داخل نفس العنصر: خارجه تفصلها مسافة مرئية
+                    لأن .num عنصر inline-block باتجاه مستقلّ */}
+                {t(day.weather.labelKey)} · <span className="num">{day.weather.highC}°</span>
               </span>
             )}
           </div>

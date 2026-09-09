@@ -78,6 +78,16 @@ describe('تصنيف حالة اليوم', () => {
     expect(day.advice.vars.temp).toBe(HEAT_THRESHOLD_C + 2)
   })
 
+  /**
+   * حارس لتناقض ظهر على الشاشة: الشارة تقول 41° والنصيحة تحتها 41.1°.
+   * الرقم الواحد يُعرض بصيغة واحدة.
+   */
+  it('يبني النصيحة على القيمة المقرّبة نفسها المعروضة', async () => {
+    const day = await classify({ high: 41.1, low: 26.8, wind: 10 })
+    expect(day.highC).toBe(41)
+    expect(day.advice.vars.temp).toBe(41)
+  })
+
   it('يقرأ رموز المطر العالمية', async () => {
     const day = await classify({ high: 28, low: 15, wind: 8, code: 61 })
     expect(day.condition).toBe('rain')

@@ -93,19 +93,31 @@ function buildAdvice(day) {
 }
 
 function decorate(raw, index, source) {
-  const condition = classify(raw)
-  return {
-    day: index + 1,
+  /*
+   * نُقرّب أولًا ثم نبني كل شيء على القيمة المقرّبة.
+   *
+   * وإلا ظهر التناقض للمستخدم: الشارة تقول 41° والنصيحة تقول 41.1° في
+   * السطر التالي مباشرة. رقم واحد يُعرض بصيغتين يبدو خللًا.
+   */
+  const day = {
     highC: Math.round(raw.highC),
     lowC: Math.round(raw.lowC),
     windKph: Math.round(raw.windKph),
+    weatherCode: raw.weatherCode,
+  }
+
+  const condition = classify(day)
+
+  return {
+    day: index + 1,
+    ...day,
     condition,
     source,
     icon: CONDITION_META[condition].icon,
     labelKey: CONDITION_META[condition].labelKey,
-    advice: buildAdvice({ highC: raw.highC, windKph: raw.windKph }),
-    avoidMiddayOutdoor: raw.highC >= HEAT_THRESHOLD_C,
-    windyWarning: raw.windKph >= WIND_THRESHOLD_KPH,
+    advice: buildAdvice(day),
+    avoidMiddayOutdoor: day.highC >= HEAT_THRESHOLD_C,
+    windyWarning: day.windKph >= WIND_THRESHOLD_KPH,
   }
 }
 
