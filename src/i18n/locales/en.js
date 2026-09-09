@@ -60,6 +60,7 @@ export default {
     back10: 'Back ten seconds',
     forward10: 'Forward ten seconds',
     speed: 'Playback speed',
+    voicePick: 'Choose voice',
     position: 'Playback position',
   },
 
@@ -119,7 +120,8 @@ export default {
     until: 'until {time}',
     excluded: 'Did not fit this trip',
     excludedHint: 'Add a day, or switch the pace to Packed.',
-    note: 'Weather forecast is a simulation.',
+    note: 'Weather data from Open-Meteo.',
+    noteOffline: 'Could not fetch weather — showing Hail climate averages.',
     day: 'Day {n}',
     step: {
       prefs: 'Reading your interests and trip length',
@@ -159,6 +161,8 @@ export default {
     sunny: 'Sunny',
     hot: 'Very hot',
     dusty: 'Wind & dust',
+    cloudy: 'Partly cloudy',
+    rain: 'Rain',
     adviceDusty: 'Dust-raising winds — we moved open-air sites to the early morning.',
     adviceHot: 'Reaching {temp}° at midday — outdoor visits moved to the morning, the museum takes the midday heat.',
     adviceFine: 'Good conditions — we ordered the route by each site’s best hour.',

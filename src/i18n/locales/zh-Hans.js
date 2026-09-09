@@ -53,6 +53,7 @@ export default {
     back10: '后退十秒',
     forward10: '前进十秒',
     speed: '播放速度',
+    voicePick: '选择语音',
     position: '播放位置',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: '至 {time}',
     excluded: '本次行程未能安排',
     excludedHint: '增加一天，或将节奏改为紧凑。',
-    note: '天气预报为模拟数据。',
+    note: '天气数据来自 Open-Meteo。',
+    noteOffline: '无法获取天气——显示哈伊勒的气候平均值。',
     day: '第 {n} 天',
     step: {
       prefs: '读取您的兴趣与行程天数',
@@ -145,6 +147,8 @@ export default {
     sunny: '晴',
     hot: '酷热',
     dusty: '风沙',
+    cloudy: '局部多云',
+    rain: '有雨',
     adviceDusty: '扬尘大风——我们把露天遗址提前到清晨。',
     adviceHot: '正午高达 {temp}°——户外行程调至上午，正午的暑热交给博物馆。',
     adviceFine: '天气适宜——路线按各遗址的最佳时段排列。',

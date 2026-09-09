@@ -53,6 +53,7 @@ export default {
     back10: 'Reculer de dix secondes',
     forward10: 'Avancer de dix secondes',
     speed: 'Vitesse de lecture',
+    voicePick: 'Choisir la voix',
     position: 'Position de lecture',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: 'jusqu’à {time}',
     excluded: 'N’a pas trouvé sa place',
     excludedHint: 'Ajoutez un jour ou passez au rythme Intense.',
-    note: 'Les prévisions météo sont simulées.',
+    note: 'Données météo par Open-Meteo.',
+    noteOffline: 'Météo indisponible — moyennes climatiques de Haïl affichées.',
     day: 'Jour {n}',
     step: {
       prefs: 'Lecture de vos intérêts et de la durée',
@@ -145,6 +147,8 @@ export default {
     sunny: 'Ensoleillé',
     hot: 'Très chaud',
     dusty: 'Vent et poussière',
+    cloudy: 'Partiellement nuageux',
+    rain: 'Pluie',
     adviceDusty: 'Vents de poussière — nous avons avancé les sites en plein air tôt le matin.',
     adviceHot: 'Jusqu’à {temp}° à midi — visites extérieures déplacées au matin, le musée prend la chaleur de midi.',
     adviceFine: 'Bonnes conditions — itinéraire classé selon la meilleure heure de chaque site.',

@@ -53,6 +53,7 @@ export default {
     back10: 'Zehn Sekunden zurück',
     forward10: 'Zehn Sekunden vor',
     speed: 'Wiedergabegeschwindigkeit',
+    voicePick: 'Stimme wählen',
     position: 'Wiedergabeposition',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: 'bis {time}',
     excluded: 'Hat nicht mehr gepasst',
     excludedHint: 'Füge einen Tag hinzu oder wechsle das Tempo auf Kompakt.',
-    note: 'Die Wettervorhersage ist eine Simulation.',
+    note: 'Wetterdaten von Open-Meteo.',
+    noteOffline: 'Wetter nicht abrufbar — Klimamittelwerte für Hail werden angezeigt.',
     day: 'Tag {n}',
     step: {
       prefs: 'Interessen und Reisedauer werden gelesen',
@@ -145,6 +147,8 @@ export default {
     sunny: 'Sonnig',
     hot: 'Sehr heiß',
     dusty: 'Wind & Staub',
+    cloudy: 'Teilweise bewölkt',
+    rain: 'Regen',
     adviceDusty: 'Staubaufwirbelnder Wind — Orte im Freien haben wir auf den frühen Morgen vorgezogen.',
     adviceHot: 'Bis {temp}° mittags — Außenbesuche in den Morgen verlegt, das Museum übernimmt die Mittagshitze.',
     adviceFine: 'Gute Bedingungen — Route nach der besten Stunde jedes Ortes sortiert.',

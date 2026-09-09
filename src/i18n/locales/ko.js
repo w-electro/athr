@@ -53,6 +53,7 @@ export default {
     back10: '10초 뒤로',
     forward10: '10초 앞으로',
     speed: '재생 속도',
+    voicePick: '음성 선택',
     position: '재생 위치',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: '{time}까지',
     excluded: '이번 여행에는 들어가지 못했습니다',
     excludedHint: '하루를 추가하거나 속도를 빽빽하게로 바꾸세요.',
-    note: '날씨 예보는 시뮬레이션입니다.',
+    note: '날씨 데이터 출처: Open-Meteo.',
+    noteOffline: '날씨를 가져오지 못했습니다 — 하일의 기후 평년값을 표시합니다.',
     day: '{n}일차',
     step: {
       prefs: '관심사와 여행 기간 읽는 중',
@@ -145,6 +147,8 @@ export default {
     sunny: '맑음',
     hot: '매우 더움',
     dusty: '바람과 먼지',
+    cloudy: '구름 조금',
+    rain: '비',
     adviceDusty: '먼지를 일으키는 바람 — 야외 장소를 이른 아침으로 앞당겼습니다.',
     adviceHot: '정오에 {temp}°까지 — 야외 일정은 오전으로 옮기고, 한낮 더위는 박물관이 맡습니다.',
     adviceFine: '조건이 좋습니다 — 각 장소의 최적 시간대로 경로를 배열했습니다.',

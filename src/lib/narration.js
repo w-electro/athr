@@ -19,4 +19,10 @@ export function formatTimecode(seconds) {
   return `${minutes}:${String(rest).padStart(2, '0')}`
 }
 
-export const PLAYBACK_RATES = [1, 1.25, 1.5]
+/**
+ * سرعات التشغيل.
+ *
+ * نبدأ من 0.9 لا من 1: أصوات التركيب تميل إلى التسرّع في السرد الطويل،
+ * وإبطاؤها قليلًا يجعلها أقرب إلى صوت مرشد يشرح لا آلة تقرأ.
+ */
+export const PLAYBACK_RATES = [0.9, 1, 1.25, 1.5]

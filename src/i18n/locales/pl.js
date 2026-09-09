@@ -53,6 +53,7 @@ export default {
     back10: 'Cofnij o dziesięć sekund',
     forward10: 'Przewiń o dziesięć sekund',
     speed: 'Prędkość odtwarzania',
+    voicePick: 'Wybierz głos',
     position: 'Pozycja odtwarzania',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: 'do {time}',
     excluded: 'Nie zmieściło się w tej podróży',
     excludedHint: 'Dodaj dzień albo zmień tempo na Intensywne.',
-    note: 'Prognoza pogody jest symulacją.',
+    note: 'Dane pogodowe z Open-Meteo.',
+    noteOffline: 'Nie udało się pobrać pogody — pokazujemy średnie klimatyczne dla Hail.',
     day: 'Dzień {n}',
     step: {
       prefs: 'Odczyt zainteresowań i długości podróży',
@@ -145,6 +147,8 @@ export default {
     sunny: 'Słonecznie',
     hot: 'Bardzo gorąco',
     dusty: 'Wiatr i pył',
+    cloudy: 'Częściowe zachmurzenie',
+    rain: 'Deszcz',
     adviceDusty: 'Wiatr unoszący pył — miejsca na otwartym powietrzu przesunęliśmy na wczesny ranek.',
     adviceHot: 'Do {temp}° w południe — wizyty na zewnątrz przeniesione na ranek, muzeum przejmuje południowy upał.',
     adviceFine: 'Dobre warunki — trasa ułożona według najlepszej godziny każdego miejsca.',

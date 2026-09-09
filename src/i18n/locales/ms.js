@@ -53,6 +53,7 @@ export default {
     back10: 'Undur sepuluh saat',
     forward10: 'Maju sepuluh saat',
     speed: 'Kelajuan main balik',
+    voicePick: 'Pilih suara',
     position: 'Kedudukan main balik',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: 'hingga {time}',
     excluded: 'Tidak muat dalam perjalanan ini',
     excludedHint: 'Tambah satu hari atau tukar rentak kepada Padat.',
-    note: 'Ramalan cuaca ialah simulasi.',
+    note: 'Data cuaca daripada Open-Meteo.',
+    noteOffline: 'Cuaca tidak dapat diperoleh — memaparkan purata iklim Hail.',
     day: 'Hari {n}',
     step: {
       prefs: 'Membaca minat dan tempoh perjalanan anda',
@@ -145,6 +147,8 @@ export default {
     sunny: 'Cerah',
     hot: 'Sangat panas',
     dusty: 'Angin dan debu',
+    cloudy: 'Berawan sebahagian',
+    rain: 'Hujan',
     adviceDusty: 'Angin berdebu — tapak terbuka kami awalkan ke pagi buta.',
     adviceHot: 'Mencecah {temp}° pada tengah hari — lawatan luar dipindah ke pagi, muzium mengambil panas tengah hari.',
     adviceFine: 'Keadaan baik — laluan disusun mengikut jam terbaik setiap tapak.',

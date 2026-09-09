@@ -53,6 +53,7 @@ export default {
     back10: 'Tien seconden terug',
     forward10: 'Tien seconden vooruit',
     speed: 'Afspeelsnelheid',
+    voicePick: 'Stem kiezen',
     position: 'Afspeelpositie',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: 'tot {time}',
     excluded: 'Paste niet in deze reis',
     excludedHint: 'Voeg een dag toe of zet het tempo op Vol.',
-    note: 'De weersverwachting is een simulatie.',
+    note: 'Weergegevens van Open-Meteo.',
+    noteOffline: 'Weer niet op te halen — klimaatgemiddelden voor Hail getoond.',
     day: 'Dag {n}',
     step: {
       prefs: 'Je interesses en reisduur lezen',
@@ -145,6 +147,8 @@ export default {
     sunny: 'Zonnig',
     hot: 'Zeer heet',
     dusty: 'Wind en stof',
+    cloudy: 'Halfbewolkt',
+    rain: 'Regen',
     adviceDusty: 'Stofopwaaiende wind — we hebben de buitenlocaties naar de vroege ochtend gehaald.',
     adviceHot: 'Tot {temp}° rond het middaguur — buitenbezoeken naar de ochtend verplaatst; het museum vangt de middaghitte op.',
     adviceFine: 'Goede omstandigheden — route geordend op het beste uur van elke locatie.',

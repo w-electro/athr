@@ -53,6 +53,7 @@ export default {
     back10: 'On saniye geri',
     forward10: 'On saniye ileri',
     speed: 'Oynatma hızı',
+    voicePick: 'Ses seç',
     position: 'Oynatma konumu',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: '{time}’a kadar',
     excluded: 'Bu geziye sığmadı',
     excludedHint: 'Bir gün ekleyin veya tempoyu Yoğun’a çevirin.',
-    note: 'Hava tahmini bir simülasyondur.',
+    note: 'Hava durumu verileri Open-Meteo.',
+    noteOffline: 'Hava durumu alınamadı — Hail iklim ortalamaları gösteriliyor.',
     day: '{n}. gün',
     step: {
       prefs: 'İlgi alanlarınız ve gezi süreniz okunuyor',
@@ -145,6 +147,8 @@ export default {
     sunny: 'Güneşli',
     hot: 'Çok sıcak',
     dusty: 'Rüzgâr ve toz',
+    cloudy: 'Parçalı bulutlu',
+    rain: 'Yağmurlu',
     adviceDusty: 'Toz kaldıran rüzgâr — açık alandaki yerleri sabahın erken saatlerine aldık.',
     adviceHot: 'Öğlen {temp}°’ye çıkıyor — açık hava ziyaretleri sabaha alındı, öğle sıcağını müze karşılıyor.',
     adviceFine: 'Koşullar iyi — rota her yerin en iyi saatine göre sıralandı.',

@@ -53,6 +53,7 @@ export default {
     back10: 'Retroceder diez segundos',
     forward10: 'Avanzar diez segundos',
     speed: 'Velocidad de reproducción',
+    voicePick: 'Elegir voz',
     position: 'Posición de reproducción',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: 'hasta las {time}',
     excluded: 'No cupo en este viaje',
     excludedHint: 'Añade un día o cambia el ritmo a Intenso.',
-    note: 'El pronóstico del tiempo es una simulación.',
+    note: 'Datos meteorológicos de Open-Meteo.',
+    noteOffline: 'No se pudo obtener el tiempo — mostrando medias climáticas de Hail.',
     day: 'Día {n}',
     step: {
       prefs: 'Leyendo tus intereses y la duración',
@@ -145,6 +147,8 @@ export default {
     sunny: 'Soleado',
     hot: 'Muy caluroso',
     dusty: 'Viento y polvo',
+    cloudy: 'Parcialmente nublado',
+    rain: 'Lluvia',
     adviceDusty: 'Vientos con polvo — adelantamos los sitios al aire libre a primera hora.',
     adviceHot: 'Hasta {temp}° al mediodía — visitas exteriores movidas a la mañana; el museo cubre el calor del mediodía.',
     adviceFine: 'Buenas condiciones — ordenamos la ruta según la mejor hora de cada sitio.',

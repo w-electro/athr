@@ -53,6 +53,7 @@ export default {
     back10: 'Rudi sekunde kumi',
     forward10: 'Songa sekunde kumi',
     speed: 'Kasi ya kucheza',
+    voicePick: 'Chagua sauti',
     position: 'Nafasi ya kucheza',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: 'hadi {time}',
     excluded: 'Halikutoshea katika safari hii',
     excludedHint: 'Ongeza siku moja au badilisha mwendo kuwa Mnene.',
-    note: 'Utabiri wa hali ya hewa ni uigaji.',
+    note: 'Data ya hali ya hewa kutoka Open-Meteo.',
+    noteOffline: 'Imeshindwa kupata hali ya hewa — tunaonyesha wastani wa hali ya hewa ya Hail.',
     day: 'Siku {n}',
     step: {
       prefs: 'Inasoma mapendeleo yako na muda wa safari',
@@ -145,6 +147,8 @@ export default {
     sunny: 'Jua',
     hot: 'Joto kali',
     dusty: 'Upepo na vumbi',
+    cloudy: 'Mawingu kiasi',
+    rain: 'Mvua',
     adviceDusty: 'Upepo unaoinua vumbi — tumesogeza maeneo ya wazi hadi asubuhi na mapema.',
     adviceHot: 'Hufikia {temp}° adhuhuri — ziara za nje zimehamishiwa asubuhi, jumba la makumbusho linachukua joto la adhuhuri.',
     adviceFine: 'Hali nzuri — njia imepangwa kwa saa bora ya kila eneo.',

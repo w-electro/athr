@@ -53,6 +53,7 @@ export default {
     back10: 'Bumalik ng sampung segundo',
     forward10: 'Sumulong ng sampung segundo',
     speed: 'Bilis ng pagpapatugtog',
+    voicePick: 'Pumili ng boses',
     position: 'Posisyon ng pagpapatugtog',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: 'hanggang {time}',
     excluded: 'Hindi kasya sa biyaheng ito',
     excludedHint: 'Magdagdag ng isang araw o palitan ang bilis ng Siksik.',
-    note: 'Simulation lang ang taya ng panahon.',
+    note: 'Datos ng panahon mula sa Open-Meteo.',
+    noteOffline: 'Hindi makuha ang panahon — ipinapakita ang karaniwang klima ng Hail.',
     day: 'Araw {n}',
     step: {
       prefs: 'Binabasa ang iyong interes at tagal',
@@ -145,6 +147,8 @@ export default {
     sunny: 'Maaraw',
     hot: 'Napakainit',
     dusty: 'Hangin at alikabok',
+    cloudy: 'Bahagyang maulap',
+    rain: 'Umuulan',
     adviceDusty: 'Hanging nagpapalipad ng alikabok — inilipat namin sa maagang umaga ang mga lugar na nasa labas.',
     adviceHot: 'Umaabot sa {temp}° sa tanghali — inilipat sa umaga ang mga panlabas na pagbisita, ang museo ang bahala sa init ng tanghali.',
     adviceFine: 'Maganda ang kondisyon — inayos ang ruta ayon sa pinakamainam na oras ng bawat lugar.',

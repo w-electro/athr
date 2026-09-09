@@ -53,6 +53,7 @@ export default {
     back10: 'Lùi mười giây',
     forward10: 'Tiến mười giây',
     speed: 'Tốc độ phát',
+    voicePick: 'Chọn giọng đọc',
     position: 'Vị trí phát',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: 'đến {time}',
     excluded: 'Không kịp trong chuyến này',
     excludedHint: 'Thêm một ngày hoặc đổi nhịp sang Dày đặc.',
-    note: 'Dự báo thời tiết là mô phỏng.',
+    note: 'Dữ liệu thời tiết từ Open-Meteo.',
+    noteOffline: 'Không lấy được thời tiết — đang hiển thị trung bình khí hậu của Hail.',
     day: 'Ngày {n}',
     step: {
       prefs: 'Đang đọc sở thích và số ngày',
@@ -145,6 +147,8 @@ export default {
     sunny: 'Nắng',
     hot: 'Rất nóng',
     dusty: 'Gió và bụi',
+    cloudy: 'Có mây rải rác',
+    rain: 'Mưa',
     adviceDusty: 'Gió cuốn bụi — chúng tôi dời các nơi ngoài trời lên sáng sớm.',
     adviceHot: 'Lên tới {temp}° vào giữa trưa — chuyển tham quan ngoài trời sang buổi sáng, bảo tàng gánh cái nóng buổi trưa.',
     adviceFine: 'Điều kiện tốt — lộ trình xếp theo giờ đẹp nhất của từng nơi.',

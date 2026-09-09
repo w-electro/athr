@@ -332,7 +332,13 @@ function Plan({ itinerary, onRestart }) {
         </section>
       )}
 
-      <p className="text-center text-[0.625rem] text-sand-faint">{t('trip.note')}</p>
+      {/*
+        نقول للمستخدم من أين جاء الطقس. تقديرٌ مناخي معروضٌ كأنه رصد اليوم
+        خداعٌ صغير لا داعي له — والاعتراف يزيد الثقة لا ينقصها.
+      */}
+      <p className="text-center text-[0.625rem] text-sand-faint">
+        {itinerary.days[0]?.weather?.source === 'estimate' ? t('trip.noteOffline') : t('trip.note')}
+      </p>
     </div>
   )
 }

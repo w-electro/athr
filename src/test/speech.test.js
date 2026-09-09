@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { toSpeechLang, pickVoice } from '../lib/speech.js'
+import { toSpeechLang, pickVoice, listVoices } from '../lib/speech.js'
 import { LANGUAGES } from '../i18n/languages.js'
 
 /** يبني صوتًا وهميًا بشكل SpeechSynthesisVoice. */
@@ -49,16 +49,54 @@ describe('اختيار الصوت', () => {
   })
 
   /**
-   * الصوت المحلي يعمل بلا إنترنت — وهذا شرط جوهري لتطبيق يُستخدم في
-   * موقع أثري بلا تغطية، لا مجرد تفضيل أداء.
+   * حارس لعلّة مسموعة: كانت النسخة الأولى تُفضّل الصوت المحلي دائمًا،
+   * فتختار الصوت المضغوط الرديء بينما يقف بجانبه صوت عصبيّ أفضل بكثير.
    */
-  it('يفضّل الصوت المحلي على الصوت الشبكي', () => {
-    const mixed = [voice('de-DE', 'Cloud Anna', false), voice('de-DE', 'Local Hans', true)]
-    expect(pickVoice(mixed, 'de').name).toBe('Local Hans')
+  it('يفضّل الصوت عالي الجودة على المضغوط الافتراضي', () => {
+    const mixed = [
+      voice('de-DE', 'German Compact', true),
+      voice('de-DE', 'Anna (Premium)', true),
+    ]
+    expect(pickVoice(mixed, 'de').name).toBe('Anna (Premium)')
+  })
+
+  it('يتعرّف على دلائل الجودة في أسماء الأنظمة المختلفة', () => {
+    for (const name of ['Google العربية', 'Siri Voice 2', 'Microsoft Neural', 'Zira Enhanced']) {
+      const pool = [voice('ar-SA', 'Compact Basic'), voice('ar-SA', name)]
+      expect(pickVoice(pool, 'ar').name).toBe(name)
+    }
+  })
+
+  /**
+   * بلا اتصال يصبح الصوت الشبكي عديم الفائدة مهما كانت جودته — وهذه هي
+   * الحالة الفعلية في جبة.
+   */
+  it('يقصر الاختيار على الأصوات المحلية حين لا يوجد اتصال', () => {
+    const mixed = [voice('de-DE', 'Cloud Premium', false), voice('de-DE', 'Local Hans', true)]
+    expect(pickVoice(mixed, 'de', { requireOffline: true }).name).toBe('Local Hans')
+    // ومع الاتصال تتقدّم الجودة
+    expect(pickVoice(mixed, 'de').name).toBe('Cloud Premium')
+  })
+
+  it('يقبل صوتًا شبكيًا بلا اتصال بدل الصمت إن لم يوجد محلي', () => {
+    const onlyCloud = [voice('fr-FR', 'Cloud Thomas', false)]
+    expect(pickVoice(onlyCloud, 'fr', { requireOffline: true }).name).toBe('Cloud Thomas')
   })
 
   it('يقبل الصوت الشبكي إن لم يوجد محلي', () => {
     expect(pickVoice(voices, 'fr').name).toBe('Thomas')
+  })
+
+  it('يُرجع كل أصوات اللغة مرتّبة ليختار المستخدم', () => {
+    const pool = [
+      voice('ar-SA', 'Compact Basic'),
+      voice('ar-EG', 'Laila Premium'),
+      voice('en-US', 'Samantha'),
+    ]
+    const options = listVoices(pool, 'ar')
+    expect(options).toHaveLength(2)
+    expect(options[0].name).toBe('Laila Premium')
+    expect(options.map((entry) => entry.name)).not.toContain('Samantha')
   })
 
   it('يتعامل مع الشرطة السفلية في رموز أندرويد', () => {
@@ -72,6 +110,16 @@ describe('اختيار الصوت', () => {
   it('يُرجع null بدل صوت بلغة خاطئة', () => {
     expect(pickVoice(voices, 'ta')).toBeNull()
     expect(pickVoice(voices, 'sw')).toBeNull()
+  })
+
+  /**
+   * حارس: الرداءة تُنزِّل الترتيب ولا تُخرج من القائمة. جهازٌ لا يملك إلا
+   * صوتًا مضغوطًا يجب أن ينطق بصوتٍ متواضع، لا أن يصمت.
+   */
+  it('يستخدم الصوت المضغوط إن كان الوحيد المتاح', () => {
+    const only = [voice('ar-SA', 'Arabic Compact')]
+    expect(pickVoice(only, 'ar')?.name).toBe('Arabic Compact')
+    expect(listVoices(only, 'ar')).toHaveLength(1)
   })
 
   it('يتحمّل قائمة فارغة أو رمزًا مفقودًا', () => {

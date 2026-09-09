@@ -1,6 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { formatTimecode, PLAYBACK_RATES } from '../lib/narration.js'
-import { isSpeechSupported, loadVoices, pickVoice, toSpeechLang, cancelSpeech } from '../lib/speech.js'
+import {
+  isSpeechSupported,
+  loadVoices,
+  listVoices,
+  pickVoice,
+  toSpeechLang,
+  cancelSpeech,
+} from '../lib/speech.js'
 import { useI18n } from '../i18n/index.jsx'
 
 /**
@@ -32,15 +39,17 @@ export default function AudioPlayer({ narration, siteName }) {
   const { segments, totalSeconds } = narration
 
   const [voice, setVoice] = useState(null)
+  const [voiceOptions, setVoiceOptions] = useState([])
+  const [showVoices, setShowVoices] = useState(false)
   const [speechReady, setSpeechReady] = useState(false)
   const [playing, setPlaying] = useState(false)
   const [segIndex, setSegIndex] = useState(0)
   const [segFraction, setSegFraction] = useState(0)
-  const [rate, setRate] = useState(1)
+  const [rate, setRate] = useState(0.9)
 
   // مراجع لتفادي الإغلاقات القديمة داخل مؤقّتات ونداءات النطق
   const indexRef = useRef(0)
-  const rateRef = useRef(1)
+  const rateRef = useRef(0.9)
   const playingRef = useRef(false)
   const tickRef = useRef(null)
 
@@ -62,7 +71,25 @@ export default function AudioPlayer({ narration, siteName }) {
 
     loadVoices().then((voices) => {
       if (cancelled) return
-      setVoice(pickVoice(voices, speechLang))
+
+      // بلا اتصال نقصر الاختيار على الأصوات المثبّتة في الجهاز؛ ومع
+      // الاتصال تتقدّم الجودة، لأن أفضل الأصوات على أغلب الأنظمة ليست
+      // هي الأصوات المضغوطة الافتراضية.
+      const requireOffline = typeof navigator !== 'undefined' && navigator.onLine === false
+      const options = listVoices(voices, speechLang, { requireOffline })
+
+      setVoiceOptions(options)
+
+      // نحترم اختيار المستخدم السابق لهذه اللغة إن كان الصوت ما زال موجودًا
+      let chosen = null
+      try {
+        const savedName = window.localStorage.getItem(`athr.voice.${speechLang}`)
+        chosen = options.find((entry) => entry.name === savedName) ?? null
+      } catch {
+        /* التخزين غير متاح */
+      }
+
+      setVoice(chosen ?? pickVoice(voices, speechLang, { requireOffline }))
       setSpeechReady(true)
     })
 
@@ -196,6 +223,29 @@ export default function AudioPlayer({ narration, siteName }) {
     if (useSpeech) speakSegment(index)
   }
 
+  /** يبدّل الصوت ويحفظ الاختيار لهذه اللغة، ثم يعيد نطق المقطع الحالي به. */
+  function chooseVoice(next) {
+    setVoice(next)
+    setShowVoices(false)
+    try {
+      window.localStorage.setItem(`athr.voice.${speechLang}`, next.name)
+    } catch {
+      /* التخزين غير متاح — الاختيار يبقى لهذه الجلسة */
+    }
+    if (playing) {
+      // نمرّر الصوت مباشرةً لأن الحالة لم تُحدَّث بعد في هذه الدورة
+      cancelSpeech()
+      const utterance = new SpeechSynthesisUtterance(segments[segIndex].text)
+      utterance.lang = speechLang
+      utterance.voice = next
+      utterance.rate = rateRef.current
+      utterance.onend = () => {
+        if (playingRef.current) speakSegment(indexRef.current + 1)
+      }
+      window.speechSynthesis.speak(utterance)
+    }
+  }
+
   function changeRate() {
     const next = PLAYBACK_RATES[(PLAYBACK_RATES.indexOf(rate) + 1) % PLAYBACK_RATES.length]
     setRate(next)
@@ -232,6 +282,23 @@ export default function AudioPlayer({ narration, siteName }) {
             {voice?.name ? ` · ${voice.name}` : ''}
           </p>
         </div>
+
+        {/*
+          اختيار الصوت. لا نعرضه إلا حين يملك الجهاز أكثر من صوت لهذه اللغة،
+          لأن الحكم النهائي على جودة الصوت أذنُ المستخدم لا خوارزميتنا.
+        */}
+        {voiceOptions.length > 1 && (
+          <button
+            type="button"
+            onClick={() => setShowVoices((value) => !value)}
+            aria-label={t('audio.voicePick')}
+            aria-expanded={showVoices}
+            className="rounded-lg border border-night-500 px-2 py-1 text-sand-dim"
+          >
+            <VoiceIcon />
+          </button>
+        )}
+
         <button
           type="button"
           onClick={changeRate}
@@ -241,6 +308,26 @@ export default function AudioPlayer({ narration, siteName }) {
           <span className="num">{rate}</span>×
         </button>
       </div>
+
+      {showVoices && (
+        <ul className="mx-4 mb-2 max-h-40 overflow-y-auto rounded-lg border border-night-600 bg-night-800">
+          {voiceOptions.map((option) => (
+            <li key={`${option.name}-${option.lang}`}>
+              <button
+                type="button"
+                onClick={() => chooseVoice(option)}
+                aria-pressed={option.name === voice?.name}
+                className={`flex w-full items-center justify-between gap-2 px-3 py-2 text-start text-micro ${
+                  option.name === voice?.name ? 'text-terracotta-bright' : 'text-sand-dim'
+                }`}
+              >
+                <span className="truncate">{option.name}</span>
+                <span className="num shrink-0 text-[0.625rem] text-sand-faint">{option.lang}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <div className="relative px-4">
         <div className="flex h-14 items-center gap-[3px]" aria-hidden="true">
@@ -352,6 +439,15 @@ function PauseIcon() {
     <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
       <rect x="7" y="5" width="4" height="14" rx="1.2" />
       <rect x="13" y="5" width="4" height="14" rx="1.2" />
+    </svg>
+  )
+}
+
+function VoiceIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <rect x="9" y="3" width="6" height="11" rx="3" />
+      <path d="M5 11a7 7 0 0014 0M12 18v3" strokeLinecap="round" />
     </svg>
   )
 }

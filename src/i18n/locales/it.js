@@ -53,6 +53,7 @@ export default {
     back10: 'Indietro di dieci secondi',
     forward10: 'Avanti di dieci secondi',
     speed: 'Velocità di riproduzione',
+    voicePick: 'Scegli la voce',
     position: 'Posizione di riproduzione',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: 'fino alle {time}',
     excluded: 'Non è entrato in questo viaggio',
     excludedHint: 'Aggiungi un giorno o passa al ritmo Intenso.',
-    note: 'Le previsioni meteo sono una simulazione.',
+    note: 'Dati meteo da Open-Meteo.',
+    noteOffline: 'Meteo non disponibile — mostrate le medie climatiche di Ha il.',
     day: 'Giorno {n}',
     step: {
       prefs: 'Lettura dei tuoi interessi e della durata',
@@ -145,6 +147,8 @@ export default {
     sunny: 'Soleggiato',
     hot: 'Molto caldo',
     dusty: 'Vento e polvere',
+    cloudy: 'Parzialmente nuvoloso',
+    rain: 'Pioggia',
     adviceDusty: 'Venti che sollevano polvere — abbiamo anticipato i siti all’aperto al mattino presto.',
     adviceHot: 'Fino a {temp}° a mezzogiorno — visite all’aperto spostate al mattino, il museo copre le ore più calde.',
     adviceFine: 'Buone condizioni — percorso ordinato secondo l’ora migliore di ogni sito.',

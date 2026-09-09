@@ -53,6 +53,7 @@ export default {
     back10: '10秒戻る',
     forward10: '10秒進む',
     speed: '再生速度',
+    voicePick: '音声を選ぶ',
     position: '再生位置',
   },
   scan: {
@@ -110,7 +111,8 @@ export default {
     until: '{time} まで',
     excluded: '今回は入りませんでした',
     excludedHint: '日数を増やすか、ペースを「詰めて」に変更してください。',
-    note: '天気予報はシミュレーションです。',
+    note: '天気データは Open-Meteo より。',
+    noteOffline: '天気を取得できません — ハーイルの気候平年値を表示しています。',
     day: '{n} 日目',
     step: {
       prefs: '興味と日数を読み取り中',
@@ -145,6 +147,8 @@ export default {
     sunny: '晴れ',
     hot: '猛暑',
     dusty: '風と砂塵',
+    cloudy: '晴れ時々曇り',
+    rain: '雨',
     adviceDusty: '砂塵を巻き上げる風 — 屋外の場所を早朝に繰り上げました。',
     adviceHot: '正午に {temp}° まで — 屋外は午前に移し、正午の暑さは博物館が引き受けます。',
     adviceFine: '良い条件です — 各所の最適な時間帯で経路を並べました。',
