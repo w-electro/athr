@@ -1,6 +1,14 @@
 import '@testing-library/jest-dom/vitest'
 import { cleanup } from '@testing-library/react'
 import { afterEach, vi } from 'vitest'
+import { primeContentCache } from '../data/content/index.js'
+
+/**
+ * في الإنتاج يُحمّل محتوى كل لغة كسولًا (حزمة مستقلة لكل لغة).
+ * في الاختبارات نحمّلها كلها مرة واحدة قبل أي اختبار، فتبقى فحوص الشاشات
+ * متزامنة ولا تحتاج انتظارًا في كل تأكيد.
+ */
+await primeContentCache()
 
 afterEach(() => {
   cleanup()

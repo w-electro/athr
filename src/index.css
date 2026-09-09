@@ -95,7 +95,37 @@
    * تطبيق letter-spacing عليها يفكّ هذا الالتحام فتتحول الكلمة إلى حروف
    * متناثرة غير مقروءة. هذا ليس تفضيلًا جماليًا بل خطأ إملائي فعلي.
    */
-  :root:not([lang='ar']):not([lang='fa']):not([lang='ur']) .eyebrow {
+  /*
+   * القاعدة بالإضافة لا بالاستثناء: نضيف التباعد وخط الآلة للكتابات
+   * اللاتينية والسيريلية واليونانية وحدها، لأن ما يفسده التباعد أكثر مما
+   * يحتمله.
+   *
+   *   العربية والفارسية والأردية متّصلة، فالتباعد يفكّ التحام حروفها.
+   *   والصينية واليابانية والكورية والتايلندية والهندية والبنغالية
+   *   والتاميلية لا تملك محارف في IBM Plex Mono أصلًا، فيسقط الخط إلى بديل
+   *   ويبقى التباعد الواسع يبعثر النص بلا فائدة.
+   */
+  .eyebrow {
+    letter-spacing: normal;
+  }
+
+  :root[lang='en'] .eyebrow,
+  :root[lang='fr'] .eyebrow,
+  :root[lang='es'] .eyebrow,
+  :root[lang='de'] .eyebrow,
+  :root[lang='it'] .eyebrow,
+  :root[lang='pt'] .eyebrow,
+  :root[lang='nl'] .eyebrow,
+  :root[lang='pl'] .eyebrow,
+  :root[lang='tr'] .eyebrow,
+  :root[lang='id'] .eyebrow,
+  :root[lang='ms'] .eyebrow,
+  :root[lang='vi'] .eyebrow,
+  :root[lang='tl'] .eyebrow,
+  :root[lang='sw'] .eyebrow,
+  :root[lang='ru'] .eyebrow,
+  :root[lang='uk'] .eyebrow,
+  :root[lang='el'] .eyebrow {
     @apply font-mono;
     letter-spacing: 0.18em;
   }

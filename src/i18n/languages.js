@@ -57,8 +57,17 @@ export const LANGUAGES = [
 
 export const DEFAULT_LANGUAGE = 'ar'
 
-/** اللغات التي تتوفر لها القصص الكاملة (لا الواجهة فقط). */
-export const FULL_CONTENT_LANGUAGES = ['ar', 'en']
+/**
+ * اللغات التي تتوفر لها القصص التراثية كاملة، لا الواجهة فقط.
+ *
+ * الآن: جميع اللغات المدعومة. لكلّ واحدة ملفٌ في src/data/content/ يحمل
+ * قصص المواقع الأربعة وحقائقها ونصائحها وسردها الصوتي.
+ *
+ * أبقينا هذه القائمة منفصلة عن LANGUAGES عن قصد: إن أضفتَ لغة واجهة جديدة
+ * ولم تترجم محتواها بعد، فلا تضِف رمزها هنا — عندئذٍ يعرض التطبيق قصصها
+ * بالإنجليزية مع ملاحظة صريحة، بدل أن يوهم المستخدم بترجمة غير موجودة.
+ */
+export const FULL_CONTENT_LANGUAGES = LANGUAGES.map((language) => language.code)
 
 export function getLanguage(code) {
   return LANGUAGES.find((language) => language.code === code)

@@ -119,18 +119,22 @@ describe('شاشة الاستكشاف', () => {
   })
 
   /**
-   * حارس لصنفٍ كامل من العلل: اللغات التي لم يُترجم محتواها بعد (الأردية،
-   * اليابانية…) يجب أن تتراجع إلى الإنجليزية لا إلى العربية. وقعت هذه
-   * العلّة في ثلاث شاشات مستقلة قبل أن نضبطها.
+   * حارس لصنفٍ كامل من العلل: وقع تسرّب العربية إلى لغاتٍ أخرى في ثلاث
+   * شاشات مستقلة. الآن أن كل اللغات لها محتوى مترجم، يجب أن يظهر اسم
+   * الموقع بلغة المستخدم نفسها — لا بالعربية ولا بالإنجليزية.
    */
-  it.each(['ur', 'ja', 'fa'])(
-    'تعرض محتوى المواقع بالإنجليزية لا بالعربية للغة %s',
-    (code) => {
-      renderApp('/explore', code)
-      expect(screen.getByText('The Jubbah Petroglyphs')).toBeInTheDocument()
-      expect(screen.queryByText('نقوش جبة الصخرية')).not.toBeInTheDocument()
-    },
-  )
+  it.each([
+    ['ur', 'جُبّہ کے چٹانی نقوش'],
+    ['ja', 'ジュッバの岩絵'],
+    ['fa', 'سنگ‌نگاره‌های جُبّه'],
+    ['sw', 'Michoro ya Miamba ya Jubbah'],
+    ['th', 'ภาพสลักหินแห่งญุบบะฮ์'],
+  ])('تعرض محتوى المواقع بلغة %s نفسها', (code, expectedName) => {
+    renderApp('/explore', code)
+    expect(screen.getByText(expectedName)).toBeInTheDocument()
+    expect(screen.queryByText('نقوش جبة الصخرية')).not.toBeInTheDocument()
+    expect(screen.queryByText('The Jubbah Petroglyphs')).not.toBeInTheDocument()
+  })
 
   it('تصفّي القائمة بالبحث', async () => {
     const user = userEvent.setup()
@@ -183,11 +187,18 @@ describe('شاشة تفاصيل الموقع', () => {
     expect(screen.getByRole('heading', { name: 'The story' })).toBeInTheDocument()
   })
 
-  it('تنبّه بلغة غير مترجمة أن القصة ستُعرض بالإنجليزية', () => {
+  it('تعرض القصة الكاملة باليابانية بلا ملاحظة تراجع', () => {
     renderApp('/site/jubbah', 'ja')
-    expect(screen.getByText(/アラビア語と英語/)).toBeInTheDocument()
-    // والمحتوى فعلًا بالإنجليزية
-    expect(screen.getByText('When the desert was a lake')).toBeInTheDocument()
+    expect(screen.getByText('砂漠が湖であったころ')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '物語' })).toBeInTheDocument()
+    // لم تعد هناك لغة تتراجع، فالملاحظة يجب ألا تظهر
+    expect(screen.queryByText(/アラビア語と英語/)).not.toBeInTheDocument()
+  })
+
+  it('تعرض السرد الصوتي بلغة المستخدم أيضًا', () => {
+    renderApp('/site/aja', 'ko')
+    const player = screen.getByLabelText('오디오 가이드')
+    expect(within(player).getByText(/앞에 아자산맥이 펼쳐져 있습니다/)).toBeInTheDocument()
   })
 
   it('تنسب الصورة إلى مصدرها ورخصتها', () => {

@@ -12,7 +12,7 @@
  * لاحقًا استبدال المصدر بـ API أو قاعدة بيانات دون تعديل الواجهة.
  */
 
-import EN_CONTENT from './content/en.js'
+import { getLoadedContent } from './content/index.js'
 
 /**
  * مسار الصور. نمرّ عبر BASE_URL لأن التطبيق يُنشر على مسار فرعي
@@ -350,10 +350,9 @@ export const SITES = [
 /* ────────────────────────── الوصول متعدد اللغات ────────────────────────── */
 
 /**
- * المحتوى النصي المترجم بالكامل.
- * العربية هي الأساس (مكتوبة داخل SITES أعلاه)، والباقي طبقات فوقها.
+ * المحتوى النصي المترجم بالكامل — 28 لغة فوق الأساس العربي.
+ * العربية مكتوبة داخل SITES أعلاه؛ البقية طبقات في src/data/content/.
  */
-const CONTENT_BY_LANGUAGE = { en: EN_CONTENT }
 
 /**
  * يدمج النص المترجم فوق البنية المشتركة.
@@ -362,7 +361,9 @@ const CONTENT_BY_LANGUAGE = { en: EN_CONTENT }
  * فلا يمكن أن تتباعد بين اللغات. النص وحده هو ما يُستبدل.
  */
 function localize(site, language) {
-  const overlay = CONTENT_BY_LANGUAGE[language]?.[site.id]
+  // getLoadedContent متزامنة: تُرجع null إن لم تُحمَّل لغةٌ بعد، فنعرض
+  // الأساس العربي لحظةً واحدة ريثما ينتهي التحميل ويُعاد العرض.
+  const overlay = getLoadedContent(language)?.[site.id]
   if (!overlay) return site
 
   return {

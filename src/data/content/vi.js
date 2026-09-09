@@ -1,0 +1,234 @@
+export default {
+  jubbah: {
+    name: 'Tranh khắc đá Jubbah',
+    shortName: 'Jubbah',
+    subtitle: 'Jabal Umm Sinman · Di sản Thế giới UNESCO',
+    tagline: 'Phòng tranh ngoài trời cổ nhất bán đảo Ả Rập, tuổi đời mười nghìn năm.',
+    era: 'khoảng 10.000 năm trước (thời đại đồ đá mới)',
+    city: 'Jubbah, tây bắc Hail',
+    ticket: 'Vé vào cửa mang tính tượng trưng · nên đặt hướng dẫn viên trước',
+    story: [
+      {
+        heading: 'Khi sa mạc còn là một hồ nước',
+        body: 'Mười nghìn năm trước, Jubbah không phải là cát như bạn thấy hôm nay, mà là một hồ nước ngọt trải rộng khắp lòng chảo này, viền quanh là những đồng cỏ xanh nơi từng đàn bò rừng, linh dương sừng kiếm và đà điểu kéo xuống uống nước; và chính trên bờ hồ ấy con người tiền sử đã dựng chỗ ở, rồi khi ngẩng đầu nhìn lên vách đá Jabal Umm Sinman, họ thấy ở đó một trang giấy trắng đang chờ bàn tay mình.',
+      },
+      {
+        heading: 'Umm Sinman: ngọn núi biết nói',
+        body: 'Jabal Umm Sinman vươn lên ở phía bắc làng Jubbah như một bức tường đá khổng lồ, trên mặt đá khắc hàng nghìn hình bằng kỹ thuật gõ đục và rạch nét: những người đàn ông thân cao vai rộng, những phụ nữ tết bím dài, cùng các loài vật được thể hiện với độ chính xác giải phẫu đáng kinh ngạc — bò rừng sừng cong, dê núi, sư tử và đà điểu; hình lớn nhất trong số đó cao hơn hai mét, bởi nó được khắc để nhìn thấy từ xa, tựa một lời tuyên bố về căn tính.',
+      },
+      {
+        heading: 'Từ hình vẽ đến con chữ',
+        body: 'Điều làm nên sự phi thường của Jubbah là nó không ghi lại một khoảnh khắc, mà ghi lại chính bước chuyển của con người từ vẽ sang viết: phía trên những hình thú cổ hơn có thể đọc được các minh văn Thamud, Nabatea và Ả Rập sơ kỳ, do những lữ khách đi ngang qua hàng nghìn năm sau khắc lại — đến mức một vách đá duy nhất ở đây trở thành cuốn sổ lưu niệm sâu tới mười thiên niên kỷ.',
+      },
+      {
+        heading: 'Sự thừa nhận của thế giới',
+        body: 'Năm 2015, UNESCO đã ghi danh «nghệ thuật khắc đá vùng Hail» vào Danh sách Di sản Thế giới, bao gồm Jabal Umm Sinman ở Jubbah cùng các núi al-Manjur và Raat ở Shuwaymis; đó là di sản thứ tư của Ả Rập Xê Út được ghi danh, đồng thời là sự thừa nhận quốc tế đầu tiên rằng sa mạc Nafud từng là sân khấu của cả một nền văn minh.',
+      },
+    ],
+    facts: [
+      { label: 'Ghi danh UNESCO', value: '2015' },
+      { label: 'Số mảng khắc ước tính', value: 'hơn 5.400 hình khắc' },
+      { label: 'Hình khắc cổ nhất', value: 'khoảng 10.000 năm' },
+      { label: 'Khoảng cách từ Hail', value: '95 km về phía tây bắc' },
+    ],
+    tips: [
+      'Hãy đến ngay sau khi mặt trời mọc: ánh sáng chiếu xiên làm nổi bật độ sâu của nét khắc, và chỉ khi ấy chúng mới lên ảnh được.',
+      'Đi bộ trên cát từ mảng đá này sang mảng đá khác khá mất thời gian; hãy mang theo nước và đi giày kín mũi.',
+      'Đừng chạm vào hình khắc và cũng đừng tưới nước cho rõ nét, vì thói quen ấy làm hỏng đá.',
+    ],
+    narration: {
+      voice: 'Giọng của Athr — lời kể do trí tuệ nhân tạo tạo ra',
+      segments: [
+        { at: 0, text: 'Chào mừng bạn đến Jubbah. Hãy dừng lại một lát trước khi đi tiếp, và nhìn xuống lớp cát dưới chân mình.' },
+        { at: 11, text: 'Lớp cát này từng là nước: mười nghìn năm trước, một hồ nước ngọt đã trải rộng ngay tại đây.' },
+        { at: 23, text: 'Bên phải bạn là Jabal Umm Sinman; hãy lại gần mảng đá đầu tiên và tìm hai chiếc sừng cong.' },
+        { at: 38, text: 'Đó là một con bò rừng, đã tuyệt chủng khỏi bán đảo Ả Rập hàng nghìn năm — vậy mà nó vẫn còn ở đây.' },
+        { at: 52, text: 'Hãy ngước mắt lên một chút: những hình người cao lớn vai rộng chính là chữ ký của người Jubbah.' },
+        { at: 68, text: 'Cũng xin để ý dòng chữ nhỏ phía trên chúng, chữ Thamud và Nabatea, do khách bộ hành hàng nghìn năm sau khắc lại.' },
+        { at: 84, text: 'Bạn đang đứng trước cuốn sổ lưu niệm dài nhất lịch sử. Xin cứ thong thả.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Vách đá có hình khắc · Jabal Umm Sinman',
+      evidence: [
+        'Kỹ thuật gõ đục trên sa thạch sẫm màu phủ lớp vecni sa mạc',
+        'Hình người cao lớn vai rộng — phong cách đặc trưng của Jubbah',
+        'Chữ Thamud chồng lên các hình khắc thú cổ hơn',
+      ],
+    },
+  },
+
+  qishlah: {
+    name: 'Pháo đài Aarif và Qishlah',
+    shortName: 'Aarif và Qishlah',
+    subtitle: 'Trái tim lịch sử của Hail · hai công trình liền kề',
+    tagline: 'Một pháo đài đất canh giữ thành phố từ trên cao, và một thành lũy 142 gian che chở nó từ bên dưới.',
+    era: 'Aarif: hơn 200 năm · Qishlah: 1941',
+    city: 'Trung tâm Hail',
+    ticket: 'Vào cửa miễn phí · Qishlah mở cửa vào buổi chiều tối',
+    story: [
+      {
+        heading: 'Con mắt không ngủ của Hail',
+        body: 'Trên một ngọn đồi đá nhìn xuống thành phố sừng sững pháo đài Aarif, do người Hail dựng lên hơn hai thế kỷ trước để canh chừng những con đường dẫn vào thành; từ các tháp canh, lính gác dõi theo những đoàn lữ hành đến theo lối Darb Zubaydah, và đốt lửa trong những đêm Ramadan để báo giờ xả chay — tập tục ấy đến nay vẫn sống trong tiếng đại bác bắn đi từ chính ngọn đồi này.',
+      },
+      {
+        heading: 'Lớp đất trụ vững hai thế kỷ',
+        body: 'Pháo đài được đắp bằng đất trộn rơm, tường dày hơn một mét và được gia cố bằng thân cây liễu bách; kỹ thuật ấy không thô sơ như vẻ ngoài của nó: bức tường đất dày giữ cái mát của đêm cho tới ban ngày và cái nóng của ngày cho tới ban đêm, nhờ vậy tạo ra một hệ điều hòa tự nhiên giữa lòng sa mạc mà mùa hè vượt quá năm mươi độ.',
+      },
+      {
+        heading: 'Qishlah: một thành phố trong một bức tường',
+        body: 'Hãy xuống đồi về phía đông và bạn sẽ gặp điều hoàn toàn trái ngược với pháo đài: Qishlah là một thành lũy hình chữ nhật đồ sộ do Quốc vương Abdulaziz cho xây năm 1941 làm doanh trại, gồm 142 gian phòng trên hai tầng, tám tháp canh ở các góc và hai bên sườn, một thánh đường bên trong, cùng một sân rộng có hành lang cắt ngang; đi dọc những hành lang đất dài của nó chẳng khác nào băng qua một thành phố thu nhỏ.',
+      },
+      {
+        heading: 'Từ doanh trại thành ký ức',
+        body: 'Khi vai trò quân sự chấm dứt, Qishlah trở thành một trong những di sản quan trọng nhất của Hail, và ngày nay sân của nó là nơi diễn ra các sự kiện văn hóa cùng những phiên chợ truyền thống; có một chi tiết đáng chú ý: mỗi ô cửa sổ trên tám tháp canh đều được mở theo một góc khác nhau, để khi hợp lại chúng bao quát mọi hướng tiến vào thành lũy mà không chừa một điểm mù nào.',
+      },
+    ],
+    facts: [
+      { label: 'Số gian phòng của Qishlah', value: '142' },
+      { label: 'Tháp canh', value: '8' },
+      { label: 'Năm xây Qishlah', value: '1941 (1360 Hijri)' },
+      { label: 'Vật liệu', value: 'đất, rơm, thân cây liễu bách' },
+    ],
+    tips: [
+      'Hãy leo lên pháo đài Aarif nửa giờ trước hoàng hôn: quang cảnh thành phố nhìn từ trên cao là bức ảnh đẹp nhất bạn chụp được ở Hail.',
+      'Trong tháng Ramadan, đại bác được bắn từ ngọn đồi này; nếu đến vào mùa ấy hãy tới sớm, vì chỗ nhanh chóng kín người.',
+      'Nền đất của Qishlah không bằng phẳng — hãy cẩn thận nếu đi cùng trẻ nhỏ hoặc người lớn tuổi.',
+    ],
+    narration: {
+      voice: 'Giọng của Athr — lời kể do trí tuệ nhân tạo tạo ra',
+      segments: [
+        { at: 0, text: 'Bạn đang đứng dưới chân đồi Aarif; bậc thang ở ngay phía trước, và bảy mươi bậc ngăn cách bạn với khung cảnh đẹp nhất Hail.' },
+        { at: 14, text: 'Khi leo lên, hãy để ý độ dày của bức tường bên trái: hơn một mét đất trộn rơm.' },
+        { at: 28, text: 'Độ dày ấy không chỉ để phòng thủ mà còn để làm mát tự nhiên: cái mát của đêm được giữ lại trong lớp đất cho tới giữa trưa.' },
+        { at: 44, text: 'Từ tháp canh này, người lính từng dõi theo các đoàn lữ hành, và cũng từ đây tiếng đại bác Ramadan vẫn vang lên đến hôm nay.' },
+        { at: 60, text: 'Bây giờ hãy quay về hướng đông: khối chữ nhật bằng đất lớn kia chính là Qishlah, với 142 gian phòng và tám tháp canh.' },
+        { at: 76, text: 'Khi vào bên trong, hãy đếm góc của các ô cửa sổ: quanh thành lũy này không có lấy một điểm mù.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Kiến trúc phòng thủ bằng đất · Qishlah / pháo đài Aarif',
+      evidence: [
+        'Tường đất thu hẹp dần về phía trên',
+        'Tháp góc hình trụ với lỗ châu mai hình tam giác',
+        'Lan can răng cưa đặc trưng của kiến trúc Najd',
+      ],
+    },
+  },
+
+  aja: {
+    name: 'Dãy núi Aja',
+    shortName: 'Aja',
+    subtitle: 'Dãy hoa cương đỏ · phía tây Hail',
+    tagline: 'Ngọn núi mang tên một người tình, rồi trở thành thành trì của bộ tộc Tayy và Hatim, chủ nhà huyền thoại của họ.',
+    era: 'Cấu tạo địa chất hơn 500 triệu năm tuổi',
+    city: 'Phía tây thành phố Hail',
+    ticket: 'Tự do vào · một số tuyến cần xe hai cầu',
+    story: [
+      {
+        heading: 'Aja và Salma: hai ngọn núi và một chuyện tình',
+        body: 'Sử sách Ả Rập kể rằng một người đàn ông tên Aja đem lòng yêu một phụ nữ tên Salma; họ hàng chia rẽ hai người, họ bỏ trốn, bị đuổi kịp và bị giết, rồi mỗi người hóa thành một ngọn núi: Aja ở phía tây Hail còn Salma ở phía đông, giữa hai bên là một đồng bằng rộng mà họ mãi mãi không thể băng qua. Câu chuyện vốn là truyền thuyết, nhưng nó bén rễ sâu đến mức cả hai cái tên đã trở thành địa danh chính thức trên mọi bản đồ bán đảo.',
+      },
+      {
+        heading: 'Thành trì thiên nhiên của bộ tộc Tayy',
+        body: 'Aja chưa bao giờ chỉ là một ngọn núi đẹp: nó là căn cứ của bộ tộc Tayy, những người đã đến định cư ở vùng này nhiều thế kỷ trước Hồi giáo, biến các hẻm núi hẹp và đèo hiểm thành một vị trí không thể công phá; từ những ngọn núi này đã bước ra Hatim al-Ta’i, người mà lòng hào phóng đến nay vẫn là một thành ngữ trong tiếng Ả Rập, và cả con trai ông là Adi, người đã ra mắt Nhà Tiên tri. Còn cái tên «Jabal Shammar» phổ biến về sau thì bao gồm cả Aja lẫn Salma.',
+      },
+      {
+        heading: 'Hoa cương màu lửa',
+        body: 'Đá của Aja là hoa cương hồng đến đỏ sẫm, hình thành hơn năm trăm triệu năm trước từ dòng mắc ma nguội chậm trong lòng đất sâu trước khi các chuyển động kiến tạo nâng nó lên; và chính sự nguội chậm ấy giải thích vì sao các tinh thể thạch anh và fenspat lớn đến mức nhìn thấy bằng mắt thường. Lúc hoàng hôn, đá phản chiếu ánh sáng khiến cả dãy núi như bốc cháy — đó chính là khoảnh khắc các nhiếp ảnh gia chờ đợi.',
+      },
+      {
+        heading: 'Nước giữa lòng đá',
+        body: 'Giữa các hẻm núi Aja có những lối mòn, thung lũng và vũng đá giữ nước sau mưa, quanh đó là những vườn chà là và làng nhỏ đã sống nhờ nguồn nước ấy suốt nhiều thế kỷ; đi bộ trong các hẻm núi này vào buổi sáng là một trải nghiệm hoàn toàn khác với hình dung quen thuộc về sa mạc: có bóng râm mát, có tiếng vọng giữa những vách đá, và có những hình khắc cổ bất ngờ hiện ra trên một tảng đá giữa đường.',
+      },
+    ],
+    facts: [
+      { label: 'Đỉnh cao nhất', value: 'khoảng 1.500 m so với mực nước biển' },
+      { label: 'Loại đá', value: 'hoa cương hồng và đá núi lửa cổ' },
+      { label: 'Chiều dài', value: 'hơn 100 km' },
+      { label: 'Liên hệ lịch sử', value: 'bộ tộc Tayy · Hatim al-Ta’i' },
+    ],
+    tips: [
+      'Ánh sáng đẹp nhất để chụp ảnh là giờ đầu tiên sau bình minh hoặc giờ cuối trước hoàng hôn, khi đá hoa cương rực lên như than hồng.',
+      'Một số hẻm núi cần xe hai cầu; hãy kiểm tra tình trạng đường trước khi đi vào.',
+      'Đừng trông cậy vào sóng điện thoại trong hẻm núi — hãy tải bản đồ trước khi khởi hành.',
+    ],
+    narration: {
+      voice: 'Giọng của Athr — lời kể do trí tuệ nhân tạo tạo ra',
+      segments: [
+        { at: 0, text: 'Trước mặt bạn là dãy núi Aja. Hãy dừng ở cửa hẻm núi và lắng nghe: bạn sẽ nghe thấy một sự tĩnh lặng có tiếng vọng.' },
+        { at: 13, text: 'Tảng đá bạn đang chạm vào là hoa cương hồng, đã nguội chậm trong lòng đất sâu từ năm trăm triệu năm trước.' },
+        { at: 30, text: 'Chính vì thế mà tinh thể của nó lớn đến vậy: hãy đưa tay lướt trên bề mặt và bạn sẽ cảm nhận được những hạt thạch anh.' },
+        { at: 45, text: 'Những hẻm núi này từng là thành trì của bộ tộc Tayy; không một người lạ nào vào được nếu thiếu người dẫn đường thuộc bộ tộc.' },
+        { at: 61, text: 'Và cũng từ đây đã bước ra Hatim al-Ta’i, người mà tên tuổi trở thành từ đồng nghĩa với lòng hào phóng trong toàn bộ tiếng Ả Rập.' },
+        { at: 78, text: 'Nếu có thể, hãy nán lại đến hoàng hôn: khi ấy cả ngọn núi sẽ nhuộm màu than hồng.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Cấu tạo hoa cương · dãy Aja',
+      evidence: [
+        'Hoa cương hồng tinh thể thô với phong hóa dạng cầu',
+        'Đỉnh răng cưa và hẻm núi hẹp đặc trưng của dãy Aja',
+        'Thảm thực vật sa mạc thưa thớt trên các sườn thấp',
+      ],
+    },
+  },
+
+  museum: {
+    name: 'Bảo tàng Vùng Hail',
+    shortName: 'Bảo tàng',
+    subtitle: 'Cả một vùng đất dưới cùng một mái nhà',
+    tagline: 'Hãy bắt đầu từ đây: mọi thứ bạn sắp thấy bên ngoài đều được giải thích trước ở bên trong.',
+    era: 'Từ thời tiền sử đến thời hiện đại',
+    city: 'Thành phố Hail',
+    ticket: 'Vào cửa miễn phí · đóng cửa sáng thứ Sáu',
+    story: [
+      {
+        heading: 'Vì sao nên bắt đầu từ đây',
+        body: 'Sai lầm phổ biến nhất của khách đến Hail là đi thẳng tới Jubbah trước, trong khi chính bảo tàng vùng này mới là nơi trao cho bạn chiếc chìa khóa: ở đây bạn thấy các bản phỏng dựng hình khắc kèm lời diễn giải, những tấm bản đồ cho thấy hồ nước xưa kia đã phủ kín Nafud ra sao, cùng hiện vật gốc từ các di chỉ khắp vùng. Sau một giờ ở đây, mỗi tảng đá bạn nhìn thấy bên ngoài đều trở nên đọc được, thay vì mãi là một hoa văn khó hiểu.',
+      },
+      {
+        heading: 'Từ đá lửa đến sắt',
+        body: 'Các gian trưng bày của bảo tàng nối tiếp theo trình tự thời gian: công cụ đá lửa thời đồ đá cho thấy con người đầu tiên đã tạo ra một lưỡi cắt như thế nào, kế đó là gốm và công cụ đồng, rồi các minh văn Thamud và Nabatea được di dời hoặc sao chép, cho đến khu Hồi giáo, nơi Hail hiện ra như một trạm dừng chính trên tuyến Darb Zubaydah, con đường hành hương từ Kufa đến Mecca.',
+      },
+      {
+        heading: 'Darb Zubaydah đi qua nơi đây',
+        body: 'Một trong những phần trưng bày quan trọng nhất là câu chuyện về Darb Zubaydah, con đường mà Zubaydah, vợ của Harun al-Rashid, đã ra lệnh trang bị cho khách hành hương bằng các bể chứa nước, giếng và tháp dẫn đường ban đêm, cùng các trạm nghỉ đặt theo những khoảng cách được tính toán; chính việc con đường này băng qua vùng Hail đã khiến nơi đây trở thành trung tâm thương mại và văn hóa suốt nhiều thế kỷ, chứ không đơn thuần là một chốn đi ngang.',
+      },
+      {
+        heading: 'Di sản sống',
+        body: 'Phần cuối dành cho di sản dân gian: bình pha cà phê và bộ đồ tiếp khách, y phục thêu, nông cụ và dụng cụ tưới tiêu xưa, cùng vật dụng trong ngôi nhà Hail; đến đây thì rõ rằng lòng hào phóng của Hatim al-Ta’i chưa bao giờ chỉ là một truyền thuyết văn chương, mà là cả một nền văn hóa hiếu khách với dụng cụ và nghi thức riêng, đến nay vẫn được gìn giữ trong các gia đình ở Hail.',
+      },
+    ],
+    facts: [
+      { label: 'Các khu trưng bày', value: 'Tiền sử · Các vương quốc · Hồi giáo · Di sản dân gian' },
+      { label: 'Thời lượng lý tưởng', value: '90 phút' },
+      { label: 'Phù hợp với trẻ em', value: 'Có — phòng có điều hòa, lộ trình ngắn' },
+      { label: 'Vào cửa', value: 'Miễn phí' },
+    ],
+    tips: [
+      'Hãy ghé thăm vào ngày đầu tiên của chuyến đi: nó sẽ thay đổi cách bạn nhìn tất cả những nơi còn lại.',
+      'Đây là lựa chọn tuyệt vời vào những giờ nóng nhất, bởi nó là nơi duy nhất có điều hòa trong danh sách này.',
+      'Hãy hỏi riêng về khu Darb Zubaydah: nhiều khách tham quan đi ngang qua mà không để ý.',
+    ],
+    narration: {
+      voice: 'Giọng của Athr — lời kể do trí tuệ nhân tạo tạo ra',
+      segments: [
+        { at: 0, text: 'Chào mừng bạn đến Bảo tàng Vùng Hail: đây là điểm khởi đầu tốt nhất cho hành trình của bạn trong vùng này.' },
+        { at: 12, text: 'Gian đầu tiên bên phải bạn là công cụ đá lửa. Hãy nhìn phần lưỡi được ghè — đó là công nghệ đầu tiên loài người biết đến.' },
+        { at: 29, text: 'Sau đó hãy bước sang gian hình khắc: những gì được giải thích ở đây, lát nữa bạn sẽ thấy trên chính những tảng đá của Jubbah.' },
+        { at: 45, text: 'Trong khu Hồi giáo, hãy tìm tấm bản đồ Darb Zubaydah: con đường ấy giải thích tầm quan trọng của Hail.' },
+        { at: 62, text: 'Và cuối cùng là gian di sản dân gian: những bình cà phê, y phục và vật dụng của lòng hiếu khách.' },
+        { at: 74, text: 'Khi bước ra ngoài, bạn sẽ sẵn sàng để đọc Hail, chứ không chỉ để ngắm nhìn nó.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Hiện vật trưng bày · Bảo tàng Vùng Hail',
+      evidence: [
+        'Ánh sáng tủ trưng bày hướng vào trên nền tối',
+        'Bệ trưng bày kèm bảng chú thích',
+        'Bình gốm với hoa văn hình học Najd',
+      ],
+    },
+  },
+}

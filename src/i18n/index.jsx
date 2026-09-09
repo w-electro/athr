@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { LOCALES } from './locales/index.js'
+import { loadContent, getLoadedContent } from '../data/content/index.js'
 import {
   DEFAULT_LANGUAGE,
   FULL_CONTENT_LANGUAGES,
@@ -90,6 +91,16 @@ function writeStored(key, value) {
   }
 }
 
+/**
+ * اللغة التي سيبدأ بها التطبيق: المحفوظة، وإلا لغة الجهاز، وإلا العربية.
+ *
+ * يستخدمها main.jsx لتحميل المحتوى قبل أول عرض، فلا يرى المستخدم ومضة
+ * نصٍّ عربي قبل أن تحلّ لغته محلّه.
+ */
+export function resolveInitialLanguage() {
+  return readStored(STORAGE_KEY) || detectDeviceLanguage() || DEFAULT_LANGUAGE
+}
+
 export function I18nProvider({ children, initialLanguage }) {
   // ترتيب الأولوية: قيمة ممرّرة (للاختبارات) ← اختيار محفوظ ← لغة الجهاز
   const [language, setLanguageState] = useState(() => initialLanguage || readStored(STORAGE_KEY) || null)
@@ -112,6 +123,27 @@ export function I18nProvider({ children, initialLanguage }) {
     root.dir = meta.dir
     ensureScriptFont(meta.code)
   }, [meta])
+
+  /**
+   * تحميل محتوى اللغة النشطة.
+   *
+   * الملفات مقسّمة إلى حزم مستقلة (انظر data/content/index.js)، فنُنزّل
+   * لغة المستخدم وحدها. نرفع `contentTick` بعد التحميل لإجبار إعادة العرض،
+   * لأن sites.js يقرأ المحتوى من ذاكرة متزامنة لا من حالة React.
+   */
+  const [contentTick, setContentTick] = useState(0)
+
+  useEffect(() => {
+    let cancelled = false
+    if (active === 'ar' || getLoadedContent(active)) return undefined
+
+    loadContent(active).then(() => {
+      if (!cancelled) setContentTick((tick) => tick + 1)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [active])
 
   const setLanguage = useCallback((code) => {
     setLanguageState(code)
@@ -142,15 +174,17 @@ export function I18nProvider({ children, initialLanguage }) {
       /** اللغة التي ستُعرض بها القصص فعليًا. */
       contentLanguage: FULL_CONTENT_LANGUAGES.includes(active) ? active : 'en',
       /**
-       * اتجاه نص المحتوى — قد يخالف اتجاه الواجهة.
+       * اتجاه نص المحتوى.
        *
-       * قارئ أردي يرى واجهةً من اليمين لليسار بينما القصص بالإنجليزية من
-       * اليسار لليمين. بدون تحديد هذا الاتجاه على عناصر المحتوى، يضع
-       * المتصفح النقطة في أول الجملة الإنجليزية لا في آخرها.
+       * يطابق اتجاه الواجهة ما دام المحتوى مترجمًا بلغة المستخدم. أما إن
+       * أُضيفت لغة واجهة بلا محتوى، فالقصص تُعرض بالإنجليزية ويجب أن يكون
+       * اتجاهها ltr وإن كانت الواجهة rtl — وإلا وضع المتصفح النقطة في أول
+       * الجملة الإنجليزية بدل آخرها.
        */
-      contentDir: FULL_CONTENT_LANGUAGES.includes(active) && active === 'ar' ? 'rtl' : 'ltr',
+      contentDir: FULL_CONTENT_LANGUAGES.includes(active) ? meta.dir : 'ltr',
     }),
-    [active, meta, language, onboarded, completeOnboarding, deviceLanguage, setLanguage],
+    // contentTick ضمن التبعيات ليُعاد بناء القيمة بعد وصول المحتوى
+    [active, meta, language, onboarded, completeOnboarding, deviceLanguage, setLanguage, contentTick],
   )
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>
