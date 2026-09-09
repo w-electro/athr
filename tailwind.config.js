@@ -49,7 +49,19 @@ export default {
         // وهي العائلة الوحيدة التي تغطي الـ28 لغة دون مربعات فارغة.
         sans: ['Noto Sans', 'Tajawal', 'system-ui', 'sans-serif'],
         // Tajawal للعربية (طلب العميل)
-        arabic: ['Tajawal', 'Noto Sans Arabic', 'sans-serif'],
+        arabic: ['Tajawal', 'Noto Naskh Arabic', 'sans-serif'],
+        /*
+         * ترتيب هذه القوائم مقصود.
+         *
+         * المتصفح يختار الخط لكلّ حرفٍ على حدة: يأخذ أوّل خطٍّ في القائمة
+         * يملك ذلك الحرف. ولمّا كانت خطوط النستعليق وVazirmatn تحمل حروفًا
+         * لاتينية أيضًا، فلو وضعناها أوّلًا لعُرض النصّ الإنجليزي بها — وهو
+         * ما حدث فعلًا: ظهرت القصص الإنجليزية داخل واجهةٍ أردية بخطٍّ مذيَّل
+         * غريب. فوضعنا Noto Sans أوّلًا ليأخذ اللاتينية، وتسقط الحروف
+         * العربية والأردية إلى خطّها الصحيح بعده.
+         */
+        persian: ['Noto Sans', 'Vazirmatn', 'Noto Naskh Arabic', 'sans-serif'],
+        urdu: ['Noto Sans', 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', 'serif'],
         // الكوفي زاويّ ومحفور — صدى مباشر لنقوش الصخر
         display: ['Reem Kufi', 'Noto Sans', 'sans-serif'],
         // الأرقام والبيانات بخط آلة: قراءة "جهاز ميداني"

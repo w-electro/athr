@@ -24,7 +24,7 @@ const STEPS = { form: 'form', checking: 'checking', plan: 'plan' }
 const CHECK_STEPS = ['prefs', 'weather', 'order']
 
 export default function TripScreen() {
-  const { t, language } = useI18n()
+  const { t, language, contentLanguage } = useI18n()
   const [step, setStep] = useState(STEPS.form)
   const [interests, setInterests] = useState(['history'])
   const [days, setDays] = useState(2)
@@ -50,7 +50,8 @@ export default function TripScreen() {
     const forecast = await fetchForecast(days)
     timers.forEach(clearTimeout)
 
-    setItinerary(buildItinerary({ interests, days, pace, language }, forecast))
+    // language لصيغة الساعة، وcontentLanguage لأسماء المواقع
+    setItinerary(buildItinerary({ interests, days, pace, language: contentLanguage }, forecast))
     setStep(STEPS.plan)
   }
 
@@ -227,7 +228,7 @@ function Checking({ stage }) {
 /* ──────────────────────────── عرض المسار ──────────────────────────── */
 
 function Plan({ itinerary, onRestart }) {
-  const { t, language } = useI18n()
+  const { t, language, contentDir } = useI18n()
   const total = itinerary.days.reduce((sum, day) => sum + day.stops.length, 0)
 
   return (
@@ -286,7 +287,9 @@ function Plan({ itinerary, onRestart }) {
                   className="surface block p-4 transition-transform duration-200 ease-athr active:scale-[0.99]"
                 >
                   <div className="mb-2 flex items-start justify-between gap-3">
-                    <h3 className="font-display text-[1.0625rem] text-sand">{stop.site.name}</h3>
+                    <h3 className="font-display text-[1.0625rem] text-sand" dir={contentDir}>
+                      {stop.site.name}
+                    </h3>
                     <span className="num shrink-0 rounded-md bg-night-600 px-2 py-1 text-[0.6875rem] text-sand">
                       {formatClockFor(stop.startMinutes, language)}
                     </span>
@@ -318,7 +321,7 @@ function Plan({ itinerary, onRestart }) {
                   to={`/site/${site.id}`}
                   className="flex items-center justify-between gap-3 rounded-lg bg-night-900 px-3 py-2.5 text-body text-sand-dim"
                 >
-                  {site.name}
+                  <span dir={contentDir}>{site.name}</span>
                   <span className="shrink-0 text-[0.6875rem] text-sand-faint">
                     {formatDuration(site.durationMinutes, t)}
                   </span>

@@ -158,11 +158,12 @@ export default {
     bestTime: 'بهترین زمان بازدید: {time}.',
   },
   common: {
+    // ارقام لاتینی برای هماهنگی با ساعت‌ها و فاصله‌ها در سراسر برنامه
     minutes: '{n} دقیقه',
-    hour: '۱ ساعت',
-    twoHours: '۲ ساعت',
+    hour: '1 ساعت',
+    twoHours: '2 ساعت',
     hours: '{n} ساعت',
-    half: '۳۰ دقیقه',
+    half: '30 دقیقه',
     and: 'و',
     language: 'زبان',
     changeLanguage: 'تغییر زبان',

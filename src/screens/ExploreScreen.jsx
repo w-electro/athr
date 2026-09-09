@@ -11,11 +11,13 @@ import { useI18n } from '../i18n/index.jsx'
  * حين تكبر لاحقًا، هذه هي النقطة الوحيدة التي تُستبدل بنداء API.
  */
 export default function ExploreScreen() {
-  const { t, language, meta } = useI18n()
+  const { t, contentLanguage, meta } = useI18n()
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('all')
 
-  const sites = useMemo(() => getAllSites(language), [language])
+  // contentLanguage لا language: الأخيرة قد تكون لغةً لم يُترجم محتواها بعد
+  // (الأردية مثلًا)، فتُعرض بيانات المواقع بالعربية بدل الإنجليزية.
+  const sites = useMemo(() => getAllSites(contentLanguage), [contentLanguage])
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase()

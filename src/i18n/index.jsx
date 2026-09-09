@@ -50,6 +50,30 @@ function translate(locale, key, vars) {
   )
 }
 
+/**
+ * خطوط الكتابات التي تحتاج ملفًا خاصًا بها.
+ *
+ * لا نُحمّلها كلها في index.html: الخطوط العربية والفارسية والأردية تغطي
+ * النطاق اليونيكودي نفسه، فلو أدرجناها جميعًا لحمّل كل قارئ عربي أربعة
+ * خطوط لا يحتاج منها إلا واحدًا. نحمّل ما يلزم عند اختيار اللغة فقط.
+ */
+const SCRIPT_FONTS = {
+  fa: 'https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap',
+  ur: 'https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;700&display=swap',
+}
+
+function ensureScriptFont(code) {
+  const href = SCRIPT_FONTS[code]
+  if (!href || typeof document === 'undefined') return
+  if (document.querySelector(`link[data-script-font="${code}"]`)) return
+
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.href = href
+  link.dataset.scriptFont = code
+  document.head.appendChild(link)
+}
+
 function readStored(key) {
   try {
     return window.localStorage.getItem(key)
@@ -86,6 +110,7 @@ export function I18nProvider({ children, initialLanguage }) {
     const root = document.documentElement
     root.lang = meta.code
     root.dir = meta.dir
+    ensureScriptFont(meta.code)
   }, [meta])
 
   const setLanguage = useCallback((code) => {
@@ -116,6 +141,14 @@ export function I18nProvider({ children, initialLanguage }) {
       hasFullContent: FULL_CONTENT_LANGUAGES.includes(active),
       /** اللغة التي ستُعرض بها القصص فعليًا. */
       contentLanguage: FULL_CONTENT_LANGUAGES.includes(active) ? active : 'en',
+      /**
+       * اتجاه نص المحتوى — قد يخالف اتجاه الواجهة.
+       *
+       * قارئ أردي يرى واجهةً من اليمين لليسار بينما القصص بالإنجليزية من
+       * اليسار لليمين. بدون تحديد هذا الاتجاه على عناصر المحتوى، يضع
+       * المتصفح النقطة في أول الجملة الإنجليزية لا في آخرها.
+       */
+      contentDir: FULL_CONTENT_LANGUAGES.includes(active) && active === 'ar' ? 'rtl' : 'ltr',
     }),
     [active, meta, language, onboarded, completeOnboarding, deviceLanguage, setLanguage],
   )

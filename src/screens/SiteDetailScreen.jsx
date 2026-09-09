@@ -19,7 +19,7 @@ import { useI18n } from '../i18n/index.jsx'
 export default function SiteDetailScreen() {
   const { siteId } = useParams()
   const navigate = useNavigate()
-  const { t, contentLanguage, hasFullContent, language, isRtl } = useI18n()
+  const { t, contentLanguage, contentDir, hasFullContent, language, isRtl } = useI18n()
   const site = getSiteById(siteId, contentLanguage)
 
   const scrollRef = useRef(null)
@@ -91,7 +91,7 @@ export default function SiteDetailScreen() {
           </span>
         )}
 
-        <div className="absolute bottom-0 start-0 end-0 p-5">
+        <div className="absolute bottom-0 start-0 end-0 p-5" dir={contentDir}>
           <span className="eyebrow mb-2 block text-gold/80">{site.era}</span>
           <h1 className="font-display text-hero text-sand">{site.name}</h1>
           <p className="mt-1.5 text-body text-sand-dim">{site.subtitle}</p>
@@ -100,7 +100,9 @@ export default function SiteDetailScreen() {
 
       <div className="relative z-10 -mt-4 rounded-t-3xl bg-basalt">
         <div className="screen-pad space-y-8 pt-6">
-          <p className="text-read font-medium text-sand">{site.tagline}</p>
+          <p className="text-read font-medium text-sand" dir={contentDir}>
+            {site.tagline}
+          </p>
 
           {!hasFullContent && (
             <p className="rounded-xl border border-night-600 bg-night-800 p-3.5 text-micro text-sand-faint">
@@ -120,7 +122,7 @@ export default function SiteDetailScreen() {
 
           <section>
             <SectionHead>{t('site.story')}</SectionHead>
-            <div className="space-y-7">
+            <div className="space-y-7" dir={contentDir}>
               {site.story.map((chapter, index) => (
                 <article key={chapter.heading}>
                   <div className="mb-2 flex items-baseline gap-2.5">
@@ -137,7 +139,7 @@ export default function SiteDetailScreen() {
 
           <section>
             <SectionHead>{t('site.facts')}</SectionHead>
-            <dl className="overflow-hidden rounded-xl border border-night-600">
+            <dl className="overflow-hidden rounded-xl border border-night-600" dir={contentDir}>
               {site.facts.map((fact, index) => (
                 <div
                   key={fact.label}
@@ -154,7 +156,7 @@ export default function SiteDetailScreen() {
 
           <section>
             <SectionHead>{t('site.tips')}</SectionHead>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2.5" dir={contentDir}>
               {site.tips.map((tip) => (
                 <li key={tip} className="flex gap-3 rounded-xl border border-night-600 bg-night-800 p-3.5">
                   <span aria-hidden="true" className="mt-0.5 shrink-0 text-terracotta">

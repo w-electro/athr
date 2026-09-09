@@ -28,7 +28,7 @@ const STATES = {
 }
 
 export default function ScanScreen() {
-  const { t, language } = useI18n()
+  const { t, contentLanguage, contentDir } = useI18n()
   const [state, setState] = useState(STATES.idle)
   const [stageIndex, setStageIndex] = useState(0)
   const [result, setResult] = useState(null)
@@ -124,7 +124,9 @@ export default function ScanScreen() {
     setState(STATES.idle)
   }
 
-  const matchedSite = result?.siteId ? getSiteById(result.siteId, language === 'en' ? 'en' : 'ar') : null
+  // contentLanguage هي لغة المحتوى الفعلية (تتراجع للإنجليزية للغات التي لم
+  // يُترجم محتواها بعد) — لا language مباشرة، وإلا ظهر المحتوى بالعربية دائمًا.
+  const matchedSite = result?.siteId ? getSiteById(result.siteId, contentLanguage) : null
 
   return (
     <div className="screen-pad">
@@ -144,7 +146,12 @@ export default function ScanScreen() {
       </header>
 
       {showDemo && (
-        <DemoPanel provider={provider} target={demoTarget} onChange={setDemoTarget} language={language} />
+        <DemoPanel
+          provider={provider}
+          target={demoTarget}
+          onChange={setDemoTarget}
+          contentLanguage={contentLanguage}
+        />
       )}
 
       <canvas ref={canvasRef} className="hidden" aria-hidden="true" />
@@ -212,7 +219,14 @@ export default function ScanScreen() {
       )}
 
       {state === STATES.result && result && (
-        <ResultPanel result={result} site={matchedSite} snapshot={snapshot} onRetry={reset} t={t} />
+        <ResultPanel
+          result={result}
+          site={matchedSite}
+          snapshot={snapshot}
+          onRetry={reset}
+          t={t}
+          contentDir={contentDir}
+        />
       )}
     </div>
   )
@@ -324,21 +338,33 @@ function AnalysisOverlay({ snapshot, stageIndex, t }) {
   )
 }
 
-function ResultPanel({ result, site, snapshot, onRetry, t }) {
+function ResultPanel({ result, site, snapshot, onRetry, t, contentDir }) {
   const percent = Math.round(result.confidence * 100)
+
+  /*
+   * من أين يأتي النص؟
+   * المزوّد الحيّ (Claude) يولّد وصفه بلغة المستخدم، فنعرض نصّه كما هو.
+   * أما المحاكاة والتعرّف المحلي فيُرجعان المعرّف فقط، فنقرأ الاسم والأدلة
+   * من بيانات الموقع بلغة المحتوى الحالية.
+   */
+  const label = result.label ?? site?.scan.matchLabel
+  const evidence = result.evidence?.length ? result.evidence : (site?.scan.evidence ?? [])
 
   if (!site) {
     return (
       <div className="surface animate-rise-in space-y-4 p-5">
         <p className="font-display text-title text-sand">{t('scan.unknown')}</p>
+        <p className="text-body text-sand-dim">{t('scan.hint')}</p>
         <p className="num text-micro text-sand-faint">
           {t('scan.confidence')}: {percent}%
         </p>
-        <ul className="space-y-1.5 text-body text-sand-dim">
-          {result.evidence.map((item) => (
-            <li key={item}>· {item}</li>
-          ))}
-        </ul>
+        {result.error && (
+          <ul className="space-y-1.5 text-micro text-sand-faint">
+            {evidence.map((item) => (
+              <li key={item}>· {item}</li>
+            ))}
+          </ul>
+        )}
         <button type="button" onClick={onRetry} className="btn-primary">
           {t('scan.retry')}
         </button>
@@ -363,8 +389,8 @@ function ResultPanel({ result, site, snapshot, onRetry, t }) {
         </SiteArt>
 
         <div className="space-y-5 border-t border-night-600 p-5">
-          <div>
-            <span className="eyebrow block">{result.label}</span>
+          <div dir={contentDir}>
+            <span className="eyebrow block">{label}</span>
             <h2 className="mt-1.5 font-display text-title text-sand">{site.name}</h2>
           </div>
 
@@ -383,8 +409,8 @@ function ResultPanel({ result, site, snapshot, onRetry, t }) {
 
           <div>
             <p className="eyebrow mb-2.5">{t('scan.evidence')}</p>
-            <ul className="space-y-2">
-              {result.evidence.map((item) => (
+            <ul className="space-y-2" dir={contentDir}>
+              {evidence.map((item) => (
                 <li key={item} className="flex gap-2.5 text-body text-sand-dim">
                   <span className="mt-1 shrink-0 text-terracotta" aria-hidden="true">
                     ◆
@@ -419,9 +445,9 @@ function ResultPanel({ result, site, snapshot, onRetry, t }) {
  * تثبيت النتيجة على موقع بعينه (توجيه الكاميرا نحو صورة مطبوعة مثلًا).
  * اللوحة تجعل ذلك خيارًا صريحًا معلنًا، وتُبطل نفسها مع مزوّد حقيقي.
  */
-function DemoPanel({ provider, target, onChange, language }) {
+function DemoPanel({ provider, target, onChange, contentLanguage }) {
   const { t } = useI18n()
-  const sites = getAllSites(language === 'en' ? 'en' : 'ar')
+  const sites = getAllSites(contentLanguage)
 
   return (
     <div className="mb-5 rounded-xl border border-dashed border-night-500 bg-night-900 p-4">

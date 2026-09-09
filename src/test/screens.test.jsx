@@ -118,6 +118,20 @@ describe('شاشة الاستكشاف', () => {
     expect(screen.queryByText('نقوش جبة الصخرية')).not.toBeInTheDocument()
   })
 
+  /**
+   * حارس لصنفٍ كامل من العلل: اللغات التي لم يُترجم محتواها بعد (الأردية،
+   * اليابانية…) يجب أن تتراجع إلى الإنجليزية لا إلى العربية. وقعت هذه
+   * العلّة في ثلاث شاشات مستقلة قبل أن نضبطها.
+   */
+  it.each(['ur', 'ja', 'fa'])(
+    'تعرض محتوى المواقع بالإنجليزية لا بالعربية للغة %s',
+    (code) => {
+      renderApp('/explore', code)
+      expect(screen.getByText('The Jubbah Petroglyphs')).toBeInTheDocument()
+      expect(screen.queryByText('نقوش جبة الصخرية')).not.toBeInTheDocument()
+    },
+  )
+
   it('تصفّي القائمة بالبحث', async () => {
     const user = userEvent.setup()
     renderApp()
@@ -248,6 +262,27 @@ describe('شاشة المسح', () => {
     expect(screen.getByText(/تعرّفنا عليه/)).toBeInTheDocument()
     expect(screen.getByText('درجة الثقة')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /اقرأ القصة كاملة/ })).toBeInTheDocument()
+  }, 15000)
+
+  /**
+   * حارس للعلّة التي أبلغ عنها المستخدم: كانت نتيجة المسح تظهر بالعربية
+   * دائمًا لأن طبقة التعرّف كانت تُرجع نصًا عربيًا جاهزًا بدل المعرّف.
+   */
+  it('تعرض نتيجة المسح بلغة الواجهة لا بالعربية دائمًا', async () => {
+    const user = userEvent.setup()
+    renderApp('/scan', 'en')
+
+    const file = new File(['x'], 'jubbah.jpg', { type: 'image/jpeg' })
+    await user.upload(screen.getByLabelText('Choose a photo'), file)
+
+    expect(
+      await screen.findByRole('heading', { name: 'The Jubbah Petroglyphs' }, { timeout: 8000 }),
+    ).toBeInTheDocument()
+
+    // التسمية والأدلة بالإنجليزية أيضًا، لا العنوان وحده
+    expect(screen.getByText('Carved rock face · Jabal Umm Sinman')).toBeInTheDocument()
+    expect(screen.getByText(/Pecked technique on dark sandstone/)).toBeInTheDocument()
+    expect(screen.queryByText(/واجهة صخرية منقوشة/)).not.toBeInTheDocument()
   }, 15000)
 
   it('تتيح تثبيت نتيجة العرض التوضيحي على موقع محدد', async () => {

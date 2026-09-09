@@ -27,6 +27,53 @@
     @apply font-display;
   }
 
+  /*
+   * ── خطوط الكتابات العربية الثلاث ──────────────────────────────────────
+   *
+   * العربية والفارسية والأردية تشترك في الأبجدية لكنها لا تشترك في الخط:
+   *
+   *   الفارسية تحتاج حروفًا لا توجد في العربية: گ چ پ ژ، وياءً فارسية (ی)
+   *   وكافًا فارسية (ک). خط Tajawal عربي بحت ولا يحملها، فتظهر مربعات
+   *   فارغة أو تُستبدل بحروف من خط آخر بشكل غير متجانس.
+   *
+   *   الأردية تُكتب تقليديًا بخط النستعليق المائل لا بالنسخ، ولها حروف
+   *   خاصة: ٹ ڈ ڑ ں ھ ے ۓ. عرضها بخط نسخ عربي مقروء لكنه يبدو للقارئ
+   *   الأردي غريبًا كما يبدو النص العربي بخط لاتيني.
+   *
+   * لذلك: خط مخصص لكل واحدة، ويُحمَّل عند اختيار اللغة فقط (انظر
+   * ensureScriptFont في src/i18n/index.jsx) حتى لا نُثقل بقية المستخدمين.
+   */
+  :root[lang='ar'] body {
+    @apply font-arabic;
+  }
+
+  :root[lang='fa'] body {
+    @apply font-persian;
+  }
+
+  :root[lang='ur'] body {
+    @apply font-urdu;
+    /* النستعليق ينحدر بشدة تحت خط الأساس — يحتاج فسحة رأسية أكبر */
+    line-height: 2.1;
+  }
+
+  /*
+   * الكوفي (Reem Kufi) مصمّم للعربية ولا يحمل الحروف الفارسية والأردية.
+   * استخدامه هناك يُنتج حروفًا ناقصة، فنعيد العناوين إلى خط النص نفسه.
+   */
+  :root[lang='fa'] h1,
+  :root[lang='fa'] h2,
+  :root[lang='fa'] h3 {
+    @apply font-persian font-bold;
+  }
+
+  :root[lang='ur'] h1,
+  :root[lang='ur'] h2,
+  :root[lang='ur'] h3 {
+    @apply font-urdu;
+    line-height: 1.9;
+  }
+
   /* الأرقام بخط الآلة دائمًا — مسافات، أوقات، نسب ثقة، إحداثيات.
      `direction: ltr` يمنع انقلاب الأرقام داخل النص العربي. */
   .num {
@@ -53,11 +100,20 @@
     letter-spacing: 0.18em;
   }
 
-  :root[lang='ar'] .eyebrow,
-  :root[lang='fa'] .eyebrow,
-  :root[lang='ur'] .eyebrow {
+  :root[lang='ar'] .eyebrow {
     @apply font-arabic font-medium;
     letter-spacing: normal;
+  }
+
+  :root[lang='fa'] .eyebrow {
+    @apply font-persian font-medium;
+    letter-spacing: normal;
+  }
+
+  :root[lang='ur'] .eyebrow {
+    @apply font-urdu;
+    letter-spacing: normal;
+    text-transform: none;
   }
 
   /* القاعدة نفسها للأرقام: الأرقام تبقى بخط الآلة، لكن لا نمدّها على نص عربي */

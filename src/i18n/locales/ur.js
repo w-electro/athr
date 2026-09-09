@@ -158,11 +158,12 @@ export default {
     bestTime: 'بہترین وقتِ زیارت: {time}۔',
   },
   common: {
+    // باقی ایپ میں اوقات اور فاصلوں کے ساتھ ہم آہنگی کے لیے لاطینی ہندسے
     minutes: '{n} منٹ',
-    hour: '۱ گھنٹہ',
-    twoHours: '۲ گھنٹے',
+    hour: '1 گھنٹہ',
+    twoHours: '2 گھنٹے',
     hours: '{n} گھنٹے',
-    half: '۳۰ منٹ',
+    half: '30 منٹ',
     and: 'اور',
     language: 'زبان',
     changeLanguage: 'زبان بدلیں',

@@ -12,11 +12,22 @@ describe('طبقة التعرّف على الصور', () => {
 
     expect(result).toMatchObject({
       status: expect.stringMatching(/^(match|no-match)$/),
-      label: expect.any(String),
+      siteId: expect.any(String),
       confidence: expect.any(Number),
-      evidence: expect.any(Array),
       provider: 'mock',
     })
+  })
+
+  /**
+   * حارس لعلّة حقيقية وقعت: كانت المحاكاة تُرجع اسم الموقع وأدلّته نصًّا
+   * عربيًا جاهزًا، فتظهر نتيجة المسح بالعربية مهما كانت لغة الواجهة.
+   * القاعدة الآن: هذه الطبقة تُرجع معرّفًا لا نصًّا، والواجهة هي التي تترجم.
+   */
+  it('لا يُرجع نصًا بشريًا — المعرّف فقط، لتترجمه الواجهة', async () => {
+    const result = await recognizeSite({ instant: true, siteId: 'jubbah' }, { provider: 'mock' })
+
+    expect(result.label).toBeUndefined()
+    expect(result.evidence).toBeUndefined()
   })
 
   it('يتعرّف على الموقع المطلوب حين يُمرَّر siteId صراحة', async () => {
@@ -24,7 +35,7 @@ describe('طبقة التعرّف على الصور', () => {
 
     expect(result.status).toBe('match')
     expect(result.siteId).toBe('jubbah')
-    expect(result.evidence.length).toBeGreaterThan(0)
+    expect(result.confidence).toBeGreaterThan(0.5)
   })
 
   it('يطابق بالكلمات المفتاحية', async () => {
@@ -42,6 +53,7 @@ describe('طبقة التعرّف على الصور', () => {
     expect(result.status).toBe('no-match')
     expect(result.siteId).toBeNull()
     expect(result.confidence).toBeLessThan(0.5)
+    expect(result.label).toBeUndefined()
   })
 
   it('يدور على المواقع بالتتابع حتى لا تتكرر النتيجة', async () => {

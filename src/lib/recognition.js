@@ -18,13 +18,21 @@
  * ── شكل النتيجة الموحّد ────────────────────────────────────────────────
  * {
  *   status: 'match' | 'no-match',
- *   siteId: string | null,
- *   label: string,          // ما رآه النموذج بعبارة بشرية
+ *   siteId: string | null,  // المعرّف فقط — لا نص
  *   confidence: number,     // 0..1
- *   evidence: string[],     // الأدلة البصرية التي بنى عليها القرار
+ *   label?: string,         // نص جاهز، من مزوّد حيّ يولّده بلغة المستخدم
+ *   evidence?: string[],    // المثل
  *   provider: string,
  *   elapsedMs: number,
  * }
+ *
+ * ── قاعدة مهمة: هذا الملف لا يُنتج نصًا بشريًا ──────────────────────────
+ * المحاكاة تُرجع siteId فقط، والواجهة هي التي تقرأ الاسم والأدلة من بيانات
+ * الموقع بلغة المستخدم. لو أعاد هذا الملف نصًا جاهزًا لظهرت نتيجة المسح
+ * بالعربية دائمًا مهما كانت لغة الواجهة — وهو خطأ وقعنا فيه فعلًا وأصلحناه.
+ *
+ * الاستثناء الوحيد: مزوّد حيّ (Claude) يولّد وصفًا حرًّا بلغة المستخدم، فله
+ * أن يملأ label/evidence مباشرة. الواجهة تفضّل نصّه إن وُجد.
  */
 
 import { getAllSites, getSiteById } from '../data/sites.js'
@@ -57,23 +65,17 @@ async function mockProvider(input = {}) {
     return {
       status: 'no-match',
       siteId: null,
-      label: 'لم نتعرّف على الموقع',
       confidence: 0.31,
-      evidence: [
-        'لم تُطابق الملامح البصرية أيًا من المواقع المسجّلة',
-        'جرّب تصوير الواجهة كاملة في ضوء أفضل',
-      ],
       provider: 'mock',
       elapsedMs: nowMs() - started,
     }
   }
 
+  // المعرّف ودرجة الثقة فقط — الاسم والأدلة تقرأهما الواجهة بلغة المستخدم
   return {
     status: 'match',
     siteId: site.id,
-    label: site.scan.matchLabel,
     confidence: site.scan.confidence,
-    evidence: site.scan.evidence,
     provider: 'mock',
     elapsedMs: nowMs() - started,
   }
@@ -192,13 +194,13 @@ export async function recognizeSite(input = {}, options = {}) {
   try {
     return await provider(input)
   } catch (error) {
-    // فشل الشبكة أو الخادم لا يجب أن يكسر العرض — نرجع لنتيجة واضحة
+    // فشل الشبكة أو الخادم لا يكسر العرض. رسالة الخطأ التقنية تبقى كما هي
+    // (ليست نصًا للمستخدم بل تشخيصًا)، والواجهة تعرض عنوانًا مترجمًا فوقها.
     return {
       status: 'no-match',
       siteId: null,
-      label: 'تعذّر إكمال التحليل',
       confidence: 0,
-      evidence: [error.message || 'خطأ غير معروف'],
+      evidence: [error.message || 'unknown error'],
       provider: name,
       elapsedMs: 0,
       error: true,

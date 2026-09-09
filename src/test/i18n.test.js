@@ -76,6 +76,64 @@ describe('اكتمال الترجمات', () => {
   })
 })
 
+/** يجمع كل القيم النصية في ملف لغة. */
+function values(source) {
+  return Object.values(source).flatMap((value) =>
+    value && typeof value === 'object' ? values(value) : [String(value)],
+  )
+}
+
+describe('سلامة الكتابات العربية الثلاث', () => {
+  /**
+   * العربية والفارسية والأردية تتشارك الأبجدية لكنها لا تتشارك كل الحروف.
+   * الفارسية والأردية تستخدمان الياء الفارسية (ی U+06CC) والكاف الفارسية
+   * (ک U+06A9)، ووضع الياء أو الكاف العربية مكانهما خطأ إملائي يراه القارئ
+   * فورًا — وهو أشيع أخطاء التعريب في التطبيقات.
+   */
+  it.each(['fa', 'ur'])('اللغة %s لا تستخدم الياء أو الكاف العربية', (code) => {
+    const offenders = values(LOCALES[code]).filter(
+      (value) => value.includes('ي') || value.includes('ك'),
+    )
+    expect(offenders).toEqual([])
+  })
+
+  it('الأردية تستخدم حروفها الخاصة لا حروف العربية وحدها', () => {
+    const all = values(LOCALES.ur).join('')
+    expect(all).toContain('ہ') // ہائے مدور
+    expect(all).toContain('ے') // بڑی ے
+    expect(all).not.toContain('ة') // التاء المربوطة عربية لا أردية
+  })
+
+  it('الفارسية تستخدم حروفها الخاصة', () => {
+    const all = values(LOCALES.fa).join('')
+    expect(all).toContain('گ')
+    expect(all).toContain('چ')
+    expect(all).toContain('پ')
+  })
+
+  /**
+   * التطبيق يعرض الأرقام بخط IBM Plex Mono بأرقام لاتينية (المسافات،
+   * الأوقات، نسب الثقة). لو كتبنا "۳۰ دقیقه" بأرقام هندية شرقية لظهر
+   * نظاما ترقيم مختلفان في الشاشة الواحدة.
+   */
+  it.each(Object.keys(LOCALES))('اللغة %s لا تخلط نظامَي ترقيم', (code) => {
+    const offenders = values(LOCALES[code]).filter((value) => /[٠-٩۰-۹]/.test(value))
+    expect(offenders).toEqual([])
+  })
+
+  /**
+   * العربية والفارسية والأردية لها علامات ترقيم خاصة: ، بدل الفاصلة
+   * اللاتينية، و؟ بدل علامة الاستفهام. استخدام العلامة اللاتينية يقلب
+   * اتجاه الفاصلة بصريًا ويبدو خطأً مطبعيًا.
+   */
+  it.each(['ar', 'fa', 'ur'])('اللغة %s تستخدم علامات الترقيم العربية', (code) => {
+    const offenders = values(LOCALES[code]).filter(
+      (value) => value.includes(',') || value.includes('?') || value.includes(';'),
+    )
+    expect(offenders).toEqual([])
+  })
+})
+
 describe('سجلّ اللغات', () => {
   it('يعرّف 29 لغة برموز فريدة', () => {
     expect(LANGUAGES).toHaveLength(29)
