@@ -1,0 +1,1659 @@
+{
+  "version": 1,
+  "note": "مولّد بـ scripts/build-narration-audio.py — لا يُحرَّر يدويًا",
+  "clips": {
+    "ar/aja": {
+      "file": "ar/aja.mp3",
+      "seconds": 54.9,
+      "offsets": [
+        0.0,
+        8.22,
+        18.95,
+        27.8,
+        37.07,
+        46.47
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ar/jubbah": {
+      "file": "ar/jubbah.mp3",
+      "seconds": 66.54,
+      "offsets": [
+        0.0,
+        8.78,
+        16.65,
+        26.89,
+        37.27,
+        47.8,
+        58.87
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ar/museum": {
+      "file": "ar/museum.mp3",
+      "seconds": 57.83,
+      "offsets": [
+        0.0,
+        9.75,
+        22.16,
+        32.68,
+        43.34,
+        51.21
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ar/qishlah": {
+      "file": "ar/qishlah.mp3",
+      "seconds": 62.14,
+      "offsets": [
+        0.0,
+        11.22,
+        20.69,
+        31.56,
+        40.55,
+        54.06
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "bn/aja": {
+      "file": "bn/aja.mp3",
+      "seconds": 52.05,
+      "offsets": [
+        0.0,
+        10.19,
+        19.84,
+        26.57,
+        36.01,
+        44.68
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS ben"
+    },
+    "bn/jubbah": {
+      "file": "bn/jubbah.mp3",
+      "seconds": 53.94,
+      "offsets": [
+        0.0,
+        8.08,
+        16.03,
+        24.09,
+        32.15,
+        39.49,
+        48.44
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS ben"
+    },
+    "bn/museum": {
+      "file": "bn/museum.mp3",
+      "seconds": 48.5,
+      "offsets": [
+        0.0,
+        8.22,
+        18.4,
+        26.63,
+        35.67,
+        42.68
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS ben"
+    },
+    "bn/qishlah": {
+      "file": "bn/qishlah.mp3",
+      "seconds": 51.21,
+      "offsets": [
+        0.0,
+        8.91,
+        16.01,
+        26.06,
+        33.9,
+        43.33
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS ben"
+    },
+    "de/aja": {
+      "file": "de/aja.mp3",
+      "seconds": 41.87,
+      "offsets": [
+        0.0,
+        7.8,
+        14.77,
+        22.44,
+        29.05,
+        35.6
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "de/jubbah": {
+      "file": "de/jubbah.mp3",
+      "seconds": 46.75,
+      "offsets": [
+        0.0,
+        7.32,
+        12.75,
+        19.93,
+        26.41,
+        34.28,
+        42.15
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "de/museum": {
+      "file": "de/museum.mp3",
+      "seconds": 44.52,
+      "offsets": [
+        0.0,
+        6.83,
+        16.65,
+        24.8,
+        31.84,
+        39.3
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "de/qishlah": {
+      "file": "de/qishlah.mp3",
+      "seconds": 46.82,
+      "offsets": [
+        0.0,
+        8.08,
+        14.42,
+        23.13,
+        31.42,
+        39.71
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "el/aja": {
+      "file": "el/aja.mp3",
+      "seconds": 52.04,
+      "offsets": [
+        0.0,
+        10.87,
+        19.37,
+        28.29,
+        36.3,
+        45.36
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "el/jubbah": {
+      "file": "el/jubbah.mp3",
+      "seconds": 56.02,
+      "offsets": [
+        0.0,
+        8.22,
+        15.47,
+        23.48,
+        31.21,
+        40.9,
+        49.4
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "el/museum": {
+      "file": "el/museum.mp3",
+      "seconds": 51.56,
+      "offsets": [
+        0.0,
+        8.78,
+        19.09,
+        29.33,
+        37.76,
+        45.57
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "el/qishlah": {
+      "file": "el/qishlah.mp3",
+      "seconds": 56.5,
+      "offsets": [
+        0.0,
+        10.31,
+        18.39,
+        28.15,
+        36.86,
+        48.28
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "en/aja": {
+      "file": "en/aja.mp3",
+      "seconds": 40.76,
+      "offsets": [
+        0.0,
+        7.25,
+        14.0,
+        21.32,
+        27.73,
+        34.91
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "en/jubbah": {
+      "file": "en/jubbah.mp3",
+      "seconds": 42.92,
+      "offsets": [
+        0.0,
+        6.41,
+        11.92,
+        18.26,
+        23.9,
+        30.73,
+        37.91
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "en/museum": {
+      "file": "en/museum.mp3",
+      "seconds": 38.88,
+      "offsets": [
+        0.0,
+        6.41,
+        13.66,
+        21.25,
+        27.59,
+        34.28
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "en/qishlah": {
+      "file": "en/qishlah.mp3",
+      "seconds": 40.9,
+      "offsets": [
+        0.0,
+        7.52,
+        13.52,
+        20.69,
+        27.87,
+        34.63
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "es/aja": {
+      "file": "es/aja.mp3",
+      "seconds": 43.13,
+      "offsets": [
+        0.0,
+        7.59,
+        14.98,
+        22.51,
+        29.75,
+        36.65
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "es/jubbah": {
+      "file": "es/jubbah.mp3",
+      "seconds": 46.19,
+      "offsets": [
+        0.0,
+        5.92,
+        12.12,
+        19.02,
+        25.08,
+        32.82,
+        40.9
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "es/museum": {
+      "file": "es/museum.mp3",
+      "seconds": 43.89,
+      "offsets": [
+        0.0,
+        6.97,
+        15.89,
+        23.55,
+        30.94,
+        39.02
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "es/qishlah": {
+      "file": "es/qishlah.mp3",
+      "seconds": 48.42,
+      "offsets": [
+        0.0,
+        8.15,
+        15.12,
+        24.11,
+        31.98,
+        41.11
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "fa/aja": {
+      "file": "fa/aja.mp3",
+      "seconds": 47.67,
+      "offsets": [
+        0.0,
+        9.02,
+        18.41,
+        26.78,
+        33.9,
+        41.86
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS fas"
+    },
+    "fa/jubbah": {
+      "file": "fa/jubbah.mp3",
+      "seconds": 53.14,
+      "offsets": [
+        0.0,
+        7.12,
+        15.24,
+        22.73,
+        30.95,
+        38.01,
+        47.38
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS fas"
+    },
+    "fa/museum": {
+      "file": "fa/museum.mp3",
+      "seconds": 46.61,
+      "offsets": [
+        0.0,
+        7.87,
+        18.73,
+        26.89,
+        32.71,
+        40.6
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS fas"
+    },
+    "fa/qishlah": {
+      "file": "fa/qishlah.mp3",
+      "seconds": 51.59,
+      "offsets": [
+        0.0,
+        10.53,
+        18.01,
+        27.43,
+        35.16,
+        43.38
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS fas"
+    },
+    "fr/aja": {
+      "file": "fr/aja.mp3",
+      "seconds": 44.94,
+      "offsets": [
+        0.0,
+        8.43,
+        16.03,
+        24.25,
+        30.87,
+        37.76
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "fr/jubbah": {
+      "file": "fr/jubbah.mp3",
+      "seconds": 48.01,
+      "offsets": [
+        0.0,
+        6.76,
+        12.4,
+        20.28,
+        26.34,
+        34.49,
+        43.2
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "fr/museum": {
+      "file": "fr/museum.mp3",
+      "seconds": 44.38,
+      "offsets": [
+        0.0,
+        7.32,
+        16.3,
+        24.8,
+        32.05,
+        39.3
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "fr/qishlah": {
+      "file": "fr/qishlah.mp3",
+      "seconds": 48.91,
+      "offsets": [
+        0.0,
+        8.85,
+        14.98,
+        24.73,
+        32.26,
+        41.32
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "he/aja": {
+      "file": "he/aja.mp3",
+      "seconds": 46.93,
+      "offsets": [
+        0.0,
+        6.96,
+        15.21,
+        23.45,
+        31.43,
+        39.53
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS heb"
+    },
+    "he/jubbah": {
+      "file": "he/jubbah.mp3",
+      "seconds": 50.77,
+      "offsets": [
+        0.0,
+        6.97,
+        14.7,
+        21.67,
+        27.54,
+        36.01,
+        45.99
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS heb"
+    },
+    "he/museum": {
+      "file": "he/museum.mp3",
+      "seconds": 44.05,
+      "offsets": [
+        0.0,
+        7.65,
+        15.52,
+        22.94,
+        30.65,
+        38.47
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS heb"
+    },
+    "he/qishlah": {
+      "file": "he/qishlah.mp3",
+      "seconds": 52.17,
+      "offsets": [
+        0.0,
+        10.37,
+        18.16,
+        27.61,
+        35.48,
+        43.96
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS heb"
+    },
+    "hi/aja": {
+      "file": "hi/aja.mp3",
+      "seconds": 47.66,
+      "offsets": [
+        0.0,
+        9.82,
+        18.39,
+        25.85,
+        33.86,
+        41.04
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "hi/jubbah": {
+      "file": "hi/jubbah.mp3",
+      "seconds": 49.61,
+      "offsets": [
+        0.0,
+        7.32,
+        13.1,
+        19.65,
+        27.03,
+        34.56,
+        43.13
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "hi/museum": {
+      "file": "hi/museum.mp3",
+      "seconds": 44.66,
+      "offsets": [
+        0.0,
+        8.57,
+        17.21,
+        25.85,
+        33.23,
+        39.51
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "hi/qishlah": {
+      "file": "hi/qishlah.mp3",
+      "seconds": 45.57,
+      "offsets": [
+        0.0,
+        9.06,
+        15.47,
+        23.83,
+        30.45,
+        39.3
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "id/aja": {
+      "file": "id/aja.mp3",
+      "seconds": 48.42,
+      "offsets": [
+        0.0,
+        8.92,
+        16.44,
+        25.71,
+        34.0,
+        41.25
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "id/jubbah": {
+      "file": "id/jubbah.mp3",
+      "seconds": 49.89,
+      "offsets": [
+        0.0,
+        7.46,
+        14.84,
+        22.57,
+        28.71,
+        35.67,
+        43.76
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "id/museum": {
+      "file": "id/museum.mp3",
+      "seconds": 45.98,
+      "offsets": [
+        0.0,
+        7.59,
+        17.56,
+        27.24,
+        34.14,
+        40.06
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "id/qishlah": {
+      "file": "id/qishlah.mp3",
+      "seconds": 52.11,
+      "offsets": [
+        0.0,
+        9.68,
+        17.0,
+        26.13,
+        34.7,
+        45.01
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "it/aja": {
+      "file": "it/aja.mp3",
+      "seconds": 47.1,
+      "offsets": [
+        0.0,
+        9.27,
+        17.14,
+        25.64,
+        33.37,
+        40.55
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "it/jubbah": {
+      "file": "it/jubbah.mp3",
+      "seconds": 50.51,
+      "offsets": [
+        0.0,
+        7.94,
+        14.14,
+        22.3,
+        27.17,
+        35.88,
+        43.97
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "it/museum": {
+      "file": "it/museum.mp3",
+      "seconds": 48.91,
+      "offsets": [
+        0.0,
+        8.01,
+        18.95,
+        27.73,
+        35.81,
+        43.75
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "it/qishlah": {
+      "file": "it/qishlah.mp3",
+      "seconds": 53.86,
+      "offsets": [
+        0.0,
+        9.27,
+        17.28,
+        27.73,
+        35.88,
+        45.84
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ja/aja": {
+      "file": "ja/aja.mp3",
+      "seconds": 51.77,
+      "offsets": [
+        0.0,
+        10.73,
+        18.81,
+        27.31,
+        35.6,
+        44.73
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ja/jubbah": {
+      "file": "ja/jubbah.mp3",
+      "seconds": 57.41,
+      "offsets": [
+        0.0,
+        7.11,
+        14.07,
+        24.11,
+        32.54,
+        40.76,
+        51.21
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ja/museum": {
+      "file": "ja/museum.mp3",
+      "seconds": 50.02,
+      "offsets": [
+        0.0,
+        8.64,
+        18.11,
+        26.96,
+        36.37,
+        43.34
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ja/qishlah": {
+      "file": "ja/qishlah.mp3",
+      "seconds": 52.46,
+      "offsets": [
+        0.0,
+        9.06,
+        15.61,
+        26.48,
+        35.32,
+        45.15
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ko/aja": {
+      "file": "ko/aja.mp3",
+      "seconds": 46.75,
+      "offsets": [
+        0.0,
+        9.27,
+        16.86,
+        24.32,
+        32.4,
+        40.55
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ko/jubbah": {
+      "file": "ko/jubbah.mp3",
+      "seconds": 51.98,
+      "offsets": [
+        0.0,
+        7.59,
+        14.07,
+        22.16,
+        29.12,
+        37.14,
+        45.92
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ko/museum": {
+      "file": "ko/museum.mp3",
+      "seconds": 46.47,
+      "offsets": [
+        0.0,
+        8.36,
+        16.65,
+        24.25,
+        32.33,
+        39.71
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ko/qishlah": {
+      "file": "ko/qishlah.mp3",
+      "seconds": 48.84,
+      "offsets": [
+        0.0,
+        9.82,
+        16.3,
+        25.36,
+        32.05,
+        41.8
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ms/aja": {
+      "file": "ms/aja.mp3",
+      "seconds": 46.9,
+      "offsets": [
+        0.0,
+        8.78,
+        17.2,
+        25.1,
+        32.54,
+        39.94
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS zlm"
+    },
+    "ms/jubbah": {
+      "file": "ms/jubbah.mp3",
+      "seconds": 48.74,
+      "offsets": [
+        0.0,
+        7.15,
+        13.72,
+        22.17,
+        28.95,
+        35.81,
+        42.74
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS zlm"
+    },
+    "ms/museum": {
+      "file": "ms/museum.mp3",
+      "seconds": 45.43,
+      "offsets": [
+        0.0,
+        7.07,
+        16.06,
+        24.43,
+        31.19,
+        39.32
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS zlm"
+    },
+    "ms/qishlah": {
+      "file": "ms/qishlah.mp3",
+      "seconds": 48.2,
+      "offsets": [
+        0.0,
+        9.25,
+        15.74,
+        25.66,
+        33.74,
+        41.94
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS zlm"
+    },
+    "nl/aja": {
+      "file": "nl/aja.mp3",
+      "seconds": 41.73,
+      "offsets": [
+        0.0,
+        7.94,
+        15.47,
+        22.78,
+        29.12,
+        36.02
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "nl/jubbah": {
+      "file": "nl/jubbah.mp3",
+      "seconds": 44.94,
+      "offsets": [
+        0.0,
+        6.76,
+        12.33,
+        19.02,
+        25.22,
+        32.75,
+        39.79
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "nl/museum": {
+      "file": "nl/museum.mp3",
+      "seconds": 45.08,
+      "offsets": [
+        0.0,
+        7.11,
+        16.44,
+        24.73,
+        31.98,
+        39.58
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "nl/qishlah": {
+      "file": "nl/qishlah.mp3",
+      "seconds": 45.77,
+      "offsets": [
+        0.0,
+        8.85,
+        15.12,
+        23.9,
+        31.28,
+        40.06
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "pl/aja": {
+      "file": "pl/aja.mp3",
+      "seconds": 45.77,
+      "offsets": [
+        0.0,
+        9.41,
+        17.14,
+        25.15,
+        32.4,
+        39.92
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "pl/jubbah": {
+      "file": "pl/jubbah.mp3",
+      "seconds": 50.72,
+      "offsets": [
+        0.0,
+        7.66,
+        14.98,
+        23.55,
+        28.85,
+        36.58,
+        45.22
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "pl/museum": {
+      "file": "pl/museum.mp3",
+      "seconds": 44.87,
+      "offsets": [
+        0.0,
+        7.39,
+        17.35,
+        25.08,
+        32.54,
+        39.51
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "pl/qishlah": {
+      "file": "pl/qishlah.mp3",
+      "seconds": 50.86,
+      "offsets": [
+        0.0,
+        9.55,
+        15.61,
+        24.87,
+        32.96,
+        43.69
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "pt/aja": {
+      "file": "pt/aja.mp3",
+      "seconds": 44.94,
+      "offsets": [
+        0.0,
+        8.43,
+        15.82,
+        24.25,
+        31.21,
+        38.25
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "pt/jubbah": {
+      "file": "pt/jubbah.mp3",
+      "seconds": 49.61,
+      "offsets": [
+        0.0,
+        6.69,
+        12.96,
+        20.97,
+        27.17,
+        36.02,
+        44.17
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "pt/museum": {
+      "file": "pt/museum.mp3",
+      "seconds": 47.24,
+      "offsets": [
+        0.0,
+        7.32,
+        17.07,
+        25.92,
+        33.93,
+        41.94
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "pt/qishlah": {
+      "file": "pt/qishlah.mp3",
+      "seconds": 49.88,
+      "offsets": [
+        0.0,
+        8.57,
+        15.96,
+        25.08,
+        32.4,
+        42.43
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ru/aja": {
+      "file": "ru/aja.mp3",
+      "seconds": 44.17,
+      "offsets": [
+        0.0,
+        8.71,
+        16.79,
+        24.39,
+        31.28,
+        38.25
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ru/jubbah": {
+      "file": "ru/jubbah.mp3",
+      "seconds": 50.03,
+      "offsets": [
+        0.0,
+        8.36,
+        15.19,
+        22.02,
+        28.22,
+        36.02,
+        44.45
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ru/museum": {
+      "file": "ru/museum.mp3",
+      "seconds": 44.87,
+      "offsets": [
+        0.0,
+        8.57,
+        17.21,
+        25.43,
+        32.75,
+        39.44
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ru/qishlah": {
+      "file": "ru/qishlah.mp3",
+      "seconds": 49.12,
+      "offsets": [
+        0.0,
+        8.57,
+        15.33,
+        25.08,
+        32.68,
+        42.43
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "sw/aja": {
+      "file": "sw/aja.mp3",
+      "seconds": 49.77,
+      "offsets": [
+        0.0,
+        7.68,
+        16.7,
+        24.94,
+        32.6,
+        43.03
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS swh"
+    },
+    "sw/jubbah": {
+      "file": "sw/jubbah.mp3",
+      "seconds": 57.8,
+      "offsets": [
+        0.0,
+        7.34,
+        15.58,
+        25.8,
+        34.3,
+        41.77,
+        51.16
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS swh"
+    },
+    "sw/museum": {
+      "file": "sw/museum.mp3",
+      "seconds": 47.86,
+      "offsets": [
+        0.0,
+        6.7,
+        17.58,
+        27.98,
+        35.1,
+        41.89
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS swh"
+    },
+    "sw/qishlah": {
+      "file": "sw/qishlah.mp3",
+      "seconds": 56.89,
+      "offsets": [
+        0.0,
+        9.44,
+        18.57,
+        28.63,
+        40.15,
+        48.74
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS swh"
+    },
+    "ta/aja": {
+      "file": "ta/aja.mp3",
+      "seconds": 53.57,
+      "offsets": [
+        0.0,
+        10.65,
+        18.3,
+        27.11,
+        37.58,
+        46.26
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS tam"
+    },
+    "ta/jubbah": {
+      "file": "ta/jubbah.mp3",
+      "seconds": 64.18,
+      "offsets": [
+        0.0,
+        8.94,
+        17.87,
+        25.59,
+        35.11,
+        43.57,
+        56.6
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS tam"
+    },
+    "ta/museum": {
+      "file": "ta/museum.mp3",
+      "seconds": 49.97,
+      "offsets": [
+        0.0,
+        9.81,
+        18.97,
+        28.06,
+        36.58,
+        43.35
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS tam"
+    },
+    "ta/qishlah": {
+      "file": "ta/qishlah.mp3",
+      "seconds": 56.76,
+      "offsets": [
+        0.0,
+        12.51,
+        20.4,
+        28.94,
+        38.04,
+        48.05
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS tam"
+    },
+    "th/aja": {
+      "file": "th/aja.mp3",
+      "seconds": 57.51,
+      "offsets": [
+        0.0,
+        9.87,
+        19.74,
+        28.54,
+        38.65,
+        48.63
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS tha"
+    },
+    "th/jubbah": {
+      "file": "th/jubbah.mp3",
+      "seconds": 55.54,
+      "offsets": [
+        0.0,
+        7.34,
+        14.17,
+        23.48,
+        30.68,
+        36.95,
+        47.17
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS tha"
+    },
+    "th/museum": {
+      "file": "th/museum.mp3",
+      "seconds": 53.78,
+      "offsets": [
+        0.0,
+        10.29,
+        21.68,
+        31.39,
+        39.9,
+        48.02
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS tha"
+    },
+    "th/qishlah": {
+      "file": "th/qishlah.mp3",
+      "seconds": 59.57,
+      "offsets": [
+        0.0,
+        10.05,
+        17.04,
+        29.74,
+        39.74,
+        52.28
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS tha"
+    },
+    "tl/aja": {
+      "file": "tl/aja.mp3",
+      "seconds": 51.49,
+      "offsets": [
+        0.0,
+        8.7,
+        17.77,
+        26.51,
+        34.84,
+        44.28
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS tgl"
+    },
+    "tl/jubbah": {
+      "file": "tl/jubbah.mp3",
+      "seconds": 63.14,
+      "offsets": [
+        0.0,
+        9.04,
+        18.01,
+        27.18,
+        38.17,
+        46.39,
+        56.63
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS tgl"
+    },
+    "tl/museum": {
+      "file": "tl/museum.mp3",
+      "seconds": 51.77,
+      "offsets": [
+        0.0,
+        8.05,
+        18.3,
+        27.71,
+        37.56,
+        46.5
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS tgl"
+    },
+    "tl/qishlah": {
+      "file": "tl/qishlah.mp3",
+      "seconds": 55.77,
+      "offsets": [
+        0.0,
+        10.93,
+        18.49,
+        28.78,
+        39.51,
+        48.55
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS tgl"
+    },
+    "tr/aja": {
+      "file": "tr/aja.mp3",
+      "seconds": 43.55,
+      "offsets": [
+        0.0,
+        8.85,
+        14.98,
+        23.9,
+        31.28,
+        37.28
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "tr/jubbah": {
+      "file": "tr/jubbah.mp3",
+      "seconds": 44.59,
+      "offsets": [
+        0.0,
+        6.48,
+        12.68,
+        19.09,
+        24.67,
+        32.26,
+        39.86
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "tr/museum": {
+      "file": "tr/museum.mp3",
+      "seconds": 41.6,
+      "offsets": [
+        0.0,
+        7.32,
+        15.54,
+        23.13,
+        29.33,
+        35.95
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "tr/qishlah": {
+      "file": "tr/qishlah.mp3",
+      "seconds": 45.57,
+      "offsets": [
+        0.0,
+        8.01,
+        14.84,
+        23.69,
+        30.59,
+        38.46
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "uk/aja": {
+      "file": "uk/aja.mp3",
+      "seconds": 42.99,
+      "offsets": [
+        0.0,
+        8.43,
+        15.96,
+        22.99,
+        30.17,
+        36.93
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "uk/jubbah": {
+      "file": "uk/jubbah.mp3",
+      "seconds": 48.49,
+      "offsets": [
+        0.0,
+        7.87,
+        14.07,
+        21.11,
+        26.48,
+        34.49,
+        42.92
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "uk/museum": {
+      "file": "uk/museum.mp3",
+      "seconds": 45.01,
+      "offsets": [
+        0.0,
+        8.57,
+        17.0,
+        25.01,
+        32.33,
+        38.53
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "uk/qishlah": {
+      "file": "uk/qishlah.mp3",
+      "seconds": 48.7,
+      "offsets": [
+        0.0,
+        9.41,
+        16.09,
+        25.78,
+        32.54,
+        42.22
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "ur/aja": {
+      "file": "ur/aja.mp3",
+      "seconds": 49.59,
+      "offsets": [
+        0.0,
+        9.9,
+        19.37,
+        26.95,
+        35.43,
+        42.28
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS urd-script_arabic"
+    },
+    "ur/jubbah": {
+      "file": "ur/jubbah.mp3",
+      "seconds": 57.25,
+      "offsets": [
+        0.0,
+        8.27,
+        14.72,
+        23.08,
+        31.94,
+        39.48,
+        50.18
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS urd-script_arabic"
+    },
+    "ur/museum": {
+      "file": "ur/museum.mp3",
+      "seconds": 46.33,
+      "offsets": [
+        0.0,
+        7.58,
+        17.53,
+        26.14,
+        33.51,
+        40.42
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS urd-script_arabic"
+    },
+    "ur/qishlah": {
+      "file": "ur/qishlah.mp3",
+      "seconds": 49.48,
+      "offsets": [
+        0.0,
+        9.82,
+        17.53,
+        27.87,
+        34.79,
+        42.77
+      ],
+      "engine": "mms-tts",
+      "voice": "MMS urd-script_arabic"
+    },
+    "vi/aja": {
+      "file": "vi/aja.mp3",
+      "seconds": 74.2,
+      "offsets": [
+        0.0,
+        13.52,
+        25.43,
+        38.94,
+        53.3,
+        67.44
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "vi/jubbah": {
+      "file": "vi/jubbah.mp3",
+      "seconds": 71.83,
+      "offsets": [
+        0.0,
+        12.05,
+        23.9,
+        31.77,
+        41.52,
+        53.02,
+        63.05
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "vi/museum": {
+      "file": "vi/museum.mp3",
+      "seconds": 64.17,
+      "offsets": [
+        0.0,
+        9.75,
+        23.13,
+        37.69,
+        47.58,
+        55.95
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "vi/qishlah": {
+      "file": "vi/qishlah.mp3",
+      "seconds": 71.76,
+      "offsets": [
+        0.0,
+        14.35,
+        23.48,
+        38.11,
+        51.21,
+        63.89
+      ],
+      "engine": "supertonic-3",
+      "voice": "Supertonic M4"
+    },
+    "zh-Hans/aja": {
+      "file": "zh-Hans/aja.mp3",
+      "seconds": 51.75,
+      "offsets": [
+        0.0,
+        9.65,
+        18.52,
+        27.1,
+        35.02,
+        44.52
+      ],
+      "engine": "kokoro-82m",
+      "voice": "Kokoro zf_xiaobei"
+    },
+    "zh-Hans/jubbah": {
+      "file": "zh-Hans/jubbah.mp3",
+      "seconds": 55.3,
+      "offsets": [
+        0.0,
+        8.12,
+        14.47,
+        22.7,
+        30.45,
+        40.02,
+        49.0
+      ],
+      "engine": "kokoro-82m",
+      "voice": "Kokoro zf_xiaobei"
+    },
+    "zh-Hans/museum": {
+      "file": "zh-Hans/museum.mp3",
+      "seconds": 51.42,
+      "offsets": [
+        0.0,
+        7.62,
+        17.75,
+        26.8,
+        36.3,
+        44.33
+      ],
+      "engine": "kokoro-82m",
+      "voice": "Kokoro zf_xiaobei"
+    },
+    "zh-Hans/qishlah": {
+      "file": "zh-Hans/qishlah.mp3",
+      "seconds": 54.45,
+      "offsets": [
+        0.0,
+        10.4,
+        18.05,
+        27.73,
+        36.67,
+        46.75
+      ],
+      "engine": "kokoro-82m",
+      "voice": "Kokoro zf_xiaobei"
+    },
+    "zh-Hant/aja": {
+      "file": "zh-Hant/aja.mp3",
+      "seconds": 51.65,
+      "offsets": [
+        0.0,
+        9.55,
+        18.32,
+        26.9,
+        34.8,
+        44.4
+      ],
+      "engine": "kokoro-82m",
+      "voice": "Kokoro zf_xiaobei"
+    },
+    "zh-Hant/jubbah": {
+      "file": "zh-Hant/jubbah.mp3",
+      "seconds": 55.58,
+      "offsets": [
+        0.0,
+        8.18,
+        14.57,
+        22.82,
+        30.65,
+        40.1,
+        49.12
+      ],
+      "engine": "kokoro-82m",
+      "voice": "Kokoro zf_xiaobei"
+    },
+    "zh-Hant/museum": {
+      "file": "zh-Hant/museum.mp3",
+      "seconds": 51.7,
+      "offsets": [
+        0.0,
+        7.58,
+        17.7,
+        26.93,
+        36.38,
+        44.48
+      ],
+      "engine": "kokoro-82m",
+      "voice": "Kokoro zf_xiaobei"
+    },
+    "zh-Hant/qishlah": {
+      "file": "zh-Hant/qishlah.mp3",
+      "seconds": 54.67,
+      "offsets": [
+        0.0,
+        10.45,
+        18.48,
+        28.1,
+        37.02,
+        47.02
+      ],
+      "engine": "kokoro-82m",
+      "voice": "Kokoro zf_xiaobei"
+    }
+  }
+}
