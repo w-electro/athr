@@ -107,19 +107,55 @@ export default {
     acrossOne: 'dalam satu hari',
     edit: 'Ubah',
     weather: 'Pemeriksaan cuaca',
-    travel: 'Perjalanan {minutes} menit',
+    travel: 'Perjalanan {minutes} menit · {km} km',
+    travelFromHail: 'Dari Hail: {minutes} menit · {km} km',
     until: 'hingga {time}',
     excluded: 'Tidak muat dalam perjalanan ini',
     excludedHint: 'Tambah satu hari atau ubah ritme menjadi Padat.',
-    note: 'Data cuaca dari Open-Meteo.',
+    note: 'Data cuaca dari Open-Meteo · Jarak dihitung dari koordinat situs.',
     noteOffline: 'Cuaca tidak dapat diambil — menampilkan rata-rata iklim Hail.',
     day: 'Hari {n}',
+    openMaps: 'Buka di peta',
+    navigate: 'Arahkan ke sini',
+    routeDay: 'Seluruh rute hari ini di peta',
+    dayDistance: 'Perjalanan hari ini: {km} km',
     step: {
       prefs: 'Membaca minat dan lama perjalanan Anda',
       weather: 'Memeriksa prakiraan cuaca Hail',
-      order: 'Menata situs menurut jam terbaiknya',
+      order: 'Menata situs menurut kedekatan dan jam terbaiknya',
     },
   },
+
+  access: {
+    offRoad: 'Sebagian jalan belum beraspal — disarankan kendaraan gardan ganda',
+    guide: 'Kunjungan bersama pemandu resmi · atur sebelumnya',
+    farDrive: 'Sekitar {hours} jam berkendara sekali jalan',
+  },
+
+  /*
+    Panel — lapisan yang lebih rinci daripada situs. Pengunjung sudah tahu
+    bahwa ia berada di Jubbah; yang ia datangi adalah panel yang satu ini.
+  */
+  panel: {
+    heading: 'Panel di situs ini',
+    count: '{count} panel terdokumentasi',
+    look: 'Carilah',
+    inscriptions: 'Memuat inskripsi Tsamudik',
+    famous: 'Yang paling termasyhur di Jubbah',
+    atSite: 'Sebuah panel di {site}',
+    unknownSubject: 'Subjeknya belum dipastikan',
+  },
+
+  /* Masa pemahatan. Yang memisahkannya adalah abad, bukan gaya. */
+  era: {
+    neolithic: 'Neolitikum · sekitar sepuluh ribu tahun lalu',
+    later: 'Setelah unta dijinakkan · sekitar tiga ribu tahun lalu',
+    thamudic: 'Masa Tsamudik · berabad-abad sebelum Islam',
+    neolithicShort: 'Neolitikum',
+    laterShort: 'Belakangan',
+    thamudicShort: 'Tsamudik',
+  },
+
   interest: {
     history: 'Sejarah dan arkeologi',
     nature: 'Alam dan petualangan',

@@ -4,6 +4,8 @@ import {
   scoreSite,
   orderStopsForDay,
   travelMinutesBetween,
+  legFor,
+  accessWarnings,
   renderReason,
   bestTimeKey,
   formatClock,
@@ -11,6 +13,7 @@ import {
   formatClockFor,
 } from '../lib/itinerary.js'
 import { getAllSites, getSiteById, formatDuration } from '../data/sites.js'
+import { HAIL_CENTER } from '../lib/geo.js'
 import ar from '../i18n/locales/ar.js'
 import en from '../i18n/locales/en.js'
 
@@ -60,12 +63,75 @@ describe('محرّك بناء الرحلة', () => {
     expect(scheduled + plan.excluded.length).toBe(getAllSites().length)
   })
 
-  it('يشمل المواقع الأربعة في رحلة يومين بإيقاع متوازن', () => {
-    // الإيقاع المتوازن رُفع إلى 360 دقيقة تحديدًا ليتسع لكل المواقع في يومين
-    const plan = buildItinerary({ interests: ['history', 'nature'], days: 2, pace: 'balanced' })
+  it('يشمل مواقع المدينة كلّها في رحلة ثلاثة أيام', () => {
+    const plan = buildItinerary({ interests: ['history', 'nature'], days: 3, pace: 'packed' })
     const scheduled = plan.days.reduce((sum, day) => sum + day.stops.length, 0)
-    expect(scheduled).toBe(4)
-    expect(plan.excluded).toHaveLength(0)
+    expect(scheduled).toBeGreaterThanOrEqual(5)
+  })
+
+  /**
+   * الشويمس تبعد 250 كم وآخر طريقها ترابي: الذهاب والإياب وحدهما نحو ستّ
+   * ساعات. مخطّطٌ يضعها بجانب محطّةٍ أخرى يبني يومًا لا يُنفَّذ.
+   */
+  it('يفرد يومًا كاملًا للشويمس وحدها', () => {
+    const plan = buildItinerary({ interests: ['history'], days: 3, pace: 'packed' })
+    const day = plan.days.find((d) => d.stops.some((s) => s.site.id === 'shuwaymis'))
+
+    if (day) expect(day.stops).toHaveLength(1)
+    else expect(plan.excluded.map((s) => s.id)).toContain('shuwaymis')
+  })
+
+  it('يحذّر من الطريق الترابي والمرشد المطلوب في الشويمس', () => {
+    expect(accessWarnings(getSiteById('shuwaymis')).map((w) => w.key)).toEqual(
+      expect.arrayContaining(['access.offRoad', 'access.guide', 'access.farDrive']),
+    )
+    expect(accessWarnings(getSiteById('qishlah'))).toHaveLength(0)
+  })
+
+  /**
+   * يومٌ فيه ثلاث ساعات قيادة لا يبدأ في الثامنة: الانطلاق المتأخّر يعني
+   * الوصول بعد الظهر، والنقوش لا تُقرأ في ضوءٍ عموديّ.
+   */
+  it('يبدأ اليوم البعيد مبكّرًا', () => {
+    const plan = buildItinerary({ interests: ['history'], days: 3, pace: 'packed' })
+    const remote = plan.days.find((d) => d.stops.some((s) => s.site.id === 'shuwaymis'))
+    const near = plan.days.find((d) => d.stops.every((s) => !s.site.access?.fullDay))
+
+    if (remote) {
+      // البداية 6:00 لا 8:00 — نستدلّ عليها من زمن أول محطّة ناقصًا الطريق
+      expect(remote.stops[0].startMinutes - remote.stops[0].travelMinutes).toBe(6 * 60)
+    }
+    if (near) {
+      expect(near.stops[0].startMinutes - near.stops[0].travelMinutes).toBe(8 * 60)
+    }
+  })
+
+  it('يحتسب الطريق من حائل إلى المحطّة الأولى', () => {
+    const plan = buildItinerary({ interests: ['history'], days: 1, pace: 'balanced' })
+    const first = plan.days[0].stops[0]
+    expect(first.fromHail).toBe(true)
+    expect(first.travelMinutes).toBeGreaterThan(0)
+  })
+
+  /**
+   * الملاحة تنطلق من المحطّة السابقة لا من حائل دائمًا.
+   *
+   * الزائر يضغط الزرّ وهو واقفٌ عند المحطّة السابقة، لا في فندقه. ورابطٌ
+   * ينطلق من حائل يعطيه مسارًا يعود به إلى المدينة ثم يخرج منها ثانية.
+   */
+  it('يسلسل نقطة الانطلاق من محطّة إلى التي تليها', () => {
+    const plan = buildItinerary({ interests: ['history', 'culture'], days: 3, pace: 'packed' })
+    // الشويمس تحتجز يومًا لنفسها، فنأخذ أطول يومٍ متعدّد المحطّات
+    const stops = plan.days
+      .map((day) => day.stops)
+      .sort((a, b) => b.length - a.length)[0]
+    expect(stops.length).toBeGreaterThan(1)
+
+    expect(stops[0].fromCoords).toEqual(HAIL_CENTER)
+    for (let i = 1; i < stops.length; i += 1) {
+      expect(stops[i].fromCoords).toEqual(stops[i - 1].site.coords)
+      expect(stops[i].fromHail).toBe(false)
+    }
   })
 
   it('يحسب أوقات بداية ونهاية متسلسلة بلا تداخل', () => {
@@ -131,9 +197,25 @@ describe('التفاعل مع الطقس', () => {
 })
 
 describe('أدوات مساعدة', () => {
-  it('يحسب زمن تنقّل معقولًا بحد أدنى 15 دقيقة', () => {
-    expect(travelMinutesBetween(getSiteById('museum'), getSiteById('qishlah'))).toBe(15)
+  it('يحسب زمن تنقّل معقولًا بحد أدنى عشر دقائق', () => {
+    // داخل المدينة: قصيرٌ لكن ليس صفرًا — ركوبٌ ووقوفٌ ومشي
+    expect(travelMinutesBetween(getSiteById('museum'), getSiteById('qishlah'))).toBe(10)
     expect(travelMinutesBetween(getSiteById('qishlah'), getSiteById('jubbah'))).toBeGreaterThan(60)
+  })
+
+  /**
+   * حارس لعلّة بنيوية في النسخة السابقة: كانت تطرح بُعد كل موقع عن حائل،
+   * فموقعان على البعد نفسه في اتجاهين متضادّين يظهران متلاصقين.
+   * أَعَيْرِف والمتحف يبعدان عن حائل بالقدر نفسه تقريبًا لكنهما متباعدان.
+   */
+  it('يقيس المسافة بين الموقعين لا فرق بعدهما عن حائل', () => {
+    // موقعان على بُعدٍ متساوٍ من حائل لكن في اتجاهين متضادّين. الحساب
+    // القديم (طرح البعدين) كان يعطي صفرًا، والحقيقة نحو أربعين كيلومترًا.
+    const north = { coords: { lat: 27.69, lng: 41.6907 }, distanceFromHailKm: 20, access: {} }
+    const south = { coords: { lat: 27.33, lng: 41.6907 }, distanceFromHailKm: 20, access: {} }
+
+    expect(Math.abs(north.distanceFromHailKm - south.distanceFromHailKm)).toBe(0)
+    expect(legFor(north, south).km).toBeGreaterThan(40)
   })
 
   it('لا يحسب تنقّلًا للمحطة الأولى', () => {

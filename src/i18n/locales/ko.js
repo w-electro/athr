@@ -107,19 +107,50 @@ export default {
     acrossOne: '하루 안에',
     edit: '수정',
     weather: '날씨 확인',
-    travel: '이동 {minutes}분',
+    travel: '이동 {minutes}분 · {km}km',
+    travelFromHail: '하일에서 {minutes}분 · {km}km',
     until: '{time}까지',
     excluded: '이번 여행에는 들어가지 못했습니다',
     excludedHint: '하루를 추가하거나 속도를 빽빽하게로 바꾸세요.',
-    note: '날씨 데이터 출처: Open-Meteo.',
+    note: '날씨 데이터 출처: Open-Meteo · 거리는 유적 좌표로 계산했습니다.',
     noteOffline: '날씨를 가져오지 못했습니다 — 하일의 기후 평년값을 표시합니다.',
     day: '{n}일차',
+    openMaps: '지도에서 열기',
+    navigate: '여기로 길찾기',
+    routeDay: '하루 경로 전체를 지도에서 보기',
+    dayDistance: '오늘 이동 거리: {km}km',
     step: {
       prefs: '관심사와 여행 기간 읽는 중',
       weather: '하일 예보 확인 중',
-      order: '최적 시간대로 정렬 중',
+      order: '가까운 순서와 가장 좋은 시간대로 정렬 중',
     },
   },
+
+  access: {
+    offRoad: '일부 구간은 비포장도로입니다 — 사륜구동 차량을 권합니다',
+    guide: '공인 가이드와 동행 방문 · 미리 예약하세요',
+    farDrive: '편도 약 {hours}시간 운전',
+  },
+
+  panel: {
+    heading: '이 유적의 암면',
+    count: '기록된 암면 {count}점',
+    look: '눈여겨볼 것',
+    inscriptions: '사무드 문자 명문이 있습니다',
+    famous: '주바에서 가장 이름난 암면',
+    atSite: '{site}의 암면',
+    unknownSubject: '주제가 정해지지 않음',
+  },
+
+  era: {
+    neolithic: '신석기 시대 · 약 1만 년 전',
+    later: '낙타 가축화 이후 · 약 3천 년 전',
+    thamudic: '사무드 시대 · 이슬람 이전 여러 세기',
+    neolithicShort: '신석기',
+    laterShort: '후대',
+    thamudicShort: '사무드',
+  },
+
   interest: {
     history: '역사와 고고학',
     nature: '자연과 모험',

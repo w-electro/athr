@@ -69,58 +69,116 @@ export default {
     },
   },
 
-  qishlah: {
-    name: 'Aarif Fort & Qishlah',
-    shortName: 'Aarif & Qishlah',
-    subtitle: 'The historic heart of Hail · two neighbouring landmarks',
-    tagline: 'A mud fort watching the city from above, and a 142-room fortress guarding it below.',
-    era: 'Aarif: over 200 years · Qishlah: 1941',
+  aarif: {
+    name: 'Aarif Fort',
+    shortName: 'Aarif',
+    subtitle: 'The hilltop fort · more than two centuries old',
+    tagline: 'A mud fort on a rocky summit, from which every road into Hail can be watched.',
+    era: 'Over 200 years',
     city: 'Central Hail',
-    ticket: 'Free entry · Qishlah opens in the evening',
+    ticket: 'Free entry',
     story: [
       {
         heading: 'The eye of Hail that never sleeps',
-        body: 'On a rocky hill overlooking the city stands Aarif Fort, built by the people of Hail more than two centuries ago as a watchful eye over the roads into town. From its towers, guards tracked caravans arriving along Darb Zubaydah, and lit fires on Ramadan nights to signal the breaking of the fast — a custom still alive today in the cannon fired from that same hill.',
+        body: 'On the summit of a rocky hill overlooking the city stands Aarif Fort, built by the people of Hail more than two centuries ago as a watchful eye over the roads that led into it. From its towers, guards tracked the caravans arriving along Darb Zubaydah, and lit fires on Ramadan nights to signal the breaking of the fast — a custom still alive today in the cannon fired from that same hill.',
       },
       {
         heading: 'Mud that stood for two centuries',
-        body: 'The fort was built of mud mixed with straw, its walls more than a metre thick, reinforced with tamarisk trunks. The technique is not as primitive as it looks: a thick mud wall holds the night’s cool through the day and the day’s heat through the night, making a natural air conditioner in a desert that passes fifty degrees in summer.',
+        body: 'The fort was built of mud mixed with straw, its walls more than a metre thick, reinforced with tamarisk trunks. The technique is not as primitive as it looks: a thick mud wall holds the night’s cool through the day and the day’s heat through the night, making a natural air conditioner in the heart of a desert that passes fifty degrees in summer.',
       },
       {
-        heading: 'Qishlah: a city inside a wall',
-        body: 'Walk down the hill to the east and you meet the fort’s complete opposite. Qishlah is an enormous rectangular fortress commissioned by King Abdulaziz in 1941 as a military barracks. It holds 142 rooms across two storeys, eight watchtowers at its corners and along its flanks, a mosque within, and a broad courtyard crossed by arcades. Walking its long mud corridors feels like moving through a miniature city.',
+        heading: 'Seventy steps to the finest view',
+        body: 'There is no way up but on foot. The stairway cut into the hill runs to some seventy steps, climbed in a few minutes — and the moment you reach the roof, the whole of Hail opens out beneath you: Qishlah to the west, a mud rectangle with clean-cut edges, the Aja mountains behind it blocking the horizon, and the modern city spreading between the two.',
       },
       {
-        heading: 'From barracks to memory',
-        body: 'Once its military role ended, Qishlah became one of Hail’s most important heritage sites, its courtyard now hosting cultural events and heritage markets. A detail worth noticing: every window in its eight towers was set at a different angle — together they cover every approach to the fortress without a single blind spot.',
+        heading: 'The hill that chose itself',
+        body: 'Choosing this hill was no matter of architectural taste: it is the only natural high ground in the middle of the Hail plain, and thirty metres above that plain is enough to cover the horizon in every direction. Its base is solid rock — nothing can be tunnelled beneath it, and no ladder or siege tower can be set against it. Then the years turned, and the city spread around the hill and past it, until the fort built to watch the desert now looks out over crowded streets — the same place, the purpose inverted.',
       },
     ],
     facts: [
-      { label: 'Rooms in Qishlah', value: '142' },
-      { label: 'Watchtowers', value: '8' },
-      { label: 'Qishlah built', value: '1941 (1360 AH)' },
+      { label: 'Estimated age', value: 'over 200 years' },
+      { label: 'Height above the city', value: 'about 30 m' },
+      { label: 'Access', value: 'stairs only · no road for vehicles' },
       { label: 'Materials', value: 'mud, straw, tamarisk trunks' },
     ],
     tips: [
-      'Climb Aarif Fort half an hour before sunset — the view over the city is the best photograph you will take in Hail.',
-      'The cannon is fired from the hill during Ramadan; if you visit then, come early, as the site fills up.',
-      'Qishlah’s mud floors are uneven — take care with children or older visitors.',
+      'Climb half an hour before sunset — the view over the city from the top is the best photograph you will take in Hail.',
+      'The cannon is fired from the hill during Ramadan; if you visit in that season, come early, as the site fills up quickly.',
+      'There is no lift and no road for cars, and the last stretch of stairs is steep — bear that in mind if you are with older visitors.',
     ],
     narration: {
       voice: 'The voice of Athr — AI-generated narration',
       segments: [
         { at: 0, text: 'You are at the foot of Aarif hill. The stairs are ahead, and seventy steps separate you from the finest view in Hail.' },
         { at: 14, text: 'As you climb, notice the thickness of the wall to your left — over a metre of mud and straw.' },
-        { at: 28, text: 'That thickness is not only defence. It is natural cooling: the night’s chill is stored in the mud until noon.' },
+        { at: 28, text: 'That thickness is not only defence. It is natural cooling: the night’s chill is stored in it until noon.' },
         { at: 44, text: 'From this tower a guard once watched for caravans. And from here the Ramadan cannon still fires today.' },
-        { at: 60, text: 'Now turn east. That large mud rectangle is Qishlah: 142 rooms and eight towers.' },
-        { at: 76, text: 'When you go inside, count the angles of the windows. There is not one blind spot around the fortress.' },
+        { at: 60, text: 'Now turn west. That large mud rectangle is Qishlah, only a kilometre and a half away.' },
+        { at: 76, text: 'Behind it the Aja mountains close off the horizon, and between them the whole of Hail lies before your eyes.' },
       ],
     },
     scan: {
-      matchLabel: 'Defensive mud architecture · Qishlah / Aarif Fort',
+      matchLabel: 'Mud fort on a rocky summit · Aarif',
       evidence: [
+        'A natural rock base on which the building rises',
         'Mud walls with an upward batter',
+        'Crenellated parapets characteristic of Najdi architecture',
+      ],
+    },
+  },
+
+  qishlah: {
+    name: 'Qishlah Fortress',
+    shortName: 'Qishlah',
+    subtitle: '142 rooms · 1360 AH / 1941 CE',
+    tagline: 'The largest mud building in Arabia: a whole city inside a single wall.',
+    era: '1360 AH / 1941 CE',
+    city: 'Central Hail',
+    ticket: 'Free entry · opens in the evening',
+    story: [
+      {
+        heading: 'A city inside a wall',
+        body: 'Qishlah is an enormous rectangular fortress commissioned by King Abdulaziz in 1360 AH as a military barracks. It holds 142 rooms across two storeys, eight watchtowers at its corners and along its flanks, a mosque within, and a broad courtyard crossed by arcades — so much so that walking its long mud corridors feels like moving through a miniature city rather than a single building.',
+      },
+      {
+        heading: 'Mud built to a ruler',
+        body: 'What sets Qishlah apart from older mud architecture is that it was raised to a strict geometric plan rather than growing by increments: the arcades are parallel, the rooms identical in size, the towers evenly spaced. It stands on the dividing line between the traditional architecture of Najd and planned modern building — made from the same mud, straw and tamarisk trunks that had built Aarif two centuries earlier.',
+      },
+      {
+        heading: 'Eight towers and not one blind spot',
+        body: 'The striking thing about its eight towers is that every window in them was set at a different angle from its neighbour, so that together they cover every direction around the fortress without leaving a single blind spot. It is a precise piece of visual reckoning achieved without modern surveying instruments — and you can verify it yourself by standing in the courtyard and following the lines of sight from tower to tower.',
+      },
+      {
+        heading: 'From barracks to memory',
+        body: 'Once its military role ended, Qishlah became one of Hail’s foremost visitor sites, its courtyard hosting cultural events, heritage markets and the programme of the Hail festival. A building raised to shut people out has become a place that means nothing without them.',
+      },
+    ],
+    facts: [
+      { label: 'Rooms', value: '142' },
+      { label: 'Watchtowers', value: '8' },
+      { label: 'Year built', value: '1360 AH / 1941 CE' },
+      { label: 'Materials', value: 'mud, straw, tamarisk trunks' },
+    ],
+    tips: [
+      'Qishlah usually opens in the evening, so make it the close of your day after coming down from Aarif — only a kilometre and a half apart.',
+      'The mud floors are uneven and the corridors dimly lit, so watch your step if you are with children or older visitors.',
+      'The inner courtyard is the best place to photograph after sunset, when the mud walls are lit from below and the texture of the earth stands out.',
+    ],
+    narration: {
+      voice: 'The voice of Athr — AI-generated narration',
+      segments: [
+        { at: 0, text: 'You are standing before Qishlah, and what you see is not one building but a whole city inside a wall.' },
+        { at: 12, text: 'One hundred and forty-two rooms on two storeys, eight towers, a mosque and a courtyard at the centre.' },
+        { at: 26, text: 'Come in through the gate and stand in the courtyard a moment. Notice that the arcades are parallel and the rooms identical.' },
+        { at: 41, text: 'That is what makes it unusual: mud built to a ruler, not extended little by little as was the custom.' },
+        { at: 56, text: 'Now follow the tower windows with your eye — each one set at an angle that differs from its neighbour.' },
+        { at: 70, text: 'Count them if you like: you will not find one blind spot anywhere around the fortress.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Rectangular mud fortress · Qishlah',
+      evidence: [
+        'A long rectangular mud façade with a regular rhythm of windows',
         'Cylindrical corner towers with triangular firing slits',
         'Crenellated parapets characteristic of Najdi architecture',
       ],
@@ -241,5 +299,153 @@ export default {
         'Pottery vessel with Najdi geometric decoration',
       ],
     },
+  },
+
+  shuwaymis: {
+    name: 'The Shuwaymis Petroglyphs',
+    shortName: 'Shuwaymis',
+    subtitle: 'Jabal al-Manjor and Raat · UNESCO World Heritage',
+    tagline: 'The other half of the UNESCO inscription, in valleys reached only by those who set out for them.',
+    era: '~10,000 years ago (Neolithic)',
+    city: 'Shuwaymis, southwest of Hail',
+    ticket: 'Visits with an accredited guide · arranging ahead is essential',
+    story: [
+      {
+        heading: 'The forgotten half of the inscription',
+        body: 'When UNESCO inscribed the Rock Art in the Hail Region in 2015, the listing was not for Jubbah alone but for two sites: Jabal Umm Sinman at Jubbah, and Jabal al-Manjor and Raat at Shuwaymis. Shuwaymis, though, has always been the less visited of the two, remote and hard of approach, so its carvings have come down in better condition and with less interference — today they are among the best-preserved Neolithic rock art in the whole peninsula.',
+      },
+      {
+        heading: 'Valleys read like pages',
+        body: 'The Shuwaymis carvings do not sit on one face as they do at Jubbah; they are spread along the walls of narrow, deep valleys, and as you walk between them one panel opens after another. You will see herds of wild cattle, lions, leopards and ostriches, human figures hunting with the bow, and complete scenes rather than scattered symbols — some panels tell a single event from beginning to end.',
+      },
+      {
+        heading: 'The dog that changed history',
+        body: 'It was at Shuwaymis specifically that some of the oldest known depictions of domesticated dogs in the world were found: dogs with pricked ears and curled tails surrounding a hunter drawing his bow, several of them attached to him by lines that have been read as leashes. If that reading holds, these walls record one of the most important moments in the relationship between humans and animals, more than eight thousand years ago.',
+      },
+      {
+        heading: 'Why here',
+        body: 'The reason so much gathered on this particular wall is that Shuwaymis was a meeting place of waters: valleys running down off the volcanic lava fields converge into channels that hold water after rain, so the animals came, and the hunters came after them. The carvings are simply a record of those who stood here waiting — and the wall you draw on is the wall you shelter beneath.',
+      },
+    ],
+    facts: [
+      { label: 'UNESCO inscription', value: '2015 (with Jubbah)' },
+      { label: 'The two components', value: 'Jabal al-Manjor · Jabal Raat' },
+      { label: 'Distance from Hail', value: '250 km southwest' },
+      { label: 'Access', value: 'accredited guide · part of the route unpaved' },
+    ],
+    tips: [
+      'Arrange the visit several days before you travel with the Heritage Commission or an accredited guide — the site is not open to free entry as Jubbah is.',
+      'Give it a full day of its own rather than a stop within a day; the drive out and back alone is around six hours.',
+      'Carry more fuel and water than you think you need — the last station before the site is far off and coverage drops out in the valleys.',
+      'Walking between the panels is over gravel and uneven rock, so closed shoes here are a necessity, not a choice.',
+    ],
+    narration: {
+      voice: 'The voice of Athr — AI-generated narration',
+      segments: [
+        { at: 0, text: 'Welcome to Shuwaymis. You have come a long way to get here, so take a breath and look around you.' },
+        { at: 13, text: 'These valleys are the other half of the UNESCO inscription that Jubbah shares — and the less visited of the two.' },
+        { at: 28, text: 'Few visitors is a mercy to the stone: what you see here is more intact than at any other site.' },
+        { at: 43, text: 'Walk the valley slowly. The panels do not appear all at once, but one after another.' },
+        { at: 58, text: 'Look for the scene of the hunter, with dogs around him, ears pricked and tails curled.' },
+        { at: 73, text: 'They are among the oldest depictions of domesticated dogs known anywhere, carved eight thousand years ago.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Rock art in a valley · Shuwaymis',
+      evidence: [
+        'Pecking on a valley wall rather than an open rock face',
+        'Composite hunting scenes rather than scattered figures',
+        'Dark desert varnish cut through by the pecking',
+      ],
+    },
+  },
+}
+
+/**
+ * Panel text — a separate named export, not part of the default.
+ *
+ * The default export is a map of site id → content; a key called `panels`
+ * inside it would read as a site to anything walking those keys. Everything
+ * structural (subject, era, inscriptions) stays in panels.js.
+ */
+export const panels = {
+  'jubbah-p1': {
+    name: 'The camel caravan',
+    story:
+      'Camels one behind another, cut into a single face. They are the commonest thing to see at Jubbah and the most recent: of the 1,944 animal carvings counted at Umm Sinman, 1,378 are camels — seven out of every ten. That was never a matter of taste. The camel entered human life here late; it was domesticated about three thousand years ago, and so became the animal people carved because it had become the animal they lived by.',
+    look:
+      'Follow the lines of the legs: the later camels are cut with a quick, summary stroke, not with the anatomical care you see in the wild cattle carved thousands of years before them.',
+  },
+
+  'jubbah-p2': {
+    name: 'The King of Jubbah',
+    story:
+      'The most famous thing at Jubbah, and visitors come to it from the far ends of the earth. A large human figure cut with a realism rare in rock art: a spear in his right hand, something like a crown on his head, a necklace at his throat, a belt at his waist — and standing before him a smaller figure that people have read as a servant or an attendant. Local people call him ‘the king’; archaeologists describe him as ‘a figure of authority’, which is the more exact phrase. The carving does not tell us who he was. It tells us only that whoever cut it wanted him known as someone apart.',
+    look:
+      'Compare his size with the figure standing in front of him. The difference in scale is not a fault in the drawing but a language: the larger is the higher in rank — the oldest way humans ever found to say ‘this one matters’.',
+  },
+
+  'jubbah-p3': {
+    name: 'The ibex with the long horns',
+    story:
+      'An ibex with two long horns curving back in a wide arc. The ibex is among the most carved animals in all of Arabia, and it was never only quarry: its image recurs at water places and on high ground so insistently that researchers believe it held a meaning for those who cut it beyond meat — fertility, or survival, or something we cannot name. The Nubian ibex still survives in the mountains of the region today, one of the few creatures carved here that never went extinct.',
+    look:
+      'Look at the length of the horns against the body: the exaggeration is deliberate. It is the horn that defines the animal in the carver’s eye, not its true proportions.',
+  },
+
+  'jubbah-p4': {
+    name: 'The single camel',
+    story:
+      'One camel holding the whole face alone. A solitary carving is not the same as a camel within a caravan: the caravan is news of wealth or of a journey, while the single animal is closer to a signature — one particular beast that its owner knew. Many of Jubbah’s camels have Thamudic inscriptions cut beside them carrying names, until some of them look like a deed of ownership set into the stone.',
+    look:
+      'Search the rock around the camel for small scattered letters. Where there is a camel at Jubbah there is usually a name.',
+  },
+
+  'jubbah-p5': {
+    name: 'The figure never settled',
+    story:
+      'A figure nobody agrees how to name. This is not a gap in the documentation but an ordinary condition of rock art: some carvings have been eaten away by weathering, some were cut over an older carving until the lines ran together, and some were made in a style whose key we no longer hold. Honesty serves better than guesswork here — what we do not know is part of what we know, and half of what is at Jubbah has still not been studied in full.',
+    look:
+      'Step close, then step back. Many shapes that are obscure up close resolve from a distance, because they were carved to be seen from one.',
+  },
+
+  'jubbah-p6': {
+    name: 'The lion and his tamer',
+    story:
+      'A lion, and beside it a human figure facing it. The Asiatic lion did once live in northern Arabia, until it was wiped out there centuries ago, so this carving is eyewitness and not imagination. The scene itself — a man standing before a predator and not fleeing from it — is among the most argued over at the site: is it a hunt, a taming, or a rite in which the carver claims power over the beast? No text explains it. The carving is the only account there is.',
+    look:
+      'Note the set of the arms on the human figure. Their direction — towards the lion or away from it — is the whole distance between confrontation and flight.',
+  },
+
+  'jubbah-p7': {
+    name: 'The three camels and the rider',
+    story:
+      'Three camels, and at the far left of them a man mounted on one, with Thamudic inscriptions alongside; on the same panel appears the scene of the lion and his tamer. This overlay is the whole of Jubbah in a single rock: a scene from the age of lions, camels cut thousands of years after it, and letters written by a third passer-by. Three separate times, with nothing to join them but the wall.',
+    look:
+      'Look for the difference in the colour of the pecking: the older is closer to the colour of the surrounding rock, because the dark desert varnish has grown back over it, and the more recent is paler, because time has not caught up with it yet.',
+  },
+
+  'jubbah-p8': {
+    name: 'The thrower and the cow',
+    story:
+      'A human figure at life size holding a curved stick like a boomerang, and before him a cow. The curved throwing stick is a weapon well known in the carvings of the peninsula: it is flung to strike the quarry or to throw it off balance. The cow is a cow of the wet age — when Jubbah was a lake ringed by meadows, herds grazed here of which nothing at all is left in this desert. The panel, then, is a scene of making a living, not decoration.',
+    look:
+      'Measure the human figure against yourself: the Neolithic figures at Jubbah stand the height of a standing man, which is what makes being in front of one a different thing from looking at a photograph of it.',
+  },
+
+  'jubbah-p9': {
+    name: 'A camel and an inscription',
+    story:
+      'A camel with Thamudic inscriptions beside it. At Umm Sinman alone, 5,431 Thamudic inscriptions have been counted — more than all the animal carvings put together. Thamudic is an old North Arabian script, and most of what was written in it here is names, lineages and phrases of passage: so-and-so son of so-and-so passed by here. Which means that the oldest thing people wrote on this mountain is the simplest thing people always write: I was here.',
+    look:
+      'The letters are far smaller than the figures and far shallower, so look for them in the empty spaces between the animals, not at the centre of the panel.',
+  },
+
+  'jubbah-p10': {
+    name: 'The flock of ostriches',
+    story:
+      'A group of ostriches carved together, with Thamudic inscriptions around them. The Arabian ostrich lived in this desert for thousands of years and then went extinct in the twentieth century; the last of them known was hunted in the 1940s. So this panel is the picture of an animal that no longer exists, cut by someone who saw it every day and never once thought he was recording an ending.',
+    look:
+      'Count the birds: ostriches are carved in groups, never singly, because that is how they were seen — the carver draws what he is used to, not what he imagines.',
   },
 }

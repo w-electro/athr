@@ -107,19 +107,50 @@ export default {
     acrossOne: 'op één dag',
     edit: 'Bewerken',
     weather: 'Weercontrole',
-    travel: '{minutes} min reizen',
+    travel: '{minutes} min reizen · {km} km',
+    travelFromHail: 'Vanaf Hail: {minutes} min · {km} km',
     until: 'tot {time}',
     excluded: 'Paste niet in deze reis',
     excludedHint: 'Voeg een dag toe of zet het tempo op Vol.',
-    note: 'Weergegevens van Open-Meteo.',
+    note: 'Weergegevens van Open-Meteo · Afstanden berekend uit de coördinaten van de locaties.',
     noteOffline: 'Weer niet op te halen — klimaatgemiddelden voor Hail getoond.',
     day: 'Dag {n}',
+    openMaps: 'Openen in kaarten',
+    navigate: 'Hierheen navigeren',
+    routeDay: 'Hele dagroute in kaarten',
+    dayDistance: 'Dagrit: {km} km',
     step: {
       prefs: 'Je interesses en reisduur lezen',
       weather: 'De verwachting voor Hail controleren',
-      order: 'Locaties op hun beste uur ordenen',
+      order: 'Locaties op nabijheid en beste uur ordenen',
     },
   },
+
+  access: {
+    offRoad: 'Een deel van de route is onverhard — een terreinwagen is aan te raden',
+    guide: 'Bezoek met een erkende gids · regel het vooraf',
+    farDrive: 'Ongeveer {hours} uur rijden per richting',
+  },
+
+  panel: {
+    heading: 'Panelen op deze locatie',
+    count: '{count} gedocumenteerde panelen',
+    look: 'Waar je op moet letten',
+    inscriptions: 'Draagt Thamudische inscripties',
+    famous: 'Het beroemdste van Jubbah',
+    atSite: 'Een paneel in {site}',
+    unknownSubject: 'Onderwerp onbepaald',
+  },
+
+  era: {
+    neolithic: 'Neolithicum · ongeveer tienduizend jaar geleden',
+    later: 'Na de domesticatie van de kameel · ongeveer drieduizend jaar geleden',
+    thamudic: 'Thamudische periode · eeuwen vóór de islam',
+    neolithicShort: 'Neolithicum',
+    laterShort: 'Later',
+    thamudicShort: 'Thamudisch',
+  },
+
   interest: {
     history: 'Geschiedenis en archeologie',
     nature: 'Natuur en avontuur',

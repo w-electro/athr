@@ -58,58 +58,116 @@ export default {
     },
   },
 
-  qishlah: {
-    name: 'Ngome ya Aarif na Qishlah',
-    shortName: 'Aarif na Qishlah',
-    subtitle: 'Moyo wa kihistoria wa Hail · alama mbili jirani',
-    tagline: 'Ngome ya udongo inayolinda mji kutoka juu, na boma la vyumba 142 linalouhifadhi kutoka chini.',
-    era: 'Aarif: zaidi ya miaka 200 · Qishlah: 1941',
+  aarif: {
+    name: 'Ngome ya Aarif',
+    shortName: 'Aarif',
+    subtitle: 'Ngome ya kilimani · zaidi ya karne mbili',
+    tagline: 'Ngome ya udongo juu ya kilele cha miamba, ambapo kila njia inayoingia Hail huchungwa.',
+    era: 'Zaidi ya miaka 200',
     city: 'Katikati ya mji wa Hail',
-    ticket: 'Kuingia bure · Qishlah hufunguliwa jioni',
+    ticket: 'Kuingia bure',
     story: [
       {
         heading: 'Jicho la Hail lisilolala',
-        body: 'Juu ya kilima cha miamba kinachouangalia mji imesimama Ngome ya Aarif, iliyojengwa na watu wa Hail zaidi ya karne mbili zilizopita ili kuchunga njia zinazoingia mjini; kutoka minara yake walinzi walifuatilia misafara iliyokuja kupitia Darb Zubayda, na waliwasha moto katika usiku wa Ramadhani kutangaza kufuturu — desturi ambayo hadi leo inaishi katika mzinga unaopigwa kutoka kilima kile kile.',
+        body: 'Juu ya kilima cha miamba kinachouangalia mji wa Hail imesimama Ngome ya Aarif, iliyojengwa na wenyeji wake zaidi ya karne mbili zilizopita ili kuwa jicho lisilolala juu ya njia zinazoelekea mjini; kutoka minara yake walinzi walifuatilia misafara iliyokuja kupitia Darb Zubayda, na waliwasha moto katika usiku wa Ramadhani kutangaza kufuturu — desturi ambayo hadi leo inaishi katika mzinga unaopigwa kutoka kilima kile kile.',
       },
       {
         heading: 'Udongo uliodumu karne mbili',
         body: 'Ngome ilijengwa kwa udongo uliochanganywa na majani makavu, ikiwa na kuta zenye unene wa zaidi ya mita moja zilizoimarishwa kwa mashina ya mvinje; na mbinu hii si duni kama inavyoonekana: ukuta mnene wa udongo huhifadhi ubaridi wa usiku hadi mchana na joto la mchana hadi usiku, hivyo hutengeneza kiyoyozi cha asili katikati ya jangwa ambalo kiangazi hupita nyuzi hamsini.',
       },
       {
-        heading: 'Qishlah: mji ndani ya ukuta',
-        body: 'Shuka kutoka kilimani kuelekea mashariki nawe utakutana na kinyume kabisa cha ngome: Qishlah ni boma kubwa la mstatili alilotaka Mfalme Abdulaziz lijengwe mwaka 1941 kama kambi ya jeshi, likiwa na vyumba 142 katika ghorofa mbili, minara minane ya ulinzi pembeni na kwenye kona, msikiti ndani, na ua mpana unaokatizwa na baraza; hata kutembea katika njia zake ndefu za udongo huhisi kama kupita katika mji uliopunguzwa.',
+        heading: 'Hatua sabini hadi mandhari bora kuliko yote',
+        body: 'Ngome hii hupandwa kwa miguu tu, kwani ngazi zilizochongwa kilimani ni takriban hatua sabini unazozipanda ndani ya dakika chache; na mara tu ufikapo juu, Hail yote hujitandaza chini yako: utaiona Qishlah upande wa magharibi kama mstatili wa udongo wenye mipaka iliyo wazi, Milima ya Aja ikiziba upeo wa macho nyuma yake, na mji wa kisasa ukienea kati yao.',
       },
       {
-        heading: 'Kutoka kambi hadi kumbukumbu',
-        body: 'Jukumu lake la kijeshi lilipokwisha, Qishlah likawa mojawapo ya maeneo muhimu zaidi ya urithi katika Hail, na leo ua wake huandaa matukio ya kitamaduni na masoko ya jadi; kuna kipengele kimoja chenye kustahili kutazamwa: kila dirisha katika minara yake minane lilifunguliwa kwa pembe tofauti, ili kwa pamoja yafunike kila upande wa kulikaribia boma bila kuacha hata sehemu moja isiyoonekana.',
+        heading: 'Kilima kilichojichagua chenyewe',
+        body: 'Kuchaguliwa kwa kilima hiki hakukuwa suala la ladha ya usanifu, bali ndicho kiinuko pekee cha asili katikati ya tambarare ya Hail; mita thelathini juu ya tambarare zinatosha kuufunika upeo wa macho kila upande, na msingi wake ni mwamba mgumu usiochimbika kutoka chini wala kuegemezwa ngazi au mnara wa kuzingira. Kisha zama zikageuka: mji ukaenea kukizunguka kilima hata ukakipita, hadi ngome iliyojengwa kulichunga jangwa leo inatazama barabara zenye msongamano — mahali ni palepale, lakini kazi yake imegeuka kinyume.',
       },
     ],
     facts: [
-      { label: 'Vyumba vya Qishlah', value: '142' },
-      { label: 'Minara ya ulinzi', value: '8' },
-      { label: 'Ujenzi wa Qishlah', value: '1941 (1360 H)' },
+      { label: 'Makadirio ya umri', value: 'zaidi ya miaka 200' },
+      { label: 'Kimo juu ya mji', value: 'takriban mita 30' },
+      { label: 'Kupanda', value: 'ngazi tu · hakuna njia ya gari' },
       { label: 'Vifaa vya ujenzi', value: 'udongo, majani makavu, mashina ya mvinje' },
     ],
     tips: [
-      'Panda Ngome ya Aarif nusu saa kabla ya machweo: mandhari ya mji kutoka juu ndiyo picha bora utakayopiga Hail.',
+      'Panda nusu saa kabla ya machweo: mandhari ya mji kutoka kileleni ndiyo picha bora utakayopiga Hail.',
       'Katika Ramadhani mzinga hupigwa kutoka kilima hiki; ukija msimu huo fika mapema, kwa kuwa eneo hujaa haraka.',
-      'Sakafu za udongo za Qishlah hazijasawazishwa — kuwa mwangalifu ukiwa na watoto au wageni wazee.',
+      'Hakuna lifti wala njia ya gari, na sehemu ya mwisho ya ngazi ni mteremko mkali — zingatia hilo ukiwa na wageni wazee.',
     ],
     narration: {
       voice: 'Sauti ya Athr — masimulizi yaliyotengenezwa na akili bandia',
       segments: [
-        { at: 0, text: 'Kwa sasa uko chini ya kilima cha Aarif; ngazi ziko mbele yako, na hatua sabini zinakutenganisha na mandhari bora kuliko yote Hail.' },
+        { at: 0, text: 'Kwa sasa uko chini ya kilima cha Ngome ya Aarif; ngazi ziko mbele yako, na hatua sabini zinakutenganisha na mandhari bora kuliko yote Hail.' },
         { at: 14, text: 'Ukiwa unapanda, angalia unene wa ukuta ulio upande wako wa kushoto: zaidi ya mita moja ya udongo na majani makavu.' },
-        { at: 28, text: 'Unene huo si kwa ajili ya ulinzi tu, bali ni kupoza kwa njia ya asili: ubaridi wa usiku huhifadhiwa ndani ya udongo hadi adhuhuri.' },
-        { at: 44, text: 'Kutoka mnara huu mlinzi alikuwa akichunga misafara, na kutoka hapa hapa mzinga wa Ramadhani bado unapigwa hadi leo.' },
-        { at: 60, text: 'Sasa geuka kuelekea mashariki: mstatili ule mkubwa wa udongo ndio Qishlah, wenye vyumba 142 na minara minane.' },
-        { at: 76, text: 'Utakapoingia ndani, hesabu pembe za madirisha: kuzunguka boma hili hutapata hata sehemu moja isiyoonekana.' },
+        { at: 28, text: 'Unene huo si kwa ajili ya ulinzi tu, bali ni kupoza kwa njia ya asili: ubaridi wa usiku huhifadhiwa humo hadi adhuhuri.' },
+        { at: 44, text: 'Kutoka mnara huu mlinzi alikuwa akichunga misafara, na kutoka hapa hapa mzinga wa Ramadhani hupigwa hadi leo.' },
+        { at: 60, text: 'Sasa geuka kuelekea magharibi: mstatili ule mkubwa wa udongo ndio Qishlah, ni kilomita moja na nusu tu kutoka pale ulipo.' },
+        { at: 76, text: 'Na nyuma yake imesimama Milima ya Aja ikiziba upeo wa macho, na kati yao Hail nzima hujitandaza mbele ya macho yako.' },
       ],
     },
     scan: {
-      matchLabel: 'Usanifu wa ulinzi wa udongo · Qishlah / Ngome ya Aarif',
+      matchLabel: 'Ngome ya udongo juu ya kilele cha miamba · Aarif',
       evidence: [
+        'Msingi wa mwamba wa asili ambao jengo limesimama juu yake',
         'Kuta za udongo zinazopungua upana kuelekea juu',
+        'Kingo zenye meno, alama mahususi ya usanifu wa Najd',
+      ],
+    },
+  },
+
+  qishlah: {
+    name: 'Boma la Qishlah',
+    shortName: 'Qishlah',
+    subtitle: 'Vyumba 142 · 1360 H / 1941',
+    tagline: 'Jengo kubwa kuliko yote la udongo katika Rasi ya Uarabuni: mji kamili ndani ya ukuta mmoja.',
+    era: '1360 H / 1941',
+    city: 'Katikati ya mji wa Hail',
+    ticket: 'Kuingia bure · hufunguliwa jioni',
+    story: [
+      {
+        heading: 'Mji ndani ya ukuta',
+        body: 'Qishlah ni boma kubwa la mstatili alilotaka Mfalme Abdulaziz lijengwe mwaka 1360 H kama kambi ya jeshi, likiwa na vyumba 142 katika ghorofa mbili, minara minane ya ulinzi kwenye kona na pembeni mwake, msikiti ndani, na ua mpana unaokatizwa na baraza; hata kutembea katika njia zake ndefu za udongo huhisi kama kuzunguka mji uliopunguzwa, si kuingia jengo moja.',
+      },
+      {
+        heading: 'Udongo unapojengwa kwa rula',
+        body: 'Kinachoitofautisha Qishlah na usanifu wa udongo wa zamani ni kwamba ilijengwa kwa mpango wa kijiometri wa kina, si kwa kuongezeka kidogo kidogo: baraza zake zinafuatana sambamba, vyumba vyake vina vipimo vilivyolingana, na minara yake imepangwa kwa utaratibu; kwa hivyo inasimama hasa kwenye mpaka kati ya usanifu wa jadi wa Najd na usanifu wa kisasa uliopangwa — ikijengwa kwa udongo, majani makavu na mashina ya mvinje yale yale yaliyojenga Aarif karne mbili kabla yake.',
+      },
+      {
+        heading: 'Minara minane bila sehemu isiyoonekana',
+        body: 'Jambo la kuvutia katika minara yake minane ni kwamba kila dirisha lilibuniwa kwa pembe tofauti na jirani yake, ili kwa pamoja yafunike kila upande unaozunguka boma bila kuacha hata sehemu moja isiyoonekana; ni hesabu ya macho ya kina iliyotimizwa bila zana za kisasa za upimaji, nawe waweza kuithibitisha mwenyewe ukisimama uani na kufuatilia mistari ya kuona kutoka mnara mmoja hadi mwingine.',
+      },
+      {
+        heading: 'Kutoka kambi hadi kumbukumbu',
+        body: 'Jukumu lake la kijeshi lilipokwisha, Qishlah likageuka kuwa mojawapo ya vivutio muhimu zaidi vya utalii katika Hail: ua wake leo huandaa matukio ya kitamaduni, masoko ya urithi na shughuli za Tamasha la Hail; hivyo jengo lililojengwa ili kujifunga mbali na watu leo halina maana yoyote pasipo wao.',
+      },
+    ],
+    facts: [
+      { label: 'Idadi ya vyumba', value: 'vyumba 142' },
+      { label: 'Minara ya ulinzi', value: 'minara 8' },
+      { label: 'Mwaka wa ujenzi', value: '1360 H / 1941' },
+      { label: 'Vifaa vya ujenzi', value: 'udongo, majani makavu, mashina ya mvinje' },
+    ],
+    tips: [
+      'Qishlah hufunguliwa jioni mara nyingi; ifanye iwe hitimisho la siku yako baada ya kushuka Aarif — kati yao ni kilomita moja na nusu tu.',
+      'Sakafu zake za udongo hazijasawazishwa na mwanga ni hafifu katika njia zake; angalia hatua zako ukiwa na watoto au wageni wazee.',
+      'Ua wa ndani ndipo mahali bora kupiga picha baada ya magharibi, pale kuta za udongo zinapoangaziwa kutoka chini na muundo wa udongo ukajitokeza.',
+    ],
+    narration: {
+      voice: 'Sauti ya Athr — masimulizi yaliyotengenezwa na akili bandia',
+      segments: [
+        { at: 0, text: 'Kwa sasa uko mbele ya Qishlah, na unachokiona si jengo moja bali ni mji kamili ndani ya ukuta.' },
+        { at: 12, text: 'Vyumba mia moja arobaini na viwili katika ghorofa mbili, minara minane, msikiti na ua katikati.' },
+        { at: 26, text: 'Ingia kupitia lango na usimame uani kitambo, na uangalie jinsi baraza zinavyofuatana sambamba na vyumba vinavyolingana.' },
+        { at: 41, text: 'Na hilo ndilo linaloitofautisha: udongo uliojengwa kwa rula, si kwa kuongezeka kidogo kidogo kama ilivyokuwa kawaida.' },
+        { at: 56, text: 'Sasa fuatilia madirisha ya minara kwa jicho lako: kila dirisha lipo kwa pembe inayotofautiana na jirani yake.' },
+        { at: 70, text: 'Yahesabu ukitaka — hutapata hata sehemu moja isiyoonekana kuzunguka boma hili.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Boma la udongo la mstatili · Qishlah',
+      evidence: [
+        'Ukuta wa mbele wa udongo mrefu wenye mpangilio sawia wa madirisha',
         'Minara ya pembeni yenye umbo la mche na matundu ya kurushia yenye pembetatu',
         'Kingo zenye meno, alama mahususi ya usanifu wa Najd',
       ],
@@ -230,5 +288,141 @@ export default {
         'Chombo cha udongo chenye nakshi za kijiometri za Najd',
       ],
     },
+  },
+
+  shuwaymis: {
+    name: 'Michoro ya Miamba ya Shuwaymis',
+    shortName: 'Shuwaymis',
+    subtitle: 'Milima ya al-Manjur na Raat · Urithi wa Dunia wa UNESCO',
+    tagline: 'Nusu nyingine ya uandikishaji wa UNESCO: mabonde yanayofikiwa tu na yule aliyeyakusudia.',
+    era: 'takriban miaka 10,000 iliyopita (Enzi Mpya ya Mawe)',
+    city: 'Shuwaymis, kusini-magharibi mwa Hail',
+    ticket: 'Ziara kwa uongozi wa mwongozaji aliyeidhinishwa · ni lazima kupanga mapema',
+    story: [
+      {
+        heading: 'Nusu iliyosahaulika ya uandikishaji',
+        body: 'UNESCO ilipoandikisha «sanaa ya miamba katika eneo la Hail» mwaka 2015, uandikishaji huo haukuwa wa Jubbah peke yake, bali wa maeneo mawili: Jabal Umm Sinman huko Jubbah, pamoja na milima ya al-Manjur na Raat huko Shuwaymis; lakini Shuwaymis ilibaki ndiyo yenye wageni wachache kuliko yote kwa sababu ya umbali wake na ugumu wa njia yake, hivyo michoro yake ikasalia salama zaidi na iliyoharibiwa kidogo zaidi — na leo ni miongoni mwa sanaa ya Enzi Mpya ya Mawe iliyohifadhika vyema kuliko yote katika Rasi nzima ya Uarabuni.',
+      },
+      {
+        heading: 'Mabonde yanayosomeka kama kurasa',
+        body: 'Michoro ya Shuwaymis haiko juu ya ukuta mmoja kama ilivyo Jubbah, bali imetapakaa kwenye kuta za mabonde membamba na yenye kina unayotembea ndani yake hadi paneli moja ikakufunukia baada ya nyingine: makundi ya ng’ombe-mwitu, simba, chui na mbuni; maumbo ya binadamu wakiwinda kwa upinde; na matukio kamili, si alama zilizotawanyika — hata baadhi ya paneli husimulia tukio moja tangu mwanzo wake hadi mwisho wake.',
+      },
+      {
+        heading: 'Mbwa aliyebadili historia',
+        body: 'Ni hapa Shuwaymis ndipo yalipopatikana yale yanayohesabiwa kuwa miongoni mwa michoro kongwe kuliko yote duniani ya mbwa waliofugwa: mbwa wenye masikio yaliyosimama na mikia iliyojisokota wakimzunguka mwindaji anayevuta upinde wake, na baadhi yao wamefungwa kwake kwa mistari iliyofasiriwa kuwa kamba za kuwaongoza; na tafsiri hiyo ikiwa sahihi, basi kuta hizi zinaandika mojawapo ya nyakati muhimu zaidi katika uhusiano wa mwanadamu na mnyama, zaidi ya miaka elfu nane iliyopita.',
+      },
+      {
+        heading: 'Kwa nini hapa',
+        body: 'Sababu ya msongamano huu wa michoro juu ya ukuta fulani ni kwamba Shuwaymis ilikuwa mahali pa kukutania maji: mabonde yanayoteremka kutoka nyanda za lava za volkeno kisha yakakusanyika katika mikondo inayoshikilia maji baada ya mvua, wanyama wakayafuata na wawindaji wakawafuata wanyama; hivyo michoro si chochote ila ni kumbukumbu ya waliosimama hapa wakisubiri — na ukuta wanaouchora ndio ukuta unaowapa kivuli.',
+      },
+    ],
+    facts: [
+      { label: 'Kuandikishwa UNESCO', value: '2015 (pamoja na Jubbah)' },
+      { label: 'Sehemu zake mbili', value: 'Jabal al-Manjur · Jabal Raat' },
+      { label: 'Umbali kutoka Hail', value: 'km 250 kusini-magharibi' },
+      { label: 'Kufika', value: 'mwongozaji aliyeidhinishwa · sehemu ya njia ni ya udongo' },
+    ],
+    tips: [
+      'Panga ziara siku kadhaa kabla ya safari pamoja na Tume ya Urithi au mwongozaji aliyeidhinishwa, kwa kuwa eneo hili halijafunguliwa kwa kuingia huru kama Jubbah.',
+      'Itenge siku nzima ya peke yake, si kituo ndani ya siku yenye mengine: kwenda na kurudi peke yake ni takriban saa sita.',
+      'Chukua mafuta na maji ya kutosha zaidi ya haja yako, kwa kuwa kituo cha mwisho kabla ya eneo hilo kiko mbali na mtandao hukatika ndani ya mabonde.',
+      'Kutembea kati ya paneli ni juu ya changarawe na mwamba usiosawazika — viatu vilivyofungwa hapa ni lazima, si hiari.',
+    ],
+    narration: {
+      voice: 'Sauti ya Athr — masimulizi yaliyotengenezwa na akili bandia',
+      segments: [
+        { at: 0, text: 'Karibu Shuwaymis. Umesafiri njia ndefu kufika hapa; vuta pumzi na uangalie kukuzunguka.' },
+        { at: 13, text: 'Mabonde haya ndiyo nusu nyingine ya uandikishaji wa UNESCO inayoushirikiana na Jubbah, na ndiyo yenye wageni wachache kuliko yote.' },
+        { at: 28, text: 'Uchache wa wageni ni neema kwa jiwe: unachokiona hapa ni salama zaidi kuliko unachokiona katika eneo lingine lolote.' },
+        { at: 43, text: 'Tembea bondeni polepole, kwa kuwa paneli hazijitokezi kwa mpigo mmoja bali moja baada ya nyingine.' },
+        { at: 58, text: 'Na utafute tukio la mwindaji aliyezungukwa na mbwa wenye masikio yaliyosimama na mikia iliyojisokota.' },
+        { at: 73, text: 'Hao ni miongoni mwa michoro kongwe tunayoijua duniani ya mbwa waliofugwa, ilichongwa miaka elfu nane iliyopita.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Sanaa ya miamba ndani ya bonde · Shuwaymis',
+      evidence: [
+        'Uchongaji juu ya ukuta wa bonde, si juu ya mwamba ulio wazi',
+        'Matukio ya uwindaji yaliyounganishwa, si maumbo yaliyotawanyika',
+        'Tabaka jeusi la rangi ya jangwa linalokatwa na uchongaji',
+      ],
+    },
+  },
+}
+
+/*
+  Paneli — maandishi mahususi zaidi kuliko ya eneo, yametenganishwa na
+  usafirishaji mkuu ili ramani ya «kitambulisho cha eneo → maudhui» ibaki
+  ikiwa na maeneo pekee.
+*/
+export const panels = {
+  'jubbah-p1': {
+    name: 'Msafara wa ngamia',
+    story:
+      'Ngamia wakifuatana wamechongwa juu ya uso mmoja wa mwamba — ndicho kinachoonekana zaidi Jubbah na pia kipya kuliko vyote. Kati ya michoro 1,944 ya wanyama iliyohesabiwa Umm Sinman, 1,378 ni ngamia — saba kati ya kila kumi. Halikuwa suala la ladha, bali ni kwa sababu ngamia aliingia katika maisha ya mwanadamu hapa kwa kuchelewa: alifugwa takriban miaka elfu tatu iliyopita, kisha akawa mnyama anayechongwa kwa kuwa alikuwa amekwisha kuwa mnyama anayetegemewa kuishi.',
+    look: 'Fuatilia mistari ya miguu: ngamia wa kipindi cha baadaye walichongwa kwa mkwaruzo wa haraka na mfupi, si kwa usahihi wa kimwili unaouona kwa ng’ombe-mwitu waliowatangulia kwa maelfu ya miaka.',
+  },
+
+  'jubbah-p2': {
+    name: 'Mfalme wa Jubbah',
+    story:
+      'Ndicho kitu maarufu kuliko vyote Jubbah, na wageni huja kukiona kutoka pembe za mbali za dunia. Umbo kubwa la mwanadamu lililochongwa kwa uhalisia adimu katika sanaa ya miamba: mkuki katika mkono wake wa kulia, kitu kinachofanana na taji kichwani mwake, mkufu shingoni, na mshipi kiunoni — na mbele yake amesimama umbo dogo zaidi ambalo watu wamelisoma kuwa mtumishi au mfuasi. Wenyeji humwita «mfalme», wanaakiolojia humweleza kuwa «umbo lenye mamlaka», na maelezo ya pili ni sahihi zaidi: uchongaji hautuambii yeye ni nani, unatuambia tu kwamba aliyechonga alitaka ijulikane kuwa huyu si kama wengine.',
+    look: 'Linganisha ukubwa wake na umbo lililosimama mbele yake. Tofauti ya ukubwa hapa si kosa la kuchora bali ni lugha: mkubwa zaidi ana cheo cha juu zaidi — ndiyo njia kongwe kuliko zote aliyoijua mwanadamu ya kusema «huyu ni muhimu».',
+  },
+
+  'jubbah-p3': {
+    name: 'Mbuzi wa milimani mwenye pembe ndefu',
+    story:
+      'Mbuzi wa milimani mwenye pembe mbili ndefu zilizopinda kuelekea nyuma kwa tao pana. Mbuzi wa milimani ni miongoni mwa waliochongwa zaidi katika Uarabuni kote, wala hakuwa mawindo tu: sura yake hujirudia mahali penye maji na katika sehemu za juu, hata watafiti wakadhani kuwa kwa waliomchonga alibeba maana inayozidi nyama — uzazi, kudumu, au kitu tusichokijua. Mbuzi wa milimani wa Kinubia bado yu hai katika milima ya eneo hili hadi leo, naye ni miongoni mwa viumbe wachache waliochongwa hapa ambao hawakutoweka.',
+    look: 'Angalia urefu wa pembe ukilinganisha na mwili: kutiwa chumvi huko ni kwa makusudi, kwa kuwa pembe ndiyo inayomtambulisha mnyama machoni pa mchongaji, si vipimo vyake halisi.',
+  },
+
+  'jubbah-p4': {
+    name: 'Ngamia peke yake',
+    story:
+      'Ngamia mmoja anaujaza uso wa mwamba peke yake. Uchongaji wa mnyama mmoja ni tofauti na uchongaji ndani ya msafara: msafara ni habari ya utajiri au ya safari, ilhali wa peke yake yu karibu zaidi na sahihi ya mkono — mnyama maalum aliyejulikana na mwenyewe. Ngamia wengi wa Jubbah wamechongwa yakiwa kando yao maandishi ya Kithamudi yenye majina, hata baadhi yao huonekana kama hati ya umiliki iliyochongwa jiweni.',
+    look: 'Tafuta herufi ndogo zilizotawanyika kumzunguka ngamia. Jubbah, palipo na ngamia mara nyingi pana jina.',
+  },
+
+  'jubbah-p5': {
+    name: 'Umbo lisilobainika',
+    story:
+      'Umbo ambalo jina lake halikubaliwi. Hili si upungufu wa uandishi bali ni hali ya kawaida katika sanaa ya miamba: baadhi ya michoro imeharibiwa na hali ya hewa, baadhi ilichongwa juu ya uchongaji wa zamani zaidi hata mistari ikachanganyika, na baadhi ilichorwa kwa mtindo ambao ufunguo wake haupo tena kwetu. Uaminifu hapa ni wa manufaa zaidi kuliko kubahatisha — kwa kuwa tusichokijua nacho ni sehemu ya maarifa, na nusu ya kilichopo Jubbah bado hakijachunguzwa vya kutosha.',
+    look: 'Sogea karibu, kisha rudi nyuma. Maumbo mengi yasiyoeleweka ukiwa karibu hubainika ukiwa mbali, kwa sababu yalichongwa yaonekane kutoka umbali.',
+  },
+
+  'jubbah-p6': {
+    name: 'Simba na mfugaji wake',
+    story:
+      'Simba, na kando yake umbo la mwanadamu linalomkabili. Simba wa Asia aliishi kweli kaskazini mwa Rasi ya Uarabuni hadi alipotoweka huko karne kadhaa zilizopita, hivyo uchongaji huu ni ushuhuda wa aliyeona kwa macho, si ubunifu. Ama tukio lenyewe — mwanadamu amesimama mbele ya mnyama mkali wala hamkimbii — ni miongoni mwa yanayobishaniwa zaidi: je, huku ni kuwinda, ni kufuga, au ni ibada ambamo mchongaji anadai mamlaka juu ya mnyama huyo mkali? Hakuna maandishi yanayolifafanua; uchongaji wenyewe ndiyo simulizi pekee.',
+    look: 'Tazama mkao wa mikono miwili ya umbo la mwanadamu. Mwelekeo — kuelekea simba au mbali naye — ndiyo tofauti yote kati ya kukabiliana na kukimbia.',
+  },
+
+  'jubbah-p7': {
+    name: 'Ngamia watatu na mpandaji',
+    story:
+      'Ngamia watatu, na upande wa kushoto kabisa mwanamume amempanda ngamia, kando yao maandishi ya Kithamudi, na katika paneli hiyohiyo huonekana pia tukio la simba na mfugaji wake. Mwingiliano huu ndiyo Jubbah yote ndani ya jiwe moja: tukio kutoka enzi ya simba, ngamia waliochongwa maelfu ya miaka baadaye, na herufi zilizoandikwa na mpita njia wa tatu. Nyakati tatu zisizounganishwa na chochote isipokuwa ukuta huu.',
+    look: 'Tafuta tofauti ya rangi mahali palipogongwa: pa zamani zaidi huelekea rangi ya mwamba unaopazunguka kwa sababu tabaka jeusi la rangi ya jangwa limerudi kupafunika, na pa karibuni ni angavu zaidi kwa kuwa wakati bado haujapafikia.',
+  },
+
+  'jubbah-p8': {
+    name: 'Mtupaji na ng’ombe-mwitu',
+    story:
+      'Umbo la mwanadamu lenye ukubwa wa mtu halisi likishika fimbo iliyopinda inayofanana na bumerangi, na mbele yake ng’ombe-mwitu. Fimbo iliyopinda ni silaha ya kutupa inayojulikana katika michoro ya Uarabuni: hutupwa impige mawindo au imchanganye. Ama ng’ombe huyo ni ng’ombe wa kipindi cha unyevu: Jubbah ilipokuwa ziwa lililozungukwa na malisho, makundi ambayo leo hayajabaki hata mmoja katika jangwa hili yalichunga hapo. Basi paneli hii ni tukio la maisha ya kila siku, si mapambo.',
+    look: 'Jipimie mwenyewe umbo la mwanadamu: maumbo ya Enzi Mpya ya Mawe Jubbah yana ukubwa wa mtu aliyesimama, na ndilo linalofanya kusimama mbele yao kuwe tofauti na kuitazama picha yake tu.',
+  },
+
+  'jubbah-p9': {
+    name: 'Ngamia na maandishi',
+    story:
+      'Ngamia mwenye maandishi ya Kithamudi kando yake. Umm Sinman peke yake yamehesabiwa maandishi 5,431 ya Kithamudi — ni mengi kuliko michoro yote ya wanyama. Kithamudi ni hati ya Kiarabu cha kaskazini cha kale, na kilichoandikwa kwayo zaidi hapa ni majina, nasaba na maneno ya kupita: «fulani mwana wa fulani alipita hapa». Yaani, kitu cha zamani kuliko vyote walichokiandika watu juu ya mlima huu ndicho kitu rahisi kuliko vyote ambacho watu huandika daima: mimi nilikuwa hapa.',
+    look: 'Herufi ni ndogo mno kuliko michoro wala hazikuchongwa kwa kina kama hiyo; zitafute katika nafasi zilizo kati ya wanyama, si katikati ya paneli.',
+  },
+
+  'jubbah-p10': {
+    name: 'Kundi la mbuni',
+    story:
+      'Kundi la mbuni waliochongwa pamoja, na kuwazunguka maandishi ya Kithamudi. Mbuni wa Kiarabu aliishi katika jangwa hili kwa maelfu ya miaka kisha akatoweka katika karne ya ishirini; wa mwisho aliyejulikana kati yao aliwindwa miaka ya 1940. Basi paneli hii ni picha ya mnyama ambaye hayupo tena, iliyochongwa na mtu aliyekuwa akimwona kila siku wala hakuwahi kufikiri kuwa alikuwa anaandika mwisho wake.',
+    look: 'Wahesabu ndege: mbuni huchongwa kwa makundi si mmoja mmoja, kwa sababu ndivyo alivyokuwa akionekana — na mchongaji huchora alichokizoea kukiona, si alichokiwazia.',
   },
 }

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { recognizeSite, getActiveProviderName, ANALYSIS_STAGES } from '../lib/recognition.js'
 import { getSiteById, getAllSites } from '../data/sites.js'
+import { getPanelById, isPanelId, SUBJECTS } from '../data/panels.js'
 import SiteArt from '../components/SiteArt.jsx'
 import Petroglyph from '../components/Petroglyph.jsx'
 import { useI18n } from '../i18n/index.jsx'
@@ -35,6 +36,8 @@ export default function ScanScreen() {
   const [snapshot, setSnapshot] = useState(null)
   const [demoTarget, setDemoTarget] = useState('auto')
   const [showDemo, setShowDemo] = useState(false)
+  // يصير صحيحًا حين تُرسل الكاميرا أول إطار فعلي، لا حين يُمنح الإذن
+  const [frameReady, setFrameReady] = useState(false)
 
   const videoRef = useRef(null)
   const canvasRef = useRef(null)
@@ -49,25 +52,65 @@ export default function ScanScreen() {
   function stopCamera() {
     streamRef.current?.getTracks().forEach((track) => track.stop())
     streamRef.current = null
+    // نفكّ الارتباط أيضًا، وإلا بقي آخر إطار معلّقًا على الشاشة
+    if (videoRef.current) videoRef.current.srcObject = null
   }
+
+  /**
+   * ربط البثّ بعنصر الفيديو.
+   *
+   * ══════════════════════════════════════════════════════════════════
+   *  لماذا في useEffect لا داخل startCamera
+   * ══════════════════════════════════════════════════════════════════
+   * عنصر <video> لا يُركَّب إلا حين تصير الحالة `live`. وكانت النسخة
+   * الأولى تُسند البثّ داخل startCamera بينما الحالة ما زالت `starting`،
+   * فيكون videoRef.current قيمته null، فتُتخطّى الإسنادُ بصمت، ثم تصير
+   * الحالة live فيظهر عنصر فيديو فارغ.
+   *
+   * النتيجة التي رآها المستخدم: يمنح الإذن ثم يرى شاشة سوداء.
+   *
+   * الآن نُسند بعد التركيب فعلًا — وهذا هو الترتيب الصحيح دائمًا مع
+   * عنصر يظهر شرطيًا.
+   */
+  useEffect(() => {
+    if (state !== STATES.live && state !== STATES.analyzing) return undefined
+    const video = videoRef.current
+    const stream = streamRef.current
+    if (!video || !stream || video.srcObject === stream) return undefined
+
+    video.srcObject = stream
+
+    // play() تُرجع وعدًا في المتصفحات الحديثة و undefined في غيرها،
+    // فنتحقّق قبل أن نسلسل عليه — وإلا رمى السطرُ نفسُه واختفت الشاشة
+    const started = video.play?.()
+    if (started && typeof started.catch === 'function') started.catch(() => {})
+
+    return undefined
+  }, [state])
 
   async function startCamera() {
     setState(STATES.starting)
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: { ideal: 'environment' } },
-        audio: false,
-      })
-      streamRef.current = stream
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream
-        await videoRef.current.play()
+    setFrameReady(false)
+
+    // بعض الأجهزة ترفض قيدًا لا تدعمه، فنطلب الكاميرا الخلفية أولًا ثم
+    // نقنع بأي كاميرا بدل أن نُظهر "تعذّر الفتح" ونحن لم نحاول فعلًا
+    const attempts = [
+      { video: { facingMode: { ideal: 'environment' } }, audio: false },
+      { video: true, audio: false },
+    ]
+
+    for (const constraints of attempts) {
+      try {
+        streamRef.current = await navigator.mediaDevices.getUserMedia(constraints)
+        setState(STATES.live)
+        return
+      } catch {
+        // نجرّب القيد التالي
       }
-      setState(STATES.live)
-    } catch {
-      // رفض الإذن أو غياب الكاميرا — شائع على أجهزة لجان التحكيم
-      setState(STATES.denied)
     }
+
+    // رفض الإذن أو غياب الكاميرا — شائع على أجهزة لجان التحكيم
+    setState(STATES.denied)
   }
 
   function captureFrame() {
@@ -75,8 +118,16 @@ export default function ScanScreen() {
     const canvas = canvasRef.current
     if (!video || !canvas) return null
 
-    const width = video.videoWidth || 720
-    const height = video.videoHeight || 960
+    /*
+      الكاميرا تحتاج جزءًا من الثانية قبل أن تُرسل أول إطار، وقبلها تكون
+      videoWidth صفرًا. لو عوّضنا الصفر بمقاس افتراضي لرسمنا لقطة سوداء
+      تمامًا ثم سلّمناها للنموذج كأنها صورة — فيردّ بنتيجة عن لا شيء.
+      نرفض الالتقاط بدل أن نختلق صورة.
+    */
+    const width = video.videoWidth
+    const height = video.videoHeight
+    if (!width || !height) return null
+
     canvas.width = width
     canvas.height = height
     canvas.getContext('2d').drawImage(video, 0, 0, width, height)
@@ -86,7 +137,10 @@ export default function ScanScreen() {
   }
 
   async function analyze(image) {
-    setSnapshot(image?.dataUrl ?? null)
+    // لا نحلّل عدمًا — الزرّ معطّل حتى تجهز الكاميرا، وهذا حارس أخير
+    if (!image) return
+
+    setSnapshot(image.dataUrl)
     setState(STATES.analyzing)
     setStageIndex(0)
 
@@ -126,7 +180,17 @@ export default function ScanScreen() {
 
   // contentLanguage هي لغة المحتوى الفعلية (تتراجع للإنجليزية للغات التي لم
   // يُترجم محتواها بعد) — لا language مباشرة، وإلا ظهر المحتوى بالعربية دائمًا.
-  const matchedSite = result?.siteId ? getSiteById(result.siteId, contentLanguage) : null
+  /*
+    فهرس التعرّف يخلط المواقع واللوحات في مساحة معرّفات واحدة، فقد يعود
+    بـ jubbah أو بـ jubbah-p2. واللوحة تُرجع موقعَها أيضًا: الزائر يريد
+    القصّة الدقيقة، لكنه يحتاج أن يعرف أين هو.
+  */
+  const matchedPanel = isPanelId(result?.siteId)
+    ? getPanelById(result.siteId, contentLanguage)
+    : null
+
+  const matchedSiteId = matchedPanel ? matchedPanel.siteId : result?.siteId
+  const matchedSite = matchedSiteId ? getSiteById(matchedSiteId, contentLanguage) : null
 
   return (
     <div className="screen-pad">
@@ -155,11 +219,20 @@ export default function ScanScreen() {
       )}
 
       <canvas ref={canvasRef} className="hidden" aria-hidden="true" />
+      {/*
+        بلا capture عمدًا.
+
+        capture="environment" يأمر متصفّح الجوال بفتح الكاميرا مباشرةً
+        وتخطّي منتقي الملفّات — فيصير زرّ «اختر صورة» زرَّ كاميرا ثانيًا،
+        ولا سبيل إلى صورةٍ من المعرض أو من الحاسوب إطلاقًا.
+
+        وهذا المسار هو الوحيد المتاح حين يُرفض إذن الكاميرا، أو حين يُجرَّب
+        التطبيق على حاسوب بلا كاميرا — أي في العرض أمام لجنة التحكيم.
+      */}
       <input
         ref={fileInputRef}
         type="file"
         accept="image/*"
-        capture="environment"
         onChange={handleFile}
         className="hidden"
         aria-label={t('scan.pick')}
@@ -177,8 +250,13 @@ export default function ScanScreen() {
         <div className="relative overflow-hidden rounded-2xl border border-night-600 bg-basalt">
           <video
             ref={videoRef}
+            // playsInline يمنع iOS من فتح الفيديو ملء الشاشة،
+            // و autoPlay يضمن التشغيل إن رُفض وعد play() لفقد سياق اللمسة
+            autoPlay
             playsInline
             muted
+            // أول إطار وصل فعلًا: الآن فقط صارت videoWidth حقيقية
+            onLoadedMetadata={() => setFrameReady(true)}
             className={`h-[26rem] w-full object-cover transition-opacity duration-500 ${
               state === STATES.analyzing ? 'opacity-25' : ''
             }`}
@@ -201,9 +279,10 @@ export default function ScanScreen() {
           <button
             type="button"
             onClick={() => analyze(captureFrame())}
+            disabled={!frameReady}
             aria-label={t('scan.shutter')}
             className="flex h-[68px] w-[68px] items-center justify-center rounded-full border-[3px] border-terracotta
-                       transition-transform duration-200 ease-athr active:scale-95"
+                       transition-all duration-200 ease-athr active:scale-95 disabled:scale-90 disabled:opacity-40"
           >
             <span className="h-[52px] w-[52px] rounded-full bg-terracotta" />
           </button>
@@ -222,6 +301,7 @@ export default function ScanScreen() {
         <ResultPanel
           result={result}
           site={matchedSite}
+          panel={matchedPanel}
           snapshot={snapshot}
           onRetry={reset}
           t={t}
@@ -338,7 +418,48 @@ function AnalysisOverlay({ snapshot, stageIndex, t }) {
   )
 }
 
-function ResultPanel({ result, site, snapshot, onRetry, t, contentDir }) {
+/**
+ * جسد اللوحة: حِقبتها، قصّتها، وما يُبحث عنه فيها.
+ *
+ * «ابحث عن» مقصودٌ في آخره: الزائر واقفٌ أمام الصخر لا جالسٌ يقرأ، فآخر
+ * ما يراه قبل أن يرفع عينيه ينبغي أن يكون توجيهًا لعينه لا معلومةً أخرى.
+ */
+function PanelBody({ panel, t, contentDir }) {
+  const subject = SUBJECTS[panel.subject] ?? SUBJECTS.unknown
+
+  return (
+    <div className="space-y-4" dir={contentDir}>
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="chip-quiet">
+          <span aria-hidden="true">{subject.icon}</span>
+          {t(`era.${panel.era}Short`)}
+        </span>
+        {/* الموضوع غير المحسوم يُقال صراحةً: علامةُ استفهامٍ وحدها تبدو
+            عطبًا في الواجهة، والتصريح يبدو ما هو — أمانةً علمية */}
+        {panel.subject === 'unknown' && (
+          <span className="chip-quiet">{t('panel.unknownSubject')}</span>
+        )}
+        {panel.hasInscriptions && (
+          <span className="chip-quiet text-gold-bright">✎ {t('panel.inscriptions')}</span>
+        )}
+        {panel.famous && (
+          <span className="chip border border-terracotta/50 text-terracotta-bright">
+            ★ {t('panel.famous')}
+          </span>
+        )}
+      </div>
+
+      <p className="text-body leading-relaxed text-sand-dim">{panel.story}</p>
+
+      <div className="rounded-xl border-s-2 border-terracotta bg-terracotta/[0.07] p-3.5">
+        <p className="eyebrow mb-1.5 text-terracotta-bright">{t('panel.look')}</p>
+        <p className="text-micro leading-relaxed text-sand-dim">{panel.look}</p>
+      </div>
+    </div>
+  )
+}
+
+function ResultPanel({ result, site, panel, snapshot, onRetry, t, contentDir }) {
   const percent = Math.round(result.confidence * 100)
 
   /*
@@ -389,10 +510,25 @@ function ResultPanel({ result, site, snapshot, onRetry, t, contentDir }) {
         </SiteArt>
 
         <div className="space-y-5 border-t border-night-600 p-5">
+          {/*
+            حين تُعرف اللوحة يتقدّم اسمها على اسم الموقع: الزائر يعرف أنه
+            في جبة، وما جاء من أجله هو معرفة ما أمامه الآن.
+          */}
           <div dir={contentDir}>
-            <span className="eyebrow block">{label}</span>
-            <h2 className="mt-1.5 font-display text-title text-sand">{site.name}</h2>
+            {panel ? (
+              <>
+                <span className="eyebrow block">{t('panel.atSite', { site: site.shortName })}</span>
+                <h2 className="mt-1.5 font-display text-title text-sand">{panel.name}</h2>
+              </>
+            ) : (
+              <>
+                <span className="eyebrow block">{label}</span>
+                <h2 className="mt-1.5 font-display text-title text-sand">{site.name}</h2>
+              </>
+            )}
           </div>
+
+          {panel && <PanelBody panel={panel} t={t} contentDir={contentDir} />}
 
           <div>
             <div className="mb-2 flex items-center justify-between text-[0.6875rem]">

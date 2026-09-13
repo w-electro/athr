@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { formatTimecode, PLAYBACK_RATES } from '../lib/narration.js'
+import { findClip, locateSegment } from '../lib/audioAssets.js'
 import {
   isSpeechSupported,
   loadVoices,
@@ -14,30 +15,43 @@ import { useI18n } from '../i18n/index.jsx'
  * الدليل الصوتي.
  *
  * ══════════════════════════════════════════════════════════════════════
- *  وضعان، والفرق بينهما جوهري
+ *  ثلاثة أوضاع، مرتّبة بالجودة
  * ══════════════════════════════════════════════════════════════════════
  *
- *  🔊 وضع النطق (speech) — الافتراضي متى توفّر صوت للغة المستخدم.
- *     المتصفح ينطق السرد فعلًا عبر Web Speech API: مجانًا، بلا مفاتيح،
- *     وبلا إنترنت على أغلب الأجهزة. هذا دليل صوتي حقيقي لا محاكاة.
+ *  ♪ وضع الملف (file) — الأفضل، وهو المعتاد.
+ *     مقطع مولّد مسبقًا بأفضل نموذج مفتوح لكل لغة (انظر
+ *     scripts/build-narration-audio.py). صوت واحد متّصل بلا تقطيع بين
+ *     الجمل، وبدايات الجمل مقيسة وقت التوليد فالإبراز مطابق لا مقدَّر،
+ *     وتغيير السرعة يتولّاه المتصفح نفسه بلا إعادة نطق.
  *
- *  ▶︎ وضع المؤقّت (timer) — احتياطي حين لا يملك الجهاز صوتًا لتلك اللغة.
- *     يتقدّم النص متزامنًا كما كان، دون صوت.
+ *  🔊 وضع النطق (speech) — حين لا يوجد ملف لهذه اللغة بعد.
+ *     المتصفح ينطق السرد عبر Web Speech API. مجاني وبلا إنترنت، لكن
+ *     جودته رهن ما ثبّته صانع الهاتف: آليّة غالبًا، ومتقطّعة بين الجمل،
+ *     وفي العربية تنطق بلا تشكيل فتخطئ الحركات.
+ *
+ *  ▶︎ وضع المؤقّت (timer) — حين لا صوت للغة أصلًا.
+ *     يتقدّم النص متزامنًا دون صوت، فيبقى الدليل مفيدًا لا معطوبًا.
  *
  * التراجع تلقائي وصامت: الزائر لا يرى رسالة خطأ، يرى دليلًا يعمل.
  *
- * ── لماذا نُقسّم النطق إلى مقاطع بدل جملة واحدة طويلة ─────────────────
- * 1) التزامن يصبح مضمونًا: نُبرز المقطع الذي يُنطق الآن، لا تخمينًا زمنيًا.
- * 2) بعض المتصفحات تقطع النطق الطويل بعد ~15 ثانية. مقاطعنا أقصر من ذلك.
- * 3) يمكن للزائر القفز إلى أي جملة والاستماع منها.
+ * ── لماذا يبقى التقسيم إلى جمل في وضع الملف ──────────────────────────
+ * ليس للتشغيل بل للقراءة: الزائر يقفز إلى أي جملة، ويقرأ ما يُنطق الآن.
+ * وفي وضع النطق يضيف سببًا ثالثًا: بعض المتصفحات تقطع النطق الطويل بعد
+ * نحو خمس عشرة ثانية، وجملنا أقصر من ذلك.
  */
 
 const BAR_COUNT = 44
 
-export default function AudioPlayer({ narration, siteName }) {
+const MODES = { file: 'file', speech: 'speech', timer: 'timer' }
+
+export default function AudioPlayer({ narration, siteName, siteId }) {
   const { t, contentLanguage } = useI18n()
   const { segments, totalSeconds } = narration
 
+  const [clip, setClip] = useState(null)
+  const [clipFailed, setClipFailed] = useState(false)
+  // ينتظر بايتات من الشبكة. النطق كان فوريًا، والملف قد لا يكون — فنقولها
+  const [buffering, setBuffering] = useState(false)
   const [voice, setVoice] = useState(null)
   const [voiceOptions, setVoiceOptions] = useState([])
   const [showVoices, setShowVoices] = useState(false)
@@ -52,13 +66,17 @@ export default function AudioPlayer({ narration, siteName }) {
   const rateRef = useRef(0.9)
   const playingRef = useRef(false)
   const tickRef = useRef(null)
+  const audioRef = useRef(null)
 
   indexRef.current = segIndex
   rateRef.current = rate
   playingRef.current = playing
 
   const speechLang = toSpeechLang(contentLanguage)
-  const useSpeech = speechReady && Boolean(voice)
+
+  const useFile = Boolean(clip) && !clipFailed
+  const useSpeech = !useFile && speechReady && Boolean(voice)
+  const mode = useFile ? MODES.file : useSpeech ? MODES.speech : MODES.timer
 
   /* ─────────────────────── اختيار الصوت المناسب ─────────────────────── */
 
@@ -100,20 +118,51 @@ export default function AudioPlayer({ narration, siteName }) {
 
   /* ─────────────────────────── مدد المقاطع ─────────────────────────── */
 
+  /*
+    بدايات الجمل. حين يوجد مقطع مولّد نستعمل الأزمنة المقيسة وقت التوليد
+    بدل الأزمنة المكتوبة يدويًا في المحتوى — فتلك تقديرات كُتبت قبل وجود
+    صوت، وهذه قياسات للصوت نفسه.
+  */
+  const offsets = useMemo(() => {
+    if (useFile && clip.offsets.length === segments.length) return clip.offsets
+    return segments.map((segment) => segment.at)
+  }, [useFile, clip, segments])
+
+  const duration = useFile && clip.seconds > 0 ? clip.seconds : totalSeconds
+
   const durations = useMemo(
-    () =>
-      segments.map((segment, index) =>
-        Math.max(1, (segments[index + 1]?.at ?? totalSeconds) - segment.at),
-      ),
-    [segments, totalSeconds],
+    () => offsets.map((at, index) => Math.max(1, (offsets[index + 1] ?? duration) - at)),
+    [offsets, duration],
   )
 
   const stop = useCallback(() => {
     setPlaying(false)
     playingRef.current = false
+    setBuffering(false)
     cancelSpeech()
+    audioRef.current?.pause()
     clearInterval(tickRef.current)
   }, [])
+
+  /* ───────────────────── البحث عن مقطع مولّد مسبقًا ───────────────────── */
+
+  useEffect(() => {
+    let cancelled = false
+    setClip(null)
+    setClipFailed(false)
+
+    findClip(contentLanguage, siteId).then((found) => {
+      if (cancelled) return
+      // لو وصل المقطع بينما المتصفح ينطق (ضغط الزائر تشغيل قبل أن يُقرأ
+      // الفهرس) أوقفنا النطق، وإلا سُمع الصوتان معًا
+      if (found && playingRef.current) stop()
+      setClip(found)
+    })
+
+    return () => {
+      cancelled = true
+    }
+  }, [contentLanguage, siteId, stop])
 
   // إيقاف كل شيء عند مغادرة الشاشة أو تغيير الموقع/اللغة
   useEffect(() => {
@@ -163,7 +212,8 @@ export default function AudioPlayer({ narration, siteName }) {
    * الشريطُ الصوتَ أبدًا.
    */
   useEffect(() => {
-    if (!playing) return undefined
+    // في وضع الملف يقود الصوتُ النصَّ عبر timeupdate، فلا تقدير ولا مؤقّت
+    if (!playing || useFile) return undefined
 
     tickRef.current = setInterval(() => {
       setSegFraction((fraction) => {
@@ -189,7 +239,36 @@ export default function AudioPlayer({ narration, siteName }) {
     }, 100)
 
     return () => clearInterval(tickRef.current)
-  }, [playing, useSpeech, segments, durations, stop])
+  }, [playing, useFile, useSpeech, segments, durations, stop])
+
+  /* ────────────────── وضع الملف: الصوت يقود النص ────────────────── */
+
+  /** يشغّل الملف من ثانية بعينها، ويتراجع إلى النطق إن تعذّر التشغيل. */
+  const playFileAt = useCallback((seconds) => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    if (Number.isFinite(seconds)) audio.currentTime = seconds
+    audio.playbackRate = rateRef.current
+
+    const started = audio.play?.()
+    if (started && typeof started.catch === 'function') {
+      // تعذّر التشغيل (ملف ناقص أو صيغة غير مدعومة): ننتقل إلى النطق
+      started.catch(() => setClipFailed(true))
+    }
+  }, [])
+
+  function handleTimeUpdate(event) {
+    const { index, fraction } = locateSegment(event.target.currentTime, offsets, duration)
+    setSegIndex(index)
+    setSegFraction(fraction)
+  }
+
+  function handleEnded() {
+    stop()
+    setSegIndex(0)
+    setSegFraction(0)
+  }
 
   function toggle() {
     if (playing) {
@@ -198,7 +277,14 @@ export default function AudioPlayer({ narration, siteName }) {
     }
     setPlaying(true)
     playingRef.current = true
-    if (useSpeech) speakSegment(segIndex >= segments.length ? 0 : segIndex)
+
+    // preload="none" يعني أن أوّل ضغطة تبدأ التنزيل — نُظهر ذلك فورًا
+    // بدل أن يبدو الزرّ ميّتًا على اتصال بطيء
+    if (useFile) {
+      if (audioRef.current?.readyState === 0) setBuffering(true)
+      playFileAt(undefined)
+    }
+    else if (useSpeech) speakSegment(segIndex >= segments.length ? 0 : segIndex)
   }
 
   /**
@@ -212,7 +298,14 @@ export default function AudioPlayer({ narration, siteName }) {
     const next = Math.min(segments.length - 1, Math.max(0, segIndex + delta))
     setSegIndex(next)
     setSegFraction(0)
-    if (playing && useSpeech) speakSegment(next)
+
+    if (useFile) {
+      // نحرّك الرأس حتى وهو متوقّف، ليبدأ التشغيل التالي من هنا
+      if (audioRef.current) audioRef.current.currentTime = offsets[next]
+      if (playing) playFileAt(offsets[next])
+    } else if (playing && useSpeech) {
+      speakSegment(next)
+    }
   }
 
   function jumpTo(index) {
@@ -220,7 +313,9 @@ export default function AudioPlayer({ narration, siteName }) {
     setSegFraction(0)
     setPlaying(true)
     playingRef.current = true
-    if (useSpeech) speakSegment(index)
+
+    if (useFile) playFileAt(offsets[index])
+    else if (useSpeech) speakSegment(index)
   }
 
   /** يبدّل الصوت ويحفظ الاختيار لهذه اللغة، ثم يعيد نطق المقطع الحالي به. */
@@ -250,23 +345,46 @@ export default function AudioPlayer({ narration, siteName }) {
     const next = PLAYBACK_RATES[(PLAYBACK_RATES.indexOf(rate) + 1) % PLAYBACK_RATES.length]
     setRate(next)
     rateRef.current = next
-    // النطق الجاري لا يقبل تغيير السرعة، فنعيد نطق المقطع الحالي بها
-    if (playing && useSpeech) speakSegment(segIndex)
+
+    if (useFile) {
+      // المتصفح يغيّر السرعة أثناء التشغيل بلا انقطاع ولا تغيّر في الطبقة
+      if (audioRef.current) audioRef.current.playbackRate = next
+    } else if (playing && useSpeech) {
+      // النطق الجاري لا يقبل تغيير السرعة، فنعيد نطق المقطع الحالي بها
+      speakSegment(segIndex)
+    }
   }
 
   const bars = useMemo(() => buildWaveform(segments), [segments])
   const ratio = Math.min(1, (segIndex + segFraction) / segments.length)
-  const elapsed = segments[segIndex].at + segFraction * durations[segIndex]
+  const elapsed = offsets[segIndex] + segFraction * durations[segIndex]
 
   return (
     <section
       aria-label={t('audio.title')}
       className="overflow-hidden rounded-2xl border border-night-600 bg-night-900"
     >
+      {/*
+        عنصر الصوت. لا نضع فيه controls: أزرارنا هي الواجهة، وهذا هو
+        المحرّك تحتها. preload="none" حتى لا ننزّل مقاطع لن تُسمع.
+      */}
+      {useFile && (
+        <audio
+          ref={audioRef}
+          src={clip.url}
+          preload="none"
+          onTimeUpdate={handleTimeUpdate}
+          onEnded={handleEnded}
+          onWaiting={() => setBuffering(true)}
+          onPlaying={() => setBuffering(false)}
+          onError={() => setClipFailed(true)}
+        />
+      )}
+
       <div className="flex items-center gap-3 px-4 pb-3 pt-4">
         <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-terracotta/15">
           <span className="text-base" aria-hidden="true">
-            {useSpeech ? '🔊' : '◉'}
+            {mode === MODES.timer ? '◉' : '🔊'}
           </span>
           {playing && (
             <span className="absolute inset-0 animate-ring-out rounded-full border border-terracotta" />
@@ -276,10 +394,11 @@ export default function AudioPlayer({ narration, siteName }) {
           <p className="truncate text-[0.8125rem] font-semibold text-sand">
             {t('audio.title')} · {siteName}
           </p>
-          {/* اسم الصوت اسم عَلَم لا يُترجم، فنعرضه كما هو */}
+          {/* أسماء الأصوات أعلام لا تُترجم، فنعرضها كما هي */}
           <p className="truncate text-[0.6875rem] text-sand-faint">
             {narration.voice}
-            {voice?.name ? ` · ${voice.name}` : ''}
+            {useFile && clip.voice ? ` · ${clip.voice}` : ''}
+            {mode === MODES.speech && voice?.name ? ` · ${voice.name}` : ''}
           </p>
         </div>
 
@@ -287,7 +406,7 @@ export default function AudioPlayer({ narration, siteName }) {
           اختيار الصوت. لا نعرضه إلا حين يملك الجهاز أكثر من صوت لهذه اللغة،
           لأن الحكم النهائي على جودة الصوت أذنُ المستخدم لا خوارزميتنا.
         */}
-        {voiceOptions.length > 1 && (
+        {mode === MODES.speech && voiceOptions.length > 1 && (
           <button
             type="button"
             onClick={() => setShowVoices((value) => !value)}
@@ -355,7 +474,7 @@ export default function AudioPlayer({ narration, siteName }) {
 
       <div className="flex items-center justify-between px-4 pb-1 pt-1.5 text-[0.6875rem] text-sand-faint">
         <span className="num">{formatTimecode(elapsed)}</span>
-        <span className="num">{formatTimecode(totalSeconds)}</span>
+        <span className="num">{formatTimecode(duration)}</span>
       </div>
 
       <div className="flex items-center justify-center gap-7 px-4 pb-4 pt-1">
@@ -372,10 +491,11 @@ export default function AudioPlayer({ narration, siteName }) {
           type="button"
           onClick={toggle}
           aria-label={playing ? t('audio.pause') : t('audio.play')}
+          aria-busy={buffering}
           className="flex h-14 w-14 items-center justify-center rounded-full bg-terracotta text-basalt
                      transition-transform duration-200 ease-athr active:scale-95"
         >
-          {playing ? <PauseIcon /> : <PlayIcon />}
+          {buffering ? <SpinnerIcon /> : playing ? <PauseIcon /> : <PlayIcon />}
         </button>
 
         <button
@@ -401,7 +521,7 @@ export default function AudioPlayer({ narration, siteName }) {
                 }`}
               >
                 <span className="num mt-1 shrink-0 text-[0.625rem] text-sand-faint">
-                  {formatTimecode(segment.at)}
+                  {formatTimecode(offsets[index] ?? segment.at)}
                 </span>
                 <span className="leading-relaxed">{segment.text}</span>
               </button>
@@ -439,6 +559,21 @@ function PauseIcon() {
     <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
       <rect x="7" y="5" width="4" height="14" rx="1.2" />
       <rect x="13" y="5" width="4" height="14" rx="1.2" />
+    </svg>
+  )
+}
+
+/** ينزّل المقطع الآن. قوسٌ يدور — لا نصّ، فالانتظار عادةً أقصر من قراءته. */
+function SpinnerIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6 animate-spin" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.4" opacity="0.25" />
+      <path
+        d="M21 12a9 9 0 00-9-9"
+        stroke="currentColor"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+      />
     </svg>
   )
 }

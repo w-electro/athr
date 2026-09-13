@@ -107,19 +107,50 @@ export default {
     acrossOne: '一天之內',
     edit: '修改',
     weather: '天氣檢查',
-    travel: '車程 {minutes} 分鐘',
+    travel: '車程 {minutes} 分鐘 · {km} 公里',
+    travelFromHail: '自哈伊勒出發：{minutes} 分鐘 · {km} 公里',
     until: '至 {time}',
     excluded: '本次行程未能安排',
     excludedHint: '增加一天，或將節奏改為緊湊。',
-    note: '天氣資料來自 Open-Meteo。',
+    note: '天氣資料來自 Open-Meteo · 距離依各遺址座標推算。',
     noteOffline: '無法取得天氣——顯示哈伊勒的氣候平均值。',
     day: '第 {n} 天',
+    openMaps: '用地圖開啟',
+    navigate: '導航至此',
+    routeDay: '在地圖檢視全日路線',
+    dayDistance: '今日車程：{km} 公里',
     step: {
       prefs: '讀取您的興趣與行程天數',
       weather: '查詢哈伊勒的天氣預報',
-      order: '按各遺址的最佳時段排序',
+      order: '依遠近與最合適的時段排序',
     },
   },
+
+  access: {
+    offRoad: '部分路段未鋪設路面 — 建議開四輪驅動車',
+    guide: '須由合格導遊陪同參觀 · 請事先安排',
+    farDrive: '單程約 {hours} 小時車程',
+  },
+
+  panel: {
+    heading: '這處遺址的岩壁',
+    count: '已記錄 {count} 面岩壁',
+    look: '該看哪裡',
+    inscriptions: '刻有薩姆德文題字',
+    famous: '朱拜最有名的一面',
+    atSite: '{site} 的一面岩壁',
+    unknownSubject: '畫的是什麼，還說不準',
+  },
+
+  era: {
+    neolithic: '新石器時代 · 距今約一萬年',
+    later: '駱駝馴化之後 · 距今約三千年',
+    thamudic: '薩姆德時期 · 伊斯蘭教之前的幾個世紀',
+    neolithicShort: '新石器',
+    laterShort: '晚期',
+    thamudicShort: '薩姆德',
+  },
+
   interest: {
     history: '歷史與考古',
     nature: '自然與探險',

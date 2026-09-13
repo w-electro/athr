@@ -107,19 +107,50 @@ export default {
     acrossOne: 'w jeden dzień',
     edit: 'Edytuj',
     weather: 'Sprawdzenie pogody',
-    travel: '{minutes} min dojazdu',
+    travel: '{minutes} min dojazdu · {km} km',
+    travelFromHail: 'Z Hail: {minutes} min · {km} km',
     until: 'do {time}',
     excluded: 'Nie zmieściło się w tej podróży',
     excludedHint: 'Dodaj dzień albo zmień tempo na Intensywne.',
-    note: 'Dane pogodowe z Open-Meteo.',
+    note: 'Dane pogodowe z Open-Meteo · Odległości obliczone ze współrzędnych miejsc.',
     noteOffline: 'Nie udało się pobrać pogody — pokazujemy średnie klimatyczne dla Hail.',
     day: 'Dzień {n}',
+    openMaps: 'Otwórz w mapach',
+    navigate: 'Nawiguj tutaj',
+    routeDay: 'Cała trasa dnia w mapach',
+    dayDistance: 'Trasa dnia: {km} km',
     step: {
       prefs: 'Odczyt zainteresowań i długości podróży',
       weather: 'Sprawdzanie prognozy dla Hail',
-      order: 'Porządkowanie miejsc według najlepszej godziny',
+      order: 'Porządkowanie miejsc według bliskości i najlepszej godziny',
     },
   },
+
+  access: {
+    offRoad: 'Część drogi jest nieutwardzona — zalecany samochód z napędem 4×4',
+    guide: 'Zwiedzanie z licencjonowanym przewodnikiem · umów się wcześniej',
+    farDrive: 'Około {hours} godzin jazdy w jedną stronę',
+  },
+
+  panel: {
+    heading: 'Panele w tym miejscu',
+    count: '{count} udokumentowanych paneli',
+    look: 'Na co zwrócić uwagę',
+    inscriptions: 'Nosi inskrypcje tamudejskie',
+    famous: 'Najsłynniejszy w Dżubbie',
+    atSite: 'Panel w miejscu {site}',
+    unknownSubject: 'Temat nierozstrzygnięty',
+  },
+
+  era: {
+    neolithic: 'Neolit · około dziesięć tysięcy lat temu',
+    later: 'Po udomowieniu wielbłąda · około trzy tysiące lat temu',
+    thamudic: 'Okres tamudejski · stulecia przed islamem',
+    neolithicShort: 'Neolit',
+    laterShort: 'Późniejsze',
+    thamudicShort: 'Tamudejskie',
+  },
+
   interest: {
     history: 'Historia i archeologia',
     nature: 'Przyroda i przygoda',

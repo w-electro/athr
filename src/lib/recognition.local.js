@@ -58,18 +58,133 @@ import { getAllSites } from '../data/sites.js'
 export const MODEL_ID = 'onnx-community/dinov3-vits16-pretrain-lvd1689m-ONNX'
 export const MODEL_DTYPE = 'q8'
 
-/** أقل تشابه نعتبره تعرّفًا ناجحًا. اضبطه بالدفتر بعد تجربة صورك. */
-export const SIMILARITY_THRESHOLD = 0.62
+/**
+ * أقل تشابه نعتبره تعرّفًا ناجحًا.
+ *
+ * ══════════════════════════════════════════════════════════════════════
+ *  الرقم مقيس لا مقدَّر
+ * ══════════════════════════════════════════════════════════════════════
+ * قيس على 198 صورة مرجعية لعشر لوحات في جبة، و53 صورة سالبة (رمل، سماء،
+ * صخر بلا نقش). والأرقام من scripts/build-reference-index.mjs:
+ *
+ *   الصور الصحيحة : أدنى 0.802 · وسيط 0.954
+ *   الصور السالبة : أعلى 0.896 · وسيط 0.666
+ *
+ * لاحظ التداخل: أضعف صورة صحيحة (0.802) أدنى من أقوى صورة سالبة (0.896).
+ * ففصلٌ تامّ مستحيل، والسؤال أيّ الخطأين نحتمل.
+ *
+ * ── لماذا 0.91 ───────────────────────────────────────────────────────
+ * كانت 0.62 تخمينًا كُتب قبل وجود صورٍ أصلًا. وبمسح العتبات على الفهرس
+ * الحالي — مع سلّم القصّ مفعّلًا كما يعمل في المتصفح — 0.91 هي أدنى قيمة
+ * تعطي **صفر** سوالب مقبولة:
+ *
+ *   0.87 → 195 صحيحة · 1 خاطئة · 3 سوالب مقبولة
+ *   0.89 → 193 صحيحة · 0 خاطئة · 2 سوالب مقبولة
+ *   0.90 → 192 صحيحة · 0 خاطئة · 1 سالبة مقبولة
+ *   0.91 → 191 صحيحة · 0 خاطئة · 0 سالبة مقبولة  ←
+ *
+ * أي 96.5% تعرّف مقابل صفر إجابة خاطئة.
+ *
+ * ── ولماذا لا تُخفَّض بعد سلّم القصّ ─────────────────────────────────────
+ * قبل السلّم كانت 0.90 تعطي صفر سوالب أيضًا، فبدت خفضًا مجّانيًا. لكنّ
+ * السلّم يجرّب ثلاث لقطات، وثلاث محاولات تعني ثلاث فرصٍ لتجاوز العتبة —
+ * للسالبة كما للصحيحة. فعادت 0.90 تسرّب سالبة، و0.87 ثلاثًا.
+ *
+ * أي أنّ السلّم اشترى متانةً أمام الإطار، لا رخصةً بخفض العتبة. والقياس
+ * هو ما أظهر ذلك: الحدس وحده كان سيخفضها.
+ *
+ * والمقايضة مقصودة: «لم أتعرّف، جرّب مرّة أخرى» إزعاجٌ صغير يُحلّ بضغطة،
+ * أمّا اسمُ لوحةٍ خاطئ يُقال بثقة أمام لجنة تحكيم تختبر النظام بتصوير
+ * الرمل فهو العطب الذي لا يُنسى.
+ */
+export const SIMILARITY_THRESHOLD = 0.91
 
 /**
  * أقل فارق مطلوب بين الأول والثاني.
  *
  * لماذا لا يكفي التشابه وحده: لو تشابهت واجهتان صخريتان، قد يعطي النموذج
- * 0.71 للأولى و0.70 للثانية. التشابه عالٍ لكن الاختيار بينهما عشوائي
+ * 0.96 للأولى و0.95 للثانية. التشابه عالٍ لكن الاختيار بينهما عشوائي
  * عمليًا. فنطلب فارقًا واضحًا، وإلا أقررنا بعدم المعرفة — وهو أفضل بكثير
  * من إجابة واثقة خاطئة أمام لجنة تحكيم.
+ *
+ * ── والقياس يقول إنّ الهامش أهمّ من العتبة ────────────────────────────
+ * على صور جبة، رفعُ الهامش من صفر إلى 0.02 يُلغي **كلّ** الإجابات الخاطئة
+ * عند أيّ عتبة — حتى عند 0.62. وأخطاؤنا الأربعة كلّها من هذا النوع:
+ * لوحتان متجاورتان على الصخرة نفسها (p3 تلتبس بـ p2 ثلاث مرّات)، والفرق
+ * بين درجتيهما ضئيل.
+ *
+ * و0.04 لا يضيف أمانًا فوق 0.02، لكنه يُسقط أربع صور صحيحة إضافية —
+ * فاخترنا 0.02.
  */
-export const MIN_MARGIN = 0.04
+export const MIN_MARGIN = 0.02
+
+/**
+ * سلّم القصّ: نسبٌ من الكادر نجرّبها كلّها ونأخذ أفضلها.
+ *
+ * ── العلّة التي يعالجها ────────────────────────────────────────────────
+ * DINOv3 يلخّص الكادر كلّه في متجه واحد. فإن لم تملأ اللوحة الكادر —
+ * وقف السائح بعيدًا، أو دخل في الصورة رملٌ وسماءٌ وصخرٌ مجاور — انزاح
+ * المتجه كلّه، لا طرفه فحسب.
+ *
+ * والقياس قاسٍ: على jubbah-p2، حشوُ 20% حول اللوحة يُسقط التشابه من
+ * 0.944 إلى 0.790. أي أنّ إطارًا يسيرًا — أقلّ ممّا يحدث في أيّ لقطة
+ * حقيقية — يكفي لإسقاط الصورة تحت أيّ عتبة صالحة. وعند 45% صار 0.599،
+ * وعند 30% أخطأ اللوحة أصلًا.
+ *
+ * ── العلاج ────────────────────────────────────────────────────────────
+ * المراجع مقصوصة على اللوحة. فحين يكون الاستعلام أوسع، نقرّبه بالقصّ من
+ * المركز ونجرّب عدّة نسب:
+ *
+ *   حصّة اللوحة   بلا سلّم   بسلّم القصّ
+ *      80%          0.790  →  0.949
+ *      60%          0.776  →  0.938
+ *      45%          0.599  →  0.901
+ *
+ * ── لماذا هذه النسب الثلاث ─────────────────────────────────────────────
+ * 1 للّقطة المضبوطة، و0.7 و0.5 تغطّيان البُعد المعتاد. وكلّ نسبة إضافية
+ * تعني استدلالًا كاملًا آخر على جوّال السائح، ولا تشتري شيئًا بعد 0.5 —
+ * إذ تصير اللوحة أصغر من أن يبقى فيها تفصيل.
+ */
+export const CROP_LADDER = [1, 0.7, 0.5]
+
+/**
+ * إن كانت اللقطة الكاملة واثقة بما يكفي، لا نُتعب الجوّال ببقيّة السلّم.
+ *
+ * وسيط الصور الصحيحة 0.954، فنصفُ اللقطات المضبوطة تخرج من أوّل محاولة
+ * بزمنٍ كما كان، ولا يدفع ثمن السلّم إلا من احتاجه فعلًا.
+ */
+const EARLY_EXIT = 0.95
+
+/** يقتصّ من المركز بنسبة من الكادر. frac = 1 يُرجع الصورة كما هي. */
+export async function centerCrop(image, frac) {
+  if (frac >= 1) return image
+  const w = Math.round(image.width * frac)
+  const h = Math.round(image.height * frac)
+  const x = Math.round((image.width - w) / 2)
+  const y = Math.round((image.height - h) / 2)
+  return image.crop([x, y, x + w - 1, y + h - 1])
+}
+
+/**
+ * يقارن متجه استعلام واحد بالفهرس.
+ *
+ * أعلى تشابه لكل موقع لا لكل صورة، وإلا فاز الموقع الذي له صور أكثر.
+ * مُصدَّر كي تختبره أدوات التحقّق على الشيفرة المشحونة نفسها، لا على نسخة
+ * منها تتقادم بصمت.
+ */
+export function matchVector(queryVector, index) {
+  const bestPerSite = new Map()
+  for (const entry of index) {
+    const score = dot(queryVector, entry.vector)
+    if (!bestPerSite.has(entry.siteId) || score > bestPerSite.get(entry.siteId)) {
+      bestPerSite.set(entry.siteId, score)
+    }
+  }
+
+  const ranked = [...bestPerSite.entries()].sort((a, b) => b[1] - a[1])
+  const [topSiteId, topScore] = ranked[0]
+  return { topSiteId, topScore, margin: topScore - (ranked[1]?.[1] ?? 0) }
+}
 
 const INDEX_URL = `${import.meta.env?.BASE_URL ?? '/'}reference-index.json`
 
@@ -78,7 +193,7 @@ let indexPromise = null
 
 /* ────────────────────────────── النموذج ────────────────────────────── */
 
-async function getExtractor(onProgress) {
+export async function getExtractor(onProgress) {
   if (!extractorPromise) {
     extractorPromise = (async () => {
       const { pipeline } = await import('@huggingface/transformers')
@@ -99,7 +214,7 @@ async function getExtractor(onProgress) {
  * الرمز الأول (CLS) الذي يلخّص الصورة كلها. نتعامل مع الحالتين حتى لا
  * ينكسر الكود عند تبديل النموذج.
  */
-function toVector(output) {
+export function toVector(output) {
   const tensor = output?.pooler_output ?? output?.last_hidden_state ?? output
   const data = Array.from(tensor.data ?? tensor)
   const dims = tensor.dims
@@ -113,7 +228,7 @@ function toVector(output) {
 }
 
 /** يجعل طول المتجه 1، فيصبح الضرب النقطي = تشابه جيب التمام مباشرة. */
-function normalize(vector) {
+export function normalize(vector) {
   let sum = 0
   for (const value of vector) sum += value * value
   const magnitude = Math.sqrt(sum) || 1
@@ -160,6 +275,14 @@ async function fetchPrebuiltIndex() {
       return null
     }
 
+    /*
+      siteId قد يحمل معرّف لوحة لا موقع.
+
+      الاسم موروث من حين كان التعرّف على مستوى الموقع وحده. والفهرس اليوم
+      يخلط الاثنين في مساحة معرّفات واحدة: `jubbah` موقع، و`jubbah-p2`
+      لوحةٌ فيه — والفرق يُعرف من الاسم نفسه عبر isPanelId في data/panels.js،
+      فلا جدول ربط ولا حقل إضافي.
+    */
     return payload.entries.map((entry) => ({
       siteId: entry.siteId,
       vector: normalize(entry.vector),
@@ -217,29 +340,43 @@ export async function localVisionProvider(input = {}) {
     }
   }
 
-  const queryVector = toVector(await extractor(source))
+  const { RawImage } = await import('@huggingface/transformers')
+  const image = await RawImage.read(source)
 
-  // أعلى تشابه لكل موقع لا لكل صورة، وإلا فاز الموقع الذي له صور أكثر
-  const bestPerSite = new Map()
-  for (const entry of index) {
-    const score = dot(queryVector, entry.vector)
-    if (!bestPerSite.has(entry.siteId) || score > bestPerSite.get(entry.siteId)) {
-      bestPerSite.set(entry.siteId, score)
+  /*
+   * كلّ درجة من السلّم استعلامٌ قائم بذاته: لها عتبتها وهامشها.
+   *
+   * ولا نجمع الدرجات في مجموعة واحدة ثم نحسب الهامش عليها، لأنّ ذلك يخلط
+   * أدلّة مشاهد مختلفة: قد تُرجّح اللقطة الكاملة لوحةً والقصّة الضيّقة
+   * أخرى، فيخرج هامشٌ عريض لا يقابله يقين. فنُبقي كلّ مشهد متّسقًا مع
+   * نفسه، ونقبل أوثق مشهدٍ اجتاز الشرطين معًا.
+   */
+  let best = null
+  let highestSeen = 0
+
+  for (const frac of CROP_LADDER) {
+    const view = await centerCrop(image, frac)
+    const { topSiteId, topScore, margin } = matchVector(
+      toVector(await extractor(view)),
+      index,
+    )
+
+    if (topScore > highestSeen) highestSeen = topScore
+
+    if (topScore >= SIMILARITY_THRESHOLD && margin >= MIN_MARGIN) {
+      if (!best || topScore > best.confidence) {
+        best = { siteId: topSiteId, confidence: topScore, crop: frac }
+      }
+      // لقطة مضبوطة: لا داعي لإتعاب الجوّال ببقيّة السلّم
+      if (topScore >= EARLY_EXIT) break
     }
   }
 
-  const ranked = [...bestPerSite.entries()].sort((a, b) => b[1] - a[1])
-  const [topSiteId, topScore] = ranked[0]
-  const runnerUp = ranked[1]?.[1] ?? 0
-  const margin = topScore - runnerUp
-
-  const confident = topScore >= SIMILARITY_THRESHOLD && margin >= MIN_MARGIN
-
-  if (!confident) {
+  if (!best) {
     return {
       status: 'no-match',
       siteId: null,
-      confidence: Math.max(0, topScore),
+      confidence: Math.max(0, highestSeen),
       provider: 'local',
       elapsedMs: Date.now() - started,
     }
@@ -247,8 +384,9 @@ export async function localVisionProvider(input = {}) {
 
   return {
     status: 'match',
-    siteId: topSiteId,
-    confidence: topScore,
+    siteId: best.siteId,
+    confidence: best.confidence,
+    crop: best.crop,
     provider: 'local',
     elapsedMs: Date.now() - started,
   }

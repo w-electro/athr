@@ -107,19 +107,55 @@ export default {
     acrossOne: 'dalam satu hari',
     edit: 'Sunting',
     weather: 'Semakan cuaca',
-    travel: 'Perjalanan {minutes} minit',
+    travel: 'Perjalanan {minutes} minit · {km} km',
+    travelFromHail: 'Dari Hail: {minutes} minit · {km} km',
     until: 'hingga {time}',
     excluded: 'Tidak muat dalam perjalanan ini',
     excludedHint: 'Tambah satu hari atau tukar rentak kepada Padat.',
-    note: 'Data cuaca daripada Open-Meteo.',
+    note: 'Data cuaca daripada Open-Meteo · Jarak dikira daripada koordinat tapak.',
     noteOffline: 'Cuaca tidak dapat diperoleh — memaparkan purata iklim Hail.',
     day: 'Hari {n}',
+    openMaps: 'Buka dalam peta',
+    navigate: 'Navigasi ke sini',
+    routeDay: 'Seluruh laluan hari ini dalam peta',
+    dayDistance: 'Perjalanan hari ini: {km} km',
     step: {
       prefs: 'Membaca minat dan tempoh perjalanan anda',
       weather: 'Menyemak ramalan cuaca Hail',
-      order: 'Menyusun tapak mengikut jam terbaiknya',
+      order: 'Menyusun tapak mengikut kedekatan dan jam terbaiknya',
     },
   },
+
+  access: {
+    offRoad: 'Sebahagian jalan tidak berturap — kenderaan pacuan empat roda disarankan',
+    guide: 'Lawatan bersama pemandu bertauliah · aturkan lebih awal',
+    farDrive: 'Kira-kira {hours} jam pemanduan sehala',
+  },
+
+  /*
+    Panel — lapisan yang lebih halus daripada tapak. Pengunjung sudah tahu
+    dia berada di Jubbah; yang didatanginya ialah panel yang satu ini.
+  */
+  panel: {
+    heading: 'Panel di tapak ini',
+    count: '{count} panel yang didokumentasikan',
+    look: 'Cari',
+    inscriptions: 'Mengandungi inskripsi Thamudik',
+    famous: 'Yang paling masyhur di Jubbah',
+    atSite: 'Sebuah panel di {site}',
+    unknownSubject: 'Subjeknya belum ditentukan',
+  },
+
+  /* Zaman ukiran. Yang memisahkannya ialah kurun, bukan gaya. */
+  era: {
+    neolithic: 'Neolitik · kira-kira sepuluh ribu tahun dahulu',
+    later: 'Selepas unta dijinakkan · kira-kira tiga ribu tahun dahulu',
+    thamudic: 'Zaman Thamudik · berkurun-kurun sebelum Islam',
+    neolithicShort: 'Neolitik',
+    laterShort: 'Terkemudian',
+    thamudicShort: 'Thamudik',
+  },
+
   interest: {
     history: 'Sejarah dan arkeologi',
     nature: 'Alam dan pengembaraan',

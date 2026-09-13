@@ -58,58 +58,116 @@ export default {
     },
   },
 
-  qishlah: {
-    name: 'Forte Aarif e Qishlah',
-    shortName: 'Aarif e Qishlah',
-    subtitle: 'Il cuore storico di Ha’il · due monumenti vicini',
-    tagline: 'Un forte di terra cruda che veglia sulla città dall’alto e una fortezza di 142 stanze che la custodisce dal basso.',
-    era: 'Aarif: oltre 200 anni · Qishlah: 1941',
+  aarif: {
+    name: 'Il forte Aarif',
+    shortName: 'Aarif',
+    subtitle: 'Il forte della collina · più di due secoli',
+    tagline: 'Un forte di terra cruda su una cima rocciosa, da cui si sorveglia ogni strada che entra a Ha’il.',
+    era: 'Oltre 200 anni',
     city: 'Centro di Ha’il',
-    ticket: 'Ingresso libero · la Qishlah apre la sera',
+    ticket: 'Ingresso libero',
     story: [
       {
         heading: 'L’occhio di Ha’il che non dorme mai',
-        body: 'Su una collina rocciosa che domina la città sorge il forte Aarif, edificato dagli abitanti di Ha’il più di due secoli fa per vegliare sulle strade che vi conducevano; dalle sue torri le guardie seguivano le carovane in arrivo lungo il Darb Zubayda e accendevano fuochi nelle notti di Ramadan per annunciare la rottura del digiuno, usanza tuttora viva nel cannone che si spara da quella stessa collina.',
+        body: 'Sulla cima di una collina rocciosa che domina la città sorge il forte Aarif, edificato dagli abitanti di Ha’il più di due secoli fa per vegliare sulle strade che vi conducevano; dalle sue torri le guardie seguivano le carovane in arrivo lungo il Darb Zubayda e accendevano fuochi nelle notti di Ramadan per annunciare la rottura del digiuno, usanza tuttora viva nel cannone che si spara da quella stessa collina.',
       },
       {
         heading: 'La terra che ha retto due secoli',
         body: 'Il forte fu costruito con terra impastata di paglia, con muri spessi più di un metro rinforzati da tronchi di tamerice, e la tecnica non è così rudimentale come sembra: un muro spesso di terra trattiene il fresco della notte durante il giorno e il calore del giorno durante la notte, creando così un condizionamento naturale nel cuore di un deserto che d’estate supera i cinquanta gradi.',
       },
       {
-        heading: 'La Qishlah: una città dentro un muro',
-        body: 'Scendi la collina verso est e troverai l’esatto contrario del forte: la Qishlah è un’enorme fortezza rettangolare che il re Abdulaziz fece erigere nel 1941 come caserma, con 142 stanze su due piani, otto torri di guardia agli angoli e sui lati, una moschea all’interno e un ampio cortile attraversato da portici; percorrere i suoi lunghi corridoi di terra somiglia ad attraversare una città in miniatura.',
+        heading: 'Settanta gradini per la vista più bella',
+        body: 'Al forte si sale soltanto a piedi: la scala scavata nella collina conta una settantina di gradini che si superano in pochi minuti, e appena raggiungi il terrazzo Ha’il intera si distende sotto di te — a ovest la Qishlah, un rettangolo di terra dai contorni netti; dietro di essa i monti Aja che chiudono l’orizzonte; e in mezzo la città moderna che si allarga.',
       },
       {
-        heading: 'Da caserma a memoria',
-        body: 'Terminato il suo ruolo militare, la Qishlah è divenuta uno dei luoghi patrimoniali più importanti di Ha’il, e nel suo cortile si tengono oggi eventi culturali e mercati tradizionali; un dettaglio merita attenzione: ogni finestra delle sue otto torri fu aperta con un’inclinazione diversa, così che insieme coprono ogni accesso alla fortezza senza un solo angolo cieco.',
+        heading: 'La collina che scelse se stessa',
+        body: 'Scegliere questa collina non fu una questione di gusto architettonico: è l’unico rilievo naturale in mezzo alla pianura di Ha’il, e trenta metri sopra quella pianura bastano a coprire l’orizzonte in ogni direzione; la sua base, poi, è roccia compatta, sotto la quale non si può scavare alcuna galleria e contro la quale non si appoggiano né scale né torri d’assedio. Poi girarono gli anni: la città si estese attorno alla collina e oltre di essa, finché il forte costruito per sorvegliare il deserto oggi si affaccia su strade affollate — lo stesso luogo, la funzione rovesciata.',
       },
     ],
     facts: [
-      { label: 'Stanze della Qishlah', value: '142' },
-      { label: 'Torri di guardia', value: '8' },
-      { label: 'Costruzione della Qishlah', value: '1941 (1360 E.)' },
+      { label: 'Età stimata', value: 'oltre 200 anni' },
+      { label: 'Altezza sulla città', value: 'circa 30 metri' },
+      { label: 'Accesso', value: 'solo scale · nessuna strada carrabile' },
       { label: 'Materiali', value: 'terra, paglia, tronchi di tamerice' },
     ],
     tips: [
-      'Sali al forte Aarif mezz’ora prima del tramonto: la vista sulla città è la fotografia più bella che scatterai a Ha’il.',
-      'Durante il Ramadan il cannone si spara dalla collina; se visiti in quel periodo arriva presto, perché il luogo si riempie.',
-      'I pavimenti di terra della Qishlah sono irregolari: fai attenzione con bambini o visitatori anziani.',
+      'Sali mezz’ora prima del tramonto: la vista sulla città dall’alto è la fotografia più bella che scatterai a Ha’il.',
+      'Durante il Ramadan il cannone si spara dalla collina; se visiti in quel periodo arriva presto, perché il luogo si riempie in fretta.',
+      'Non ci sono ascensori né strade per le auto, e l’ultimo tratto di scala è molto ripido: tienine conto se sei con persone anziane.',
     ],
     narration: {
       voice: 'La voce di Athr — narrazione generata dall’IA',
       segments: [
         { at: 0, text: 'Sei ai piedi della collina di Aarif. La scala è davanti a te e settanta gradini ti separano dalla vista più bella di Ha’il.' },
         { at: 14, text: 'Mentre sali, osserva lo spessore del muro alla tua sinistra: più di un metro di terra e paglia.' },
-        { at: 28, text: 'Quello spessore non serve solo alla difesa, ma al raffrescamento naturale: il fresco della notte resta nella terra fino a mezzogiorno.' },
+        { at: 28, text: 'Quello spessore non serve solo alla difesa, ma al raffrescamento naturale: il fresco della notte vi resta conservato fino a mezzogiorno.' },
         { at: 44, text: 'Da questa torre una guardia scrutava le carovane, e da qui ancora oggi si spara il cannone del Ramadan.' },
-        { at: 60, text: 'Ora voltati a est: quel grande rettangolo di terra è la Qishlah, con le sue 142 stanze e le sue otto torri.' },
-        { at: 76, text: 'Quando entrerai, conta gli angoli delle finestre: non esiste un solo punto cieco attorno alla fortezza.' },
+        { at: 60, text: 'Ora voltati a ovest: quel grande rettangolo di terra è la Qishlah, a un chilometro e mezzo appena da te.' },
+        { at: 76, text: 'Dietro di essa i monti Aja chiudono l’orizzonte, e in mezzo Ha’il intera si distende davanti ai tuoi occhi.' },
       ],
     },
     scan: {
-      matchLabel: 'Architettura difensiva in terra cruda · Qishlah / forte Aarif',
+      matchLabel: 'Forte di terra cruda su cima rocciosa · Aarif',
       evidence: [
+        'Basamento roccioso naturale su cui si eleva la costruzione',
         'Muri di terra con scarpa ascendente',
+        'Parapetti merlati tipici dell’architettura del Najd',
+      ],
+    },
+  },
+
+  qishlah: {
+    name: 'La fortezza della Qishlah',
+    shortName: 'La Qishlah',
+    subtitle: '142 stanze · 1360 E. / 1941 d. C.',
+    tagline: 'Il più grande edificio in terra cruda della penisola arabica: un’intera città dentro un solo muro.',
+    era: '1360 E. / 1941 d. C.',
+    city: 'Centro di Ha’il',
+    ticket: 'Ingresso libero · apre la sera',
+    story: [
+      {
+        heading: 'Una città dentro un muro',
+        body: 'La Qishlah è un’enorme fortezza rettangolare che il re Abdulaziz fece erigere nel 1360 E. come caserma militare, con 142 stanze su due piani, otto torri di guardia agli angoli e sui lati, una moschea all’interno e un ampio cortile attraversato da portici; al punto che percorrere i suoi lunghi corridoi di terra somiglia più ad attraversare una città in miniatura che a visitare un edificio.',
+      },
+      {
+        heading: 'La terra costruita con la riga',
+        body: 'Ciò che distingue la Qishlah dall’antica architettura in terra cruda è che fu eretta seguendo un tracciato geometrico rigoroso e non per ampliamenti successivi: i portici sono paralleli, le stanze hanno misure identiche e le torri sono distribuite con regolarità; si colloca così sul confine tra l’architettura tradizionale del Najd e la costruzione moderna pianificata, innalzata con la stessa terra, la stessa paglia e gli stessi tronchi di tamerice con cui due secoli prima era sorto Aarif.',
+      },
+      {
+        heading: 'Otto torri senza un solo angolo cieco',
+        body: 'Ciò che colpisce nelle sue otto torri è che ogni finestra fu aperta con un’inclinazione diversa da quella accanto, così che insieme coprono ogni direzione attorno alla fortezza senza lasciare un solo angolo cieco; è un calcolo visivo preciso, compiuto senza strumenti moderni di rilevamento, e puoi verificarlo tu stesso fermandoti nel cortile e seguendo le linee di vista da una torre all’altra.',
+      },
+      {
+        heading: 'Da caserma a memoria',
+        body: 'Terminato il suo ruolo militare, la Qishlah è divenuta uno dei luoghi più visitati di Ha’il: nel suo cortile si tengono eventi culturali, mercati tradizionali e gli appuntamenti del festival di Ha’il; così l’edificio costruito per chiudersi alla gente è diventato un luogo che senza di essa non ha alcun senso.',
+      },
+    ],
+    facts: [
+      { label: 'Numero di stanze', value: '142' },
+      { label: 'Torri di guardia', value: '8' },
+      { label: 'Anno di costruzione', value: '1360 E. / 1941 d. C.' },
+      { label: 'Materiali', value: 'terra, paglia, tronchi di tamerice' },
+    ],
+    tips: [
+      'La Qishlah apre di solito la sera: falla diventare la chiusura della tua giornata, dopo essere sceso da Aarif — fra le due c’è appena un chilometro e mezzo.',
+      'I suoi pavimenti di terra sono irregolari e i corridoi poco illuminati: guarda dove metti i piedi se sei con bambini o visitatori anziani.',
+      'Il cortile interno è il posto migliore per fotografare dopo il tramonto, quando i muri di terra vengono illuminati dal basso e affiora la materia della terra.',
+    ],
+    narration: {
+      voice: 'La voce di Athr — narrazione generata dall’IA',
+      segments: [
+        { at: 0, text: 'Sei davanti alla Qishlah, e ciò che vedi non è un edificio, ma un’intera città dentro un muro.' },
+        { at: 12, text: 'Centoquarantadue stanze su due piani, otto torri, una moschea e un cortile al centro.' },
+        { at: 26, text: 'Entra dal portone e fermati un istante nel cortile: osserva che i portici sono paralleli e le stanze identiche.' },
+        { at: 41, text: 'È proprio questo a distinguerla: terra costruita con la riga, non ampliata poco a poco come voleva l’uso.' },
+        { at: 56, text: 'Ora segui con lo sguardo le finestre delle torri: ognuna ha un’inclinazione diversa da quella accanto.' },
+        { at: 70, text: 'Contale, se vuoi: non troverai un solo punto cieco attorno alla fortezza.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Fortezza rettangolare in terra cruda · la Qishlah',
+      evidence: [
+        'Lunga facciata rettangolare in terra con un ritmo regolare di finestre',
         'Torri angolari cilindriche con feritoie triangolari',
         'Parapetti merlati tipici dell’architettura del Najd',
       ],
@@ -230,5 +288,149 @@ export default {
         'Vaso in ceramica con decoro geometrico del Najd',
       ],
     },
+  },
+
+  shuwaymis: {
+    name: 'I petroglifi di Shuwaymis',
+    shortName: 'Shuwaymis',
+    subtitle: 'Jabal al-Manjur e Raat · Patrimonio mondiale UNESCO',
+    tagline: 'L’altra metà dell’iscrizione UNESCO, in valli che raggiunge soltanto chi le cerca.',
+    era: '~10.000 anni fa (Neolitico)',
+    city: 'Shuwaymis, a sud-ovest di Ha’il',
+    ticket: 'Visita con guida autorizzata · è indispensabile concordarla prima',
+    story: [
+      {
+        heading: 'La metà dimenticata dell’iscrizione',
+        body: 'Quando nel 2015 l’UNESCO iscrisse «l’arte rupestre della regione di Ha’il», l’iscrizione non riguardava Jubbah soltanto ma due siti: il Jabal Umm Sinman a Jubbah e i monti al-Manjur e Raat a Shuwaymis; Shuwaymis però è rimasta la meno visitata, per la distanza e per l’asprezza della via d’accesso, e proprio per questo le sue incisioni sono giunte più integre e meno manomesse — oggi sono fra le meglio conservate dell’arte neolitica di tutta la penisola.',
+      },
+      {
+        heading: 'Valli che si leggono come pagine',
+        body: 'Le incisioni di Shuwaymis non si concentrano su un’unica parete come a Jubbah, ma si distribuiscono lungo i fianchi di valli strette e profonde che percorri mentre ti si scopre un pannello dopo l’altro: mandrie di uri, leoni, leopardi e struzzi, figure umane che cacciano con l’arco e scene intere anziché simboli sparsi — alcune lastre arrivano a raccontare un unico episodio dal principio alla fine.',
+      },
+      {
+        heading: 'Il cane che ha cambiato la storia',
+        body: 'Fu proprio a Shuwaymis che si rinvenne quella che è considerata una delle più antiche raffigurazioni note al mondo di cani domestici: cani dalle orecchie dritte e dalla coda arricciata attorno a un cacciatore che tende l’arco, alcuni legati a lui da linee interpretate come guinzagli; e se l’interpretazione è esatta, queste pareti documentano uno dei momenti più importanti del rapporto fra l’uomo e l’animale, più di ottomila anni fa.',
+      },
+      {
+        heading: 'Perché proprio qui',
+        body: 'La ragione di tanto affollamento su questa parete è che Shuwaymis fu un luogo d’incontro delle acque: valli che scendono dalle colate vulcaniche e confluiscono in alvei che trattengono l’acqua dopo la pioggia, sicché vi accorrevano gli animali e dietro di loro i cacciatori; le incisioni non sono che il registro di chi qui restò ad attendere — e la parete su cui disegni è la parete che ti fa ombra.',
+      },
+    ],
+    facts: [
+      { label: 'Iscrizione UNESCO', value: '2015 (insieme a Jubbah)' },
+      { label: 'Le due componenti', value: 'Jabal al-Manjur · Jabal Raat' },
+      { label: 'Distanza da Ha’il', value: '250 km a sud-ovest' },
+      { label: 'Accesso', value: 'guida autorizzata · parte del percorso sterrata' },
+    ],
+    tips: [
+      'Concorda la visita con qualche giorno di anticipo con la Heritage Commission o con una guida autorizzata: il sito non è ad accesso libero come Jubbah.',
+      'Dedicagli una giornata intera e a sé stante, non una tappa dentro un giorno: solo andata e ritorno richiedono circa sei ore.',
+      'Porta carburante e acqua più del necessario: l’ultimo distributore prima del sito è lontano e nelle valli il segnale sparisce.',
+      'Si cammina fra le lastre su ghiaia e roccia irregolare: qui le scarpe chiuse sono una necessità, non una scelta.',
+    ],
+    narration: {
+      voice: 'La voce di Athr — narrazione generata dall’IA',
+      segments: [
+        { at: 0, text: 'Benvenuto a Shuwaymis. Hai percorso una lunga strada per arrivare: prendi fiato e guardati intorno.' },
+        { at: 13, text: 'Queste valli sono l’altra metà dell’iscrizione UNESCO che Jubbah condivide con loro, e la meno visitata.' },
+        { at: 28, text: 'E i pochi visitatori sono una fortuna per la pietra: ciò che vedi qui è più integro che in qualsiasi altro sito.' },
+        { at: 43, text: 'Cammina lentamente nella valle: le lastre non compaiono tutte insieme, ma una dopo l’altra.' },
+        { at: 58, text: 'Cerca la scena del cacciatore circondato da cani dalle orecchie dritte e dalla coda arricciata.' },
+        { at: 73, text: 'È fra le più antiche raffigurazioni di cani domestici che conosciamo al mondo, incisa ottomila anni fa.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Arte rupestre in una valle · Shuwaymis',
+      evidence: [
+        'Percussione sulla parete di una valle e non su una facciata aperta',
+        'Scene di caccia composite anziché figure sparse',
+        'Vernice del deserto scura incisa dalla percussione',
+      ],
+    },
+  },
+}
+
+/* I pannelli stanno in un export nominato a parte: l’export predefinito è una
+   mappa «id del sito → contenuto», e tutto ciò che è strutturale (soggetto,
+   epoca, iscrizioni) resta in panels.js. */
+export const panels = {
+  'jubbah-p1': {
+    name: 'La carovana di cammelli',
+    story:
+      'Cammelli incisi uno dietro l’altro sulla stessa parete: è ciò che più si vede a Jubbah ed è anche il più recente. Delle 1.944 incisioni di animali censite a Umm Sinman, 1.378 sono cammelli — sette su dieci. Non fu questione di gusto: il cammello entrò tardi nella vita dell’uomo qui, fu addomesticato circa tremila anni fa e divenne l’animale che si incideva perché era divenuto l’animale di cui si viveva.',
+    look:
+      'Segui le linee delle zampe: i cammelli tardi sono incisi con un tratto rapido e sommario, non con la precisione anatomica che vedi negli uri, più antichi di millenni.',
+  },
+
+  'jubbah-p2': {
+    name: 'Il re di Jubbah',
+    story:
+      'La cosa più celebre di Jubbah, e ci sono visitatori che arrivano dall’altro capo del mondo per vederla. Una grande figura umana incisa con un realismo raro nell’arte rupestre: una lancia nella mano destra, sul capo qualcosa che somiglia a una corona, una collana al collo, una cintura ai fianchi — e davanti a lui una figura più piccola che la gente ha letto come un servitore o un seguace. Gli abitanti del luogo lo chiamano «il re», gli archeologi lo descrivono come «una figura di autorità», ed è la formula più esatta: l’incisione non ci dice chi fosse, ci dice soltanto che chi la fece volle che lo si riconoscesse diverso dagli altri.',
+    look:
+      'Confronta la sua statura con quella della figura che gli sta davanti. Il divario di scala non è un errore del disegno ma una lingua: il più grande è quello di rango più alto — il modo più antico che l’uomo abbia trovato per dire «questo conta».',
+  },
+
+  'jubbah-p3': {
+    name: 'Lo stambecco dalle lunghe corna',
+    story:
+      'Uno stambecco con due lunghe corna piegate all’indietro in un ampio arco. Lo stambecco è tra gli animali più incisi di tutta l’Arabia e non fu mai soltanto preda: la sua immagine torna presso i punti d’acqua e sulle alture con tale insistenza che gli studiosi ritengono avesse, per chi lo incideva, un senso che andava oltre la carne — la fecondità, la sopravvivenza, o qualcosa che non sappiamo nominare. Lo stambecco nubiano vive ancora oggi sui monti della regione ed è una delle poche creature incise qui a non essersi estinta.',
+    look:
+      'Guarda la lunghezza delle corna rispetto al corpo: l’esagerazione è voluta, perché agli occhi dell’incisore è il corno a definire l’animale, non le sue proporzioni reali.',
+  },
+
+  'jubbah-p4': {
+    name: 'Il cammello solo',
+    story:
+      'Un solo cammello occupa da sé tutta la parete. E l’incisione isolata non è come il cammello dentro una carovana: la carovana è notizia di una ricchezza o di un viaggio, mentre l’animale solo somiglia piuttosto a una firma — una bestia precisa che il suo padrone conosceva. Accanto a molti cammelli di Jubbah furono incise iscrizioni tamudee che portano nomi, al punto che alcuni sembrano un atto di proprietà scolpito nella pietra.',
+    look:
+      'Cerca intorno al cammello piccole lettere sparse. Dove a Jubbah c’è un cammello, quasi sempre c’è un nome.',
+  },
+
+  'jubbah-p5': {
+    name: 'La figura non risolta',
+    story:
+      'Una figura sul cui nome non si trova accordo. Non è una lacuna della documentazione ma una condizione comune nell’arte rupestre: certe incisioni le ha divorate l’erosione, altre furono fatte sopra un’incisione più antica finché i tratti si confusero, altre ancora furono eseguite in uno stile di cui non abbiamo più la chiave. Qui l’onestà vale più della congettura: ciò che non sappiamo è parte del sapere, e metà di quanto si trova a Jubbah non è ancora stato studiato a fondo.',
+    look:
+      'Avvicinati, poi allontanati. Molte forme oscure da vicino si chiariscono da lontano, perché furono incise per essere viste a distanza.',
+  },
+
+  'jubbah-p6': {
+    name: 'Il leone e il suo domatore',
+    story:
+      'Un leone e accanto a lui una figura umana che lo fronteggia. Il leone asiatico visse davvero nel nord dell’Arabia fino a estinguersi lì secoli fa, sicché questa incisione è testimonianza oculare e non fantasia. Quanto alla scena in sé — un uomo in piedi davanti a un predatore, che non fugge — è tra le più discusse: è una caccia, un ammaestramento, o un rito in cui l’incisore rivendica potere sulla belva? Nessun testo lo spiega: l’incisione è l’unico racconto.',
+    look:
+      'Osserva la posizione delle braccia della figura umana. La loro direzione — verso il leone o in senso contrario — è tutta la distanza che separa lo scontro dalla fuga.',
+  },
+
+  'jubbah-p7': {
+    name: 'I tre cammelli e il cavaliere',
+    story:
+      'Tre cammelli e, all’estrema sinistra, un uomo in groppa a uno di essi, con iscrizioni tamudee accanto; e sullo stesso pannello compare la scena del leone e del suo domatore. Questa sovrapposizione è Jubbah intera in una sola roccia: una scena dal tempo dei leoni, cammelli incisi millenni dopo, e lettere scritte da un terzo passante. Tre tempi diversi che nulla accomuna se non la parete.',
+    look:
+      'Cerca la differenza di colore nella percussione: il più antico tende al colore della roccia circostante, perché la vernice scura del deserto è tornata a coprirlo; il più recente è più chiaro, perché il tempo non l’ha ancora raggiunto.',
+  },
+
+  'jubbah-p8': {
+    name: 'Il lanciatore e la vacca',
+    story:
+      'Una figura umana a grandezza naturale regge un bastone ricurvo simile a un boomerang, e davanti a lei sta una vacca. Il bastone ricurvo è un’arma da lancio ben nota nelle incisioni della penisola: si scaglia per colpire la preda o per sbilanciarla. La vacca, invece, è la vacca del tempo umido: quando Jubbah era un lago orlato di prati, qui pascolavano mandrie di cui in questo deserto non è rimasto nulla. Il pannello è dunque una scena di sostentamento, non un ornamento.',
+    look:
+      'Misura tu stesso la figura umana: le figure neolitiche di Jubbah raggiungono la statura di una persona in piedi, ed è questo che rende lo starle davanti tutt’altra cosa dal guardarne una fotografia.',
+  },
+
+  'jubbah-p9': {
+    name: 'Un cammello e una scrittura',
+    story:
+      'Un cammello affiancato da iscrizioni tamudee. Alla sola Umm Sinman sono state censite 5.431 iscrizioni tamudee — più di tutte le incisioni di animali messe insieme. Il tamudeo è un’antica scrittura arabica settentrionale, e ciò che più vi si scrisse qui sono nomi, genealogie e formule di passaggio: il tale figlio del tale è passato di qui. Vale a dire che la cosa più antica che gli uomini scrissero su questa montagna è la più semplice che gli uomini scrivono sempre: io ero qui.',
+    look:
+      'Le lettere sono molto più piccole delle figure e molto meno profonde: cercale negli spazi vuoti tra gli animali, non al centro del pannello.',
+  },
+
+  'jubbah-p10': {
+    name: 'Lo stormo di struzzi',
+    story:
+      'Un gruppo di struzzi incisi insieme, con iscrizioni tamudee tutt’intorno. Lo struzzo arabo visse migliaia di anni in questo deserto e poi si estinse nel XX secolo: l’ultimo esemplare noto fu cacciato negli anni Quaranta. Questo pannello è dunque l’immagine di un animale che non esiste più, incisa da qualcuno che lo vedeva ogni giorno e cui non venne mai in mente che stava documentando una fine.',
+    look:
+      'Conta gli uccelli: gli struzzi si incidono in gruppo e non a uno a uno, perché così li si vedeva — l’incisore disegna ciò a cui è abituato, non ciò che immagina.',
   },
 }

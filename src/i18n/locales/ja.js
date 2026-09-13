@@ -107,19 +107,50 @@ export default {
     acrossOne: '1日で',
     edit: '編集',
     weather: '天候チェック',
-    travel: '移動 {minutes} 分',
+    travel: '移動 {minutes} 分 · {km} km',
+    travelFromHail: 'ハーイルから {minutes} 分 · {km} km',
     until: '{time} まで',
     excluded: '今回は入りませんでした',
     excludedHint: '日数を増やすか、ペースを「詰めて」に変更してください。',
-    note: '天気データは Open-Meteo より。',
+    note: '天気データは Open-Meteo より · 距離は各所の座標から算出。',
     noteOffline: '天気を取得できません — ハーイルの気候平年値を表示しています。',
     day: '{n} 日目',
+    openMaps: '地図で開く',
+    navigate: 'ここへ経路案内',
+    routeDay: '一日の経路をまとめて地図で',
+    dayDistance: '本日の走行: {km} km',
     step: {
       prefs: '興味と日数を読み取り中',
       weather: 'ハーイルの予報を確認中',
-      order: '最適な時間帯で並べ替え中',
+      order: '近さと最適な時間帯で並べ替え中',
     },
   },
+
+  access: {
+    offRoad: '一部は未舗装路です — 四輪駆動車をおすすめします',
+    guide: '公認ガイド同行での見学 · 事前に手配を',
+    farDrive: '片道およそ {hours} 時間の運転',
+  },
+
+  panel: {
+    heading: 'この遺跡の岩面',
+    count: '記録された岩面 {count} 面',
+    look: '目を向けるところ',
+    inscriptions: 'サムード文字の銘を伴う',
+    famous: 'ジュッバでもっとも名高い',
+    atSite: '{site} の岩面',
+    unknownSubject: '主題は未確定',
+  },
+
+  era: {
+    neolithic: '新石器時代 · およそ一万年前',
+    later: 'ラクダの家畜化ののち · およそ三千年前',
+    thamudic: 'サムード文字の時代 · イスラーム以前の数世紀',
+    neolithicShort: '新石器',
+    laterShort: '後代',
+    thamudicShort: 'サムード',
+  },
+
   interest: {
     history: '歴史と考古学',
     nature: '自然と冒険',

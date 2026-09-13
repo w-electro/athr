@@ -107,19 +107,50 @@ export default {
     acrossOne: '一天之内',
     edit: '修改',
     weather: '天气检查',
-    travel: '车程 {minutes} 分钟',
+    travel: '车程 {minutes} 分钟 · {km} 公里',
+    travelFromHail: '自哈伊勒出发：{minutes} 分钟 · {km} 公里',
     until: '至 {time}',
     excluded: '本次行程未能安排',
     excludedHint: '增加一天，或将节奏改为紧凑。',
-    note: '天气数据来自 Open-Meteo。',
+    note: '天气数据来自 Open-Meteo · 距离由各遗址坐标计算。',
     noteOffline: '无法获取天气——显示哈伊勒的气候平均值。',
     day: '第 {n} 天',
+    openMaps: '在地图中打开',
+    navigate: '导航到这里',
+    routeDay: '在地图中查看全天路线',
+    dayDistance: '今日车程：{km} 公里',
     step: {
       prefs: '读取您的兴趣与行程天数',
       weather: '查询哈伊勒的天气预报',
-      order: '按各遗址的最佳时段排序',
+      order: '按远近与最佳时段排序',
     },
   },
+
+  access: {
+    offRoad: '部分路段为土路 — 建议使用四驱车',
+    guide: '须由持证导游陪同参观 · 请提前预约',
+    farDrive: '单程约 {hours} 小时车程',
+  },
+
+  panel: {
+    heading: '本遗址的岩面',
+    count: '已记录岩面 {count} 面',
+    look: '观察要点',
+    inscriptions: '带有萨姆德文题刻',
+    famous: '朱拜最著名的一面',
+    atSite: '{site} 的一面岩画',
+    unknownSubject: '题材尚未确定',
+  },
+
+  era: {
+    neolithic: '新石器时代 · 约一万年前',
+    later: '骆驼驯化之后 · 约三千年前',
+    thamudic: '萨姆德时期 · 伊斯兰教兴起前数百年',
+    neolithicShort: '新石器',
+    laterShort: '较晚期',
+    thamudicShort: '萨姆德',
+  },
+
   interest: {
     history: '历史与考古',
     nature: '自然与探险',

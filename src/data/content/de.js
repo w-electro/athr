@@ -58,58 +58,116 @@ export default {
     },
   },
 
-  qishlah: {
-    name: 'Aarif-Festung und Qischla',
-    shortName: 'Aarif & Qischla',
-    subtitle: 'Das historische Herz von Hail · zwei benachbarte Wahrzeichen',
-    tagline: 'Eine Lehmfestung, die von oben über die Stadt wacht, und eine Festung mit 142 Räumen, die sie von unten schützt.',
-    era: 'Aarif: über 200 Jahre · Qischla: 1941',
+  aarif: {
+    name: 'Die Aarif-Festung',
+    shortName: 'Aarif',
+    subtitle: 'Die Festung auf dem Hügel · über zwei Jahrhunderte alt',
+    tagline: 'Eine Lehmfestung auf felsiger Kuppe, von der aus jeder Weg nach Hail zu überblicken ist.',
+    era: 'Über 200 Jahre',
     city: 'Zentrum von Hail',
-    ticket: 'Eintritt frei · die Qischla öffnet am Abend',
+    ticket: 'Eintritt frei',
     story: [
       {
         heading: 'Das Auge von Hail, das niemals schläft',
-        body: 'Auf einem Felshügel über der Stadt steht die Aarif-Festung, von den Menschen aus Hail vor mehr als zwei Jahrhunderten erbaut, um über die Wege in die Stadt zu wachen; von ihren Türmen aus verfolgten die Wächter die Karawanen, die über den Darb Zubaida kamen, und entzündeten in den Ramadan-Nächten Feuer, um das Fastenbrechen anzukündigen — ein Brauch, der bis heute in der Kanone weiterlebt, die von ebendiesem Hügel abgefeuert wird.',
+        body: 'Auf der Kuppe eines Felshügels über der Stadt steht die Aarif-Festung, von den Menschen aus Hail vor mehr als zwei Jahrhunderten erbaut, um über die Wege in die Stadt zu wachen; von ihren Türmen aus verfolgten die Wächter die Karawanen, die über den Darb Zubaida kamen, und entzündeten in den Ramadan-Nächten Feuer, um das Fastenbrechen anzukündigen — ein Brauch, der bis heute in der Kanone weiterlebt, die von ebendiesem Hügel abgefeuert wird.',
       },
       {
         heading: 'Lehm, der zwei Jahrhunderte hielt',
         body: 'Die Festung wurde aus Lehm mit Stroh errichtet, mit über einen Meter dicken Mauern, verstärkt durch Tamariskenstämme, und diese Technik ist keineswegs so einfach, wie sie aussieht: Eine dicke Lehmmauer hält die Kühle der Nacht über den Tag und die Wärme des Tages über die Nacht und schafft so eine natürliche Klimaanlage mitten in einer Wüste, in der es im Sommer über fünfzig Grad wird.',
       },
       {
-        heading: 'Die Qischla: eine Stadt in einer Mauer',
-        body: 'Gehst du den Hügel nach Osten hinab, findest du das genaue Gegenteil der Festung: Die Qischla ist eine riesige rechteckige Anlage, die König Abdulaziz 1941 als Kaserne errichten ließ, mit 142 Räumen auf zwei Geschossen, acht Wachtürmen an Ecken und Flanken, einer Moschee im Inneren und einem weiten, von Arkaden durchzogenen Hof; durch ihre langen Lehmgänge zu gehen gleicht dem Durchqueren einer Stadt im Kleinen.',
+        heading: 'Siebzig Stufen zum schönsten Blick',
+        body: 'Hinauf kommt man nur zu Fuß: Die in den Hügel geschlagene Treppe zählt rund siebzig Stufen, die du in wenigen Minuten nimmst — und kaum stehst du oben, liegt ganz Hail unter dir. Im Westen die Qischla, ein Lehmrechteck mit scharfen Kanten; dahinter das Aja-Gebirge, das den Horizont verstellt; und dazwischen die moderne Stadt.',
       },
       {
-        heading: 'Von der Kaserne zur Erinnerung',
-        body: 'Nachdem ihre militärische Rolle endete, wurde die Qischla zu einem der wichtigsten Kulturorte Hails, und in ihrem Hof finden heute Kulturveranstaltungen und Handwerksmärkte statt; ein Detail lohnt die Aufmerksamkeit: Jedes Fenster ihrer acht Türme wurde in einem anderen Winkel gesetzt, sodass sie gemeinsam jeden Zugang zur Festung abdecken, ohne einen einzigen toten Winkel.',
+        heading: 'Der Hügel, der sich selbst gewählt hat',
+        body: 'Die Wahl dieses Hügels war keine Frage des architektonischen Geschmacks: Er ist die einzige natürliche Erhebung inmitten der Ebene von Hail, und dreißig Meter über dieser Ebene genügen, um den Horizont in jede Richtung zu überblicken; sein Sockel ist zudem massiver Fels, den man weder untergraben noch mit Leiter oder Belagerungsturm erklimmen kann. Dann wendeten sich die Jahre: Die Stadt breitete sich um den Hügel herum und über ihn hinaus aus, bis die Festung, die einst die Wüste bewachen sollte, heute auf belebte Straßen blickt — derselbe Ort, die Aufgabe ins Gegenteil verkehrt.',
       },
     ],
     facts: [
-      { label: 'Räume der Qischla', value: '142' },
-      { label: 'Wachtürme', value: '8' },
-      { label: 'Bau der Qischla', value: '1941 (1360 AH)' },
+      { label: 'Geschätztes Alter', value: 'über 200 Jahre' },
+      { label: 'Höhe über der Stadt', value: 'etwa 30 m' },
+      { label: 'Aufstieg', value: 'nur über Treppen · keine Straße' },
       { label: 'Baustoffe', value: 'Lehm, Stroh, Tamariskenstämme' },
     ],
     tips: [
-      'Steig eine halbe Stunde vor Sonnenuntergang zur Aarif-Festung hinauf: Der Blick über die Stadt ist das beste Foto, das du in Hail machen wirst.',
+      'Steig eine halbe Stunde vor Sonnenuntergang hinauf: Der Blick über die Stadt von oben ist das beste Foto, das du in Hail machen wirst.',
       'Im Ramadan wird die Kanone vom Hügel abgefeuert; wenn du dann kommst, sei früh da, denn der Ort füllt sich schnell.',
-      'Die Lehmböden der Qischla sind uneben — sei vorsichtig mit Kindern oder älteren Besuchern.',
+      'Es gibt weder Aufzug noch Straße für Autos, und das letzte Stück der Treppe ist sehr steil — bedenke das, wenn du mit älteren Menschen unterwegs bist.',
     ],
     narration: {
       voice: 'Die Stimme von Athr — KI-generierte Erzählung',
       segments: [
         { at: 0, text: 'Du stehst am Fuß des Aarif-Hügels. Die Treppe liegt vor dir, und siebzig Stufen trennen dich vom schönsten Blick in Hail.' },
         { at: 14, text: 'Achte beim Aufstieg auf die Dicke der Mauer zu deiner Linken: über ein Meter Lehm und Stroh.' },
-        { at: 28, text: 'Diese Dicke dient nicht nur der Verteidigung, sondern der natürlichen Kühlung: Die Nachtkühle bleibt bis zum Mittag im Lehm gespeichert.' },
+        { at: 28, text: 'Diese Dicke dient nicht nur der Verteidigung, sondern der natürlichen Kühlung: Die Nachtkühle bleibt bis zum Mittag darin gespeichert.' },
         { at: 44, text: 'Von diesem Turm aus hielt einst ein Wächter Ausschau nach Karawanen, und von hier wird bis heute die Ramadan-Kanone abgefeuert.' },
-        { at: 60, text: 'Wende dich nun nach Osten: Dieses große Lehmrechteck ist die Qischla mit ihren 142 Räumen und acht Türmen.' },
-        { at: 76, text: 'Wenn du hineingehst, zähle die Winkel der Fenster: Es gibt rings um die Festung keinen einzigen toten Winkel.' },
+        { at: 60, text: 'Wende dich nun nach Westen: Dieses große Lehmrechteck ist die Qischla, nur anderthalb Kilometer entfernt.' },
+        { at: 76, text: 'Dahinter verstellt das Aja-Gebirge den Horizont, und dazwischen liegt ganz Hail vor deinen Augen.' },
       ],
     },
     scan: {
-      matchLabel: 'Wehrhafte Lehmarchitektur · Qischla / Aarif-Festung',
+      matchLabel: 'Lehmfestung auf felsiger Kuppe · Aarif',
       evidence: [
+        'Natürlicher Felssockel, auf dem sich der Bau erhebt',
         'Lehmmauern mit nach oben geneigter Böschung',
+        'Zinnenbewehrte Brüstungen, typisch für die Nadschd-Architektur',
+      ],
+    },
+  },
+
+  qishlah: {
+    name: 'Die Qischla',
+    shortName: 'Qischla',
+    subtitle: '142 Räume · 1360 AH / 1941 n. Chr.',
+    tagline: 'Der größte Lehmbau der Arabischen Halbinsel: eine ganze Stadt in einer einzigen Mauer.',
+    era: '1360 AH / 1941 n. Chr.',
+    city: 'Zentrum von Hail',
+    ticket: 'Eintritt frei · öffnet am Abend',
+    story: [
+      {
+        heading: 'Eine Stadt in einer Mauer',
+        body: 'Die Qischla ist eine riesige rechteckige Anlage, die König Abdulaziz im Jahr 1360 AH als Kaserne errichten ließ, mit 142 Räumen auf zwei Geschossen, acht Wachtürmen an Ecken und Flanken, einer Moschee im Inneren und einem weiten, von Arkaden durchzogenen Hof; durch ihre langen Lehmgänge zu gehen gleicht eher dem Durchqueren einer Stadt im Kleinen als dem Besuch eines einzelnen Gebäudes.',
+      },
+      {
+        heading: 'Lehm, mit dem Lineal gebaut',
+        body: 'Was die Qischla von der alten Lehmarchitektur unterscheidet, ist, dass sie nach einem strengen geometrischen Plan errichtet wurde und nicht durch allmähliches Anbauen: Die Arkaden verlaufen parallel, die Räume haben gleiche Maße, die Türme sind regelmäßig verteilt. Damit steht sie genau an der Grenze zwischen der traditionellen Baukunst des Nadschd und dem geplanten modernen Bauen — errichtet aus demselben Lehm, demselben Stroh und denselben Tamariskenstämmen, aus denen zwei Jahrhunderte zuvor Aarif entstanden war.',
+      },
+      {
+        heading: 'Acht Türme ohne einen toten Winkel',
+        body: 'Das Bemerkenswerte an ihren acht Türmen ist, dass jedes Fenster in einem anderen Winkel als sein Nachbar gesetzt wurde, sodass sie gemeinsam jede Richtung rings um die Festung abdecken, ohne einen einzigen toten Winkel zu lassen; eine genaue optische Berechnung, ohne moderne Vermessungsgeräte ausgeführt — und du kannst sie selbst überprüfen, wenn du dich in den Hof stellst und den Sichtlinien von Turm zu Turm folgst.',
+      },
+      {
+        heading: 'Von der Kaserne zur Erinnerung',
+        body: 'Nachdem ihre militärische Rolle endete, wurde die Qischla zu einem der wichtigsten Besucherziele Hails: In ihrem Hof finden Kulturveranstaltungen, Handwerksmärkte und Programmpunkte des Hail-Festivals statt. So ist das Gebäude, das gebaut wurde, um sich vor den Menschen zu verschließen, zu einem Ort geworden, der ohne sie keinen Sinn hat.',
+      },
+    ],
+    facts: [
+      { label: 'Anzahl der Räume', value: '142' },
+      { label: 'Wachtürme', value: '8' },
+      { label: 'Baujahr', value: '1360 AH / 1941 n. Chr.' },
+      { label: 'Baustoffe', value: 'Lehm, Stroh, Tamariskenstämme' },
+    ],
+    tips: [
+      'Die Qischla öffnet meist am Abend: Mach sie zum Abschluss deines Tages, nachdem du von Aarif herabgestiegen bist — dazwischen liegen nur anderthalb Kilometer.',
+      'Ihre Lehmböden sind uneben und die Gänge nur schwach beleuchtet — achte auf deine Schritte, wenn du mit Kindern oder älteren Besuchern unterwegs bist.',
+      'Der Innenhof ist nach Sonnenuntergang der beste Ort zum Fotografieren, wenn die Lehmmauern von unten angestrahlt werden und die Struktur des Lehms hervortritt.',
+    ],
+    narration: {
+      voice: 'Die Stimme von Athr — KI-generierte Erzählung',
+      segments: [
+        { at: 0, text: 'Du stehst vor der Qischla, und was du siehst, ist kein einzelnes Gebäude, sondern eine ganze Stadt in einer Mauer.' },
+        { at: 12, text: 'Einhundertzweiundvierzig Räume auf zwei Geschossen, acht Türme, eine Moschee und ein Hof in der Mitte.' },
+        { at: 26, text: 'Tritt durch das Tor und bleib einen Moment im Hof stehen: Achte darauf, dass die Arkaden parallel laufen und die Räume gleich sind.' },
+        { at: 41, text: 'Genau das zeichnet sie aus: Lehm, mit dem Lineal gebaut, nicht Stück für Stück erweitert, wie es sonst üblich war.' },
+        { at: 56, text: 'Folge nun mit den Augen den Fenstern der Türme: Jedes steht in einem anderen Winkel als sein Nachbar.' },
+        { at: 70, text: 'Zähl sie ruhig nach: Rings um die Festung wirst du keinen einzigen toten Winkel finden.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Rechteckige Lehmfestung · Qischla',
+      evidence: [
+        'Lange rechteckige Lehmfassade mit gleichmäßigem Fensterrhythmus',
         'Zylindrische Ecktürme mit dreieckigen Schießscharten',
         'Zinnenbewehrte Brüstungen, typisch für die Nadschd-Architektur',
       ],
@@ -230,5 +288,149 @@ export default {
         'Keramikgefäß mit geometrischem Nadschd-Dekor',
       ],
     },
+  },
+
+  shuwaymis: {
+    name: 'Die Felsbilder von Schuwaimis',
+    shortName: 'Schuwaimis',
+    subtitle: 'Jabal al-Mandschur und Raat · UNESCO-Welterbe',
+    tagline: 'Die andere Hälfte der UNESCO-Eintragung, in Tälern, die nur erreicht, wer sie sucht.',
+    era: 'vor ~10.000 Jahren (Jungsteinzeit)',
+    city: 'Schuwaimis, südwestlich von Hail',
+    ticket: 'Besuch nur mit zugelassenem Führer · Anmeldung vorab unerlässlich',
+    story: [
+      {
+        heading: 'Die vergessene Hälfte der Eintragung',
+        body: 'Als die UNESCO im Jahr 2015 die „Felskunst in der Region Hail“ aufnahm, galt die Eintragung nicht Jubbah allein, sondern zwei Stätten: dem Jabal Umm Sinman bei Jubbah sowie den Bergen al-Mandschur und Raat bei Schuwaimis; Schuwaimis aber blieb wegen seiner Abgeschiedenheit und der rauen Anfahrt die weit weniger besuchte — und gerade deshalb sind seine Gravuren unversehrter und weniger beschädigt geblieben. Heute zählen sie zum Besterhaltenen der jungsteinzeitlichen Kunst auf der ganzen Halbinsel.',
+      },
+      {
+        heading: 'Täler, die sich wie Seiten lesen',
+        body: 'Die Gravuren von Schuwaimis liegen nicht auf einer einzigen Wand wie in Jubbah, sondern verteilen sich über die Flanken enger, tiefer Täler, durch die du gehst, während sich Bild um Bild öffnet: Herden von Auerochsen, Löwen, Leoparden und Straußen, Menschen, die mit dem Bogen jagen, und ganze Szenen statt vereinzelter Zeichen — manche Tafeln erzählen ein einziges Geschehen vom Anfang bis zum Ende.',
+      },
+      {
+        heading: 'Der Hund, der die Geschichte veränderte',
+        body: 'Gerade in Schuwaimis fand man, was als eine der ältesten bekannten Darstellungen domestizierter Hunde weltweit gilt: Hunde mit aufgestellten Ohren und geringelten Ruten, die einen Jäger umringen, der seinen Bogen spannt, manche mit Linien an ihn gebunden, die als Leinen gedeutet werden. Trifft diese Deutung zu, halten diese Wände einen der wichtigsten Augenblicke im Verhältnis von Mensch und Tier fest — vor mehr als achttausend Jahren.',
+      },
+      {
+        heading: 'Warum hier',
+        body: 'Dass sich ausgerechnet an dieser Wand so vieles drängt, liegt daran, dass Schuwaimis ein Ort zusammenlaufender Wasser war: Täler ziehen von den vulkanischen Lavafeldern herab und treffen sich in Rinnen, die nach dem Regen Wasser halten; also kamen die Tiere, und ihnen folgten die Jäger. Die Gravuren sind nichts anderes als das Register derer, die hier warteten — und die Wand, auf die du zeichnest, ist die Wand, die dir Schatten gibt.',
+      },
+    ],
+    facts: [
+      { label: 'UNESCO-Eintragung', value: '2015 (zusammen mit Jubbah)' },
+      { label: 'Die beiden Teile', value: 'Jabal al-Mandschur · Jabal Raat' },
+      { label: 'Entfernung von Hail', value: '250 km südwestlich' },
+      { label: 'Zugang', value: 'zugelassener Führer · Teil der Strecke unbefestigt' },
+    ],
+    tips: [
+      'Stimme den Besuch einige Tage vor der Anreise mit der Heritage Commission oder einem zugelassenen Führer ab — die Stätte ist nicht frei zugänglich wie Jubbah.',
+      'Plane einen ganzen eigenen Tag ein und keine Zwischenstation: Hin- und Rückfahrt allein dauern rund sechs Stunden.',
+      'Nimm mehr Kraftstoff und Wasser mit, als du zu brauchen glaubst — die letzte Tankstelle vor der Stätte liegt weit entfernt, und in den Tälern bricht der Empfang ab.',
+      'Der Weg zwischen den Tafeln führt über Geröll und unebenen Fels: Feste, geschlossene Schuhe sind hier Pflicht, keine Wahl.',
+    ],
+    narration: {
+      voice: 'Die Stimme von Athr — KI-generierte Erzählung',
+      segments: [
+        { at: 0, text: 'Willkommen in Schuwaimis. Du hast einen langen Weg zurückgelegt: Hol Luft und sieh dich um.' },
+        { at: 13, text: 'Diese Täler sind die andere Hälfte der UNESCO-Eintragung, die Jubbah mit ihnen teilt — und die weniger besuchte.' },
+        { at: 28, text: 'Die geringe Besucherzahl ist ein Segen für den Stein: Was du hier siehst, ist unversehrter als an jedem anderen Ort.' },
+        { at: 43, text: 'Geh langsam durch das Tal. Die Tafeln zeigen sich nicht auf einmal, sondern eine nach der anderen.' },
+        { at: 58, text: 'Such nach der Szene mit dem Jäger und den Hunden um ihn herum, mit aufgestellten Ohren und geringelten Ruten.' },
+        { at: 73, text: 'Sie gehört zum Ältesten, was wir weltweit an Darstellungen domestizierter Hunde kennen — vor achttausend Jahren geschlagen.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Felskunst in einem Tal · Schuwaimis',
+      evidence: [
+        'Schlagtechnik an einer Talwand statt an einer offenen Felswand',
+        'Zusammengesetzte Jagdszenen statt vereinzelter Figuren',
+        'Dunkler Wüstenlack, vom Schlagwerk durchbrochen',
+      ],
+    },
+  },
+}
+
+/* Die Bildfelder liegen in einem eigenen benannten Export: der Default-Export
+   ist eine Karte „Stätten-ID → Inhalt“, und alles Strukturelle (Motiv, Epoche,
+   Inschriften) bleibt in panels.js. */
+export const panels = {
+  'jubbah-p1': {
+    name: 'Die Kamelkarawane',
+    story:
+      'Kamele, eines hinter dem anderen in dieselbe Wand geschlagen. Sie sind das Häufigste, was man in Jubbah sieht, und zugleich das Jüngste: Von den 1.944 Tierbildern, die an Umm Sinman gezählt wurden, sind 1.378 Kamele — sieben von zehn. Das war keine Frage des Geschmacks. Das Kamel trat hier spät in das Leben der Menschen; es wurde vor etwa dreitausend Jahren domestiziert und wurde so zu dem Tier, das man in den Fels schlug, weil es zu dem Tier geworden war, von dem man lebte.',
+    look:
+      'Verfolge die Linien der Beine: Die späten Kamele sind mit rascher, knapper Linie geschlagen, nicht mit der anatomischen Sorgfalt, die du bei den Auerochsen siehst, die Jahrtausende älter sind.',
+  },
+
+  'jubbah-p2': {
+    name: 'Der König von Jubbah',
+    story:
+      'Das Berühmteste in Jubbah, und Besucher reisen vom anderen Ende der Welt hierher. Eine große menschliche Gestalt, geschlagen mit einem in der Felskunst seltenen Realismus: ein Speer in der rechten Hand, auf dem Kopf etwas, das einer Krone gleicht, am Hals eine Kette, an der Hüfte ein Gürtel — und vor ihm eine kleinere Gestalt, die man als Diener oder Gefolgsmann gelesen hat. Die Menschen des Ortes nennen ihn „den König“, die Archäologen beschreiben ihn als „eine Gestalt mit Autorität“, und das ist die genauere Formulierung: Das Bild sagt uns nicht, wer er war. Es sagt uns nur, dass der, der es schlug, wollte, dass man ihn als einen erkennt, der nicht wie die anderen ist.',
+    look:
+      'Vergleiche seine Größe mit der Gestalt, die vor ihm steht. Der Größenunterschied ist kein Fehler der Zeichnung, sondern eine Sprache: Der Größere ist der Höherstehende — die älteste Art, die der Mensch gefunden hat, um zu sagen „das hier zählt“.',
+  },
+
+  'jubbah-p3': {
+    name: 'Der Steinbock mit den langen Hörnern',
+    story:
+      'Ein Steinbock mit zwei langen Hörnern, die sich in weitem Bogen nach hinten biegen. Der Steinbock gehört zu den am häufigsten dargestellten Tieren ganz Arabiens, und er war nie bloß Beute: Sein Bild kehrt an Wasserstellen und auf Höhen so beharrlich wieder, dass Forscher annehmen, er habe für die, die ihn schlugen, eine Bedeutung jenseits des Fleisches gehabt — Fruchtbarkeit, Überleben oder etwas, das wir nicht zu benennen wissen. Der Nubische Steinbock lebt bis heute in den Bergen der Region und ist eines der wenigen hier dargestellten Tiere, das nicht ausgestorben ist.',
+    look:
+      'Sieh dir die Länge der Hörner im Verhältnis zum Körper an: Die Übertreibung ist gewollt, denn im Auge dessen, der das Bild schlug, bestimmt das Horn das Tier, nicht seine wirklichen Maße.',
+  },
+
+  'jubbah-p4': {
+    name: 'Das einzelne Kamel',
+    story:
+      'Ein einziges Kamel füllt die ganze Wand. Und ein alleinstehendes Bild ist nicht dasselbe wie ein Kamel in einer Karawane: Die Karawane ist eine Nachricht von Reichtum oder von einer Reise, das einzelne Tier aber kommt einer Unterschrift näher — ein bestimmtes Tier, das sein Besitzer kannte. Neben vielen Kamelen von Jubbah stehen thamudische Inschriften mit Namen, sodass manche wie ein in den Stein geschlagener Eigentumsnachweis wirken.',
+    look:
+      'Suche rund um das Kamel nach kleinen, verstreuten Buchstaben. Wo in Jubbah ein Kamel ist, ist meist auch ein Name.',
+  },
+
+  'jubbah-p5': {
+    name: 'Die ungeklärte Gestalt',
+    story:
+      'Eine Gestalt, über deren Benennung man sich nicht einig wird. Das ist kein Mangel der Dokumentation, sondern ein gewöhnlicher Zustand in der Felskunst: Manche Bilder hat die Verwitterung zerfressen, manche wurden über ein älteres Bild geschlagen, bis sich die Linien vermischten, und manche sind in einem Stil gemacht, zu dem wir den Schlüssel nicht mehr haben. Hier nützt Ehrlichkeit mehr als Vermutung — was wir nicht wissen, gehört zum Wissen, und die Hälfte dessen, was in Jubbah liegt, ist noch nicht gründlich untersucht.',
+    look:
+      'Tritt nah heran und dann wieder zurück. Viele Formen, die aus der Nähe rätselhaft sind, klären sich aus der Ferne, denn sie wurden geschlagen, um aus der Ferne gesehen zu werden.',
+  },
+
+  'jubbah-p6': {
+    name: 'Der Löwe und sein Bändiger',
+    story:
+      'Ein Löwe und daneben eine menschliche Gestalt, die ihm gegenübersteht. Der Asiatische Löwe hat tatsächlich im Norden Arabiens gelebt, bis er dort vor Jahrhunderten ausgerottet wurde; dieses Bild ist also Augenzeugenschaft und keine Erfindung. Die Szene selbst aber — ein Mensch, der vor einem Raubtier steht und nicht flieht — gehört zu den umstrittensten: Ist es eine Jagd, eine Bändigung oder ein Ritus, in dem der Bildschöpfer Macht über das Tier beansprucht? Kein Text erklärt es. Das Bild allein ist der ganze Bericht.',
+    look:
+      'Achte auf die Haltung der Arme der menschlichen Gestalt. Ihre Richtung — zum Löwen hin oder von ihm fort — ist der ganze Abstand zwischen Konfrontation und Flucht.',
+  },
+
+  'jubbah-p7': {
+    name: 'Die drei Kamele und der Reiter',
+    story:
+      'Drei Kamele, ganz links davon ein Mann, der auf einem reitet, daneben thamudische Inschriften; und auf demselben Bildfeld erscheint die Szene vom Löwen und seinem Bändiger. Diese Überlagerung ist ganz Jubbah in einem einzigen Felsen: eine Szene aus der Zeit der Löwen, Kamele, die Jahrtausende später geschlagen wurden, und Buchstaben, die ein dritter Vorüberziehender schrieb. Drei Zeiten, die nichts verbindet als die Wand.',
+    look:
+      'Suche den Unterschied in der Farbe des Schlagwerks: Das Ältere neigt zur Farbe des umgebenden Felsens, weil der dunkle Wüstenlack es wieder überzogen hat; das Jüngere ist heller, weil die Zeit es noch nicht eingeholt hat.',
+  },
+
+  'jubbah-p8': {
+    name: 'Der Werfer und die Kuh',
+    story:
+      'Eine menschliche Gestalt in Lebensgröße hält einen gebogenen Stock, der einem Bumerang gleicht, und vor ihr steht eine Kuh. Der gebogene Wurfstock ist eine in den Felsbildern der Halbinsel gut bekannte Waffe: Man schleudert ihn, um die Beute zu treffen oder aus dem Tritt zu bringen. Die Kuh aber ist die Kuh der feuchten Zeit: Als Jubbah ein See war, von Wiesen gesäumt, weideten hier Herden, von denen in dieser Wüste nichts geblieben ist. Das Bildfeld ist also eine Szene des Lebensunterhalts, kein Schmuck.',
+    look:
+      'Miss die menschliche Gestalt an dir selbst: Die jungsteinzeitlichen Figuren von Jubbah erreichen die Größe eines stehenden Menschen, und genau das macht es zu etwas anderem, vor ihnen zu stehen, als ein Foto von ihnen anzusehen.',
+  },
+
+  'jubbah-p9': {
+    name: 'Ein Kamel und eine Inschrift',
+    story:
+      'Ein Kamel, daneben thamudische Inschriften. Allein an Umm Sinman wurden 5.431 thamudische Inschriften gezählt — mehr als alle Tierbilder zusammen. Das Thamudische ist eine alte nordarabische Schrift, und das meiste, was hier damit geschrieben wurde, sind Namen, Abstammungen und Worte des Vorüberziehens: Der und der, Sohn des und des, kam hier vorbei. Das Älteste also, was Menschen auf diesen Berg schrieben, ist das Einfachste, was Menschen immer schreiben: Ich war hier.',
+    look:
+      'Die Buchstaben sind weit kleiner als die Bilder und weit flacher geschlagen — suche sie in den Zwischenräumen zwischen den Tieren, nicht in der Mitte des Bildfelds.',
+  },
+
+  'jubbah-p10': {
+    name: 'Der Schwarm Strauße',
+    story:
+      'Eine Gruppe von Straußen, gemeinsam in den Fels geschlagen, umgeben von thamudischen Inschriften. Der Arabische Strauß lebte Jahrtausende in dieser Wüste und starb im 20. Jahrhundert aus; der letzte bekannte wurde in den vierziger Jahren erlegt. Dieses Bildfeld ist also das Bild eines Tieres, das es nicht mehr gibt, geschlagen von jemandem, der es jeden Tag sah und dem nie in den Sinn kam, dass er ein Ende festhielt.',
+    look:
+      'Zähle die Vögel: Strauße werden in Gruppen dargestellt, nie einzeln, weil man sie so sah — wer das Bild schlägt, zeichnet, was er gewohnt ist, nicht was er sich ausdenkt.',
   },
 }

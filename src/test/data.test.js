@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { getAllSites, getSiteById, CATEGORIES, INTERESTS } from '../data/sites.js'
+import { haversineKm, HAIL_CENTER } from '../lib/geo.js'
 
 /**
  * حارس سلامة البيانات.
@@ -10,9 +11,42 @@ import { getAllSites, getSiteById, CATEGORIES, INTERESTS } from '../data/sites.j
 describe('بيانات المواقع', () => {
   const sites = getAllSites()
 
-  it('يحتوي المواقع التراثية الأربعة', () => {
-    expect(sites).toHaveLength(4)
-    expect(sites.map((site) => site.id)).toEqual(['jubbah', 'qishlah', 'aja', 'museum'])
+  it('يحتوي المواقع التراثية الستّة', () => {
+    expect(sites).toHaveLength(6)
+    expect(sites.map((site) => site.id)).toEqual([
+      'jubbah',
+      'aarif',
+      'qishlah',
+      'aja',
+      'museum',
+      'shuwaymis',
+    ])
+  })
+
+  /**
+   * أَعَيْرِف والقشلة معلمان منفصلان يفصل بينهما نحو كيلومتر ونصف. كانا
+   * مدمجين في مدخل واحد، فكان دبّوس الخريطة يصل إلى أحدهما فقط.
+   */
+  it('يفصل أَعَيْرِف عن القشلة بإحداثيين مختلفين', () => {
+    const aarif = getSiteById('aarif')
+    const qishlah = getSiteById('qishlah')
+    expect(aarif.coords).not.toEqual(qishlah.coords)
+    expect(haversineKm(aarif.coords, qishlah.coords)).toBeGreaterThan(0.5)
+    expect(haversineKm(aarif.coords, qishlah.coords)).toBeLessThan(3)
+  })
+
+  /**
+   * حارس لعلّة حقيقية: كان إحداثي جبة يبعد نحو سبعة كيلومترات عن جبل
+   * أُمّ سِنمان، فينزل الزائرَ في رملٍ خالٍ. نتحقّق أنّ كل موقع قريب من
+   * مدينته المعلنة بما يتّسق مع distanceFromHailKm.
+   */
+  it('تتّسق الإحداثيات مع المسافة المعلنة عن حائل', () => {
+    for (const site of sites) {
+      const actual = haversineKm(HAIL_CENTER, site.coords)
+      // نسمح بفارقٍ معقول لأن المعلن مسافة طريق والمحسوب خطّ مستقيم
+      expect(actual).toBeLessThanOrEqual(site.distanceFromHailKm + 15)
+      expect(actual).toBeGreaterThanOrEqual(site.distanceFromHailKm * 0.5 - 5)
+    }
   })
 
   it('يجلب موقعًا بالمعرّف ويعيد undefined للمجهول', () => {
@@ -77,8 +111,12 @@ describe('بيانات المواقع', () => {
     }
   })
 
-  it('يعلّم جبة وحدها كموقع تراث عالمي', () => {
+  /**
+   * إدراج اليونسكو عام 2015م شمل موقعين لا موقعًا واحدًا: جبل أُمّ سِنمان
+   * في جبة، وجبلَي المنجور وراط في الشويمس. كان التطبيق يعرض نصفه فقط.
+   */
+  it('يعلّم جبة والشويمس كموقعَي تراث عالمي', () => {
     const unesco = sites.filter((site) => site.unesco)
-    expect(unesco.map((site) => site.id)).toEqual(['jubbah'])
+    expect(unesco.map((site) => site.id)).toEqual(['jubbah', 'shuwaymis'])
   })
 })

@@ -58,42 +58,42 @@ export default {
     },
   },
 
-  qishlah: {
-    name: 'Fort Aarif en Qishlah',
-    shortName: 'Aarif & Qishlah',
-    subtitle: 'Het historische hart van Hail · twee naburige monumenten',
-    tagline: 'Een leemfort dat van bovenaf over de stad waakt, en een vesting van 142 vertrekken die haar van onderaf bewaakt.',
-    era: 'Aarif: ruim 200 jaar · Qishlah: 1941',
+  aarif: {
+    name: 'Fort Aarif',
+    shortName: 'Aarif',
+    subtitle: 'Het fort op de heuvel · ruim twee eeuwen oud',
+    tagline: 'Een leemfort op een rotstop, vanwaar elke weg die Hail binnenkomt in het oog wordt gehouden.',
+    era: 'Ruim 200 jaar',
     city: 'Centrum van Hail',
-    ticket: 'Gratis toegang · de Qishlah opent in de avond',
+    ticket: 'Gratis toegang',
     story: [
       {
         heading: 'Het oog van Hail dat nooit slaapt',
-        body: 'Op een rotsheuvel die uitkijkt over de stad staat fort Aarif, ruim twee eeuwen geleden gebouwd door de mensen van Hail om te waken over de wegen die ernaartoe leidden; vanaf de torens volgden de wachters de karavanen die over de Darb Zubayda aankwamen en ontstaken zij vuren in de nachten van de ramadan om het verbreken van het vasten aan te kondigen — een gebruik dat vandaag nog voortleeft in het kanon dat vanaf diezelfde heuvel wordt afgevuurd.',
+        body: 'Op de top van een rotsheuvel die uitkijkt over de stad staat fort Aarif, ruim twee eeuwen geleden gebouwd door de mensen van Hail om te waken over de wegen die ernaartoe leidden; vanaf de torens volgden de wachters de karavanen die over de Darb Zubayda aankwamen en ontstaken zij vuren in de nachten van de ramadan om het verbreken van het vasten aan te kondigen — een gebruik dat vandaag nog voortleeft in het kanon dat vanaf diezelfde heuvel wordt afgevuurd.',
       },
       {
         heading: 'Leem die twee eeuwen standhield',
         body: 'Het fort werd opgetrokken uit leem vermengd met stro, met muren van ruim een meter dik, versterkt met tamariskstammen, en die techniek is niet zo primitief als ze lijkt: een dikke leemmuur houdt de koelte van de nacht vast tot in de dag en de warmte van de dag tot in de nacht, en vormt zo een natuurlijke airconditioning midden in een woestijn waar het ’s zomers boven de vijftig graden komt.',
       },
       {
-        heading: 'De Qishlah: een stad binnen een muur',
-        body: 'Daal de heuvel af naar het oosten en je vindt precies het tegendeel van het fort: de Qishlah is een enorme rechthoekige vesting die koning Abdulaziz in 1941 als kazerne liet bouwen, met 142 vertrekken over twee verdiepingen, acht wachttorens op de hoeken en langs de zijden, een moskee binnenin en een ruime binnenplaats doorsneden door arcades; door haar lange leemgangen lopen voelt als het doorkruisen van een stad in het klein.',
+        heading: 'Zeventig treden naar het mooiste uitzicht',
+        body: 'Naar boven kom je alleen te voet, want de trap die in de heuvel is uitgehouwen telt zo’n zeventig treden die je in enkele minuten neemt; en zodra je het dak bereikt ligt heel Hail onder je uitgestrekt: in het westen de Qishlah, een leemrechthoek met scherpe randen, daarachter het Aja-gebergte dat de horizon afsluit, en daartussen de moderne stad.',
       },
       {
-        heading: 'Van kazerne tot geheugen',
-        body: 'Toen haar militaire rol eindigde werd de Qishlah een van de belangrijkste erfgoedplekken van Hail, en op haar binnenplaats vinden nu culturele evenementen en ambachtsmarkten plaats; één detail verdient aandacht: elk raam in de acht torens werd onder een andere hoek geplaatst, zodat zij samen elke nadering van de vesting bestrijken zonder één dode hoek.',
+        heading: 'De heuvel die zichzelf koos',
+        body: 'De keuze voor deze heuvel was geen kwestie van architectonische smaak: het is de enige natuurlijke verhoging midden in de vlakte van Hail, en dertig meter boven die vlakte is genoeg om de horizon in alle richtingen te bestrijken; bovendien is de voet massief gesteente, waar niemand onderdoor kan graven en waartegen geen ladder of belegeringstoren te zetten is. Daarna keerden de jaren: de stad breidde zich rond de heuvel en erlangs uit, tot het fort dat gebouwd was om de woestijn te bewaken vandaag uitkijkt op drukke straten — dezelfde plek, de functie omgekeerd.',
       },
     ],
     facts: [
-      { label: 'Vertrekken in de Qishlah', value: '142' },
-      { label: 'Wachttorens', value: '8' },
-      { label: 'Bouw van de Qishlah', value: '1941 (1360 AH)' },
+      { label: 'Geschatte ouderdom', value: 'ruim 200 jaar' },
+      { label: 'Hoogte boven de stad', value: 'ongeveer 30 m' },
+      { label: 'Beklimming', value: 'alleen trappen · geen weg voor auto’s' },
       { label: 'Materialen', value: 'leem, stro, tamariskstammen' },
     ],
     tips: [
-      'Beklim fort Aarif een half uur voor zonsondergang: het uitzicht over de stad is de mooiste foto die je in Hail maakt.',
-      'In de ramadan wordt het kanon vanaf de heuvel afgevuurd; kom in die periode vroeg, want de plek loopt vol.',
-      'De leemvloeren van de Qishlah zijn ongelijk — wees voorzichtig met kinderen of oudere bezoekers.',
+      'Beklim de heuvel een half uur voor zonsondergang: het uitzicht over de stad vanaf de top is de mooiste foto die je in Hail maakt.',
+      'In de ramadan wordt het kanon vanaf de heuvel afgevuurd; kom in die periode vroeg, want de plek loopt snel vol.',
+      'Er is geen lift en geen weg voor auto’s, en het laatste stuk trap is steil — houd daar rekening mee als je met oudere bezoekers bent.',
     ],
     narration: {
       voice: 'De stem van Athr — door AI gegenereerde vertelling',
@@ -102,14 +102,72 @@ export default {
         { at: 14, text: 'Let tijdens het klimmen op de dikte van de muur links van je: ruim een meter leem en stro.' },
         { at: 28, text: 'Die dikte dient niet alleen ter verdediging maar als natuurlijke koeling: de nachtkoelte blijft tot de middag in het leem bewaard.' },
         { at: 44, text: 'Vanaf deze toren speurde ooit een wachter naar karavanen, en vanaf hier klinkt vandaag nog het ramadankanon.' },
-        { at: 60, text: 'Draai je nu naar het oosten: die grote leemrechthoek is de Qishlah, met haar 142 vertrekken en acht torens.' },
-        { at: 76, text: 'Tel bij binnenkomst de hoeken van de ramen: er is rond de vesting geen enkele dode hoek.' },
+        { at: 60, text: 'Draai je nu naar het westen: die grote leemrechthoek is de Qishlah, op amper anderhalve kilometer afstand.' },
+        { at: 76, text: 'Daarachter sluit het Aja-gebergte de horizon af, en daartussen ligt heel Hail voor je ogen.' },
       ],
     },
     scan: {
-      matchLabel: 'Verdedigingsarchitectuur in leem · Qishlah / fort Aarif',
+      matchLabel: 'Leemfort op een rotstop · Aarif',
       evidence: [
+        'Een natuurlijke rotsbasis waarop het gebouw oprijst',
         'Leemmuren met naar boven toe lopend talud',
+        'Gekanteelde borstweringen, kenmerkend voor de Najd-architectuur',
+      ],
+    },
+  },
+
+  qishlah: {
+    name: 'De Qishlah',
+    shortName: 'Qishlah',
+    subtitle: '142 vertrekken · 1360 AH / 1941',
+    tagline: 'Het grootste leemgebouw van Arabië: een hele stad binnen één muur.',
+    era: '1360 AH / 1941',
+    city: 'Centrum van Hail',
+    ticket: 'Gratis toegang · opent in de avond',
+    story: [
+      {
+        heading: 'Een stad binnen een muur',
+        body: 'De Qishlah is een enorme rechthoekige vesting die koning Abdulaziz in 1360 AH als kazerne liet bouwen, met 142 vertrekken over twee verdiepingen, acht wachttorens op de hoeken en langs de zijden, een moskee binnenin en een ruime binnenplaats doorsneden door arcades; door haar lange leemgangen lopen voelt dan ook eerder als het doorkruisen van een stad in het klein dan als het bezoeken van één gebouw.',
+      },
+      {
+        heading: 'Leem, gebouwd met de liniaal',
+        body: 'Wat de Qishlah onderscheidt van de oudere leemarchitectuur is dat zij volgens een streng geometrisch plan werd opgetrokken en niet stukje bij beetje groeide: de arcades lopen evenwijdig, de vertrekken hebben dezelfde maten en de torens staan regelmatig verdeeld; zo staat zij precies op de grens tussen de traditionele bouwkunst van de Najd en de geplande moderne architectuur, opgetrokken uit dezelfde leem, stro en tamariskstammen waarmee twee eeuwen eerder Aarif was gebouwd.',
+      },
+      {
+        heading: 'Acht torens zonder één dode hoek',
+        body: 'Het opvallendst aan de acht torens is dat elk raam onder een andere hoek werd geplaatst dan zijn buurman, zodat zij samen elke richting rond de vesting bestrijken zonder ook maar één dode hoek over te laten; dat is een nauwkeurige visuele berekening, gemaakt zonder moderne landmeetkundige instrumenten, en je kunt haar zelf narekenen door op de binnenplaats te gaan staan en de zichtlijnen van toren naar toren te volgen.',
+      },
+      {
+        heading: 'Van kazerne tot geheugen',
+        body: 'Toen haar militaire rol eindigde werd de Qishlah een van de belangrijkste bezienswaardigheden van Hail, en op haar binnenplaats vinden nu culturele evenementen, ambachtsmarkten en de programmering van het Hail-festival plaats; zo werd een gebouw dat was opgetrokken om de mensen buiten te sluiten een plek die zonder hen geen betekenis heeft.',
+      },
+    ],
+    facts: [
+      { label: 'Aantal vertrekken', value: '142' },
+      { label: 'Wachttorens', value: '8' },
+      { label: 'Bouwjaar', value: '1360 AH / 1941' },
+      { label: 'Materialen', value: 'leem, stro, tamariskstammen' },
+    ],
+    tips: [
+      'De Qishlah opent meestal in de avond; maak er dus de afsluiting van je dag van, na de afdaling van Aarif — er ligt maar anderhalve kilometer tussen.',
+      'De leemvloeren zijn ongelijk en de gangen schemerig verlicht, dus let op je stappen als je met kinderen of oudere bezoekers bent.',
+      'De binnenplaats is na zonsondergang de beste plek om te fotograferen, wanneer de leemmuren van onderaf worden uitgelicht en de structuur van het leem tevoorschijn komt.',
+    ],
+    narration: {
+      voice: 'De stem van Athr — door AI gegenereerde vertelling',
+      segments: [
+        { at: 0, text: 'Je staat voor de Qishlah, en wat je ziet is geen enkel gebouw maar een hele stad binnen één muur.' },
+        { at: 12, text: 'Honderdtweeënveertig vertrekken over twee verdiepingen, acht torens, een moskee en een binnenplaats in het midden.' },
+        { at: 26, text: 'Ga door de poort naar binnen en blijf even op de binnenplaats staan: de arcades lopen evenwijdig en de vertrekken zijn identiek.' },
+        { at: 41, text: 'Dat is juist wat haar bijzonder maakt: leem gebouwd met de liniaal, niet stukje bij beetje uitgebreid zoals gebruikelijk was.' },
+        { at: 56, text: 'Volg nu met je ogen de ramen van de torens: elk raam staat onder een andere hoek dan zijn buurman.' },
+        { at: 70, text: 'Tel ze gerust na: rond de vesting vind je geen enkele dode hoek.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Rechthoekige leemvesting · Qishlah',
+      evidence: [
+        'Een lange rechthoekige leemgevel met een regelmatig ritme van ramen',
         'Cilindrische hoektorens met driehoekige schietgaten',
         'Gekanteelde borstweringen, kenmerkend voor de Najd-architectuur',
       ],
@@ -230,5 +288,137 @@ export default {
         'Aardewerken vaas met geometrisch Najd-decor',
       ],
     },
+  },
+
+  shuwaymis: {
+    name: 'De rotstekeningen van Shuwaymis',
+    shortName: 'Shuwaymis',
+    subtitle: 'De bergen al-Manjur en Raat · UNESCO-werelderfgoed',
+    tagline: 'De andere helft van de UNESCO-inschrijving, in dalen die alleen bereikt worden door wie er doelbewust heen gaat.',
+    era: '~10.000 jaar geleden (neolithicum)',
+    city: 'Shuwaymis, ten zuidwesten van Hail',
+    ticket: 'Bezoek uitsluitend met een erkende gids · vooraf regelen is noodzakelijk',
+    story: [
+      {
+        heading: 'De vergeten helft van de inschrijving',
+        body: 'Toen UNESCO in 2015 «de rotskunst in de regio Hail» op de Werelderfgoedlijst plaatste, gold die inschrijving niet voor Jubbah alleen maar voor twee locaties: de Jabal Umm Sinman bij Jubbah, en de bergen al-Manjur en Raat bij Shuwaymis; Shuwaymis bleef echter altijd de minst bezochte van de twee, afgelegen en moeilijk te bereiken, zodat de gravures er ongeschonden bleven en nauwelijks zijn aangetast — vandaag behoren zij tot de best bewaarde neolithische rotskunst van het hele schiereiland.',
+      },
+      {
+        heading: 'Dalen die je leest als bladzijden',
+        body: 'De gravures van Shuwaymis liggen niet op één wand zoals in Jubbah, maar zijn verspreid over de flanken van smalle, diepe dalen, en terwijl je ertussen loopt onthult zich het ene paneel na het andere: kudden oerossen, leeuwen, luipaarden en struisvogels, mensfiguren die met pijl en boog jagen, en volledige taferelen in plaats van losse tekens — sommige panelen vertellen één gebeurtenis van begin tot eind.',
+      },
+      {
+        heading: 'De hond die de geschiedenis veranderde',
+        body: 'Juist in Shuwaymis werden enkele van de oudste bekende afbeeldingen van gedomesticeerde honden ter wereld gevonden: honden met spitse oren en gekrulde staarten rond een jager die zijn boog spant, sommige met lijnen aan hem verbonden die als riemen zijn geduid; klopt die duiding, dan leggen deze wanden een van de belangrijkste momenten in de verhouding tussen mens en dier vast, ruim achtduizend jaar geleden.',
+      },
+      {
+        heading: 'Waarom juist hier',
+        body: 'Dat alles zich op deze wanden verdringt heeft één oorzaak: Shuwaymis was een ontmoetingsplaats van water, want dalen die van de vulkanische lavavelden afdalen komen hier samen in geulen die na regen water vasthouden, zodat de dieren kwamen en de jagers achter hen aan; de gravures zijn dus niets anders dan het register van wie hier stond te wachten — en de wand waarop je tekent is de wand waaronder je schuilt.',
+      },
+    ],
+    facts: [
+      { label: 'UNESCO-inschrijving', value: '2015 (samen met Jubbah)' },
+      { label: 'De twee onderdelen', value: 'Jabal al-Manjur · Jabal Raat' },
+      { label: 'Afstand vanaf Hail', value: '250 km naar het zuidwesten' },
+      { label: 'Toegang', value: 'erkende gids · deel van de route onverhard' },
+    ],
+    tips: [
+      'Regel het bezoek enkele dagen voor vertrek met de erfgoedautoriteit of een erkende gids: de site is niet vrij toegankelijk zoals Jubbah.',
+      'Reserveer er een hele dag voor in plaats van er een tussenstop van te maken, want de heen- en terugreis alleen al duurt zo’n zes uur.',
+      'Neem meer brandstof en water mee dan je denkt nodig te hebben: het laatste tankstation ligt ver weg en in de dalen valt het bereik weg.',
+      'Het lopen tussen de panelen gaat over grind en ongelijke rots, dus dichte schoenen zijn hier een noodzaak en geen keuze.',
+    ],
+    narration: {
+      voice: 'De stem van Athr — door AI gegenereerde vertelling',
+      segments: [
+        { at: 0, text: 'Welkom in Shuwaymis. Je hebt een lange weg afgelegd om hier te komen, dus haal adem en kijk om je heen.' },
+        { at: 13, text: 'Deze dalen vormen de andere helft van de UNESCO-inschrijving die je met Jubbah deelt, en de minst bezochte van de twee.' },
+        { at: 28, text: 'Weinig bezoekers is een zegen voor de steen: wat je hier ziet is gaver dan op welke andere plek ook.' },
+        { at: 43, text: 'Loop langzaam door het dal, want de panelen verschijnen niet in één keer maar het ene na het andere.' },
+        { at: 58, text: 'Zoek het tafereel van de jager, met om hem heen honden met spitse oren en gekrulde staarten.' },
+        { at: 73, text: 'Zij behoren tot de oudste afbeeldingen van gedomesticeerde honden ter wereld, achtduizend jaar geleden gekerfd.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Rotskunst in een dal · Shuwaymis',
+      evidence: [
+        'Kloptechniek op een dalwand in plaats van een open rotswand',
+        'Samengestelde jachttaferelen in plaats van losse figuren',
+        'Donkere woestijnvernis die door het kloppen wordt doorbroken',
+      ],
+    },
+  },
+}
+
+/* De panelen — de laag onder de locatie: niet «je bent in Jubbah», maar «dit is wat er op deze steen staat». */
+export const panels = {
+  'jubbah-p1': {
+    name: 'De kameelkaravaan',
+    story:
+      'Kamelen achter elkaar, op één rotswand geslagen — het meest voorkomende motief van Jubbah en tegelijk het jongste. Van de 1.944 diergravures die op de Jabal Umm Sinman zijn geteld, zijn er 1.378 kameel: zeven van de tien. Dat was geen kwestie van smaak. De kameel kwam laat in het leven van de mens hier: hij werd zo’n drieduizend jaar geleden gedomesticeerd, en werd toen het dier dat men kerfde omdat hij het dier was waarvan men leefde.',
+    look: 'Volg de lijnen van de poten: de late kamelen zijn met een snelle, samenvattende haal gezet, niet met de anatomische precisie van de oerossen die duizenden jaren ouder zijn.',
+  },
+
+  'jubbah-p2': {
+    name: 'De koning van Jubbah',
+    story:
+      'Het beroemdste beeld van Jubbah, waarvoor bezoekers van de andere kant van de wereld komen. Een grote mensfiguur, gekerfd met een in de rotskunst zeldzame realistische precisie: een speer in zijn rechterhand, iets wat op een kroon lijkt op zijn hoofd, een halssnoer om zijn hals, een gordel om zijn middel — en vóór hem een kleinere figuur, die men als dienaar of gevolg heeft gelezen. De mensen hier noemen hem «de koning»; archeologen noemen hem «een figuur met gezag», en dat is de nauwkeuriger formulering: de gravure vertelt ons niet wie hij was, zij vertelt alleen dat wie haar kerfde wilde dat men zag dat hij niet was als de anderen.',
+    look: 'Vergelijk zijn formaat met dat van de figuur die voor hem staat. Het verschil in grootte is hier geen tekenfout maar een taal: de grootste heeft de hoogste rang — de oudste manier die de mens vond om «deze telt» te zeggen.',
+  },
+
+  'jubbah-p3': {
+    name: 'De steenbok met de lange horens',
+    story:
+      'Een steenbok met twee lange horens die in een wijde boog naar achteren krullen. De steenbok is een van de meest gekerfde dieren van het hele schiereiland, en hij was niet alleen een prooi: zijn beeld keert zo vaak terug bij water en op hoogten dat onderzoekers vermoeden dat hij voor wie hem kerfde een betekenis had die verder ging dan vlees — vruchtbaarheid, voortbestaan, of iets wat wij niet kennen. De Nubische steenbok leeft tot op vandaag in de bergen van deze streek, en is daarmee een van de weinige dieren op deze wanden die niet is uitgestorven.',
+    look: 'Kijk naar de lengte van de horens ten opzichte van het lichaam: de overdrijving is bedoeld. Het is de horen die het dier definieert in de ogen van wie het kerft, niet zijn werkelijke maten.',
+  },
+
+  'jubbah-p4': {
+    name: 'De enkele kameel',
+    story:
+      'Eén kameel die de hele wand voor zich alleen heeft. Een losse gravure is iets anders dan een kameel in een karavaan: de karavaan is een bericht over rijkdom of over een reis, de enkeling staat dichter bij een handtekening — een bepaald dier, dat zijn eigenaar kende. Bij veel kamelen van Jubbah staan Thamudische inscripties met namen, zodat sommige ervan bijna een in steen gekerfd eigendomsbewijs lijken.',
+    look: 'Zoek rond de kameel naar kleine, verspreide letters. Waar in Jubbah een kameel staat, staat meestal ook een naam.',
+  },
+
+  'jubbah-p5': {
+    name: 'De figuur die onbeslist bleef',
+    story:
+      'Een figuur waarover men het niet eens wordt. Dat is geen tekort in de documentatie maar een gewone situatie in de rotskunst: sommige gravures zijn door erosie aangetast, andere zijn over een oudere gravure heen gezet zodat de lijnen door elkaar lopen, en weer andere zijn getekend in een stijl waarvan wij de sleutel niet meer hebben. Eerlijkheid is hier nuttiger dan gissen — wat wij niet weten hoort bij de kennis, en de helft van wat in Jubbah staat is nog niet grondig bestudeerd.',
+    look: 'Kom dichterbij en loop dan weer terug. Veel raadselachtige figuren zijn van dichtbij troebel en van een afstand helder, want zij zijn gekerfd om van ver gezien te worden.',
+  },
+
+  'jubbah-p6': {
+    name: 'De leeuw en zijn temmer',
+    story:
+      'Een leeuw, en daarnaast een mensfiguur die hem aankijkt. De Aziatische leeuw heeft werkelijk in het noorden van Arabië geleefd, tot hij er eeuwen geleden verdween; deze gravure is dus een ooggetuigenverslag en geen verbeelding. Het tafereel zelf — een mens die tegenover een roofdier staat en niet vlucht — is een van de meest omstreden: is het een jacht, een temming, of een ritueel waarin de kerver aanspraak maakt op macht over het beest? Geen tekst legt het uit; de gravure alleen is het verhaal.',
+    look: 'Let op de stand van de armen van de mensfiguur. De richting — naar de leeuw toe of ervandaan — is alles wat de confrontatie van de vlucht scheidt.',
+  },
+
+  'jubbah-p7': {
+    name: 'De drie kamelen en de ruiter',
+    story:
+      'Drie kamelen, helemaal links een man te kameel, ernaast Thamudische inscripties, en op hetzelfde paneel verschijnt het tafereel van de leeuw en zijn temmer. Die opeenstapeling is heel Jubbah in één rots: een scène uit de tijd van de leeuwen, kamelen die duizenden jaren later zijn gekerfd, en letters die een derde passant heeft achtergelaten. Drie tijden, door niets verbonden dan door de wand.',
+    look: 'Zoek het verschil in kleur van het geklopte oppervlak: het oudste neigt naar de kleur van de omringende rots, omdat de donkere woestijnvernis het weer heeft overdekt; het jongste is lichter, omdat de tijd het nog niet heeft ingehaald.',
+  },
+
+  'jubbah-p8': {
+    name: 'De werper en de oeros',
+    story:
+      'Een mensfiguur op ware grootte met een gekromde stok die op een boemerang lijkt, en vóór hem een oeros. De gekromde werpstok is een bekend wapen in de gravures van het schiereiland: je slingert hem, en hij treft de prooi of brengt haar in de war. De oeros is het rund van de vochtige tijd: toen Jubbah een meer was met weiden eromheen, graasden hier kudden waarvan in deze woestijn niets is overgebleven. Dit paneel is dus een tafereel van het dagelijks bestaan, geen versiering.',
+    look: 'Meet de mensfiguur met je eigen lichaam: de neolithische figuren van Jubbah hebben het formaat van een staande mens, en juist daardoor is ervoor staan iets heel anders dan er een foto van bekijken.',
+  },
+
+  'jubbah-p9': {
+    name: 'Kameel en inscriptie',
+    story:
+      'Een kameel met Thamudische inscripties ernaast. Alleen al op de Jabal Umm Sinman zijn 5.431 Thamudische inscripties geteld — meer dan alle diergravures samen. Het Thamudisch is een oud Noord-Arabisch schrift, en wat hier het vaakst mee geschreven is, zijn namen, afstammingen en doorgangsformules: «die en die, zoon van die en die, is hier voorbijgekomen». Het oudste wat mensen op deze berg schreven is dus het eenvoudigste wat mensen altijd schrijven: ik ben hier geweest.',
+    look: 'De letters zijn veel kleiner dan de tekeningen en minder diep gezet, dus zoek ze in de lege ruimten tussen de dieren en niet in het midden van het paneel.',
+  },
+
+  'jubbah-p10': {
+    name: 'De troep struisvogels',
+    story:
+      'Een groep struisvogels, samen gekerfd, met Thamudische inscripties eromheen. De Arabische struisvogel heeft duizenden jaren in deze woestijn geleefd en stierf in de twintigste eeuw uit; het laatste bekende exemplaar werd in de jaren veertig geschoten. Dit paneel is dus het portret van een dier dat niet meer bestaat, gekerfd door iemand die het elke dag zag en er geen moment aan dacht dat hij een einde vastlegde.',
+    look: 'Tel de vogels: struisvogels worden in groepen gekerfd en niet als losse dieren, omdat zij zo ook werden gezien — de kerver tekent wat hij gewend is, niet wat hij zich verbeeldt.',
   },
 }

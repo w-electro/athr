@@ -38,13 +38,22 @@ describe('طبقة التعرّف على الصور', () => {
     expect(result.confidence).toBeGreaterThan(0.5)
   })
 
-  it('يطابق بالكلمات المفتاحية', async () => {
-    const result = await recognizeSite(
-      { instant: true, hint: 'صورة قصر طيني قديم' },
+  /**
+   * أَعَيْرِف والقشلة كلاهما «قصر طينيّ»، فالتمييز بينهما يحتاج كلمةً
+   * تخصّ أحدهما: التلّة لأَعَيْرِف، والفناء والثكنة للقشلة.
+   */
+  it('يميّز بالكلمات المفتاحية بين المعلمين الطينيين', async () => {
+    const aarif = await recognizeSite(
+      { instant: true, hint: 'حصن على قمة تلّة صخرية' },
       { provider: 'mock' },
     )
+    expect(aarif.siteId).toBe('aarif')
 
-    expect(result.siteId).toBe('qishlah')
+    const qishlah = await recognizeSite(
+      { instant: true, hint: 'ثكنة بفناء واسع اسمها القشلة' },
+      { provider: 'mock' },
+    )
+    expect(qishlah.siteId).toBe('qishlah')
   })
 
   it('يقرّ بعدم التعرّف بدل التخمين', async () => {

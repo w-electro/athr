@@ -107,19 +107,55 @@ export default {
     acrossOne: 'sa isang araw lang',
     edit: 'I-edit',
     weather: 'Pagsusuri ng panahon',
-    travel: '{minutes} minutong biyahe',
+    travel: '{minutes} minutong biyahe · {km} km',
+    travelFromHail: 'Mula Hail: {minutes} minuto · {km} km',
     until: 'hanggang {time}',
     excluded: 'Hindi kasya sa biyaheng ito',
     excludedHint: 'Magdagdag ng isang araw o palitan ang bilis ng Siksik.',
-    note: 'Datos ng panahon mula sa Open-Meteo.',
+    note: 'Datos ng panahon mula sa Open-Meteo · Kinalkula ang layo mula sa koordinado ng mga lugar.',
     noteOffline: 'Hindi makuha ang panahon — ipinapakita ang karaniwang klima ng Hail.',
     day: 'Araw {n}',
+    openMaps: 'Buksan sa mapa',
+    navigate: 'Mag-navigate papunta rito',
+    routeDay: 'Buong ruta ng araw sa mapa',
+    dayDistance: 'Biyahe ngayong araw: {km} km',
     step: {
       prefs: 'Binabasa ang iyong interes at tagal',
       weather: 'Sinusuri ang taya ng panahon sa Hail',
-      order: 'Inaayos ang mga lugar ayon sa pinakamainam na oras',
+      order: 'Inaayos ang mga lugar ayon sa lapit at pinakamainam na oras',
     },
   },
+
+  access: {
+    offRoad: 'May bahagi ng daan na hindi semento — mainam ang 4×4',
+    guide: 'Bisitahin kasama ang akreditadong gabay · ayusin nang maaga',
+    farDrive: 'Mga {hours} oras na biyahe bawat direksyon',
+  },
+
+  /*
+    Mga panel — mas pinong antas kaysa sa lugar. Alam na ng bisitang nasa
+    Jubbah siya; ang pinunta niya ay ang mismong panel na ito.
+  */
+  panel: {
+    heading: 'Mga panel sa lugar na ito',
+    count: '{count} nadokumentong panel',
+    look: 'Hanapin',
+    inscriptions: 'May mga inskripsiyong Thamudiko',
+    famous: 'Ang pinakatanyag sa Jubbah',
+    atSite: 'Isang panel sa {site}',
+    unknownSubject: 'Hindi pa natutukoy ang paksa',
+  },
+
+  /* Mga panahon ng pag-ukit. Siglo ang naghihiwalay sa kanila, hindi istilo. */
+  era: {
+    neolithic: 'Neolitiko · mga sampung libong taon na ang nakalilipas',
+    later: 'Matapos paamuin ang kamelyo · mga tatlong libong taon na ang nakalilipas',
+    thamudic: 'Panahong Thamudiko · mga siglo bago ang Islam',
+    neolithicShort: 'Neolitiko',
+    laterShort: 'Huling panahon',
+    thamudicShort: 'Thamudiko',
+  },
+
   interest: {
     history: 'Kasaysayan at arkeolohiya',
     nature: 'Kalikasan at pakikipagsapalaran',

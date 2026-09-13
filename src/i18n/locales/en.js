@@ -116,18 +116,53 @@ export default {
     acrossOne: 'in a single day',
     edit: 'Edit',
     weather: 'Weather check',
-    travel: '{minutes} min travel',
+    travel: '{minutes} min travel · {km} km',
+    travelFromHail: 'From Hail: {minutes} min · {km} km',
     until: 'until {time}',
     excluded: 'Did not fit this trip',
     excludedHint: 'Add a day, or switch the pace to Packed.',
-    note: 'Weather data from Open-Meteo.',
+    note: 'Weather data from Open-Meteo · Distances calculated from site coordinates.',
     noteOffline: 'Could not fetch weather — showing Hail climate averages.',
     day: 'Day {n}',
+    openMaps: 'Open in maps',
+    navigate: 'Navigate here',
+    routeDay: 'Whole day’s route in maps',
+    dayDistance: 'Today’s driving: {km} km',
     step: {
       prefs: 'Reading your interests and trip length',
       weather: 'Checking the Hail forecast',
-      order: 'Ordering sites by their best hour',
+      order: 'Ordering sites by proximity and best hour',
     },
+  },
+
+  access: {
+    offRoad: 'Part of the route is unpaved — a 4×4 is advised',
+    guide: 'Visit with an accredited guide · arrange in advance',
+    farDrive: 'About {hours} hours of driving each way',
+  },
+
+  /*
+    Panels — a finer layer than the site. The visitor already knows they are at
+    Jubbah; what they came for is this particular panel and what is on it.
+  */
+  panel: {
+    heading: 'Panels at this site',
+    count: '{count} documented panels',
+    look: 'Look for',
+    inscriptions: 'Carries Thamudic inscriptions',
+    famous: 'The most famous at Jubbah',
+    atSite: 'A panel at {site}',
+    unknownSubject: 'Subject undetermined',
+  },
+
+  /* Carving eras. What separates them is centuries, not style. */
+  era: {
+    neolithic: 'Neolithic · about ten thousand years ago',
+    later: 'After camel domestication · about three thousand years ago',
+    thamudic: 'Thamudic period · centuries before Islam',
+    neolithicShort: 'Neolithic',
+    laterShort: 'Later',
+    thamudicShort: 'Thamudic',
   },
 
   interest: {

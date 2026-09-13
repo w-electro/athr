@@ -2,7 +2,7 @@
  * سجلّ المحتوى التراثي المترجم — بتحميل كسول لكل لغة على حدة.
  *
  * ── لماذا كسول ──────────────────────────────────────────────────────────
- * قصص المواقع الأربعة بـ28 لغة تزن نحو 700 كيلوبايت. لو استوردناها كلها
+ * قصص المواقع الستّة بـ28 لغة تزن نحو مِيغابايت. لو استوردناها كلها
  * دفعةً واحدة لحمّل كلُّ زائر محتوى 27 لغة لن يقرأها أبدًا — وهذا تحديدًا
  * ما لا يُحتمل في الموقع الذي بُني له التطبيق: جبة تبعد 95 كم عن حائل
  * والتغطية فيها ضعيفة.
@@ -23,12 +23,25 @@ export const CONTENT_LANGUAGE_CODES = Object.keys(loaders).map((path) => path.sl
 
 const cache = new Map()
 
+/*
+  اللوحات في تصدير مستقلّ (`export const panels`) داخل ملف اللغة نفسه، لا
+  في التصدير الافتراضي. فالافتراضي خريطةُ «معرّف موقع ← محتوى»، وحشرُ
+  مفتاحٍ اسمه panels فيها يجعل كل من يمرّ على مفاتيحه يحسبه موقعًا.
+  وبقاؤهما في ملفٍ واحد يبقي الحزمة الكسولة واحدة لكل لغة.
+*/
+const panelCache = new Map()
+
 /**
  * المحتوى المحمَّل لهذه اللغة، أو null إن لم يُحمَّل بعد.
  * متزامنة عمدًا: تناديها sites.js أثناء العرض ولا يمكنها الانتظار.
  */
 export function getLoadedContent(code) {
   return cache.get(code) ?? null
+}
+
+/** ترجمات اللوحات المحمَّلة لهذه اللغة، أو null. متزامنة كسابقتها. */
+export function getLoadedPanels(code) {
+  return panelCache.get(code) ?? null
 }
 
 /** يحمّل محتوى لغة واحدة ويخزّنه. آمن للاستدعاء المتكرر. */
@@ -41,6 +54,9 @@ export async function loadContent(code) {
 
   const module = await load()
   cache.set(code, module.default)
+  // اللوحات اختيارية: لغةٌ لم تُترجَم لوحاتُها بعد تعرضها بالعربية
+  // ولا تُسقط محتوى مواقعها المترجم معها
+  if (module.panels) panelCache.set(code, module.panels)
   return module.default
 }
 
@@ -56,4 +72,9 @@ export async function primeContentCache() {
 /** لقطة مما هو محمَّل الآن — تستخدمها الاختبارات للفحص. */
 export function loadedContentMap() {
   return Object.fromEntries(cache)
+}
+
+/** لقطة ترجمات اللوحات المحمَّلة — للاختبارات. */
+export function loadedPanelsMap() {
+  return Object.fromEntries(panelCache)
 }

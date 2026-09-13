@@ -58,42 +58,42 @@ export default {
     },
   },
 
-  qishlah: {
-    name: 'Twierdza Aarif i Kiszla',
-    shortName: 'Aarif i Kiszla',
-    subtitle: 'Historyczne serce Hail · dwa sąsiadujące zabytki',
-    tagline: 'Gliniana twierdza czuwająca nad miastem z góry i forteca o 142 pomieszczeniach strzegąca go z dołu.',
-    era: 'Aarif: ponad 200 lat · Kiszla: 1941',
+  aarif: {
+    name: 'Twierdza Aarif',
+    shortName: 'Aarif',
+    subtitle: 'Twierdza na wzgórzu · ponad dwa stulecia',
+    tagline: 'Gliniana twierdza na skalistym szczycie, z której widać każdą drogę wiodącą do Hail.',
+    era: 'Ponad 200 lat',
     city: 'Centrum Hail',
-    ticket: 'Wstęp wolny · Kiszla otwiera się wieczorem',
+    ticket: 'Wstęp wolny',
     story: [
       {
         heading: 'Oko Hail, które nigdy nie zasypia',
-        body: 'Na skalistym wzgórzu górującym nad miastem stoi twierdza Aarif, wzniesiona przez mieszkańców Hail ponad dwa wieki temu, by czuwać nad drogami do niego prowadzącymi; z jej wież straże śledziły karawany nadciągające szlakiem Darb Zubajda i rozpalały ognie w noce ramadanu, oznajmiając przerwanie postu — zwyczaj wciąż żywy dziś w armacie, którą wystrzeliwuje się z tego samego wzgórza.',
+        body: 'Na szczycie skalistego wzgórza górującego nad miastem stoi twierdza Aarif, wzniesiona przez mieszkańców Hail ponad dwa wieki temu, by czuwać nad drogami do niego prowadzącymi; z jej wież straże śledziły karawany nadciągające szlakiem Darb Zubajda i rozpalały ognie w noce ramadanu, oznajmiając przerwanie postu — zwyczaj wciąż żywy dziś w armacie, którą wystrzeliwuje się z tego samego wzgórza.',
       },
       {
         heading: 'Glina, która wytrzymała dwa stulecia',
         body: 'Twierdzę wzniesiono z gliny zmieszanej ze słomą, o murach grubszych niż metr, wzmocnionych pniami tamaryszku, a technika ta wcale nie jest tak prymitywna, na jaką wygląda: gruby mur gliniany zatrzymuje chłód nocy na cały dzień, a ciepło dnia na całą noc, tworząc naturalną klimatyzację w sercu pustyni, gdzie latem przekracza się pięćdziesiąt stopni.',
       },
       {
-        heading: 'Kiszla: miasto wewnątrz muru',
-        body: 'Zejdź ze wzgórza na wschód, a znajdziesz dokładne przeciwieństwo twierdzy: Kiszla to ogromna prostokątna forteca, którą król Abdulaziz kazał wznieść w 1941 roku jako koszary, licząca 142 pomieszczenia na dwóch kondygnacjach, osiem wież strażniczych w narożnikach i wzdłuż boków, meczet wewnątrz oraz rozległy dziedziniec przecięty arkadami; przejście jej długimi glinianymi korytarzami przypomina wędrówkę przez miasto w miniaturze.',
+        heading: 'Siedemdziesiąt stopni do najlepszego widoku',
+        body: 'Na górę wchodzi się wyłącznie pieszo, bo wykute we wzgórzu schody liczą około siedemdziesięciu stopni, które pokonasz w kilka minut; a gdy tylko staniesz na dachu, całe Hail rozłoży się pod tobą: na zachodzie Kiszla, gliniany prostokąt o wyraźnych krawędziach, za nią góry Adża zasłaniające horyzont, a pomiędzy nimi współczesne miasto.',
       },
       {
-        heading: 'Od koszar do pamięci',
-        body: 'Gdy skończyła się jej rola wojskowa, Kiszla stała się jednym z najważniejszych miejsc dziedzictwa Hail, a na jej dziedzińcu odbywają się dziś wydarzenia kulturalne i jarmarki rzemieślnicze; jeden szczegół wart jest uwagi: każde okno w ośmiu wieżach osadzono pod innym kątem, tak by wspólnie pokrywały każde podejście do fortecy, nie zostawiając ani jednego martwego pola.',
+        heading: 'Wzgórze, które wybrało samo siebie',
+        body: 'Wybór tego wzgórza nie był kwestią architektonicznego gustu: to jedyne naturalne wzniesienie pośrodku równiny Hail, a trzydzieści metrów nad nią wystarcza, by objąć wzrokiem horyzont we wszystkich kierunkach; jego podstawę stanowi zaś lita skała, pod którą nie da się przekopać podziemnego chodnika ani oprzeć o nią drabiny czy wieży oblężniczej. Potem lata zatoczyły koło: miasto rozlało się wokół wzgórza i dalej, aż twierdza wzniesiona po to, by pilnować pustyni, spogląda dziś na zatłoczone ulice — to samo miejsce, funkcja odwrócona.',
       },
     ],
     facts: [
-      { label: 'Pomieszczenia w Kiszli', value: '142' },
-      { label: 'Wieże strażnicze', value: '8' },
-      { label: 'Budowa Kiszli', value: '1941 (1360 AH)' },
+      { label: 'Szacowany wiek', value: 'ponad 200 lat' },
+      { label: 'Wysokość nad miastem', value: 'około 30 m' },
+      { label: 'Wejście', value: 'wyłącznie schody · brak drogi dla samochodów' },
       { label: 'Materiały', value: 'glina, słoma, pnie tamaryszku' },
     ],
     tips: [
-      'Wejdź na twierdzę Aarif pół godziny przed zachodem słońca: widok na miasto to najlepsze zdjęcie, jakie zrobisz w Hail.',
-      'W ramadanie ze wzgórza wystrzeliwuje się armatę; jeśli odwiedzasz w tym czasie, przyjdź wcześnie, bo miejsce się zapełnia.',
-      'Gliniane posadzki Kiszli są nierówne — uważaj, jeśli jesteś z dziećmi lub starszymi osobami.',
+      'Wejdź na wzgórze pół godziny przed zachodem słońca: widok na miasto ze szczytu to najlepsze zdjęcie, jakie zrobisz w Hail.',
+      'W ramadanie ze wzgórza wystrzeliwuje się armatę; jeśli odwiedzasz w tym czasie, przyjdź wcześnie, bo miejsce szybko się zapełnia.',
+      'Nie ma windy ani drogi dla samochodów, a ostatni odcinek schodów jest stromy — weź to pod uwagę, jeśli jesteś ze starszymi osobami.',
     ],
     narration: {
       voice: 'Głos Athr — narracja wygenerowana przez SI',
@@ -102,14 +102,72 @@ export default {
         { at: 14, text: 'Wchodząc, zwróć uwagę na grubość muru po lewej: ponad metr gliny i słomy.' },
         { at: 28, text: 'Ta grubość służy nie tylko obronie, ale naturalnemu chłodzeniu: chłód nocy pozostaje w glinie aż do południa.' },
         { at: 44, text: 'Z tej wieży strażnik wypatrywał niegdyś karawan, a stąd do dziś wystrzeliwuje się armatę ramadanu.' },
-        { at: 60, text: 'Teraz odwróć się na wschód: ten wielki gliniany prostokąt to Kiszla, ze swoimi 142 pomieszczeniami i ośmioma wieżami.' },
-        { at: 76, text: 'Gdy wejdziesz do środka, policz kąty okien: wokół fortecy nie ma ani jednego martwego pola.' },
+        { at: 60, text: 'Teraz odwróć się na zachód: ten wielki gliniany prostokąt to Kiszla, oddalona zaledwie o półtora kilometra.' },
+        { at: 76, text: 'Za nią góry Adża zamykają horyzont, a pomiędzy nimi rozciąga się przed twoimi oczami całe Hail.' },
       ],
     },
     scan: {
-      matchLabel: 'Obronna architektura gliniana · Kiszla / twierdza Aarif',
+      matchLabel: 'Gliniana twierdza na skalistym szczycie · Aarif',
       evidence: [
+        'Naturalna skalna podstawa, na której wznosi się budowla',
         'Gliniane mury o pochyleniu zwężającym się ku górze',
+        'Blankowane attyki charakterystyczne dla architektury Nadżdu',
+      ],
+    },
+  },
+
+  qishlah: {
+    name: 'Twierdza Kiszla',
+    shortName: 'Kiszla',
+    subtitle: '142 pomieszczenia · 1360 AH / 1941',
+    tagline: 'Największa gliniana budowla Arabii: całe miasto wewnątrz jednego muru.',
+    era: '1360 AH / 1941',
+    city: 'Centrum Hail',
+    ticket: 'Wstęp wolny · otwierana wieczorem',
+    story: [
+      {
+        heading: 'Miasto wewnątrz muru',
+        body: 'Kiszla to ogromna prostokątna forteca, którą król Abdulaziz kazał wznieść w 1360 roku AH jako koszary, licząca 142 pomieszczenia na dwóch kondygnacjach, osiem wież strażniczych w narożnikach i wzdłuż boków, meczet wewnątrz oraz rozległy dziedziniec przecięty arkadami; przejście jej długimi glinianymi korytarzami przypomina raczej wędrówkę przez miasto w miniaturze niż zwiedzanie jednego budynku.',
+      },
+      {
+        heading: 'Glina budowana od linijki',
+        body: 'To, co odróżnia Kiszlę od dawnej architektury glinianej, polega na tym, że wzniesiono ją według ścisłego planu geometrycznego, a nie przez stopniowe rozrastanie się: arkady biegną równolegle, pomieszczenia mają jednakowe wymiary, a wieże rozmieszczono regularnie; stoi więc dokładnie na granicy między tradycyjnym budownictwem Nadżdu a planowaną architekturą nowoczesną, wzniesiona z tej samej gliny, słomy i pni tamaryszku, z których dwa wieki wcześniej zbudowano Aarif.',
+      },
+      {
+        heading: 'Osiem wież bez jednego martwego pola',
+        body: 'Najbardziej uderzające w ośmiu wieżach jest to, że każde okno osadzono w nich pod innym kątem niż sąsiednie, tak by wspólnie pokrywały każdy kierunek wokół fortecy, nie zostawiając ani jednego martwego pola; to precyzyjny rachunek wzrokowy wykonany bez nowoczesnych przyrządów geodezyjnych, a możesz sprawdzić go sam, stając na dziedzińcu i śledząc linie widzenia od wieży do wieży.',
+      },
+      {
+        heading: 'Od koszar do pamięci',
+        body: 'Gdy skończyła się jej rola wojskowa, Kiszla stała się jednym z najważniejszych zabytków turystycznych Hail, a na jej dziedzińcu odbywają się dziś wydarzenia kulturalne, jarmarki rzemieślnicze i imprezy festiwalu Hail; budowla wzniesiona po to, by zamknąć się przed ludźmi, stała się miejscem, które bez nich nie ma żadnego sensu.',
+      },
+    ],
+    facts: [
+      { label: 'Liczba pomieszczeń', value: '142' },
+      { label: 'Wieże strażnicze', value: '8' },
+      { label: 'Rok budowy', value: '1360 AH / 1941' },
+      { label: 'Materiały', value: 'glina, słoma, pnie tamaryszku' },
+    ],
+    tips: [
+      'Kiszla otwiera się zwykle wieczorem, uczyń z niej więc zakończenie dnia po zejściu z Aarif — dzieli je tylko półtora kilometra.',
+      'Gliniane posadzki są nierówne, a korytarze słabo oświetlone, więc uważaj na każdy krok, jeśli jesteś z dziećmi lub starszymi osobami.',
+      'Wewnętrzny dziedziniec to najlepsze miejsce do zdjęć po zachodzie słońca, gdy gliniane mury podświetla się od dołu i wydobywa fakturę gliny.',
+    ],
+    narration: {
+      voice: 'Głos Athr — narracja wygenerowana przez SI',
+      segments: [
+        { at: 0, text: 'Stoisz przed Kiszlą, a to, co widzisz, nie jest jednym budynkiem, lecz całym miastem wewnątrz muru.' },
+        { at: 12, text: 'Sto czterdzieści dwa pomieszczenia na dwóch kondygnacjach, osiem wież, meczet i dziedziniec pośrodku.' },
+        { at: 26, text: 'Wejdź przez bramę i stań na chwilę na dziedzińcu: zauważ, że arkady biegną równolegle, a pomieszczenia są identyczne.' },
+        { at: 41, text: 'I to właśnie ją wyróżnia: glina budowana od linijki, a nie rozrastana po trochu, jak było w zwyczaju.' },
+        { at: 56, text: 'Teraz prześledź wzrokiem okna wież: każde z nich osadzono pod innym kątem niż sąsiednie.' },
+        { at: 70, text: 'Policz je, jeśli chcesz: wokół fortecy nie znajdziesz ani jednego martwego pola.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Prostokątna forteca gliniana · Kiszla',
+      evidence: [
+        'Długa prostokątna fasada gliniana o regularnym rytmie okien',
         'Cylindryczne wieże narożne z trójkątnymi strzelnicami',
         'Blankowane attyki charakterystyczne dla architektury Nadżdu',
       ],
@@ -230,5 +288,137 @@ export default {
         'Naczynie ceramiczne z geometrycznym zdobieniem z Nadżdu',
       ],
     },
+  },
+
+  shuwaymis: {
+    name: 'Petroglify z Szuwajmis',
+    shortName: 'Szuwajmis',
+    subtitle: 'Góry al-Mandżur i Raat · światowe dziedzictwo UNESCO',
+    tagline: 'Druga połowa wpisu UNESCO i doliny, do których dociera tylko ten, kto wyruszył po nie umyślnie.',
+    era: '~10 000 lat temu (neolit)',
+    city: 'Szuwajmis, na południowy zachód od Hail',
+    ticket: 'Zwiedzanie wyłącznie z uprawnionym przewodnikiem · wcześniejsze uzgodnienie konieczne',
+    story: [
+      {
+        heading: 'Zapomniana połowa wpisu',
+        body: 'Gdy w 2015 roku UNESCO wpisało „sztukę naskalną regionu Hail” na Listę światowego dziedzictwa, wpis nie dotyczył samej Dżubby, lecz dwóch stanowisk: Dżabal Umm Sinman w Dżubbie oraz gór al-Mandżur i Raat w Szuwajmis; Szuwajmis pozostawało jednak zawsze mniej odwiedzane, odległe i trudno dostępne, dzięki czemu jego ryty zachowały się w lepszym stanie i mniej ucierpiały od ludzkiej ręki — dziś należą do najlepiej zachowanej sztuki neolitycznej na całym półwyspie.',
+      },
+      {
+        heading: 'Doliny czytane jak stronice',
+        body: 'Ryty z Szuwajmis nie znajdują się na jednej ścianie, jak w Dżubbie, lecz rozkładają się po zboczach wąskich, głębokich dolin, a gdy idziesz pomiędzy nimi, odsłania się przed tobą panel za panelem: stada turów, lwy, lamparty i strusie, postacie ludzkie polujące z łukiem oraz całe sceny zamiast rozproszonych znaków — niektóre tablice opowiadają jedno zdarzenie od początku do końca.',
+      },
+      {
+        heading: 'Pies, który zmienił historię',
+        body: 'To właśnie w Szuwajmis odnaleziono jedne z najstarszych znanych na świecie przedstawień psów udomowionych: psy o postawionych uszach i podwiniętych ogonach otaczające myśliwego napinającego łuk, a część z nich połączono z nim liniami, które odczytano jako smycze; jeśli ta interpretacja jest trafna, ściany te utrwalają jedną z najważniejszych chwil w relacji człowieka ze zwierzęciem, sprzed ponad ośmiu tysięcy lat.',
+      },
+      {
+        heading: 'Dlaczego właśnie tutaj',
+        body: 'Przyczyną tego nagromadzenia na jednej ścianie było to, że Szuwajmis stanowiło miejsce spotkania wód: doliny schodzące z wulkanicznych pól lawowych łączą się tu w koryta zatrzymujące wodę po deszczu, więc przychodziły zwierzęta, a za nimi myśliwi; ryty są zatem po prostu rejestrem tych, którzy stali tu i czekali — a ściana, na której rysujesz, jest ścianą, w której cieniu się chronisz.',
+      },
+    ],
+    facts: [
+      { label: 'Wpis UNESCO', value: '2015 (wraz z Dżubbą)' },
+      { label: 'Dwa składniki', value: 'Dżabal al-Mandżur · Dżabal Raat' },
+      { label: 'Odległość od Hail', value: '250 km na południowy zachód' },
+      { label: 'Dojazd', value: 'uprawniony przewodnik · część trasy nieutwardzona' },
+    ],
+    tips: [
+      'Uzgodnij wizytę na kilka dni przed wyjazdem z urzędem dziedzictwa lub uprawnionym przewodnikiem: stanowisko nie jest dostępne swobodnie, jak Dżubba.',
+      'Przeznacz na nie cały osobny dzień, a nie przystanek w planie dnia, bo sam dojazd tam i z powrotem zajmuje około sześciu godzin.',
+      'Zabierz więcej paliwa i wody, niż potrzebujesz: ostatnia stacja przed stanowiskiem jest daleko, a w dolinach znika zasięg.',
+      'Chodzenie między tablicami odbywa się po żwirze i nierównej skale, więc pełne buty są tu koniecznością, a nie wyborem.',
+    ],
+    narration: {
+      voice: 'Głos Athr — narracja wygenerowana przez SI',
+      segments: [
+        { at: 0, text: 'Witaj w Szuwajmis. Przebyłeś długą drogę, by tu dotrzeć, więc odetchnij i rozejrzyj się wokół.' },
+        { at: 13, text: 'Te doliny to druga połowa wpisu UNESCO, który dzielisz z Dżubbą, i zarazem mniej odwiedzana z dwóch części.' },
+        { at: 28, text: 'Mała liczba odwiedzających to błogosławieństwo dla kamienia: to, co tu widzisz, jest nienaruszone bardziej niż gdziekolwiek indziej.' },
+        { at: 43, text: 'Idź doliną powoli, bo tablice nie pojawiają się naraz, lecz jedna po drugiej.' },
+        { at: 58, text: 'Poszukaj sceny myśliwego, a wokół niego psów o postawionych uszach i podwiniętych ogonach.' },
+        { at: 73, text: 'Należą do najstarszych znanych na świecie wizerunków psów udomowionych, wyrytych osiem tysięcy lat temu.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Sztuka naskalna w dolinie · Szuwajmis',
+      evidence: [
+        'Uderzanie w ścianę doliny, a nie w odsłoniętą ścianę skalną',
+        'Złożone sceny łowieckie zamiast rozproszonych postaci',
+        'Ciemny werniks pustynny przecięty przez ryty',
+      ],
+    },
+  },
+}
+
+/* Panele — warstwa drobniejsza niż miejsce: nie „jesteś w Dżubbie”, lecz „oto, co jest na tej skale”. */
+export const panels = {
+  'jubbah-p1': {
+    name: 'Karawana wielbłądów',
+    story:
+      'Wielbłądy jeden za drugim, wykute na jednej ścianie — najczęstszy motyw Dżubby, a zarazem najmłodszy. Spośród 1944 rytów zwierzęcych policzonych na Dżabal Umm Sinman aż 1378 to wielbłądy, czyli siedem na dziesięć. Nie była to kwestia gustu: wielbłąd wszedł w życie tutejszego człowieka późno. Udomowiono go około trzech tysięcy lat temu i wtedy stał się zwierzęciem, które się ryje, bo stał się zwierzęciem, z którego się żyje.',
+    look: 'Prześledź linie nóg: późne wielbłądy wykuwano szybkim, skrótowym pociągnięciem, bez anatomicznej precyzji, jaką widzisz u turów starszych od nich o tysiące lat.',
+  },
+
+  'jubbah-p2': {
+    name: 'Król Dżubby',
+    story:
+      'Najsłynniejszy wizerunek w Dżubbie, po który przyjeżdżają ludzie z drugiego końca świata. Wielka postać ludzka, wykuta z rzadką w sztuce naskalnej realistyczną dokładnością: włócznia w prawej dłoni, na głowie coś na kształt korony, na szyi naszyjnik, w pasie pas — a przed nią postać mniejsza, odczytywana jako sługa lub towarzysz. Tutejsi ludzie nazywają go „królem”, archeolodzy mówią o „postaci sprawującej władzę”, i to określenie jest ściślejsze: ryt nie mówi nam, kim on był, mówi tylko, że ten, kto go wykuł, chciał, by wiedziano, iż nie jest on taki jak inni.',
+    look: 'Porównaj jego rozmiar z postacią stojącą przed nim. Różnica wielkości nie jest tu błędem rysunku, lecz językiem: większy znaczy wyższy rangą — to najstarszy sposób, w jaki człowiek nauczył się mówić „ten jest ważny”.',
+  },
+
+  'jubbah-p3': {
+    name: 'Koziorożec o długich rogach',
+    story:
+      'Koziorożec o dwóch długich rogach wygiętych do tyłu w szerokim łuku. Koziorożec należy do najczęściej rytych zwierząt całego Półwyspu Arabskiego i nie był wyłącznie zwierzyną łowną: jego wizerunek powtarza się przy wodzie i na wyniesieniach tak uporczywie, że badacze przypuszczają, iż dla rytowników znaczył coś więcej niż mięso — płodność, przetrwanie albo coś, czego nie znamy. Koziorożec nubijski wciąż żyje w górach tego regionu i jest jednym z niewielu zwierząt z tych ścian, które nie wymarło.',
+    look: 'Zmierz wzrokiem długość rogów w stosunku do ciała: przesada jest zamierzona, bo w oczach rytownika to róg określa zwierzę, a nie jego rzeczywiste proporcje.',
+  },
+
+  'jubbah-p4': {
+    name: 'Samotny wielbłąd',
+    story:
+      'Jeden wielbłąd zajmujący całą ścianę. Ryt pojedynczy to co innego niż wielbłąd w karawanie: karawana jest wiadomością o bogactwie albo o podróży, pojedynczy zwierz bliższy jest podpisowi — to konkretne zwierzę, które jego właściciel znał. Przy wielu wielbłądach z Dżubby wyryto inskrypcje tamudejskie z imionami, tak że niektóre z nich wyglądają niemal jak akt własności wykuty w kamieniu.',
+    look: 'Poszukaj wokół wielbłąda drobnych, rozproszonych liter. Tam, gdzie w Dżubbie jest wielbłąd, zwykle jest też imię.',
+  },
+
+  'jubbah-p5': {
+    name: 'Postać nierozstrzygnięta',
+    story:
+      'Postać, co do której nie ma zgody. Nie jest to brak w dokumentacji, lecz stan zwyczajny w sztuce naskalnej: część rytów zniszczyła erozja, część wykuto na rycie starszym, więc linie się pomieszały, a część narysowano w stylu, do którego nie mamy już klucza. Uczciwość jest tu pożyteczniejsza od zgadywania — to, czego nie wiemy, także należy do wiedzy, a połowa tego, co jest w Dżubbie, nie została jeszcze gruntownie zbadana.',
+    look: 'Podejdź blisko, a potem się cofnij. Wiele niejasnych postaci mętnieje z bliska, a wyostrza się z oddali, bo wykuto je po to, by oglądać je z dystansu.',
+  },
+
+  'jubbah-p6': {
+    name: 'Lew i jego poskramiacz',
+    story:
+      'Lew, a obok niego postać ludzka zwrócona ku niemu. Lew azjatycki naprawdę żył w północnej Arabii, dopóki nie wyginął tam przed wiekami — ten ryt jest więc świadectwem naocznym, nie wyobraźnią. Sama scena, człowiek stojący naprzeciw drapieżnika i nieuciekający, należy do najbardziej spornych: to polowanie, poskramianie czy rytuał, w którym rytownik rości sobie władzę nad bestią? Żaden tekst tego nie wyjaśnia; opowieścią jest sam ryt.',
+    look: 'Zauważ ułożenie ramion postaci ludzkiej. Kierunek — ku lwu czy od niego — to cała różnica między stawieniem czoła a ucieczką.',
+  },
+
+  'jubbah-p7': {
+    name: 'Trzy wielbłądy i jeździec',
+    story:
+      'Trzy wielbłądy, na samym lewym skraju mężczyzna na wielbłądzie, obok inskrypcje tamudejskie, a na tym samym panelu pojawia się scena lwa i jego poskramiacza. To nawarstwienie jest całą Dżubbą w jednej skale: scena z czasów lwów, wielbłądy wykute o tysiące lat później i litery zostawione przez trzeciego przechodnia. Trzy czasy, które łączy tylko ściana.',
+    look: 'Szukaj różnicy w barwie wykutej powierzchni: najstarsza zbliża się do koloru otaczającej skały, bo ciemny werniks pustynny znów ją pokrył, a najmłodsza jest jaśniejsza, bo czas jeszcze jej nie dogonił.',
+  },
+
+  'jubbah-p8': {
+    name: 'Miotacz i tur',
+    story:
+      'Postać ludzka naturalnej wielkości z zakrzywionym kijem przypominającym bumerang, a przed nią tur. Zakrzywiony kij miotany to broń dobrze znana z rytów Półwyspu: rzucony, trafia zwierzynę albo ją dezorientuje. Tur zaś jest bydłem wilgotnej epoki: gdy Dżubba była jeziorem otoczonym łąkami, pasły się tu stada, po których na tej pustyni nie zostało nic. Ten panel jest więc sceną z życia, a nie ozdobą.',
+    look: 'Zmierz postać ludzką własnym ciałem: neolityczne postacie z Dżubby dorównują wzrostem stojącemu człowiekowi, i właśnie dlatego stanie przed nimi to coś zupełnie innego niż oglądanie ich na zdjęciu.',
+  },
+
+  'jubbah-p9': {
+    name: 'Wielbłąd i inskrypcja',
+    story:
+      'Wielbłąd, a obok niego inskrypcje tamudejskie. Na samym Dżabal Umm Sinman policzono 5431 inskrypcji tamudejskich — więcej niż wszystkich rytów zwierzęcych razem wziętych. Pismo tamudejskie to dawne pismo północnoarabskie, a najczęściej zapisywano nim tutaj imiona, rodowody i formuły przejścia: „taki a taki, syn takiego a takiego, tędy przechodził”. Najstarsze, co ludzie napisali na tej górze, jest więc najprostszym, co ludzie piszą zawsze: byłem tutaj.',
+    look: 'Litery są znacznie mniejsze od rysunków i płycej wykute, więc szukaj ich w pustych miejscach między zwierzętami, a nie pośrodku panelu.',
+  },
+
+  'jubbah-p10': {
+    name: 'Stado strusi',
+    story:
+      'Grupa strusi wykutych razem, a wokół nich inskrypcje tamudejskie. Struś arabski żył na tej pustyni tysiące lat, po czym wymarł w XX wieku; ostatniego znanego osobnika ustrzelono w latach czterdziestych. Ten panel jest więc portretem zwierzęcia, którego już nie ma, wykutym przez człowieka, który widywał je codziennie i któremu nie przyszło do głowy, że utrwala koniec.',
+    look: 'Policz ptaki: strusie ryto w grupach, nie pojedynczo, bo tak właśnie je widywano — rytownik rysuje to, do czego przywykł, a nie to, co sobie wyobraził.',
   },
 }

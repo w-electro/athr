@@ -58,58 +58,116 @@ export default {
     },
   },
 
-  qishlah: {
-    name: 'Kubu Aarif dan Qishlah',
-    shortName: 'Aarif & Qishlah',
-    subtitle: 'Jantung sejarah Hail · dua mercu tanda bersebelahan',
-    tagline: 'Sebuah kubu tanah liat yang mengawasi bandar dari atas, dan kota berbenteng 142 bilik yang menjaganya dari bawah.',
-    era: 'Aarif: lebih 200 tahun · Qishlah: 1941',
+  aarif: {
+    name: 'Kubu Aarif',
+    shortName: 'Aarif',
+    subtitle: 'Kubu di puncak bukit · lebih dua kurun',
+    tagline: 'Sebuah kubu tanah liat di puncak bukit berbatu, tempat setiap jalan yang memasuki Hail diawasi.',
+    era: 'Lebih 200 tahun',
     city: 'Pusat bandar Hail',
-    ticket: 'Masuk percuma · Qishlah dibuka pada waktu petang',
+    ticket: 'Masuk percuma',
     story: [
       {
         heading: 'Mata Hail yang tidak pernah lena',
-        body: 'Di atas bukit berbatu yang menghadap bandar berdiri Kubu Aarif, dibina penduduk Hail lebih dua abad dahulu untuk mengawasi jalan-jalan yang menuju ke sana; dari menaranya pengawal memerhati kafilah yang tiba melalui Darb Zubaidah, dan menyalakan api pada malam Ramadan bagi mengumumkan waktu berbuka — adat yang sehingga kini hidup dalam meriam yang dilepaskan dari bukit yang sama.',
+        body: 'Di atas sebuah bukit berbatu yang menghadap bandar Hail berdiri Kubu Aarif, yang dibina penduduknya lebih dua kurun dahulu agar menjadi mata yang tidak pernah lena terhadap jalan-jalan yang menuju ke bandar itu; dari menaranya para pengawal memerhati kafilah yang tiba melalui Darb Zubaidah, dan menyalakan api pada malam Ramadan bagi mengumumkan waktu berbuka — adat yang sehingga hari ini masih hidup dalam meriam yang dilepaskan dari bukit yang sama.',
       },
       {
         heading: 'Tanah liat yang bertahan dua kurun',
-        body: 'Kubu ini dibina daripada tanah liat yang diuli bersama jerami, berdinding lebih tebal daripada satu meter dan diperkukuh batang pokok tamarisk, dan tekniknya tidaklah sedaif rupanya: dinding tanah yang tebal menahan kesejukan malam hingga siang dan kepanasan siang hingga malam, lalu mencipta penyaman udara semula jadi di tengah gurun yang pada musim panas melepasi lima puluh darjah.',
+        body: 'Kubu ini dibina daripada tanah liat yang diuli bersama jerami, berdinding lebih tebal daripada satu meter dan disokong batang pokok tamarisk, dan tekniknya tidaklah sedaif rupanya: dinding tanah yang tebal menahan kesejukan malam hingga siang dan kepanasan siang hingga malam, lalu mencipta penyaman udara semula jadi di tengah gurun yang pada musim panas melepasi lima puluh darjah.',
       },
       {
-        heading: 'Qishlah: sebuah bandar dalam satu dinding',
-        body: 'Turunlah dari bukit ke arah timur dan anda akan menemui lawan tepat kubu itu: Qishlah ialah kota berbenteng segi empat tepat yang amat besar, dibina atas titah Raja Abdulaziz pada 1941 sebagai berek tentera, mengandungi 142 bilik pada dua tingkat, lapan menara pengawas di penjuru dan sisinya, sebuah masjid di dalam, serta laman luas yang direntas anjung; berjalan menyusuri lorong tanahnya yang panjang terasa seperti merentas sebuah bandar kecil.',
+        heading: 'Tujuh puluh anak tangga ke pemandangan terbaik',
+        body: 'Kubu ini hanya dapat didaki dengan berjalan kaki, kerana tangga yang dipahat pada lereng bukit berjumlah kira-kira tujuh puluh anak tangga yang anda daki dalam beberapa minit sahaja; dan sebaik anda tiba di atas, Hail terbentang lengkap di bawah anda: Qishlah kelihatan di sebelah barat sebagai segi empat tepat tanah liat yang jelas garisannya, Banjaran Aja menutup ufuk di belakangnya, dan bandar moden terbentang di antara kedua-duanya.',
       },
       {
-        heading: 'Daripada berek kepada ingatan',
-        body: 'Setelah peranan ketenteraannya berakhir, Qishlah menjadi salah satu tapak warisan terpenting di Hail, dan kini lamannya menjadi tempat acara kebudayaan serta pasar tradisional; ada satu perincian yang wajar diperhatikan: setiap tingkap pada lapan menaranya dibuka pada sudut yang berbeza, supaya kesemuanya bersama-sama menutup setiap arah menuju kota itu tanpa meninggalkan walau satu titik buta.',
+        heading: 'Bukit yang memilih dirinya sendiri',
+        body: 'Pemilihan bukit ini bukanlah soal cita rasa seni bina, sebaliknya ia satu-satunya tanah tinggi semula jadi di tengah dataran Hail; tiga puluh meter di atas dataran itu sudah memadai untuk merangkum kaki langit ke segala arah, manakala dasarnya ialah batu pejal yang tidak dapat dikorek dari bawah dan tidak dapat disandari tangga mahupun menara kepungan. Kemudian zaman berputar: bandar itu merebak mengelilingi bukit lalu melangkauinya, sehingga kubu yang dibina untuk mengawasi padang pasir kini menghadap jalan-jalan yang sesak — tempatnya tetap sama, fungsinya yang terbalik.',
       },
     ],
     facts: [
-      { label: 'Bilik di Qishlah', value: '142' },
-      { label: 'Menara pengawas', value: '8' },
-      { label: 'Pembinaan Qishlah', value: '1941 (1360 H)' },
+      { label: 'Anggaran usia', value: 'lebih 200 tahun' },
+      { label: 'Ketinggian dari bandar', value: 'kira-kira 30 meter' },
+      { label: 'Pendakian', value: 'tangga sahaja · tiada jalan kenderaan' },
       { label: 'Bahan binaan', value: 'tanah liat, jerami, batang tamarisk' },
     ],
     tips: [
-      'Naiklah ke Kubu Aarif setengah jam sebelum matahari terbenam: pemandangan bandar dari atas ialah gambar terbaik yang akan anda rakam di Hail.',
-      'Pada Ramadan meriam dilepaskan dari bukit ini; jika berkunjung ketika itu, datanglah awal kerana tempatnya cepat penuh.',
-      'Lantai tanah Qishlah tidak rata — berhati-hatilah jika bersama kanak-kanak atau pengunjung berusia.',
+      'Naiklah setengah jam sebelum matahari terbenam: pemandangan bandar dari puncaknya ialah gambar terbaik yang akan anda rakam di Hail.',
+      'Pada Ramadan meriam dilepaskan dari bukit ini; jika berkunjung pada musim itu, datanglah awal kerana tempatnya cepat penuh.',
+      'Tiada lif mahupun jalan kenderaan, dan bahagian akhir tangganya agak curam — timbangkanlah perkara ini jika anda bersama pengunjung berusia.',
     ],
     narration: {
       voice: 'Suara Athr — naratif janaan kecerdasan buatan',
       segments: [
-        { at: 0, text: 'Anda kini berada di kaki Bukit Aarif; tangganya di hadapan, dan tujuh puluh anak tangga memisahkan anda daripada pemandangan terindah di Hail.' },
-        { at: 14, text: 'Sambil mendaki, perhatikan ketebalan dinding di sebelah kiri: lebih satu meter tanah liat dan jerami.' },
-        { at: 28, text: 'Ketebalan itu bukan semata-mata untuk pertahanan, malah penyejukan semula jadi: kesejukan malam tersimpan dalam tanah sampai tengah hari.' },
-        { at: 44, text: 'Dari menara ini pengawal dahulu meninjau kafilah, dan dari sini juga meriam Ramadan masih dilepaskan hingga kini.' },
-        { at: 60, text: 'Kini berpalinglah ke timur: segi empat tepat tanah yang besar itu ialah Qishlah, dengan 142 bilik dan lapan menaranya.' },
-        { at: 76, text: 'Apabila masuk, kiralah sudut tingkap-tingkapnya: di sekeliling kota itu tiada walau satu titik buta.' },
+        { at: 0, text: 'Anda kini berada di kaki bukit Kubu Aarif; tangganya di hadapan anda, dan tujuh puluh anak tangga memisahkan anda daripada pemandangan terbaik di Hail.' },
+        { at: 14, text: 'Sambil mendaki, perhatikan ketebalan dinding di sebelah kiri anda: lebih satu meter tanah liat dan jerami.' },
+        { at: 28, text: 'Ketebalan itu bukan untuk pertahanan semata-mata, malah penyejukan semula jadi: kesejukan malam tersimpan di dalamnya sehingga tengah hari.' },
+        { at: 44, text: 'Dari menara inilah pengawal dahulu meninjau kafilah, dan dari sini juga meriam Ramadan dilepaskan sehingga hari ini.' },
+        { at: 60, text: 'Kini berpalinglah ke barat: segi empat tepat tanah liat yang besar itu ialah Qishlah, hanya satu setengah kilometer dari tempat anda berdiri.' },
+        { at: 76, text: 'Di belakangnya Banjaran Aja menutup ufuk, dan di antara kedua-duanya terbentang seluruh bandar Hail di depan mata anda.' },
       ],
     },
     scan: {
-      matchLabel: 'Seni bina pertahanan tanah liat · Qishlah / Kubu Aarif',
+      matchLabel: 'Kubu tanah liat di puncak bukit berbatu · Aarif',
       evidence: [
+        'Asas batu semula jadi yang menjadi tapak binaan',
         'Dinding tanah liat dengan kecondongan menyempit ke atas',
+        'Parapet bergerigi yang khas pada seni bina Najd',
+      ],
+    },
+  },
+
+  qishlah: {
+    name: 'Kota Qishlah',
+    shortName: 'Qishlah',
+    subtitle: '142 bilik · 1360 H / 1941 M',
+    tagline: 'Binaan tanah liat terbesar di Semenanjung Arab: sebuah bandar lengkap di dalam satu dinding.',
+    era: '1360 H / 1941 M',
+    city: 'Pusat bandar Hail',
+    ticket: 'Masuk percuma · dibuka pada waktu petang',
+    story: [
+      {
+        heading: 'Sebuah bandar di dalam dinding',
+        body: 'Qishlah ialah kota berbenteng segi empat tepat yang amat besar, dibina atas titah Raja Abdulaziz pada tahun 1360 H sebagai berek tentera, mengandungi 142 bilik pada dua tingkat, lapan menara pengawas di penjuru dan sisinya, sebuah masjid di dalam, serta laman luas yang direntas anjung-anjung; berjalan menyusuri lorong tanah liatnya yang panjang terasa seperti merentas sebuah bandar kecil, bukan sekadar memasuki satu bangunan.',
+      },
+      {
+        heading: 'Tanah liat yang dibina dengan pembaris',
+        body: 'Yang membezakan Qishlah daripada seni bina tanah liat yang lebih lama ialah ia dibina menurut perancangan geometri yang ketat, bukan berkembang sedikit demi sedikit: anjungnya selari, biliknya seragam ukuran, dan menaranya tersusun sekata; dengan itu ia berdiri tepat pada sempadan antara seni bina Najd yang tradisional dan seni bina moden yang terancang — dibina daripada tanah liat, jerami dan batang tamarisk yang sama dengan Aarif dua kurun sebelumnya.',
+      },
+      {
+        heading: 'Lapan menara tanpa titik buta',
+        body: 'Yang menarik pada lapan menaranya ialah setiap tingkap direka pada sudut yang berbeza daripada jirannya, supaya kesemuanya bersama-sama menutup setiap arah di sekeliling kota itu tanpa meninggalkan walau satu titik buta; itulah pengiraan visual yang halus, dicapai tanpa alat ukur moden, dan anda boleh membuktikannya sendiri jika berdiri di laman lalu menyusuri garis pandang dari satu menara ke menara yang lain.',
+      },
+      {
+        heading: 'Daripada berek kepada ingatan',
+        body: 'Setelah peranan ketenteraannya berakhir, Qishlah bertukar menjadi salah satu daya tarikan pelancongan terpenting di Hail: lamannya kini menjadi pentas acara kebudayaan, pasar warisan dan aktiviti Festival Hail; maka bangunan yang dahulu didirikan untuk menutup diri daripada orang ramai kini tidak lagi bermakna tanpa mereka.',
+      },
+    ],
+    facts: [
+      { label: 'Bilangan bilik', value: '142 bilik' },
+      { label: 'Menara pengawas', value: '8 menara' },
+      { label: 'Tahun pembinaan', value: '1360 H / 1941 M' },
+      { label: 'Bahan binaan', value: 'tanah liat, jerami, batang tamarisk' },
+    ],
+    tips: [
+      'Qishlah kebiasaannya dibuka pada waktu petang; jadikanlah ia penutup hari anda selepas turun dari Aarif — jarak antara kedua-duanya hanya satu setengah kilometer.',
+      'Lantai tanah liatnya tidak rata dan lorongnya malap; berhati-hatilah dengan langkah anda jika bersama kanak-kanak atau pengunjung berusia.',
+      'Laman dalamnya ialah tempat terbaik untuk merakam gambar selepas maghrib, ketika dinding tanah liat disuluh dari bawah lalu tekstur tanahnya menyerlah.',
+    ],
+    narration: {
+      voice: 'Suara Athr — naratif janaan kecerdasan buatan',
+      segments: [
+        { at: 0, text: 'Anda kini berdiri di hadapan Qishlah, dan apa yang anda lihat bukanlah satu bangunan, sebaliknya sebuah bandar lengkap di dalam dinding.' },
+        { at: 12, text: 'Seratus empat puluh dua bilik pada dua tingkat, lapan menara, sebuah masjid, dan sebuah laman di tengahnya.' },
+        { at: 26, text: 'Masuklah melalui pintu gerbang dan berhentilah seketika di laman: perhatikan anjungnya yang selari dan biliknya yang seragam.' },
+        { at: 41, text: 'Inilah keistimewaannya: tanah liat yang dibina dengan pembaris, bukan yang berkembang sedikit demi sedikit seperti kebiasaan.' },
+        { at: 56, text: 'Kini susurilah tingkap-tingkap menaranya dengan pandangan anda: setiap tingkap terbuka pada sudut yang berbeza daripada jirannya.' },
+        { at: 70, text: 'Kiralah jika anda mahu — di sekeliling kota ini anda tidak akan menemui walau satu titik buta.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Kota tanah liat berbentuk segi empat tepat · Qishlah',
+      evidence: [
+        'Fasad tanah liat yang panjang dengan irama tingkap yang sekata',
         'Menara penjuru bersilinder dengan lubang tembak bersegi tiga',
         'Parapet bergerigi yang khas pada seni bina Najd',
       ],
@@ -230,5 +288,140 @@ export default {
         'Bekas tembikar berhias geometri Najd',
       ],
     },
+  },
+
+  shuwaymis: {
+    name: 'Ukiran Batu Shuwaymis',
+    shortName: 'Shuwaymis',
+    subtitle: 'Gunung al-Manjur dan Raat · Warisan Dunia UNESCO',
+    tagline: 'Separuh lagi daripada penyenaraian UNESCO: lembah yang hanya dicapai oleh sesiapa yang sengaja menujunya.',
+    era: '±10,000 tahun dahulu (Neolitik)',
+    city: 'Shuwaymis, barat daya Hail',
+    ticket: 'Lawatan berpandukan pemandu bertauliah · penyelarasan awal diwajibkan',
+    story: [
+      {
+        heading: 'Separuh yang terlupa daripada penyenaraian',
+        body: 'Ketika UNESCO menyenaraikan «seni batu di wilayah Hail» pada 2015, penyenaraian itu bukanlah untuk Jubbah semata-mata, sebaliknya untuk dua tapak sekali gus: Jabal Umm Sinman di Jubbah, serta Gunung al-Manjur dan Raat di Shuwaymis; cuma Shuwaymis kekal yang paling kurang dikunjungi kerana jauh letaknya dan payah jalannya, lalu ukirannya justeru paling utuh dan paling kurang diganggu — dan kini ia tergolong antara seni Neolitik yang paling terpelihara di seluruh Semenanjung Arab.',
+      },
+      {
+        heading: 'Lembah yang dibaca umpama halaman',
+        body: 'Ukiran Shuwaymis tidak terhimpun pada satu dinding seperti di Jubbah, sebaliknya bertaburan pada tebing lembah yang sempit lagi dalam, yang anda susuri sehingga satu panel terdedah selepas satu panel yang lain: kawanan lembu liar, singa, harimau bintang dan burung unta; susuk manusia yang memburu dengan busur; serta babak yang lengkap, bukan lambang yang berselerak — malah ada panel yang menceritakan satu peristiwa dari mula hingga akhirnya.',
+      },
+      {
+        heading: 'Anjing yang mengubah sejarah',
+        body: 'Di Shuwaymis inilah ditemui apa yang dianggap antara gambaran tertua di dunia tentang anjing yang telah dijinakkan: anjing bertelinga tegak dan berekor berpintal yang mengelilingi seorang pemburu yang menarik busurnya, sebahagiannya terikat kepadanya dengan garisan yang ditafsirkan sebagai tali penuntun; dan andai tafsiran itu benar, maka dinding-dinding ini merakam salah satu detik terpenting dalam hubungan manusia dengan haiwan, lebih lapan ribu tahun dahulu.',
+      },
+      {
+        heading: 'Mengapa di sini',
+        body: 'Sebab terkumpulnya begitu banyak ukiran pada dinding tertentu ialah kerana Shuwaymis dahulunya tempat pertemuan air: lembah-lembah menurun dari hamparan lava gunung berapi lalu bercantum pada alur yang menakung air selepas hujan, lantas haiwan berkunjung dan pemburu pula menyusul; maka ukiran itu tidak lain hanyalah catatan tentang sesiapa yang pernah berdiri di sini menunggu — dan dinding yang mereka ukir ialah dinding yang meneduhi mereka.',
+      },
+    ],
+    facts: [
+      { label: 'Penyenaraian UNESCO', value: '2015 (bersama Jubbah)' },
+      { label: 'Dua komponennya', value: 'Gunung al-Manjur · Gunung Raat' },
+      { label: 'Jarak dari Hail', value: '250 km ke barat daya' },
+      { label: 'Akses', value: 'pemandu bertauliah · sebahagian jalan masih tanah' },
+    ],
+    tips: [
+      'Uruskan lawatan beberapa hari sebelum bertolak bersama Suruhanjaya Warisan atau pemandu bertauliah, kerana tapak ini tidak terbuka untuk kemasukan bebas seperti Jubbah.',
+      'Peruntukkan satu hari penuh yang tersendiri, bukan sekadar persinggahan dalam satu hari: perjalanan pergi dan balik sahaja mengambil kira-kira enam jam.',
+      'Bawalah bahan api dan air melebihi keperluan anda, kerana stesen terakhir sebelum tapak itu jauh dan liputan talian terputus di dalam lembah.',
+      'Berjalan antara panel bermakna melangkah di atas kerikil dan batu yang tidak rata — kasut tertutup di sini ialah satu kemestian, bukan pilihan.',
+    ],
+    narration: {
+      voice: 'Suara Athr — naratif janaan kecerdasan buatan',
+      segments: [
+        { at: 0, text: 'Selamat datang ke Shuwaymis. Anda telah menempuh jalan yang jauh untuk sampai; tariklah nafas dan pandanglah sekeliling anda.' },
+        { at: 13, text: 'Lembah-lembah ini ialah separuh lagi daripada penyenaraian UNESCO yang dikongsinya dengan Jubbah, sekali gus yang paling kurang dikunjungi.' },
+        { at: 28, text: 'Kurangnya pengunjung ialah rahmat bagi batu: apa yang anda lihat di sini lebih utuh daripada di mana-mana tapak lain.' },
+        { at: 43, text: 'Susurilah lembah ini perlahan-lahan, kerana panelnya tidak muncul serentak, sebaliknya satu demi satu.' },
+        { at: 58, text: 'Carilah babak seorang pemburu yang dikelilingi anjing bertelinga tegak dan berekor berpintal.' },
+        { at: 73, text: 'Itulah antara gambaran tertua di dunia tentang anjing yang telah dijinakkan, diukir lapan ribu tahun dahulu.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Seni batu di dalam sebuah lembah · Shuwaymis',
+      evidence: [
+        'Ukiran pada dinding lembah, bukan pada tebing terdedah',
+        'Babak pemburuan yang tersusun, bukan susuk yang berselerak',
+        'Lapisan varnis gurun gelap yang dipotong oleh ukiran',
+      ],
+    },
+  },
+}
+
+/*
+  Panel — teks yang lebih halus daripada tapak, diasingkan daripada eksport
+  utama supaya peta «id tapak → kandungan» kekal berisi tapak semata-mata.
+*/
+export const panels = {
+  'jubbah-p1': {
+    name: 'Iringan unta',
+    story:
+      'Unta berturut-turut diukir pada satu dinding — inilah yang paling kerap kelihatan di Jubbah sekali gus yang paling muda. Daripada 1,944 ukiran haiwan yang direkodkan di Umm Sinman, 1,378 daripadanya ialah unta — tujuh daripada setiap sepuluh. Itu bukan soal citarasa, sebaliknya kerana unta baru memasuki kehidupan manusia di sini pada zaman terkemudian: ia dijinakkan kira-kira tiga ribu tahun dahulu, lalu menjadi haiwan yang diukir kerana ia telah menjadi haiwan yang menyara hidup.',
+    look: 'Susuri garis kakinya: unta zaman terkemudian diukir dengan coretan pantas lagi ringkas, bukan dengan ketepatan anatomi yang anda lihat pada lembu liar yang beribu tahun lebih tua daripadanya.',
+  },
+
+  'jubbah-p2': {
+    name: 'Raja Jubbah',
+    story:
+      'Inilah yang paling masyhur di Jubbah, didatangi orang dari hujung dunia. Sesusuk manusia yang gah, diukir dengan kesetiaan pada kenyataan yang jarang ditemui dalam seni batu: lembing di tangan kanannya, sesuatu yang menyerupai mahkota di kepalanya, rantai di lehernya, tali pinggang di pinggangnya — dan di hadapannya berdiri susuk yang lebih kecil, yang dibaca orang sebagai pelayan atau pengikut. Penduduk tempatan memanggilnya «sang raja», ahli arkeologi pula menyifatkannya «susuk yang berkuasa», dan sifat kedua itu lebih tepat: ukiran ini tidak memberitahu kita siapa dia, ia cuma memberitahu bahawa pengukirnya mahu orang tahu yang dia bukan seperti orang lain.',
+    look: 'Bandingkan saiznya dengan susuk yang berdiri di hadapannya. Beza saiz di sini bukan kesilapan melukis sebaliknya sebuah bahasa: yang lebih besar lebih tinggi kedudukannya — cara tertua yang pernah manusia tahu untuk berkata «yang ini penting».',
+  },
+
+  'jubbah-p3': {
+    name: 'Kambing gurun bertanduk panjang',
+    story:
+      'Seekor kambing gurun dengan dua tanduk panjang yang melengkung ke belakang dalam satu busur yang luas. Kambing gurun antara yang paling banyak diukir di seluruh Tanah Arab, dan ia bukan sekadar buruan: gambarnya berulang di tempat berair dan di tempat tinggi, sehingga para penyelidik mengandaikan bahawa bagi pengukirnya ia menyimpan makna yang melangkaui daging — kesuburan, kelangsungan hidup, atau sesuatu yang tidak kita ketahui. Kambing gurun Nubia masih hidup di pergunungan wilayah ini hingga hari ini, dan ia antara sedikit makhluk yang diukir di sini namun tidak pupus.',
+    look: 'Lihat panjang tanduknya berbanding tubuhnya: pembesaran itu disengajakan, kerana tanduklah yang menentukan haiwan itu pada mata pengukir, bukan ukurannya yang sebenar.',
+  },
+
+  'jubbah-p4': {
+    name: 'Unta yang bersendirian',
+    story:
+      'Seekor unta mengisi dinding itu seorang diri. Ukiran tunggal berbeza daripada ukiran di dalam iringan: iringan ialah berita tentang kekayaan atau perjalanan, manakala yang tunggal lebih menghampiri tandatangan — seekor haiwan tertentu yang dikenali tuannya. Banyak unta Jubbah diukir bersebelahan inskripsi Thamudik yang membawa nama, sehingga sebahagiannya kelihatan seperti surat hak milik yang dipahat pada batu.',
+    look: 'Cari huruf-huruf halus yang berselerak di sekeliling unta itu. Di Jubbah, di mana ada unta, di situ selalunya ada nama.',
+  },
+
+  'jubbah-p5': {
+    name: 'Susuk yang belum ditentukan',
+    story:
+      'Sesusuk bentuk yang namanya tidak disepakati. Ini bukan kekurangan dalam pendokumentasian sebaliknya keadaan biasa dalam seni batu: sebahagian ukiran dihakis cuaca, sebahagian diukir menimpa ukiran yang lebih tua sehingga garisnya bercampur aduk, dan sebahagian dilukis dengan gaya yang kuncinya tidak lagi ada pada kita. Kejujuran di sini lebih berguna daripada tekaan — kerana apa yang tidak kita ketahui juga sebahagian daripada ilmu, dan separuh daripada apa yang ada di Jubbah belum dikaji dengan secukupnya.',
+    look: 'Dekatlah kepadanya, kemudian berundur. Banyak susuk yang kabur bila dilihat dekat menjadi jelas dari jauh, kerana ia diukir untuk dilihat dari kejauhan.',
+  },
+
+  'jubbah-p6': {
+    name: 'Singa dan penjinaknya',
+    story:
+      'Seekor singa, dan di sebelahnya sesusuk manusia yang berdepan dengannya. Singa Asia memang pernah hidup di utara Tanah Arab sehingga pupus dari sana beberapa kurun dahulu, maka ukiran ini keterangan saksi mata, bukan khayalan. Adapun babaknya sendiri — manusia berdiri di hadapan haiwan pemangsa tanpa lari daripadanya — antara yang paling hangat diperdebatkan: pemburuankah ini, penjinakan, atau upacara yang padanya si pengukir mendakwa kuasa ke atas haiwan buas itu? Tiada teks yang menjelaskannya; ukiran itu sendirilah satu-satunya riwayat.',
+    look: 'Perhatikan kedudukan kedua-dua lengan pada susuk manusia itu. Arahnya — menghala ke singa atau menjauhinya — itulah seluruh jarak antara berdepan dan melarikan diri.',
+  },
+
+  'jubbah-p7': {
+    name: 'Tiga ekor unta dan penunggangnya',
+    story:
+      'Tiga ekor unta, dan di hujung kirinya seorang lelaki menunggang seekor unta, di sebelahnya inskripsi Thamudik, manakala pada panel yang sama muncul juga babak singa dan penjinaknya. Pertindihan inilah Jubbah seluruhnya di dalam satu bongkah batu: sebuah babak dari zaman singa, unta yang diukir beribu tahun selepasnya, dan huruf yang ditulis oleh seorang pelintas ketiga. Tiga zaman yang tidak disatukan oleh apa-apa selain dinding ini.',
+    look: 'Cari beza warna pada bekas tumbukan: yang lebih tua cenderung sewarna dengan batu di sekelilingnya kerana lapisan varnis gurun yang gelap telah kembali menutupinya, manakala yang lebih muda lebih cerah kerana masa belum sempat menjejakinya.',
+  },
+
+  'jubbah-p8': {
+    name: 'Pelontar dan lembu liar',
+    story:
+      'Sesusuk manusia bersaiz tubuh sebenar menggenggam kayu melengkung yang menyerupai bumerang, dan di hadapannya seekor lembu liar. Kayu melengkung ialah senjata lontar yang dikenali dalam ukiran Tanah Arab: ia dilontarkan untuk mengenai buruan atau mengelirukannya. Adapun lembu itu lembu zaman lembap: ketika Jubbah masih sebuah tasik yang dikelilingi padang rumput, kawanan yang kini tidak tinggal walau seekor di gurun ini pernah meragut di sana. Maka panel ini sebuah babak kehidupan, bukan hiasan.',
+    look: 'Ukur sendiri susuk manusia itu: susuk Neolitik di Jubbah sebesar manusia yang sedang berdiri, dan itulah yang menjadikan berdiri di hadapannya berbeza daripada sekadar memandang gambarnya.',
+  },
+
+  'jubbah-p9': {
+    name: 'Seekor unta dan sebaris tulisan',
+    story:
+      'Seekor unta dengan inskripsi Thamudik di sisinya. Di Umm Sinman sahaja terekod 5,431 inskripsi Thamudik — lebih banyak daripada kesemua ukiran haiwan. Thamudik ialah tulisan Arab utara yang purba, dan yang paling banyak ditulis dengannya di sini ialah nama, keturunan dan ayat perlintasan: «si anu anak si anu pernah lalu di sini». Ertinya, perkara tertua yang ditulis orang di gunung ini ialah perkara paling ringkas yang sentiasa ditulis orang: aku pernah berada di sini.',
+    look: 'Hurufnya jauh lebih halus daripada lukisannya dan tidak sedalam itu; carilah pada ruang kosong antara haiwan, bukan di tengah-tengah panel.',
+  },
+
+  'jubbah-p10': {
+    name: 'Kawanan burung unta',
+    story:
+      'Sekumpulan burung unta diukir bersama, dan di sekelilingnya inskripsi Thamudik. Burung unta Arab hidup di gurun ini beribu tahun lamanya lalu pupus pada abad kedua puluh; yang terakhir diketahui daripadanya diburu pada tahun 1940-an. Maka panel ini ialah potret seekor haiwan yang tidak lagi wujud, diukir oleh manusia yang melihatnya setiap hari dan tidak pernah terlintas padanya bahawa dia sedang merakam sebuah pengakhiran.',
+    look: 'Kira burungnya: burung unta diukir berkumpulan, bukan bersendirian, kerana begitulah ia dilihat — dan pengukir melukis apa yang biasa dilihatnya, bukan apa yang dibayangkannya.',
   },
 }

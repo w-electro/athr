@@ -58,58 +58,116 @@ export default {
     },
   },
 
-  qishlah: {
-    name: 'Fuerte Aarif y Qishlah',
-    shortName: 'Aarif y Qishlah',
-    subtitle: 'El corazón histórico de Hail · dos monumentos vecinos',
-    tagline: 'Un fuerte de barro que vigila la ciudad desde lo alto y una fortaleza de 142 estancias que la guarda desde abajo.',
-    era: 'Aarif: más de 200 años · Qishlah: 1941',
+  aarif: {
+    name: 'El fuerte Aarif',
+    shortName: 'Aarif',
+    subtitle: 'El fuerte de la colina · más de dos siglos',
+    tagline: 'Un fuerte de barro sobre una cima rocosa desde el que se vigila todo camino que entra en Hail.',
+    era: 'Más de 200 años',
     city: 'Centro de Hail',
-    ticket: 'Entrada gratuita · la Qishlah abre por la tarde',
+    ticket: 'Entrada gratuita',
     story: [
       {
         heading: 'El ojo de Hail que nunca duerme',
-        body: 'Sobre una colina rocosa que domina la ciudad se alza el fuerte Aarif, levantado por los habitantes de Hail hace más de dos siglos para vigilar los caminos que llevaban a ella; desde sus torres los guardias seguían las caravanas que llegaban por el Darb Zubayda y encendían hogueras en las noches de Ramadán para anunciar la ruptura del ayuno, costumbre que sigue viva hoy en el cañón que se dispara desde esa misma colina.',
+        body: 'En la cima de una colina rocosa que domina la ciudad se alza el fuerte Aarif, levantado por los habitantes de Hail hace más de dos siglos para vigilar los caminos que llevaban a ella; desde sus torres los guardias seguían las caravanas que llegaban por el Darb Zubayda y encendían hogueras en las noches de Ramadán para anunciar la ruptura del ayuno, costumbre que sigue viva hoy en el cañón que se dispara desde esa misma colina.',
       },
       {
         heading: 'El barro que resistió dos siglos',
         body: 'El fuerte se construyó con barro mezclado con paja y muros de más de un metro de grosor reforzados con troncos de tarayes, y la técnica no es tan rudimentaria como parece: un muro grueso de barro conserva el frescor de la noche durante el día y el calor del día durante la noche, creando así un aire acondicionado natural en pleno desierto, donde el verano supera los cincuenta grados.',
       },
       {
-        heading: 'La Qishlah: una ciudad dentro de un muro',
-        body: 'Baja la colina hacia el este y encontrarás justo lo contrario del fuerte: la Qishlah es una enorme fortaleza rectangular que el rey Abdulaziz mandó construir en 1941 como cuartel, con 142 estancias repartidas en dos plantas, ocho torres de vigilancia en sus esquinas y sus flancos, una mezquita dentro y un amplio patio cruzado por arcadas; recorrer sus largos pasillos de barro se parece a atravesar una ciudad en miniatura.',
+        heading: 'Setenta peldaños hasta la mejor vista',
+        body: 'Al fuerte solo se sube a pie: la escalera tallada en la colina cuenta unos setenta peldaños que se salvan en pocos minutos, y en cuanto alcanzas la azotea, Hail entera se despliega a tus pies —al oeste la Qishlah, un rectángulo de barro de contornos nítidos; detrás de ella los montes Aya cerrando el horizonte; y entre ambos, la ciudad moderna extendiéndose.',
       },
       {
-        heading: 'De cuartel a memoria',
-        body: 'Terminado su papel militar, la Qishlah se convirtió en uno de los lugares patrimoniales más importantes de Hail, y en su patio se celebran hoy actos culturales y mercados tradicionales; hay un detalle que merece atención: cada ventana de sus ocho torres se abrió con un ángulo distinto, de modo que juntas cubren todos los accesos a la fortaleza sin dejar un solo ángulo muerto.',
+        heading: 'La colina que se eligió a sí misma',
+        body: 'Elegir esta colina no fue una cuestión de gusto arquitectónico: es la única elevación natural en medio de la llanura de Hail, y treinta metros por encima de ella bastan para abarcar el horizonte en todas las direcciones; además, su base es roca maciza, bajo la que no cabe excavar un túnel ni contra la que puede apoyarse una escala o una torre de asedio. Después giraron los años y la ciudad se extendió alrededor de la colina y más allá de ella, hasta que el fuerte levantado para vigilar el desierto se asoma hoy a calles concurridas: el mismo lugar, la función invertida.',
       },
     ],
     facts: [
-      { label: 'Estancias de la Qishlah', value: '142' },
-      { label: 'Torres de vigilancia', value: '8' },
-      { label: 'Construcción de la Qishlah', value: '1941 (1360 H.)' },
+      { label: 'Antigüedad estimada', value: 'más de 200 años' },
+      { label: 'Altura sobre la ciudad', value: 'unos 30 metros' },
+      { label: 'Acceso', value: 'solo escaleras · sin carretera' },
       { label: 'Materiales', value: 'barro, paja y troncos de taraye' },
     ],
     tips: [
-      'Sube al fuerte Aarif media hora antes del atardecer: la vista de la ciudad es la mejor fotografía que harás en Hail.',
-      'Durante el Ramadán se dispara el cañón desde la colina; si visitas en esas fechas, llega pronto porque el lugar se llena.',
-      'Los suelos de barro de la Qishlah son irregulares, así que ten cuidado si vas con niños o personas mayores.',
+      'Sube media hora antes del atardecer: la vista de la ciudad desde lo alto es la mejor fotografía que harás en Hail.',
+      'Durante el Ramadán se dispara el cañón desde la colina; si visitas en esas fechas, llega pronto porque el lugar se llena enseguida.',
+      'No hay ascensor ni carretera para coches, y el último tramo de escalera es muy empinado: tenlo en cuenta si vas con personas mayores.',
     ],
     narration: {
       voice: 'La voz de Athr — narración generada por IA',
       segments: [
         { at: 0, text: 'Estás al pie de la colina de Aarif. La escalera está delante y setenta peldaños te separan de la mejor vista de Hail.' },
         { at: 14, text: 'Mientras subes, fíjate en el grosor del muro a tu izquierda: más de un metro de barro y paja.' },
-        { at: 28, text: 'Ese grosor no es solo defensa, sino refrigeración natural: el frescor de la noche queda guardado en el barro hasta el mediodía.' },
+        { at: 28, text: 'Ese grosor no es solo defensa, sino refrigeración natural: el frescor de la noche queda guardado en él hasta el mediodía.' },
         { at: 44, text: 'Desde esta torre un guardia vigilaba las caravanas, y desde aquí sigue disparándose hoy el cañón del Ramadán.' },
-        { at: 60, text: 'Vuélvete ahora hacia el este: ese gran rectángulo de barro es la Qishlah, con sus 142 estancias y sus ocho torres.' },
-        { at: 76, text: 'Cuando entres, cuenta los ángulos de las ventanas: no hay un solo punto ciego alrededor de la fortaleza.' },
+        { at: 60, text: 'Vuélvete ahora hacia el oeste: ese gran rectángulo de barro es la Qishlah, a solo kilómetro y medio de ti.' },
+        { at: 76, text: 'Detrás se alzan los montes Aya cerrando el horizonte, y entre ambos se extiende Hail entera ante tus ojos.' },
       ],
     },
     scan: {
-      matchLabel: 'Arquitectura defensiva de barro · Qishlah / fuerte Aarif',
+      matchLabel: 'Fuerte de barro sobre cima rocosa · Aarif',
       evidence: [
+        'Base rocosa natural sobre la que se levanta la construcción',
         'Muros de barro con talud ascendente',
+        'Parapetos almenados propios de la arquitectura del Nayd',
+      ],
+    },
+  },
+
+  qishlah: {
+    name: 'La fortaleza de la Qishlah',
+    shortName: 'La Qishlah',
+    subtitle: '142 estancias · 1360 H. / 1941 d. C.',
+    tagline: 'La mayor construcción de barro de la península arábiga: una ciudad entera dentro de un solo muro.',
+    era: '1360 H. / 1941 d. C.',
+    city: 'Centro de Hail',
+    ticket: 'Entrada gratuita · abre por la tarde',
+    story: [
+      {
+        heading: 'Una ciudad dentro de un muro',
+        body: 'La Qishlah es una enorme fortaleza rectangular que el rey Abdulaziz mandó construir en 1360 H. como cuartel militar, con 142 estancias repartidas en dos plantas, ocho torres de vigilancia en sus esquinas y sus flancos, una mezquita dentro y un amplio patio cruzado por arcadas; hasta tal punto que recorrer sus largos pasillos de barro se parece más a atravesar una ciudad en miniatura que a visitar un edificio.',
+      },
+      {
+        heading: 'El barro levantado con regla',
+        body: 'Lo que distingue a la Qishlah de la vieja arquitectura de barro es que se levantó siguiendo un trazado geométrico riguroso y no por crecimiento gradual: las arcadas son paralelas, las estancias tienen medidas idénticas y las torres están repartidas con regularidad; se sitúa así en la frontera entre la arquitectura tradicional del Nayd y la construcción moderna planificada, alzada con el mismo barro, la misma paja y los mismos troncos de taraye con que se había levantado Aarif dos siglos antes.',
+      },
+      {
+        heading: 'Ocho torres sin un solo ángulo muerto',
+        body: 'Lo más llamativo de sus ocho torres es que cada ventana se abrió con un ángulo distinto al de su vecina, de modo que juntas cubren todas las direcciones alrededor de la fortaleza sin dejar un solo ángulo muerto; es un cálculo visual preciso logrado sin instrumentos de topografía modernos, y puedes comprobarlo tú mismo si te sitúas en el patio y sigues las líneas de visión de torre en torre.',
+      },
+      {
+        heading: 'De cuartel a memoria',
+        body: 'Terminado su papel militar, la Qishlah se convirtió en uno de los lugares más visitados de Hail, y en su patio se celebran actos culturales, mercados tradicionales y las actividades del festival de Hail; así, el edificio que se construyó para cerrarse a la gente es hoy un lugar que sin ella no significa nada.',
+      },
+    ],
+    facts: [
+      { label: 'Número de estancias', value: '142' },
+      { label: 'Torres de vigilancia', value: '8' },
+      { label: 'Año de construcción', value: '1360 H. / 1941 d. C.' },
+      { label: 'Materiales', value: 'barro, paja y troncos de taraye' },
+    ],
+    tips: [
+      'La Qishlah suele abrir por la tarde: hazla el cierre de tu jornada tras bajar de Aarif, pues solo las separa kilómetro y medio.',
+      'Sus suelos de barro son irregulares y los pasillos tienen poca luz, así que vigila dónde pisas si vas con niños o personas mayores.',
+      'El patio interior es el mejor lugar para fotografiar después del ocaso, cuando los muros de barro se iluminan desde abajo y aflora la textura de la tierra.',
+    ],
+    narration: {
+      voice: 'La voz de Athr — narración generada por IA',
+      segments: [
+        { at: 0, text: 'Estás ante la Qishlah, y lo que ves no es un edificio, sino una ciudad entera dentro de un muro.' },
+        { at: 12, text: 'Ciento cuarenta y dos estancias en dos plantas, ocho torres, una mezquita y un patio en el centro.' },
+        { at: 26, text: 'Entra por la puerta y detente un momento en el patio: fíjate en que las arcadas son paralelas y las estancias idénticas.' },
+        { at: 41, text: 'Y eso es lo que la distingue: barro levantado con regla, no ampliado poco a poco como era costumbre.' },
+        { at: 56, text: 'Sigue ahora con la mirada las ventanas de las torres: cada una tiene un ángulo distinto al de su vecina.' },
+        { at: 70, text: 'Cuéntalas si quieres: no encontrarás un solo punto ciego alrededor de la fortaleza.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Fortaleza rectangular de barro · la Qishlah',
+      evidence: [
+        'Larga fachada rectangular de barro con un ritmo regular de ventanas',
         'Torres cilíndricas en las esquinas con aspilleras triangulares',
         'Parapetos almenados propios de la arquitectura del Nayd',
       ],
@@ -230,5 +288,149 @@ export default {
         'Vasija cerámica con decoración geométrica del Nayd',
       ],
     },
+  },
+
+  shuwaymis: {
+    name: 'Los petroglifos de Shuwaymis',
+    shortName: 'Shuwaymis',
+    subtitle: 'Montes al-Manyur y Raat · Patrimonio Mundial de la UNESCO',
+    tagline: 'La otra mitad de la inscripción de la UNESCO, en unos valles a los que solo llega quien va a buscarlos.',
+    era: 'hace ~10.000 años (Neolítico)',
+    city: 'Shuwaymis, al suroeste de Hail',
+    ticket: 'Visita con guía acreditado · es imprescindible concertarla de antemano',
+    story: [
+      {
+        heading: 'La mitad olvidada de la inscripción',
+        body: 'Cuando la UNESCO inscribió «el arte rupestre de la región de Hail» en 2015, la inscripción no fue solo para Yubba, sino para dos lugares: el Yabal Umm Sinman en Yubba y los montes al-Manyur y Raat en Shuwaymis; pero Shuwaymis siguió siendo el menos visitado por su lejanía y por lo áspero de su camino, y así sus grabados se conservaron más íntegros y menos alterados —hoy son de lo mejor preservado del arte neolítico en toda la península.',
+      },
+      {
+        heading: 'Valles que se leen como páginas',
+        body: 'Los grabados de Shuwaymis no se concentran en una sola pared, como en Yubba, sino que se reparten por las paredes de valles estrechos y profundos por los que caminas mientras se te revela un panel tras otro: verás manadas de uros, leones, leopardos y avestruces, figuras humanas que cazan con arco y escenas completas en vez de símbolos sueltos —algunos paneles llegan a narrar un solo episodio de principio a fin.',
+      },
+      {
+        heading: 'El perro que cambió la historia',
+        body: 'Fue precisamente en Shuwaymis donde se halló lo que se considera una de las representaciones más antiguas del mundo de perros domesticados: perros de orejas erguidas y colas enroscadas que rodean a un cazador tensando el arco, algunos unidos a él por líneas interpretadas como correas; y si la interpretación es correcta, estas paredes documentan uno de los momentos más importantes de la relación entre el ser humano y el animal, hace más de ocho mil años.',
+      },
+      {
+        heading: 'Por qué aquí',
+        body: 'La razón de tanta acumulación en esta pared concreta es que Shuwaymis fue un punto de encuentro de aguas: valles que bajan de los campos de lava volcánica y confluyen en cauces que retienen el agua tras la lluvia, de modo que allí acudían los animales y tras ellos los cazadores; los grabados no son sino el registro de quienes esperaron aquí —y la pared sobre la que dibujas es la pared que te da sombra.',
+      },
+    ],
+    facts: [
+      { label: 'Inscripción UNESCO', value: '2015 (junto con Yubba)' },
+      { label: 'Los dos componentes', value: 'Yabal al-Manyur · Yabal Raat' },
+      { label: 'Distancia desde Hail', value: '250 km al suroeste' },
+      { label: 'Acceso', value: 'guía acreditado · parte del camino sin asfaltar' },
+    ],
+    tips: [
+      'Concierta la visita varios días antes de viajar con la Comisión de Patrimonio o con un guía acreditado, pues el sitio no es de entrada libre como Yubba.',
+      'Reserva un día entero e independiente, no una parada dentro de una jornada: solo la ida y la vuelta suman unas seis horas.',
+      'Lleva combustible y agua de sobra: la última gasolinera antes del sitio queda lejos y la cobertura desaparece en los valles.',
+      'Caminar entre los paneles se hace sobre grava y roca irregular, así que aquí el calzado cerrado es una necesidad, no una opción.',
+    ],
+    narration: {
+      voice: 'La voz de Athr — narración generada por IA',
+      segments: [
+        { at: 0, text: 'Bienvenido a Shuwaymis. Has recorrido un largo camino para llegar, así que respira hondo y mira a tu alrededor.' },
+        { at: 13, text: 'Estos valles son la otra mitad de la inscripción de la UNESCO que comparten con Yubba, y la menos visitada.' },
+        { at: 28, text: 'Y los pocos visitantes son una bendición para la piedra: lo que ves aquí está más intacto que en ningún otro sitio.' },
+        { at: 43, text: 'Camina despacio por el valle: los paneles no aparecen de golpe, sino uno tras otro.' },
+        { at: 58, text: 'Busca la escena del cazador rodeado de perros de orejas erguidas y colas enroscadas.' },
+        { at: 73, text: 'Son de las representaciones más antiguas de perros domesticados que se conocen en el mundo, grabadas hace ocho mil años.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Arte rupestre en un valle · Shuwaymis',
+      evidence: [
+        'Percusión sobre la pared de un valle y no sobre una fachada abierta',
+        'Escenas de caza compuestas en vez de figuras sueltas',
+        'Barniz del desierto oscuro rasgado por la percusión',
+      ],
+    },
+  },
+}
+
+/* Los paneles van en una exportación aparte: el export por defecto es un mapa
+   «id de sitio → contenido», y lo estructural (motivo, época, inscripciones)
+   permanece en panels.js. */
+export const panels = {
+  'jubbah-p1': {
+    name: 'La caravana de camellos',
+    story:
+      'Camellos grabados uno tras otro sobre una misma pared: es lo que más abunda en Yubba y también lo más reciente, pues de los 1.944 grabados de animales contabilizados en Umm Sinman, 1.378 son camellos, siete de cada diez. No fue cuestión de gusto: el camello entró tarde en la vida del hombre aquí, se domesticó hace unos tres mil años y se convirtió en el animal que se grababa porque se había convertido en el animal del que se vivía.',
+    look:
+      'Sigue las líneas de las patas: los camellos tardíos se graban con un trazo rápido y sumario, no con la precisión anatómica que ves en los uros, miles de años anteriores.',
+  },
+
+  'jubbah-p2': {
+    name: 'El rey de Yubba',
+    story:
+      'Lo más célebre de Yubba, y hasta aquí llegan visitantes desde el otro extremo del mundo. Es una figura humana de gran tamaño grabada con un realismo poco común en el arte rupestre: una lanza en la mano derecha, algo semejante a una corona sobre la cabeza, un collar al cuello y un cinturón a la cintura; y ante él, una figura menor que la gente ha leído como un sirviente o un acompañante. Los habitantes del lugar lo llaman «el rey» y los arqueólogos lo describen como «una figura de autoridad», que es la fórmula más exacta: el grabado no nos dice quién fue, solo nos dice que quien lo labró quiso que se le reconociera distinto de los demás.',
+    look:
+      'Compara su tamaño con el de la figura que está frente a él. La diferencia de escala no es un error del dibujo, sino un lenguaje: el mayor es el de mayor rango, la forma más antigua que halló el ser humano para decir «esto importa».',
+  },
+
+  'jubbah-p3': {
+    name: 'El íbice de cuernos largos',
+    story:
+      'Un íbice con dos cuernos largos curvados hacia atrás en un arco amplio. El íbice es de lo más grabado en toda Arabia y nunca fue solo una presa: su imagen se repite en los puntos de agua y en las alturas con tal insistencia que los investigadores creen que tenía para quienes lo labraban un sentido que iba más allá de la carne —la fecundidad, la supervivencia o algo que no sabemos nombrar—. El íbice nubio sigue vivo hoy en las montañas de la región, y es de las pocas criaturas grabadas aquí que no se extinguieron.',
+    look:
+      'Mira la longitud de los cuernos en relación con el cuerpo: la exageración es deliberada, porque lo que define al animal a ojos del grabador es el cuerno y no sus proporciones reales.',
+  },
+
+  'jubbah-p4': {
+    name: 'El camello solo',
+    story:
+      'Un solo camello ocupa toda la pared. Y el grabado aislado no es lo mismo que el camello dentro de una caravana: la caravana es noticia de una riqueza o de un viaje, mientras que el animal solitario se parece más a una firma, una bestia concreta que su dueño conocía. Junto a muchos de los camellos de Yubba se grabaron inscripciones tamúdicas con nombres, hasta el punto de que algunos parecen un título de propiedad labrado en la piedra.',
+    look:
+      'Busca alrededor del camello letras pequeñas y dispersas. Donde hay un camello en Yubba, casi siempre hay un nombre.',
+  },
+
+  'jubbah-p5': {
+    name: 'La figura sin resolver',
+    story:
+      'Una figura sobre cuyo nombre no hay acuerdo. No es una carencia de la documentación, sino algo habitual en el arte rupestre: unos grabados los ha devorado la erosión, otros se labraron sobre uno más antiguo y las líneas se confundieron, y otros se hicieron en un estilo cuya clave ya no conservamos. Aquí la honestidad vale más que la conjetura: lo que no sabemos forma parte del saber, y la mitad de lo que hay en Yubba aún no se ha estudiado a fondo.',
+    look:
+      'Acércate y luego aléjate. Muchas formas confusas de cerca se aclaran desde lejos, porque se grabaron para verse a distancia.',
+  },
+
+  'jubbah-p6': {
+    name: 'El león y su domador',
+    story:
+      'Un león y, a su lado, una figura humana que lo encara. El león asiático vivió realmente en el norte de Arabia hasta que se extinguió allí hace siglos, de modo que este grabado es un testimonio ocular y no una fantasía. La escena en sí —un hombre de pie ante un depredador, sin huir de él— es de las más discutidas: ¿es una cacería, una doma o un rito en el que el grabador se atribuye poder sobre la fiera? Ningún texto lo explica: el grabado es el único relato.',
+    look:
+      'Fíjate en la posición de los brazos de la figura humana. Su dirección —hacia el león o en sentido contrario— es toda la distancia que separa el enfrentamiento de la huida.',
+  },
+
+  'jubbah-p7': {
+    name: 'Los tres camellos y el jinete',
+    story:
+      'Tres camellos y, en el extremo izquierdo, un hombre montado en uno de ellos, con inscripciones tamúdicas al lado; y en el mismo panel aparece la escena del león y su domador. Esta superposición es Yubba entera en una sola roca: una escena de la época de los leones, camellos grabados miles de años después y letras escritas por un tercer caminante. Tres tiempos distintos que no comparten más que la pared.',
+    look:
+      'Busca la diferencia de color en la percusión: lo más antiguo tiende al color de la roca que lo rodea, porque el barniz oscuro del desierto ha vuelto a cubrirlo; lo más reciente es más claro, porque el tiempo aún no lo ha alcanzado.',
+  },
+
+  'jubbah-p8': {
+    name: 'El lanzador y la vaca',
+    story:
+      'Una figura humana de tamaño natural sostiene un palo curvo semejante a un bumerán, y frente a ella hay una vaca. El palo curvo es un arma arrojadiza bien conocida en los grabados de la península: se lanza para alcanzar a la presa o para desequilibrarla. La vaca es la vaca del tiempo húmedo: cuando Yubba era un lago rodeado de praderas, pastaban aquí rebaños de los que no queda nada en este desierto. El panel es, por tanto, una escena de subsistencia y no un adorno.',
+    look:
+      'Mide tú mismo la figura humana: las figuras neolíticas de Yubba alcanzan la talla de una persona de pie, y eso hace que estar delante de ellas sea muy distinto de mirar una fotografía suya.',
+  },
+
+  'jubbah-p9': {
+    name: 'Un camello y una escritura',
+    story:
+      'Un camello con inscripciones tamúdicas a su lado. Solo en Umm Sinman se han contabilizado 5.431 inscripciones tamúdicas, más que todos los grabados de animales juntos. El tamúdico es una antigua escritura árabe del norte, y lo que más se escribió con ella aquí fueron nombres, genealogías y fórmulas de paso: fulano hijo de fulano pasó por aquí. Es decir, que lo más antiguo que la gente escribió en esta montaña es lo más sencillo que la gente escribe siempre: yo estuve aquí.',
+    look:
+      'Las letras son mucho más pequeñas que las figuras y mucho menos profundas, así que búscalas en los huecos entre los animales y no en el centro del panel.',
+  },
+
+  'jubbah-p10': {
+    name: 'La bandada de avestruces',
+    story:
+      'Un grupo de avestruces grabadas juntas, con inscripciones tamúdicas alrededor. El avestruz árabe vivió miles de años en este desierto y se extinguió en el siglo XX: el último ejemplar conocido fue cazado en los años cuarenta. Así que este panel es la imagen de un animal que ya no existe, labrada por alguien que lo veía todos los días y a quien jamás se le ocurrió que estaba documentando un final.',
+    look:
+      'Cuenta las aves: los avestruces se graban en grupo y no de uno en uno, porque así se los veía; el grabador dibuja lo que acostumbra a ver, no lo que imagina.',
   },
 }

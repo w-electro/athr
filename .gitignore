@@ -10,3 +10,16 @@ coverage
 .vercel
 .playwright-mcp
 /*.png
+
+# بيئة بايثون 3.12 المعزولة لتوليد الصينية بـ Kokoro
+.venv-kokoro/
+
+# مساحة عمل الصور قبل معالجتها — لا تُنشر
+photos-inbox/*
+!photos-inbox/README.md
+
+# نماذج منزّلة محلّيًا لبناء الفهرس — لا تُنشر
+.cache/
+
+# مخلّفات بايثون
+__pycache__/

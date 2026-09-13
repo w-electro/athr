@@ -107,19 +107,55 @@ export default {
     acrossOne: 'chỉ trong một ngày',
     edit: 'Sửa',
     weather: 'Kiểm tra thời tiết',
-    travel: 'Di chuyển {minutes} phút',
+    travel: 'Di chuyển {minutes} phút · {km} km',
+    travelFromHail: 'Từ Hail: {minutes} phút · {km} km',
     until: 'đến {time}',
     excluded: 'Không kịp trong chuyến này',
     excludedHint: 'Thêm một ngày hoặc đổi nhịp sang Dày đặc.',
-    note: 'Dữ liệu thời tiết từ Open-Meteo.',
+    note: 'Dữ liệu thời tiết từ Open-Meteo · Khoảng cách tính từ toạ độ các địa điểm.',
     noteOffline: 'Không lấy được thời tiết — đang hiển thị trung bình khí hậu của Hail.',
     day: 'Ngày {n}',
+    openMaps: 'Mở trong bản đồ',
+    navigate: 'Chỉ đường tới đây',
+    routeDay: 'Toàn bộ lộ trình trong ngày trên bản đồ',
+    dayDistance: 'Quãng đường hôm nay: {km} km',
     step: {
       prefs: 'Đang đọc sở thích và số ngày',
       weather: 'Đang xem dự báo tại Hail',
-      order: 'Đang sắp xếp theo giờ đẹp nhất',
+      order: 'Đang sắp xếp theo khoảng cách gần và giờ đẹp nhất',
     },
   },
+
+  access: {
+    offRoad: 'Một đoạn đường chưa trải nhựa — nên đi xe hai cầu',
+    guide: 'Tham quan cùng hướng dẫn viên được cấp phép · sắp xếp trước',
+    farDrive: 'Khoảng {hours} giờ lái xe mỗi chiều',
+  },
+
+  /*
+    Bảng khắc — lớp chi tiết hơn di tích. Khách đã biết mình đang ở Jubbah;
+    thứ họ tìm đến là chính bảng khắc này và những gì có trên đó.
+  */
+  panel: {
+    heading: 'Các bảng khắc tại di tích này',
+    count: '{count} bảng khắc đã được ghi nhận',
+    look: 'Hãy tìm',
+    inscriptions: 'Có mang minh văn Thamud',
+    famous: 'Nổi tiếng nhất Jubbah',
+    atSite: 'Một bảng khắc tại {site}',
+    unknownSubject: 'Chưa xác định được chủ thể',
+  },
+
+  /* Các thời khắc đá. Ngăn cách chúng là thế kỷ, không phải phong cách. */
+  era: {
+    neolithic: 'Thời đại đồ đá mới · khoảng mười nghìn năm trước',
+    later: 'Sau khi lạc đà được thuần hóa · khoảng ba nghìn năm trước',
+    thamudic: 'Thời kỳ Thamud · nhiều thế kỷ trước Hồi giáo',
+    neolithicShort: 'Đồ đá mới',
+    laterShort: 'Muộn hơn',
+    thamudicShort: 'Thamud',
+  },
+
   interest: {
     history: 'Lịch sử và khảo cổ',
     nature: 'Thiên nhiên và phiêu lưu',

@@ -107,19 +107,55 @@ export default {
     acrossOne: 'kwa siku moja',
     edit: 'Hariri',
     weather: 'Ukaguzi wa hali ya hewa',
-    travel: 'Safari ya dakika {minutes}',
+    travel: 'Safari ya dakika {minutes} · km {km}',
+    travelFromHail: 'Kutoka Hail: dakika {minutes} · km {km}',
     until: 'hadi {time}',
     excluded: 'Halikutoshea katika safari hii',
     excludedHint: 'Ongeza siku moja au badilisha mwendo kuwa Mnene.',
-    note: 'Data ya hali ya hewa kutoka Open-Meteo.',
+    note: 'Data ya hali ya hewa kutoka Open-Meteo · Umbali umehesabiwa kutoka viwianishi vya maeneo.',
     noteOffline: 'Imeshindwa kupata hali ya hewa — tunaonyesha wastani wa hali ya hewa ya Hail.',
     day: 'Siku {n}',
+    openMaps: 'Fungua katika ramani',
+    navigate: 'Elekeza hadi hapa',
+    routeDay: 'Njia yote ya siku katika ramani',
+    dayDistance: 'Safari ya leo: km {km}',
     step: {
       prefs: 'Inasoma mapendeleo yako na muda wa safari',
       weather: 'Inaangalia utabiri wa Hail',
-      order: 'Inapanga maeneo kwa saa yao bora',
+      order: 'Inapanga maeneo kwa ukaribu na saa yao bora',
     },
   },
+
+  access: {
+    offRoad: 'Sehemu ya njia ni ya vumbi — gari la magurudumu manne linashauriwa',
+    guide: 'Tembelea ukiwa na mwongozaji aliyeidhinishwa · panga mapema',
+    farDrive: 'Takriban saa {hours} za kuendesha kila upande',
+  },
+
+  /*
+    Paneli — tabaka jembamba zaidi kuliko eneo. Mgeni tayari anajua yuko
+    Jubbah; alichokijia ni paneli hii mahususi na kilichomo ndani yake.
+  */
+  panel: {
+    heading: 'Paneli za eneo hili',
+    count: 'Paneli {count} zilizoandikwa',
+    look: 'Tafuta',
+    inscriptions: 'Ina maandishi ya Kithamudi',
+    famous: 'Maarufu kuliko zote katika Jubbah',
+    atSite: 'Paneli katika {site}',
+    unknownSubject: 'Mada yake haijabainika',
+  },
+
+  /* Enzi za uchongaji. Kinachozitenga ni karne, si mtindo. */
+  era: {
+    neolithic: 'Enzi Mpya ya Mawe · takriban miaka elfu kumi iliyopita',
+    later: 'Baada ya kufugwa kwa ngamia · takriban miaka elfu tatu iliyopita',
+    thamudic: 'Kipindi cha Kithamudi · karne kadhaa kabla ya Uislamu',
+    neolithicShort: 'Enzi Mpya ya Mawe',
+    laterShort: 'Ya baadaye',
+    thamudicShort: 'Kithamudi',
+  },
+
   interest: {
     history: 'Historia na akiolojia',
     nature: 'Maumbile na matukio',

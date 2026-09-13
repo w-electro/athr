@@ -27,10 +27,26 @@ if (!window.matchMedia) {
   })
 }
 
-if (!window.HTMLMediaElement.prototype.play) {
-  window.HTMLMediaElement.prototype.play = vi.fn().mockResolvedValue(undefined)
-}
+// jsdom يعرّف play() لكنها ترمي "Not implemented"، فنستبدلها دائمًا
+window.HTMLMediaElement.prototype.play = vi.fn().mockResolvedValue(undefined)
+window.HTMLMediaElement.prototype.pause = vi.fn()
 
 if (!window.HTMLCanvasElement.prototype.getContext) {
   window.HTMLCanvasElement.prototype.getContext = vi.fn(() => ({ drawImage: vi.fn() }))
+}
+
+/**
+ * jsdom لا يطبّق srcObject، وهو تحديدًا ما يربط بثّ الكاميرا بعنصر الفيديو.
+ * بدونه لا يمكن اختبار العلّة التي جعلت الشاشة سوداء بعد منح الإذن.
+ */
+if (!('srcObject' in window.HTMLMediaElement.prototype)) {
+  Object.defineProperty(window.HTMLMediaElement.prototype, 'srcObject', {
+    configurable: true,
+    get() {
+      return this._srcObject ?? null
+    },
+    set(value) {
+      this._srcObject = value
+    },
+  })
 }

@@ -112,12 +112,15 @@ describe('شاشة اختيار اللغة', () => {
 })
 
 describe('شاشة الاستكشاف', () => {
-  it('تعرض المواقع الأربعة', () => {
+  it('تعرض المواقع الستّة', () => {
     renderApp()
     expect(screen.getByText('نقوش جبة الصخرية')).toBeInTheDocument()
-    expect(screen.getByText('قصر عارف والقشلة')).toBeInTheDocument()
+    // أَعَيْرِف والقشلة معلمان منفصلان لا مدخلٌ واحد
+    expect(screen.getByText('قلعة أَعَيْرِف')).toBeInTheDocument()
+    expect(screen.getByText('قصر القشلة')).toBeInTheDocument()
     expect(screen.getByText('جبال أجا')).toBeInTheDocument()
     expect(screen.getByText('متحف حائل الإقليمي')).toBeInTheDocument()
+    expect(screen.getByText('نقوش الشويمس')).toBeInTheDocument()
   })
 
   it('تعرض المواقع بالإنجليزية عند اختيار الإنجليزية', () => {
@@ -183,6 +186,30 @@ describe('شاشة الاستكشاف', () => {
 })
 
 describe('شاشة تفاصيل الموقع', () => {
+  /**
+   * اللوحات تظهر في صفحة جبة بالعربية، وتغيب في لغةٍ لم تُترجم بعد —
+   * لا تظهر بنصٍّ عربي داخل واجهة أجنبية.
+   */
+  it('تعرض لوحات جبة العشر بالعربية', () => {
+    renderApp('/site/jubbah')
+    expect(screen.getByRole('heading', { name: 'لوحات هذا الموقع' })).toBeInTheDocument()
+    expect(screen.getByText('مَلِك جبة')).toBeInTheDocument()
+    expect(screen.getByText('سِرب النعام')).toBeInTheDocument()
+    expect(screen.getByText('اللوحات الموثّقة: 10')).toBeInTheDocument()
+  })
+
+  /** اللوحات بلغة المستخدم، بلا تسرّب عربي — كبقية المحتوى. */
+  it('تعرض اللوحات بالإنجليزية بلا نص عربي', () => {
+    renderApp('/site/jubbah', 'en')
+    expect(screen.queryByText('مَلِك جبة')).not.toBeInTheDocument()
+    expect(screen.queryByText('سِرب النعام')).not.toBeInTheDocument()
+  })
+
+  it('لا تعرض قسم اللوحات لموقع بلا لوحات', () => {
+    renderApp('/site/qishlah')
+    expect(screen.queryByRole('heading', { name: 'لوحات هذا الموقع' })).not.toBeInTheDocument()
+  })
+
   it('تعرض القصة والحقائق والنصائح', () => {
     renderApp('/site/jubbah')
     expect(screen.getByText('حين كانت الصحراء بحيرة')).toBeInTheDocument()
@@ -252,6 +279,73 @@ describe('شاشة المسح', () => {
     expect(screen.getByRole('heading', { name: 'المسح الذكي' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'افتح الكاميرا' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /ارفع صورة/ })).toBeInTheDocument()
+  })
+
+  /**
+   * حارس لعلّة شُحنت فعلاً: زرّ «ارفع صورة» كان يفتح الكاميرا.
+   *
+   * السبب capture="environment" على حقل الملفّ، وهو أمرٌ لمتصفّح
+   * الجوّال بتخطّي منتقي الملفّات وفتح الكاميرا مباشرةً. فيضيع
+   * المسار الوحيد المتاح حين يُرفض إذن الكاميرا، أو على حاسوبٍ بلا
+   * كاميرا — أي في العرض أمام لجنة التحكيم.
+   */
+  it('يفتح زرّ الرفع منتقي الملفّات لا الكاميرا', () => {
+    const { container } = renderApp('/scan')
+    const input = container.querySelector('input[type="file"]')
+
+    expect(input).toBeTruthy()
+    expect(input.accept).toBe('image/*')
+    expect(input.hasAttribute('capture')).toBe(false)
+  })
+
+  /**
+   * حارس لعلّة شحنت فعلًا: بعد منح الإذن كانت الشاشة سوداء.
+   *
+   * السبب أن عنصر <video> لا يُركَّب إلا في الحالة live، بينما كان ربط
+   * البثّ يجري والحالة ما زالت starting — فيكون المرجع null ويُتخطّى
+   * الربط بصمت. الاختبار يتحقّق من وصول البثّ إلى العنصر فعلًا، لا من
+   * ظهور الأزرار فحسب.
+   */
+  it('تربط بثّ الكاميرا بعنصر الفيديو بعد منح الإذن', async () => {
+    const user = userEvent.setup()
+    const track = { stop: vi.fn() }
+    const stream = { getTracks: () => [track], id: 'fake-stream' }
+
+    Object.defineProperty(navigator, 'mediaDevices', {
+      configurable: true,
+      value: { getUserMedia: vi.fn().mockResolvedValue(stream) },
+    })
+
+    const { container } = renderApp('/scan')
+    await user.click(screen.getByRole('button', { name: 'افتح الكاميرا' }))
+
+    // نصل إلى حالة التصوير
+    expect(await screen.findByLabelText('التقط وحلّل')).toBeInTheDocument()
+
+    // والأهم: البثّ مرتبط فعلًا بالعنصر
+    const video = container.querySelector('video')
+    expect(video).toBeTruthy()
+    expect(video.srcObject).toBe(stream)
+  })
+
+  it('تعود إلى أي كاميرا إن رفض الجهاز قيد الكاميرا الخلفية', async () => {
+    const user = userEvent.setup()
+    const stream = { getTracks: () => [{ stop: vi.fn() }] }
+    const getUserMedia = vi
+      .fn()
+      .mockRejectedValueOnce(new Error('OverconstrainedError'))
+      .mockResolvedValueOnce(stream)
+
+    Object.defineProperty(navigator, 'mediaDevices', {
+      configurable: true,
+      value: { getUserMedia },
+    })
+
+    renderApp('/scan')
+    await user.click(screen.getByRole('button', { name: 'افتح الكاميرا' }))
+
+    expect(await screen.findByLabelText('التقط وحلّل')).toBeInTheDocument()
+    expect(getUserMedia).toHaveBeenCalledTimes(2)
   })
 
   it('تنتقل إلى مسار الرفع عند رفض إذن الكاميرا', async () => {
@@ -371,6 +465,60 @@ describe('شاشة رحلتي', () => {
 
     await user.click(screen.getByRole('button', { name: 'تعديل' }))
     expect(screen.getByText('ما الذي يهمّك؟')).toBeInTheDocument()
+  }, 15000)
+
+  /**
+   * كان المخطّط يبني قائمةً لا سبيل منها إلى أي مكان: الإحداثيات موجودة في
+   * البيانات ولا رابط يستعملها. هذا حارس أنّ كل محطّة تفتح موضعها فعلًا.
+   */
+  it('تعطي كل محطّة رابط خرائط بإحداثياتها', async () => {
+    const user = userEvent.setup()
+    const { container } = renderApp('/trip')
+
+    await user.click(screen.getByRole('button', { name: 'ابنِ مساري' }))
+    await waitFor(() => expect(screen.getByText('مسارك جاهز')).toBeInTheDocument(), {
+      timeout: 8000,
+    })
+
+    const links = [...container.querySelectorAll('a[href*="google.com/maps"]')]
+    expect(links.length).toBeGreaterThan(0)
+
+    for (const link of links) {
+      const href = link.getAttribute('href')
+      // روابط المسار تُرمّز الفاصلة، فنفكّ الترميز قبل المطابقة
+      expect(decodeURIComponent(href)).toMatch(/-?\d+\.\d+,-?\d+\.\d+/)
+      // إحداثيات لا أسماء: البحث بالاسم قد يُنزل الزائر في مدينة أخرى
+      expect(href).not.toMatch(/[؀-ۿ]/)
+      expect(link.getAttribute('target')).toBe('_blank')
+      expect(link.getAttribute('rel')).toContain('noreferrer')
+    }
+  }, 15000)
+
+  it('تعطي كل يوم رابط مسارٍ كامل', async () => {
+    const user = userEvent.setup()
+    const { container } = renderApp('/trip')
+
+    await user.click(screen.getByRole('button', { name: 'ابنِ مساري' }))
+    await waitFor(() => expect(screen.getByText('مسارك جاهز')).toBeInTheDocument(), {
+      timeout: 8000,
+    })
+
+    const routes = [...container.querySelectorAll('a[href*="maps/dir/"]')]
+    expect(routes.length).toBeGreaterThan(0)
+    expect(decodeURIComponent(routes[0].getAttribute('href'))).toContain('origin=27.5114,41.6907')
+  }, 15000)
+
+  it('تعرض المسافة مع زمن التنقّل لا الزمن وحده', async () => {
+    const user = userEvent.setup()
+    renderApp('/trip')
+
+    await user.click(screen.getByRole('button', { name: 'ابنِ مساري' }))
+    await waitFor(() => expect(screen.getByText('مسارك جاهز')).toBeInTheDocument(), {
+      timeout: 8000,
+    })
+
+    // «من حائل: ٤٥ دقيقة · ٦٠ كم» — الرقمان معًا لا أحدهما
+    expect(screen.getAllByText(/كم/).length).toBeGreaterThan(0)
   }, 15000)
 })
 

@@ -8,6 +8,7 @@
  */
 
 import { getAllSites } from '../data/sites.js'
+import { legBetween, haversineKm, HAIL_CENTER } from './geo.js'
 
 /** إيقاع الرحلة → الدقائق المتاحة للزيارة في اليوم الواحد. */
 export const PACES = {
@@ -28,6 +29,16 @@ const TIME_ORDER = { morning: 0, afternoon: 1, evening: 2 }
 /** بداية اليوم بالدقائق من منتصف الليل (8:00 صباحًا). */
 const DAY_START_MINUTES = 8 * 60
 
+/**
+ * بداية مبكّرة للأيام البعيدة (6:00 صباحًا).
+ *
+ * الشويمس على بعد ثلاث ساعات قيادة: الانطلاق الثامنة يعني الوصول بعد
+ * الظهر، والنقوش لا تُقرأ في ضوءٍ عموديّ — تحتاج ضوءًا مائلًا يُبرز عمق
+ * النقر. فيومٌ مثل هذا يبدأ قبل الفجر عند أهل الميدان، لا في الثامنة.
+ */
+const EARLY_START_MINUTES = 6 * 60
+const EARLY_START_DRIVE_HOURS = 2
+
 /** الظهيرة الحارة: من 12:00 إلى 16:00. */
 const MIDDAY_START = 12 * 60
 const MIDDAY_END = 16 * 60
@@ -44,36 +55,118 @@ export function scoreSite(site, interests = []) {
   return overlap * 2 + unescoBoost + coverageBoost
 }
 
-/** تقدير زمن التنقّل بين محطتين انطلاقًا من بُعد كل منهما عن مركز حائل. */
+/**
+ * زمن التنقّل بين محطتين.
+ *
+ * ── ما كان خطأً هنا ──────────────────────────────────────────────────
+ * كانت النسخة السابقة تطرح بُعد كل موقع عن حائل: |95 − 2| ثم تقسم.
+ * وهذا يعطي نتائج خاطئة بنيويًا، لأن موقعين يبعد كلٌّ منهما عشرين
+ * كيلومترًا عن حائل في اتجاهين متضادّين يظهران «متجاورين» وبينهما أربعون
+ * كيلومترًا فعلًا. الآن نحسب من الإحداثيات مباشرةً — الإحداثيات نفسها
+ * التي تُبنى منها روابط الخرائط، فلا يمكن أن يتناقض الرقم مع الدبّوس.
+ */
 export function travelMinutesBetween(fromSite, toSite) {
-  if (!fromSite) return 0
-  const deltaKm = Math.abs(toSite.distanceFromHailKm - fromSite.distanceFromHailKm)
-  return Math.max(15, Math.round(deltaKm / 1.1))
+  if (!fromSite || !toSite) return 0
+  return legBetween(fromSite, toSite).minutes
+}
+
+/** المسافة والزمن معًا — تعرضهما الواجهة كما هما. */
+export function legFor(fromSite, toSite) {
+  return legBetween(fromSite, toSite)
 }
 
 /**
  * يرتّب محطات اليوم الواحد.
- * في يوم حار أو مغبر تُدفع المواقع المكشوفة إلى الصباح والمغلقة إلى الظهيرة.
+ *
+ * المعيار الأول هو وقت الزيارة الأنسب (القشلة تفتح مساءً، والنقوش تُقرأ
+ * في ضوء الصباح المائل)، وداخل كل مجموعة نسلك أقرب محطة تالية — وهي
+ * خوارزمية الجار الأقرب: ليست مثالية رياضيًا، لكنها مع ثلاث أو أربع
+ * محطات تعطي الترتيب الأمثل عمليًا وتوفّر على الزائر عشرات الكيلومترات.
+ *
+ * وفي يوم حارّ أو مغبر تتقدّم المواقع المكشوفة إلى الصباح.
  */
 export function orderStopsForDay(sites, weather) {
   const shiftOutdoor = Boolean(weather?.avoidMiddayOutdoor || weather?.windyWarning)
 
-  return [...sites].sort((a, b) => {
+  const grouped = [...sites].sort((a, b) => {
     if (shiftOutdoor && a.outdoor !== b.outdoor) return a.outdoor ? -1 : 1
-    const orderDiff = (TIME_ORDER[a.bestTime] ?? 1) - (TIME_ORDER[b.bestTime] ?? 1)
-    if (orderDiff !== 0) return orderDiff
-    return b.distanceFromHailKm - a.distanceFromHailKm
+    return (TIME_ORDER[a.bestTime] ?? 1) - (TIME_ORDER[b.bestTime] ?? 1)
   })
+
+  // الجار الأقرب داخل كل مجموعة وقت، انطلاقًا من حائل
+  const ordered = []
+  const remaining = [...grouped]
+  let cursor = { coords: HAIL_CENTER }
+
+  while (remaining.length > 0) {
+    const rank = (site) => TIME_ORDER[site.bestTime] ?? 1
+    const earliest = Math.min(...remaining.map(rank))
+    const pool = remaining.filter((site) => rank(site) === earliest)
+
+    const next = pool.reduce((best, site) =>
+      haversineKm(cursor.coords, site.coords) < haversineKm(cursor.coords, best.coords)
+        ? site
+        : best,
+    )
+
+    ordered.push(next)
+    remaining.splice(remaining.indexOf(next), 1)
+    cursor = next
+  }
+
+  return ordered
 }
 
-/** يوزّع المواقع المختارة على الأيام حسب السعة الزمنية لكل يوم. */
+/**
+ * تحذيرات الوصول — مفاتيح ترجمة لا نصّ.
+ *
+ * سببها الشويمس: 250 كم جنوب حائل وآخر الطريق ترابي. مخطّطٌ يضعها بين
+ * محطّتين داخل المدينة يبني يومًا مستحيلًا وهو واثق.
+ */
+export function accessWarnings(site) {
+  const access = site.access ?? {}
+  const warnings = []
+
+  if (access.offRoad) warnings.push({ key: 'access.offRoad' })
+  if (access.guideRequired) warnings.push({ key: 'access.guide' })
+  if (access.drivingHours >= 2) {
+    warnings.push({ key: 'access.farDrive', hours: Math.round(access.drivingHours) })
+  }
+
+  return warnings
+}
+
+/**
+ * يوزّع المواقع المختارة على الأيام حسب السعة الزمنية لكل يوم.
+ *
+ * المواقع الموسومة fullDay تحتجز يومًا كاملًا لنفسها: الشويمس تبعد 250 كم
+ * والذهاب والإياب وحدهما نحو ستّ ساعات، فوضعها بجانب محطّةٍ أخرى يبني
+ * يومًا لا يمكن تنفيذه فعلًا مهما بدا مرتّبًا على الشاشة.
+ */
 function distributeAcrossDays(sites, days, capacity) {
-  const buckets = Array.from({ length: days }, () => ({ sites: [], used: 0 }))
+  const buckets = Array.from({ length: days }, () => ({ sites: [], used: 0, locked: false }))
   const leftovers = []
 
-  for (const site of sites) {
+  // نبدأ بالمواقع التي تحتاج يومًا كاملًا حتى تأخذ أيامها قبل الازدحام
+  const ordered = [...sites].sort(
+    (a, b) => Number(Boolean(b.access?.fullDay)) - Number(Boolean(a.access?.fullDay)),
+  )
+
+  for (const site of ordered) {
+    if (site.access?.fullDay) {
+      const free = buckets.find((bucket) => bucket.sites.length === 0)
+      if (free) {
+        free.sites.push(site)
+        free.used = capacity
+        free.locked = true
+      } else {
+        leftovers.push(site)
+      }
+      continue
+    }
+
     const candidate = buckets
-      .filter((bucket) => bucket.used + site.durationMinutes + 30 <= capacity)
+      .filter((bucket) => !bucket.locked && bucket.used + site.durationMinutes + 30 <= capacity)
       .sort((a, b) => a.used - b.used)[0]
 
     if (candidate) {
@@ -108,11 +201,18 @@ export function buildItinerary(prefs, forecast = null) {
     const weather = forecast?.[index] ?? null
     const ordered = orderStopsForDay(bucket.sites, weather)
 
-    let clock = DAY_START_MINUTES
-    let previous = null
+    // يومٌ أوّلُ محطّاته بعيدة يبدأ مبكّرًا، وإلا ضاع الصباح في الطريق
+    const needsEarlyStart = ordered.some(
+      (site) => site.access?.fullDay || (site.access?.drivingHours ?? 0) >= EARLY_START_DRIVE_HOURS,
+    )
+    let clock = needsEarlyStart ? EARLY_START_MINUTES : DAY_START_MINUTES
+    // اليوم يبدأ من حائل لا من العدم: الطريق إلى المحطّة الأولى وقتٌ
+    // حقيقيّ يقضيه الزائر، وإغفاله يجعل كلّ ساعات اليوم متفائلةً كذبًا
+    let previous = { coords: HAIL_CENTER, access: {} }
 
     const stops = ordered.map((site) => {
-      const travel = travelMinutesBetween(previous, site)
+      const leg = legBetween(previous, site)
+      const travel = leg.minutes
       clock += travel
 
       // موقع مكشوف في يوم حار لا يبدأ داخل نافذة الظهيرة
@@ -123,16 +223,26 @@ export function buildItinerary(prefs, forecast = null) {
       const start = clock
       const end = start + site.durationMinutes
       clock = end
+
+      // نلتقط المصدر قبل إزاحة المؤشّر، وإلا صار «من» هو الموقعَ نفسه
+      const cameFromHail = previous.coords === HAIL_CENTER
+      const originCoords = previous.coords
       previous = site
 
       return {
         site,
         travelMinutes: travel,
+        travelKm: leg.km,
+        // من أين جاء الزائر إلى هنا — «من حائل» أو المحطّة السابقة.
+        // fromCoords تُبنى منها الملاحة: من حيث سيكون فعلًا، لا من موقعه الآن.
+        fromHail: cameFromHail,
+        fromCoords: originCoords,
         startMinutes: start,
         endMinutes: end,
         startLabel: formatClock(start),
         endLabel: formatClock(end),
         reason: buildReason(site, interests, weather),
+        warnings: accessWarnings(site),
       }
     })
 
@@ -141,6 +251,8 @@ export function buildItinerary(prefs, forecast = null) {
       weather,
       stops,
       totalMinutes: stops.reduce((sum, stop) => sum + stop.site.durationMinutes, 0),
+      // مجموع الطريق: يشمل رجلة الخروج من حائل، لا ما بين المحطّات فقط
+      totalKm: stops.reduce((sum, stop) => sum + stop.travelKm, 0),
     }
   })
 

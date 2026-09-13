@@ -4,6 +4,8 @@ import SiteArt from '../components/SiteArt.jsx'
 import AudioPlayer from '../components/AudioPlayer.jsx'
 import { getSiteById, CATEGORIES, formatDuration } from '../data/sites.js'
 import { bestTimeKey } from '../lib/itinerary.js'
+import { mapsPlaceUrl, mapsDirectionsUrl } from '../lib/geo.js'
+import { getPanelsForSite, SUBJECTS } from '../data/panels.js'
 import { useI18n } from '../i18n/index.jsx'
 
 /**
@@ -21,6 +23,7 @@ export default function SiteDetailScreen() {
   const navigate = useNavigate()
   const { t, contentLanguage, contentDir, hasFullContent, language, isRtl } = useI18n()
   const site = getSiteById(siteId, contentLanguage)
+  const panels = getPanelsForSite(siteId, contentLanguage)
 
   const scrollRef = useRef(null)
   const [offset, setOffset] = useState(0)
@@ -118,7 +121,7 @@ export default function SiteDetailScreen() {
             <Fact label={t('site.category')} value={t(`category.${site.category}`)} icon={category.icon} />
           </div>
 
-          <AudioPlayer narration={site.narration} siteName={site.shortName} />
+          <AudioPlayer narration={site.narration} siteName={site.shortName} siteId={site.id} />
 
           <section>
             <SectionHead>{t('site.story')}</SectionHead>
@@ -154,6 +157,43 @@ export default function SiteDetailScreen() {
             </dl>
           </section>
 
+          {/*
+            اللوحات الموثّقة. تغيب كليًّا حين لا لوحات لهذا الموقع أو لا
+            ترجمة بهذه اللغة — قسمٌ فارغ بعنوانٍ أسوأ من لا قسم.
+          */}
+          {panels.length > 0 && (
+            <section>
+              <SectionHead>{t('panel.heading')}</SectionHead>
+              <p className="mb-3 text-micro text-sand-faint">
+                {t('panel.count', { count: panels.length })}
+              </p>
+              <ul className="space-y-2" dir={contentDir}>
+                {panels.map((panel) => (
+                  <li
+                    key={panel.id}
+                    className="flex items-start gap-3 rounded-xl border border-night-600 bg-night-800 p-3.5"
+                  >
+                    <span aria-hidden="true" className="mt-0.5 shrink-0 text-base">
+                      {(SUBJECTS[panel.subject] ?? SUBJECTS.unknown).icon}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-body font-semibold text-sand">
+                        {panel.name}
+                        {panel.famous && (
+                          <span className="ms-2 text-[0.625rem] text-terracotta-bright">★</span>
+                        )}
+                      </p>
+                      <p className="mt-0.5 text-micro text-sand-faint">
+                        {t(`era.${panel.era}Short`)}
+                        {panel.hasInscriptions && ` · ${t('panel.inscriptions')}`}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           <section>
             <SectionHead>{t('site.tips')}</SectionHead>
             <ul className="space-y-2.5" dir={contentDir}>
@@ -170,13 +210,18 @@ export default function SiteDetailScreen() {
 
           <section className="space-y-3">
             <p className="text-micro text-sand-faint">{site.ticket}</p>
+            {/* الرابط من نفس الدالة التي يستعملها المخطّط — مصدرٌ واحد
+                للإحداثيات، فلا يمكن أن يفتح زرّان مكانين مختلفين */}
+            <a href={mapsPlaceUrl(site.coords)} target="_blank" rel="noreferrer" className="btn-primary">
+              {t('site.map')}
+            </a>
             <a
-              href={`https://www.google.com/maps/search/?api=1&query=${site.coords.lat},${site.coords.lng}`}
+              href={mapsDirectionsUrl(site.coords)}
               target="_blank"
               rel="noreferrer"
-              className="btn-primary"
+              className="btn-quiet"
             >
-              {t('site.map')}
+              {t('trip.navigate')}
             </a>
             <Link to="/trip" className="btn-quiet">
               {t('site.plan')}

@@ -58,42 +58,42 @@ export default {
     },
   },
 
-  qishlah: {
-    name: 'Aarif Kalesi ve Kışla',
-    shortName: 'Aarif ve Kışla',
-    subtitle: 'Hail’in tarihî kalbi · komşu iki yapı',
-    tagline: 'Şehri yukarıdan gözeten bir kerpiç kale ve onu aşağıdan koruyan 142 odalı bir hisar.',
-    era: 'Aarif: 200 yılı aşkın · Kışla: 1941',
+  aarif: {
+    name: 'Aarif Kalesi',
+    shortName: 'Aarif',
+    subtitle: 'Tepedeki kale · iki yüzyılı aşkın',
+    tagline: 'Kayalık bir zirvede yükselen, Hail’e giren her yolu gözeten kerpiç kale.',
+    era: '200 yılı aşkın',
     city: 'Hail şehir merkezi',
-    ticket: 'Giriş ücretsiz · Kışla akşamları açılır',
+    ticket: 'Giriş ücretsiz',
     story: [
       {
         heading: 'Hail’in hiç uyumayan gözü',
-        body: 'Şehre hâkim kayalık bir tepenin üstünde Aarif Kalesi yükselir; Hail halkı onu iki yüzyıldan fazla bir süre önce, şehre çıkan yolları gözetlemek için inşa etmiştir. Kulelerinden nöbetçiler, Derb-i Zübeyde üzerinden gelen kervanları izler, Ramazan gecelerinde de iftarı haber vermek için ateş yakardı — bu âdet, aynı tepeden atılan topla bugün hâlâ yaşamaktadır.',
+        body: 'Şehre hâkim kayalık bir tepenin zirvesinde Aarif Kalesi yükselir; Hail halkı onu iki yüzyıldan fazla bir süre önce, şehre çıkan yolları gözetlemek için inşa etmiştir. Kulelerinden nöbetçiler, Derb-i Zübeyde üzerinden gelen kervanları izler, Ramazan gecelerinde de iftarı haber vermek için ateş yakardı — bu âdet, aynı tepeden atılan topla bugün hâlâ yaşamaktadır.',
       },
       {
         heading: 'İki yüzyıl dayanan kerpiç',
         body: 'Kale, samanla yoğrulmuş çamurdan, ılgın gövdeleriyle desteklenmiş bir metreden kalın duvarlarla yapılmıştır ve bu teknik göründüğü kadar ilkel değildir: kalın bir kerpiç duvar gecenin serinliğini gündüze, gündüzün sıcağını geceye taşır; böylece yazın elli dereceyi aşan bir çölün ortasında doğal bir iklimlendirme kurar.',
       },
       {
-        heading: 'Kışla: bir duvarın içindeki şehir',
-        body: 'Tepeden doğuya inin, kalenin tam zıddını bulursunuz: Kışla, Kral Abdülaziz’in 1941’de kışla olarak yaptırdığı devasa dikdörtgen bir hisardır; iki katta 142 oda, köşelerinde ve kenarlarında sekiz gözetleme kulesi, içinde bir mescit ve revaklarla kesişen geniş bir avlu barındırır. Uzun kerpiç koridorlarında yürümek, küçültülmüş bir şehri baştan başa geçmeye benzer.',
+        heading: 'En güzel manzaraya yetmiş basamak',
+        body: 'Kaleye ancak yürüyerek çıkılır; tepeye oyulmuş merdiven yaklaşık yetmiş basamaktır ve bunları birkaç dakikada aşarsınız. Dama vardığınız anda bütün Hail ayaklarınızın altına serilir: batıda sınırları belirgin kerpiç bir dikdörtgen olarak Kışla, arkasında ufku kapatan Aca Dağları ve ikisinin arasına yayılan modern şehir.',
       },
       {
-        heading: 'Kışladan hafızaya',
-        body: 'Askerî işlevi sona erdikten sonra Kışla, Hail’in en önemli miras alanlarından biri hâline geldi ve avlusunda bugün kültür etkinlikleri ile geleneksel pazarlar düzenleniyor. Dikkate değer bir ayrıntı var: sekiz kulesindeki her pencere farklı bir açıyla açılmıştır; böylece hep birlikte hisara yaklaşan her yönü, tek bir kör nokta bırakmadan gözler.',
+        heading: 'Kendini seçen tepe',
+        body: 'Bu tepenin seçilmesi mimari bir zevk meselesi değildi; Hail ovasının ortasındaki tek doğal yükselti odur ve ovanın otuz metre üstü, ufku her yönde görmeye yeter. Tabanı da sert kayadır: altından lağım kazılamaz, üzerine ne merdiven ne de kuşatma kulesi dayanır. Sonra yıllar döndü, şehir tepenin çevresine yayılıp onu da aştı; çölü gözlemek için yapılan kale bugün kalabalık caddelere bakıyor — yer aynı, işlev tersine dönmüş.',
       },
     ],
     facts: [
-      { label: 'Kışla’daki oda sayısı', value: '142' },
-      { label: 'Gözetleme kulesi', value: '8' },
-      { label: 'Kışla’nın yapımı', value: '1941 (1360 H.)' },
+      { label: 'Tahmini yaş', value: '200 yılı aşkın' },
+      { label: 'Şehirden yüksekliği', value: 'yaklaşık 30 m' },
+      { label: 'Çıkış', value: 'yalnızca merdiven · araç yolu yok' },
       { label: 'Malzemeler', value: 'çamur, saman, ılgın gövdeleri' },
     ],
     tips: [
-      'Aarif Kalesi’ne gün batımından yarım saat önce çıkın: şehrin manzarası Hail’de çekeceğiniz en iyi fotoğraftır.',
+      'Tepeye gün batımından yarım saat önce çıkın: zirveden şehrin manzarası Hail’de çekeceğiniz en iyi fotoğraftır.',
       'Ramazan’da top bu tepeden atılır; o dönemde geliyorsanız erken gidin, çünkü alan hızla dolar.',
-      'Kışla’nın kerpiç zeminleri engebelidir; çocuk veya yaşlı ziyaretçilerle geliyorsanız dikkatli olun.',
+      'Asansör de araç yolu da yok ve merdivenin son bölümü diktir; yaşlı ziyaretçilerle geliyorsanız bunu hesaba katın.',
     ],
     narration: {
       voice: 'Athr’ın sesi — yapay zekâ ile üretilen anlatım',
@@ -102,14 +102,72 @@ export default {
         { at: 14, text: 'Çıkarken solunuzdaki duvarın kalınlığına dikkat edin: bir metreden fazla çamur ve saman.' },
         { at: 28, text: 'Bu kalınlık yalnızca savunma için değil, doğal serinletme için: gecenin serinliği öğlene kadar çamurda saklı kalır.' },
         { at: 44, text: 'Bu kuleden bir nöbetçi vaktiyle kervanları gözlerdi; Ramazan topu da bugün hâlâ buradan atılıyor.' },
-        { at: 60, text: 'Şimdi doğuya dönün: şu büyük kerpiç dikdörtgen, 142 odası ve sekiz kulesiyle Kışla’dır.' },
-        { at: 76, text: 'İçeri girdiğinizde pencerelerin açılarını sayın: hisarın çevresinde tek bir kör nokta yoktur.' },
+        { at: 60, text: 'Şimdi batıya dönün: şu büyük kerpiç dikdörtgen Kışla’dır, aranızda yalnızca bir buçuk kilometre var.' },
+        { at: 76, text: 'Arkasında Aca Dağları ufku kapatır; ikisinin arasında ise bütün Hail gözlerinizin önüne serilir.' },
       ],
     },
     scan: {
-      matchLabel: 'Savunma amaçlı kerpiç mimari · Kışla / Aarif Kalesi',
+      matchLabel: 'Kayalık zirvede kerpiç kale · Aarif',
       evidence: [
+        'Yapının üzerinde yükseldiği doğal kaya tabanı',
         'Yukarı doğru daralan eğimli kerpiç duvarlar',
+        'Necd mimarisine özgü dişli korkuluklar',
+      ],
+    },
+  },
+
+  qishlah: {
+    name: 'Kışla Hisarı',
+    shortName: 'Kışla',
+    subtitle: '142 oda · 1360 H. / 1941 M.',
+    tagline: 'Arabistan’ın en büyük kerpiç yapısı: tek bir duvarın içinde koca bir şehir.',
+    era: '1360 H. / 1941 M.',
+    city: 'Hail şehir merkezi',
+    ticket: 'Giriş ücretsiz · akşamları açılır',
+    story: [
+      {
+        heading: 'Bir duvarın içindeki şehir',
+        body: 'Kışla, Kral Abdülaziz’in 1360 hicri yılında kışla olarak yaptırdığı devasa dikdörtgen bir hisardır; iki katta 142 oda, köşelerinde ve kenarlarında sekiz gözetleme kulesi, içinde bir mescit ve revaklarla kesişen geniş bir avlu barındırır. Uzun kerpiç koridorlarında yürümek, tek bir yapıyı gezmekten çok küçültülmüş bir şehri baştan başa geçmeye benzer.',
+      },
+      {
+        heading: 'Cetvelle örülmüş kerpiç',
+        body: 'Kışla’yı eski kerpiç mimariden ayıran şey, tedricen büyüyerek değil, katı bir geometrik plana göre yükselmiş olmasıdır: revaklar paralel, odalar aynı ölçüde, kuleler düzenli aralıklarla yerleştirilmiştir. Böylece Necd’in geleneksel mimarisi ile planlı modern yapı arasındaki sınırda durur; üstelik iki yüzyıl önce Aarif’i kuran çamurun, samanın ve ılgın gövdelerinin aynısıyla örülmüştür.',
+      },
+      {
+        heading: 'Kör noktası olmayan sekiz kule',
+        body: 'Sekiz kulesinde dikkat çeken şey, her pencerenin komşusundan farklı bir açıyla açılmış olmasıdır; böylece hepsi birlikte hisarın çevresindeki her yönü, tek bir kör nokta bırakmadan kapatır. Modern ölçüm aletleri olmadan yapılmış ince bir görsel hesaptır bu ve avluda durup kuleden kuleye görüş hatlarını izleyerek kendiniz de doğrulayabilirsiniz.',
+      },
+      {
+        heading: 'Kışladan hafızaya',
+        body: 'Askerî işlevi sona erdikten sonra Kışla, Hail’in en önemli turistik yapılarından biri hâline geldi; avlusunda bugün kültür etkinlikleri, geleneksel pazarlar ve Hail festivalinin programları düzenleniyor. Böylece insanlara kapanmak için yapılmış bir bina, onlarsız hiçbir anlamı olmayan bir yere dönüştü.',
+      },
+    ],
+    facts: [
+      { label: 'Oda sayısı', value: '142' },
+      { label: 'Gözetleme kulesi', value: '8' },
+      { label: 'Yapım yılı', value: '1360 H. / 1941 M.' },
+      { label: 'Malzemeler', value: 'çamur, saman, ılgın gövdeleri' },
+    ],
+    tips: [
+      'Kışla genellikle akşamları açılır; Aarif’ten indikten sonra gününüzü onunla bitirin — aralarında yalnızca bir buçuk kilometre var.',
+      'Kerpiç zeminler engebeli, koridorlar loştur; çocuk veya yaşlı ziyaretçilerle geliyorsanız adımınıza dikkat edin.',
+      'İç avlu, gün batımından sonra fotoğraf için en iyi yerdir; kerpiç duvarlar aşağıdan aydınlatılınca çamurun dokusu belirginleşir.',
+    ],
+    narration: {
+      voice: 'Athr’ın sesi — yapay zekâ ile üretilen anlatım',
+      segments: [
+        { at: 0, text: 'Şimdi Kışla’nın önündesiniz ve gördüğünüz tek bir yapı değil, bir duvarın içindeki koca bir şehirdir.' },
+        { at: 12, text: 'İki katta yüz kırk iki oda, sekiz kule, içeride bir mescit ve ortada bir avlu.' },
+        { at: 26, text: 'Kapıdan girin ve avluda bir an durun: revakların paralel, odaların birbirinin aynı olduğunu fark edin.' },
+        { at: 41, text: 'Onu ayrıcalıklı kılan da budur: alışıldığı gibi azar azar büyütülmüş değil, cetvelle örülmüş kerpiç.' },
+        { at: 56, text: 'Şimdi gözünüzle kulelerin pencerelerini izleyin: her pencere komşusundan farklı bir açıyla açılmıştır.' },
+        { at: 70, text: 'İsterseniz sayın: hisarın çevresinde tek bir kör nokta bulamayacaksınız.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Dikdörtgen kerpiç hisar · Kışla',
+      evidence: [
+        'Düzenli pencere ritmine sahip uzun dikdörtgen kerpiç cephe',
         'Üçgen mazgallı silindirik köşe kuleleri',
         'Necd mimarisine özgü dişli korkuluklar',
       ],
@@ -230,5 +288,146 @@ export default {
         'Necd geometrik bezemeli seramik kap',
       ],
     },
+  },
+
+  shuwaymis: {
+    name: 'Şüveymis Kaya Resimleri',
+    shortName: 'Şüveymis',
+    subtitle: 'El-Mencûr ve Raat dağları · UNESCO Dünya Mirası',
+    tagline: 'UNESCO tescilinin öbür yarısı; ancak niyet edip yola çıkanın varabildiği vadiler.',
+    era: '~10.000 yıl önce (Neolitik)',
+    city: 'Şüveymis, Hail’in güneybatısı',
+    ticket: 'Ziyaret yalnızca yetkili rehber eşliğinde · önceden koordinasyon şart',
+    story: [
+      {
+        heading: 'Tescilin unutulan yarısı',
+        body: 'UNESCO 2015 yılında «Hail bölgesindeki kaya sanatı»nı Dünya Mirası Listesi’ne aldığında tescil yalnızca Cübbe için değil, iki alan içindi: Cübbe’deki Cebel Ümmü Sinman ile Şüveymis’teki el-Mencûr ve Raat dağları. Ne var ki Şüveymis uzaklığı ve yolunun çetinliği yüzünden hep daha az ziyaret edildi; bu yüzden kazımaları daha sağlam kaldı ve daha az tahrip edildi — bugün bütün yarımadada Neolitik sanatın en iyi korunmuş örnekleri arasındadır.',
+      },
+      {
+        heading: 'Sayfa sayfa okunan vadiler',
+        body: 'Şüveymis kazımaları, Cübbe’deki gibi tek bir yüzeyde değildir; dar ve derin vadilerin duvarlarına yayılmıştır ve aralarında yürüdükçe size pano panoyu açar: yaban sığırı sürüleri, aslanlar, leoparlar ve devekuşları, yayla avlanan insan figürleri ve dağınık simgeler yerine eksiksiz sahneler — kimi levhalar tek bir olayı başından sonuna anlatır.',
+      },
+      {
+        heading: 'Tarihi değiştiren köpek',
+        body: 'Dünyada bilinen en eski evcil köpek tasvirlerinden bazıları tam da Şüveymis’te bulundu: yayını geren bir avcının çevresinde, kulakları dik ve kuyrukları kıvrık köpekler; hatta bir kısmı ona, tasma diye yorumlanan çizgilerle bağlıdır. Yorum doğruysa bu duvarlar, insanla hayvan arasındaki ilişkinin en önemli anlarından birini sekiz bin yıldan fazla bir süre öncesinden belgeliyor demektir.',
+      },
+      {
+        heading: 'Neden burası',
+        body: 'Belli bir duvarda bu yığılmanın sebebi, Şüveymis’in bir su buluşma yeri olmasıdır: volkanik harralardan inen vadiler burada, yağmurdan sonra suyu tutan yataklarda birleşir; su olunca hayvanlar, hayvanlar olunca avcılar gelir. Kazımalar da burada bekleyenlerin kaydından başka bir şey değildir — üstüne resmettiğiniz duvar, gölgesine sığındığınız duvardır.',
+      },
+    ],
+    facts: [
+      { label: 'UNESCO tescili', value: '2015 (Cübbe ile birlikte)' },
+      { label: 'İki bileşen', value: 'Cebel el-Mencûr · Cebel Raat' },
+      { label: 'Hail’e uzaklık', value: '250 km güneybatıda' },
+      { label: 'Erişim', value: 'yetkili rehber · yolun bir bölümü toprak' },
+    ],
+    tips: [
+      'Ziyareti yolculuktan birkaç gün önce miras kurumuyla ya da yetkili bir rehberle ayarlayın: alan, Cübbe gibi serbest girişe açık değildir.',
+      'Bunu bir günün içinde kısa bir durak değil, başlı başına tam bir gün olarak planlayın; yalnızca gidiş dönüş altı saate yakındır.',
+      'İhtiyacınızdan fazla yakıt ve su alın: alandan önceki son istasyon uzaktır ve vadilerde şebeke kesilir.',
+      'Levhalar arasında yürüyüş çakıl ve engebeli kaya üzerindedir; kapalı ayakkabı burada tercih değil, zorunluluktur.',
+    ],
+    narration: {
+      voice: 'Athr’ın sesi — yapay zekâ ile üretilen anlatım',
+      segments: [
+        { at: 0, text: 'Şüveymis’e hoş geldiniz. Buraya varmak için uzun bir yol katettiniz; bir nefes alın ve çevrenize bakın.' },
+        { at: 13, text: 'Bu vadiler, Cübbe ile paylaştığınız UNESCO tescilinin öbür yarısıdır ve ikisinin en az ziyaret edilenidir.' },
+        { at: 28, text: 'Ziyaretçinin az olması taş için bir lütuftur: burada gördüğünüz, başka hiçbir alanda olmadığı kadar sağlamdır.' },
+        { at: 43, text: 'Vadide ağır ağır yürüyün, çünkü panolar hep birden değil, birer birer görünür.' },
+        { at: 58, text: 'Avcı sahnesini arayın; çevresinde kulakları dik, kuyrukları kıvrık köpekler olacak.' },
+        { at: 73, text: 'Bunlar dünyada bilinen en eski evcil köpek tasvirlerindendir; sekiz bin yıl önce kazınmışlardır.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Vadide kaya sanatı · Şüveymis',
+      evidence: [
+        'Açık kaya yüzeyinde değil, vadi duvarında vurma tekniği',
+        'Dağınık figürler yerine kurgulu av sahneleri',
+        'Vurmanın kestiği koyu çöl cilası',
+      ],
+    },
+  },
+}
+
+export const panels = {
+  'jubbah-p1': {
+    name: 'Deve kervanı',
+    story:
+      'Tek bir kaya yüzeyine art arda kazınmış develer. Cübbe’de en çok görülen ve en yeni olan budur: Ümmü Sinman’da sayılan 1.944 hayvan figüründen 1.378’i devedir — her ondan yedisi. Bu hiçbir zaman bir beğeni meselesi olmadı. Deve buradaki insan hayatına geç girdi; yaklaşık üç bin yıl önce evcilleştirildi ve böylece kazınan hayvan oldu, çünkü artık kendisiyle geçinilen hayvandı.',
+    look:
+      'Bacakların çizgilerini izleyin: geç dönem develeri hızlı ve özet bir darbeyle kazınmıştır, binlerce yıl önce işlenmiş yaban sığırlarındaki anatomik özenle değil.',
+  },
+
+  'jubbah-p2': {
+    name: 'Cübbe’nin Kralı',
+    story:
+      'Cübbe’nin en ünlüsü; dünyanın öbür ucundan ziyaretçiler bunun için gelir. Kaya sanatında ender görülen bir gerçekçilikle kazınmış iri bir insan figürü: sağ elinde mızrak, başında taca benzeyen bir şey, boynunda gerdanlık, belinde kemer — ve önünde, insanların hizmetkâr ya da maiyet diye okuduğu daha küçük bir figür. Buranın halkı ona «kral» der; arkeologlar ise «otorite sahibi bir figür» diye tanımlar, ki daha doğrusu budur. Kazıma bize onun kim olduğunu söylemiyor; yalnızca onu kazıyanın, onun ötekilerden ayrı biri olarak bilinmesini istediğini söylüyor.',
+    look:
+      'Boyunu, önünde duran figürle karşılaştırın. Buradaki ölçek farkı çizimde bir hata değil bir dildir: büyük olan, mertebece yüksek olandır — insanın «bu önemlidir» demek için bulduğu en eski yol.',
+  },
+
+  'jubbah-p3': {
+    name: 'Uzun boynuzlu dağ keçisi',
+    story:
+      'Geniş bir yay çizerek geriye kıvrılan iki uzun boynuzlu bir dağ keçisi. Dağ keçisi bütün Arabistan’da en çok kazınan hayvanlardandır ve hiçbir zaman yalnızca av değildi: figürü su başlarında ve yüksek yerlerde öyle ısrarla yinelenir ki araştırmacılar, kazıyanların zihninde etin ötesinde bir anlam taşıdığını düşünüyor — bereket, ya da hayatta kalma, ya da adını koyamadığımız bir şey. Nubya dağ keçisi bugün hâlâ bölgenin dağlarında yaşıyor; burada kazınıp da soyu tükenmemiş birkaç canlıdan biri.',
+    look:
+      'Boynuzların uzunluğunu gövdeye göre ölçün: abartı bilinçlidir. Kazıyanın gözünde hayvanı tanımlayan şey boynuzdur, gerçek oranları değil.',
+  },
+
+  'jubbah-p4': {
+    name: 'Tek deve',
+    story:
+      'Bütün yüzeyi tek başına dolduran bir deve. Yalnız kazınmış bir deve, kervan içindeki deveyle aynı şey değildir: kervan bir servetin ya da bir yolculuğun haberidir, tek hayvansa imzaya yakındır — sahibinin tanıdığı belirli bir hayvan. Cübbe’nin develerinin çoğunun yanına ad taşıyan Semudî yazıtlar kazınmıştır; öyle ki bazıları taşa işlenmiş bir mülkiyet belgesine benzer.',
+    look:
+      'Devenin çevresindeki kayada dağınık küçük harfler arayın. Cübbe’de deve varsa, çoğu zaman bir ad da vardır.',
+  },
+
+  'jubbah-p5': {
+    name: 'Adı konmamış figür',
+    story:
+      'Adı üzerinde uzlaşılamayan bir figür. Bu, belgelemede bir eksiklik değil kaya sanatının olağan hâlidir: kimi kazımaları aşınma yemiştir, kimisi daha eski bir kazımanın üzerine işlenmiştir de çizgiler birbirine karışmıştır, kimisi de anahtarı artık elimizde olmayan bir üslupla yapılmıştır. Burada dürüstlük tahminden daha çok işe yarar — bilmediğimiz şey de bildiğimizin bir parçasıdır ve Cübbe’dekilerin yarısı hâlâ eksiksiz incelenmiş değil.',
+    look:
+      'Yaklaşın, sonra geri çekilin. Yakından anlaşılmayan pek çok şekil uzaktan belirginleşir, çünkü uzaktan görülmek için kazınmışlardır.',
+  },
+
+  'jubbah-p6': {
+    name: 'Aslan ve terbiyecisi',
+    story:
+      'Bir aslan ve yanında ona dönük bir insan figürü. Asya aslanı kuzey Arabistan’da gerçekten yaşadı, yüzyıllar önce oradan silinene kadar; dolayısıyla bu kazıma hayal değil görgü tanıklığıdır. Sahnenin kendisi — bir yırtıcının karşısında durup kaçmayan bir insan — alanda en çok tartışılanlardandır: av mı, terbiye mi, yoksa kazıyanın canavar üzerinde güç iddia ettiği bir tören mi? Hiçbir metin açıklamıyor. Elimizdeki tek anlatı kazımanın kendisi.',
+    look:
+      'İnsan figüründeki kolların duruşuna dikkat edin. Yönleri — aslana doğru mu, ondan uzağa mı — yüzleşmeyle kaçış arasındaki bütün mesafedir.',
+  },
+
+  'jubbah-p7': {
+    name: 'Üç deve ve binici',
+    story:
+      'Üç deve; en solda birine binmiş bir adam, yanlarında Semudî yazıtlar; aynı panoda aslan ile terbiyecisinin sahnesi de görünür. Bu üst üste binme, tek bir kayada bütün Cübbe’dir: aslanlar çağından bir sahne, ondan binlerce yıl sonra kazınmış develer ve üçüncü bir yolcunun yazdığı harfler. Birbirine yalnızca duvarın bağladığı üç ayrı zaman.',
+    look:
+      'Vurma izlerinin rengindeki farkı arayın: eski olan çevredeki kayanın rengine yakındır, çünkü koyu çöl cilası üstüne yeniden büyümüştür; daha yenisi ise soluktur, çünkü zaman ona henüz yetişmemiştir.',
+  },
+
+  'jubbah-p8': {
+    name: 'Atıcı ve inek',
+    story:
+      'Gerçek insan boyunda, bumerang gibi kıvrık bir sopa tutan bir insan figürü ve önünde bir inek. Kıvrık atma sopası yarımadanın kazımalarında iyi bilinen bir silahtır: fırlatılır, avı vurur ya da dengesini bozar. İnek ise nemli çağın ineğidir — Cübbe’nin çayırlarla çevrili bir göl olduğu zamanın; burada otlayan sürülerden bu çölde hiçbir şey kalmadı. Öyleyse bu pano bir süsleme değil, bir geçim sahnesidir.',
+    look:
+      'İnsan figürünü kendinizle ölçün: Cübbe’deki Neolitik figürler ayakta duran bir insan boyundadır; bir panonun önünde durmayı fotoğrafına bakmaktan büsbütün başka bir şey yapan da budur.',
+  },
+
+  'jubbah-p9': {
+    name: 'Bir deve ve bir yazıt',
+    story:
+      'Yanında Semudî yazıtlar bulunan bir deve. Yalnızca Ümmü Sinman’da 5.431 Semudî yazıt sayıldı — bütün hayvan figürlerinin toplamından fazla. Semudî eski bir Kuzey Arapça yazıdır ve burada onunla yazılanların çoğu addır, soydur, geçiş cümlesidir: filanın oğlu filan buradan geçti. Yani insanların bu dağa yazdığı en eski şey, insanların her zaman yazdığı en basit şeydir: ben buradaydım.',
+    look:
+      'Harfler figürlerden çok daha küçük ve çok daha sığdır; onları panonun ortasında değil, hayvanların arasındaki boşluklarda arayın.',
+  },
+
+  'jubbah-p10': {
+    name: 'Devekuşu sürüsü',
+    story:
+      'Birlikte kazınmış bir devekuşu topluluğu ve çevrelerinde Semudî yazıtlar. Arap devekuşu bu çölde binlerce yıl yaşadı, sonra yirminci yüzyılda soyu tükendi; bilinen sonuncusu 1940’larda avlandı. Yani bu pano, artık var olmayan bir hayvanın resmidir; onu her gün gören ve bir sonu kayda geçirdiği bir an bile aklına gelmeyen biri kazımıştır.',
+    look:
+      'Kuşları sayın: devekuşları tek tek değil sürü hâlinde kazınır, çünkü öyle görülüyorlardı — kazıyan hayal ettiğini değil alıştığını çizer.',
   },
 }

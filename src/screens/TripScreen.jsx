@@ -9,6 +9,7 @@ import {
   formatClockFor,
 } from '../lib/itinerary.js'
 import { fetchForecast } from '../lib/weather.js'
+import { mapsPlaceUrl, mapsRouteUrl, mapsDirectionsUrl } from '../lib/geo.js'
 import Petroglyph from '../components/Petroglyph.jsx'
 import { useI18n } from '../i18n/index.jsx'
 
@@ -174,6 +175,36 @@ function Form({ interests, days, pace, onToggle, onDays, onPace, onSubmit }) {
   )
 }
 
+/** سهم ملاحة — الفعل الأساسي في البطاقة. */
+function NavigateIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
+      <path d="M21.4 2.6a1 1 0 00-1.06-.23l-17 6.5a1 1 0 00.06 1.88l7.2 2.3 2.3 7.2a1 1 0 001.88.06l6.5-17a1 1 0 00-.88-.71z" />
+    </svg>
+  )
+}
+
+/** دبّوس خريطة — لمحطّة واحدة. */
+function PinIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z" strokeLinejoin="round" />
+      <circle cx="12" cy="10" r="2.4" />
+    </svg>
+  )
+}
+
+/** مسارٌ متعرّج بين نقطتين — ليوم كامل. */
+function RouteIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <circle cx="5.5" cy="18.5" r="2.2" />
+      <circle cx="18.5" cy="5.5" r="2.2" />
+      <path d="M5.5 16.3V11a3.5 3.5 0 013.5-3.5h6" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 function Legend({ children, hint }) {
   return (
     <legend className="mb-3.5 w-full">
@@ -251,7 +282,9 @@ function Plan({ itinerary, onRestart }) {
       {itinerary.days.map((day) => (
         <section key={day.day}>
           <div className="mb-3 flex items-center justify-between gap-3">
-            <h2 className="font-display text-title text-sand">{t('trip.day', { n: day.day })}</h2>
+            <h2 className="font-display text-title text-sand">
+              {t('trip.day', { n: day.day })}
+            </h2>
             {day.weather && (
               <span className="chip-quiet">
                 <span aria-hidden="true">{day.weather.icon}</span>
@@ -263,11 +296,34 @@ function Plan({ itinerary, onRestart }) {
           </div>
 
           {day.weather && (
-            <p className="mb-5 rounded-xl border-s-2 border-gold bg-gold/[0.07] p-3.5 text-micro leading-relaxed text-sand-dim">
+            <p className="mb-3 rounded-xl border-s-2 border-gold bg-gold/[0.07] p-3.5 text-micro leading-relaxed text-sand-dim">
               <span className="font-semibold text-gold-bright">{t('trip.weather')}: </span>
               {t(day.weather.advice.key, day.weather.advice.vars)}
             </p>
           )}
+
+          {/*
+            مسار اليوم كاملًا بضغطة واحدة. الرابط يحمل المحطّات مرتّبة كما
+            رتّبها المخطّط، فما يراه الزائر على الشاشة هو ما يقوده فعلًا.
+          */}
+          <div className="mb-5 flex items-center justify-between gap-3">
+            <a
+              href={mapsRouteUrl(day.stops)}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-terracotta/50 bg-terracotta/10
+                         px-3.5 py-2.5 text-micro font-semibold text-terracotta-bright
+                         transition-transform duration-200 ease-athr active:scale-[0.98]"
+            >
+              <RouteIcon />
+              {t('trip.routeDay')}
+            </a>
+            {day.totalKm > 0 && (
+              <span className="shrink-0 text-[0.6875rem] text-sand-faint">
+                {t('trip.dayDistance', { km: day.totalKm })}
+              </span>
+            )}
+          </div>
 
           <ol className="relative space-y-3 ps-6">
             <span className="absolute inset-y-3 start-[5px] w-px bg-night-500" aria-hidden="true" />
@@ -280,7 +336,10 @@ function Plan({ itinerary, onRestart }) {
 
                 {stop.travelMinutes > 0 && (
                   <p className="mb-2 text-[0.6875rem] text-sand-faint">
-                    {t('trip.travel', { minutes: stop.travelMinutes })}
+                    {t(stop.fromHail ? 'trip.travelFromHail' : 'trip.travel', {
+                      minutes: stop.travelMinutes,
+                      km: stop.travelKm,
+                    })}
                   </p>
                 )}
 
@@ -306,6 +365,61 @@ function Plan({ itinerary, onRestart }) {
                     {renderReason(stop.reason, t)}
                   </p>
                 </Link>
+
+                {/*
+                  التحذيرات خارج البطاقة لا داخلها: البطاقة رابطٌ إلى
+                  التفاصيل، والتحذير ليس دعوةً للقراءة بل شرطٌ للذهاب.
+                */}
+                {stop.warnings.length > 0 && (
+                  <ul className="mt-2 space-y-1">
+                    {stop.warnings.map((warning) => (
+                      <li
+                        key={warning.key}
+                        className="flex items-start gap-2 rounded-lg border-s-2 border-gold/70 bg-gold/[0.06]
+                                   px-3 py-2 text-[0.6875rem] leading-relaxed text-sand-dim"
+                      >
+                        <span aria-hidden="true" className="mt-px shrink-0 text-gold-bright">
+                          ⚠
+                        </span>
+                        <span>{t(warning.key, warning)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {/*
+                  ملاحة لا معاينة. الفرق عمليّ: رابط البحث يفتح بطاقة
+                  مكانٍ على الزائر أن يضغط منها «الاتجاهات» ثم «ابدأ»،
+                  والملاحة تفتح المسار جاهزًا للانطلاق.
+
+                  والانطلاق من fromCoords لا من موقع الزائر الحالي: هو
+                  الآن في الفندق، لكنه سيقف عند المحطّة السابقة حين يضغط.
+                */}
+                <div className="mt-2 flex items-center gap-2">
+                  <a
+                    href={mapsDirectionsUrl(stop.site.coords, stop.fromCoords)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-terracotta/50
+                               bg-terracotta/10 px-3.5 py-2 text-[0.6875rem] font-semibold
+                               text-terracotta-bright transition-transform duration-200 ease-athr
+                               active:scale-[0.98]"
+                  >
+                    <NavigateIcon />
+                    {t('trip.navigate')}
+                  </a>
+                  <a
+                    href={mapsPlaceUrl(stop.site.coords)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-night-500
+                               px-3 py-2 text-[0.6875rem] text-sand-faint transition-colors
+                               duration-200 active:bg-night-700"
+                  >
+                    <PinIcon />
+                    {t('trip.openMaps')}
+                  </a>
+                </div>
               </li>
             ))}
           </ol>

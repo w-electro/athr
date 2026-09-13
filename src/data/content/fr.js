@@ -58,58 +58,116 @@ export default {
     },
   },
 
-  qishlah: {
-    name: 'Fort Aarif et Qishlah',
-    shortName: 'Aarif et Qishlah',
-    subtitle: 'Le cœur historique de Haïl · deux monuments voisins',
-    tagline: 'Un fort de terre qui veille sur la ville d’en haut, et une forteresse de 142 pièces qui la garde d’en bas.',
-    era: 'Aarif : plus de 200 ans · Qishlah : 1941',
+  aarif: {
+    name: 'Le fort Aarif',
+    shortName: 'Aarif',
+    subtitle: 'Le fort de la colline · plus de deux siècles',
+    tagline: 'Un fort de terre au sommet d’un rocher, d’où l’on surveille chaque route qui entre dans Haïl.',
+    era: 'Plus de 200 ans',
     city: 'Centre de Haïl',
-    ticket: 'Entrée libre · la Qishlah ouvre en soirée',
+    ticket: 'Entrée libre',
     story: [
       {
         heading: 'L’œil de Haïl qui ne dort jamais',
-        body: 'Sur une colline rocheuse qui domine la ville se dresse le fort Aarif, bâti par les habitants de Haïl il y a plus de deux siècles pour veiller sur les routes qui y menaient ; de ses tours, les gardes suivaient les caravanes arrivant par le Darb Zubaydah et allumaient des feux les nuits de ramadan pour annoncer la rupture du jeûne — une coutume encore vivante aujourd’hui dans le canon que l’on tire de cette même colline.',
+        body: 'Au sommet d’une colline rocheuse qui domine la ville se dresse le fort Aarif, bâti par les habitants de Haïl il y a plus de deux siècles pour veiller sur les routes qui y menaient ; de ses tours, les gardes suivaient les caravanes arrivant par le Darb Zubaydah et allumaient des feux les nuits de ramadan pour annoncer la rupture du jeûne — une coutume encore vivante aujourd’hui dans le canon que l’on tire de cette même colline.',
       },
       {
         heading: 'La terre qui a tenu deux siècles',
         body: 'Le fort fut élevé en terre mêlée de paille, avec des murs de plus d’un mètre d’épaisseur renforcés de troncs de tamaris, et cette technique n’est pas aussi rudimentaire qu’elle en a l’air : un mur de terre épais retient la fraîcheur de la nuit pendant le jour et la chaleur du jour pendant la nuit, formant ainsi une climatisation naturelle au cœur d’un désert qui dépasse cinquante degrés en été.',
       },
       {
-        heading: 'La Qishlah : une ville dans un mur',
-        body: 'Descendez la colline vers l’est et vous trouverez l’exact opposé du fort : la Qishlah est une immense forteresse rectangulaire dont le roi Abdulaziz ordonna la construction en 1941 pour servir de caserne ; elle compte 142 pièces réparties sur deux étages, huit tours de guet à ses angles et sur ses flancs, une mosquée à l’intérieur et une vaste cour traversée d’arcades — si bien que parcourir ses longs couloirs de terre revient à traverser une ville miniature.',
+        heading: 'Soixante-dix marches vers la plus belle vue',
+        body: 'On ne monte au fort qu’à pied : l’escalier taillé dans la colline compte environ soixante-dix marches que l’on gravit en quelques minutes, et dès que vous atteignez la terrasse, Haïl tout entière se déploie sous vos yeux — à l’ouest la Qishlah, grand rectangle de terre aux contours nets ; derrière elle les monts Aja qui ferment l’horizon ; et entre les deux, la ville moderne qui s’étend.',
       },
       {
-        heading: 'De la caserne à la mémoire',
-        body: 'Une fois son rôle militaire achevé, la Qishlah est devenue l’un des lieux patrimoniaux les plus importants de Haïl, et sa cour accueille désormais événements culturels et marchés traditionnels ; un détail mérite l’attention : chaque fenêtre de ses huit tours fut percée selon un angle différent, de sorte qu’ensemble elles couvrent tous les accès à la forteresse sans le moindre angle mort.',
+        heading: 'La colline qui s’est choisie elle-même',
+        body: 'Le choix de cette colline ne relevait pas du goût architectural : c’est le seul relief naturel au milieu de la plaine de Haïl, et trente mètres au-dessus de cette plaine suffisent à couvrir l’horizon dans toutes les directions ; sa base, en outre, est un roc massif que l’on ne peut ni miner par en dessous ni gravir à l’échelle ou à la tour de siège. Puis les années ont tourné : la ville s’est étendue autour de la colline et au-delà, si bien que le fort bâti pour surveiller le désert donne aujourd’hui sur des rues passantes — le lieu est le même, la fonction s’est inversée.',
       },
     ],
     facts: [
-      { label: 'Pièces de la Qishlah', value: '142' },
-      { label: 'Tours de guet', value: '8' },
-      { label: 'Construction de la Qishlah', value: '1941 (1360 H.)' },
+      { label: 'Âge estimé', value: 'plus de 200 ans' },
+      { label: 'Hauteur au-dessus de la ville', value: 'environ 30 m' },
+      { label: 'Accès', value: 'escalier seulement · pas de route carrossable' },
       { label: 'Matériaux', value: 'terre, paille, troncs de tamaris' },
     ],
     tips: [
-      'Montez au fort Aarif une demi-heure avant le coucher du soleil : la vue sur la ville est la plus belle photo que vous prendrez à Haïl.',
+      'Montez une demi-heure avant le coucher du soleil : la vue sur la ville depuis le sommet est la plus belle photo que vous prendrez à Haïl.',
       'Le canon est tiré depuis la colline pendant le ramadan ; si vous venez à cette période, arrivez tôt car le site se remplit vite.',
-      'Les sols de terre de la Qishlah sont inégaux, alors faites attention avec des enfants ou des visiteurs âgés.',
+      'Il n’y a ni ascenseur ni route pour les voitures, et la dernière volée de marches est très raide : tenez-en compte si vous accompagnez des personnes âgées.',
     ],
     narration: {
       voice: 'La voix d’Athr — narration générée par IA',
       segments: [
         { at: 0, text: 'Vous êtes au pied de la colline d’Aarif. L’escalier est devant vous, et soixante-dix marches vous séparent de la plus belle vue de Haïl.' },
         { at: 14, text: 'En montant, remarquez l’épaisseur du mur à votre gauche : plus d’un mètre de terre et de paille.' },
-        { at: 28, text: 'Cette épaisseur n’est pas seulement défensive, c’est un refroidissement naturel : la fraîcheur de la nuit reste emmagasinée dans la terre jusqu’à midi.' },
+        { at: 28, text: 'Cette épaisseur n’est pas seulement défensive, c’est un refroidissement naturel : la fraîcheur de la nuit y reste emmagasinée jusqu’à midi.' },
         { at: 44, text: 'De cette tour, un garde guettait autrefois les caravanes, et c’est d’ici que le canon du ramadan tonne encore aujourd’hui.' },
-        { at: 60, text: 'Tournez-vous maintenant vers l’est : ce grand rectangle de terre est la Qishlah, avec ses 142 pièces et ses huit tours.' },
-        { at: 76, text: 'Quand vous y entrerez, comptez les angles des fenêtres : il n’existe pas un seul angle mort autour de la forteresse.' },
+        { at: 60, text: 'Tournez-vous maintenant vers l’ouest : ce grand rectangle de terre est la Qishlah, à un kilomètre et demi seulement.' },
+        { at: 76, text: 'Derrière elle, les monts Aja ferment l’horizon, et entre les deux Haïl tout entière s’étend sous vos yeux.' },
       ],
     },
     scan: {
-      matchLabel: 'Architecture défensive en terre · Qishlah / fort Aarif',
+      matchLabel: 'Fort de terre au sommet d’un rocher · Aarif',
       evidence: [
+        'Socle rocheux naturel sur lequel s’élève la construction',
         'Murs de terre à fruit montant',
+        'Parapets crénelés caractéristiques de l’architecture du Najd',
+      ],
+    },
+  },
+
+  qishlah: {
+    name: 'La forteresse de la Qishlah',
+    shortName: 'La Qishlah',
+    subtitle: '142 pièces · 1360 H. / 1941 apr. J.-C.',
+    tagline: 'Le plus vaste édifice de terre de la péninsule Arabique : une ville entière dans un seul mur.',
+    era: '1360 H. / 1941 apr. J.-C.',
+    city: 'Centre de Haïl',
+    ticket: 'Entrée libre · ouvre en soirée',
+    story: [
+      {
+        heading: 'Une ville dans un mur',
+        body: 'La Qishlah est une immense forteresse rectangulaire dont le roi Abdulaziz ordonna la construction en 1360 H. pour servir de caserne ; elle compte 142 pièces réparties sur deux étages, huit tours de guet à ses angles et sur ses flancs, une mosquée à l’intérieur et une vaste cour traversée d’arcades — si bien que parcourir ses longs couloirs de terre ressemble moins à visiter un bâtiment qu’à traverser une ville miniature.',
+      },
+      {
+        heading: 'La terre bâtie à la règle',
+        body: 'Ce qui distingue la Qishlah de l’ancienne architecture de terre, c’est qu’elle fut élevée selon un tracé géométrique rigoureux et non par extensions successives : les arcades sont parallèles, les pièces de dimensions identiques, les tours réparties régulièrement ; elle se tient ainsi à la charnière entre l’architecture traditionnelle du Najd et la construction moderne planifiée, bâtie avec la même terre, la même paille et les mêmes troncs de tamaris qui avaient servi à Aarif deux siècles plus tôt.',
+      },
+      {
+        heading: 'Huit tours sans le moindre angle mort',
+        body: 'Ce qui frappe dans ses huit tours, c’est que chaque fenêtre fut percée selon un angle différent de sa voisine, de sorte qu’ensemble elles couvrent toutes les directions autour de la forteresse sans laisser un seul angle mort ; c’est un calcul visuel précis, obtenu sans aucun instrument de levé moderne, et vous pouvez le vérifier vous-même en vous plaçant dans la cour et en suivant les lignes de visée d’une tour à l’autre.',
+      },
+      {
+        heading: 'De la caserne à la mémoire',
+        body: 'Une fois son rôle militaire achevé, la Qishlah est devenue l’un des principaux sites touristiques de Haïl : sa cour accueille les manifestations culturelles, les marchés artisanaux et les rendez-vous du festival de Haïl ; ainsi l’édifice construit pour se fermer aux gens est-il devenu un lieu qui n’a de sens que par eux.',
+      },
+    ],
+    facts: [
+      { label: 'Nombre de pièces', value: '142' },
+      { label: 'Tours de guet', value: '8' },
+      { label: 'Année de construction', value: '1360 H. / 1941 apr. J.-C.' },
+      { label: 'Matériaux', value: 'terre, paille, troncs de tamaris' },
+    ],
+    tips: [
+      'La Qishlah ouvre le plus souvent en soirée : faites-en la fin de votre journée, après la descente d’Aarif — un kilomètre et demi seulement les sépare.',
+      'Ses sols de terre sont inégaux et les couloirs faiblement éclairés : regardez où vous mettez les pieds si vous êtes avec des enfants ou des personnes âgées.',
+      'La cour intérieure est le meilleur endroit pour photographier après le crépuscule, quand les murs de terre sont éclairés par en dessous et que la matière de la terre ressort.',
+    ],
+    narration: {
+      voice: 'La voix d’Athr — narration générée par IA',
+      segments: [
+        { at: 0, text: 'Vous êtes devant la Qishlah, et ce que vous voyez n’est pas un bâtiment mais une ville entière dans un mur.' },
+        { at: 12, text: 'Cent quarante-deux pièces sur deux étages, huit tours, une mosquée et une cour au centre.' },
+        { at: 26, text: 'Entrez par la porte et arrêtez-vous un instant dans la cour : remarquez que les arcades sont parallèles et les pièces identiques.' },
+        { at: 41, text: 'C’est là ce qui la distingue : de la terre bâtie à la règle, et non agrandie peu à peu comme le voulait l’usage.' },
+        { at: 56, text: 'Suivez maintenant du regard les fenêtres des tours : chacune est percée selon un angle différent de sa voisine.' },
+        { at: 70, text: 'Comptez-les si vous voulez : vous ne trouverez pas un seul angle mort autour de la forteresse.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Forteresse rectangulaire en terre · la Qishlah',
+      evidence: [
+        'Longue façade rectangulaire en terre au rythme régulier de fenêtres',
         'Tours d’angle cylindriques percées de meurtrières triangulaires',
         'Parapets crénelés caractéristiques de l’architecture du Najd',
       ],
@@ -230,5 +288,149 @@ export default {
         'Vase en céramique à décor géométrique du Najd',
       ],
     },
+  },
+
+  shuwaymis: {
+    name: 'Les pétroglyphes de Shuwaymis',
+    shortName: 'Shuwaymis',
+    subtitle: 'Jabal al-Manjor et Raat · Patrimoine mondial de l’UNESCO',
+    tagline: 'L’autre moitié de l’inscription de l’UNESCO, dans des vallées que seuls atteignent ceux qui les cherchent.',
+    era: 'il y a ~10 000 ans (Néolithique)',
+    city: 'Shuwaymis, au sud-ouest de Haïl',
+    ticket: 'Visite accompagnée d’un guide agréé · réservation préalable indispensable',
+    story: [
+      {
+        heading: 'La moitié oubliée de l’inscription',
+        body: 'Lorsque l’UNESCO inscrivit « l’art rupestre de la région de Haïl » en 2015, l’inscription ne concernait pas Jubbah seule mais deux sites : le Jabal Umm Sinman à Jubbah, et les Jabal al-Manjor et Raat à Shuwaymis ; mais Shuwaymis est restée la moins fréquentée, en raison de son éloignement et de la rudesse de son accès, si bien que ses gravures nous sont parvenues mieux conservées et moins abîmées — elles comptent aujourd’hui parmi les plus beaux témoignages préservés de l’art néolithique de toute la péninsule.',
+      },
+      {
+        heading: 'Des vallées qui se lisent comme des pages',
+        body: 'Les gravures de Shuwaymis ne se rassemblent pas sur une seule paroi comme à Jubbah : elles se répartissent sur les parois de vallées étroites et profondes que l’on parcourt en voyant s’ouvrir un panneau après l’autre — troupeaux de bœufs sauvages, lions, léopards et autruches, silhouettes humaines chassant à l’arc, et des scènes entières plutôt que des symboles épars, certains panneaux racontant même un seul épisode du début à la fin.',
+      },
+      {
+        heading: 'Le chien qui a changé l’histoire',
+        body: 'C’est précisément à Shuwaymis que l’on a trouvé ce qui compte parmi les plus anciennes représentations connues de chiens domestiqués au monde : des chiens aux oreilles dressées et à la queue enroulée entourant un chasseur qui bande son arc, certains reliés à lui par des traits interprétés comme des laisses ; et si cette lecture est juste, ces parois consignent l’un des moments les plus importants de la relation entre l’homme et l’animal, il y a plus de huit mille ans.',
+      },
+      {
+        heading: 'Pourquoi ici',
+        body: 'Si tant de gravures se pressent sur cette paroi précise, c’est que Shuwaymis fut un lieu de rencontre des eaux : des vallées descendent des coulées volcaniques et se rejoignent en lits qui retiennent l’eau après la pluie, de sorte que les animaux y venaient, et les chasseurs à leur suite ; les gravures ne sont donc que le registre de ceux qui ont attendu ici — et la paroi sur laquelle vous dessinez est celle qui vous abrite.',
+      },
+    ],
+    facts: [
+      { label: 'Inscription UNESCO', value: '2015 (avec Jubbah)' },
+      { label: 'Les deux composantes', value: 'Jabal al-Manjor · Jabal Raat' },
+      { label: 'Distance depuis Haïl', value: '250 km au sud-ouest' },
+      { label: 'Accès', value: 'guide agréé · une partie de la piste non revêtue' },
+    ],
+    tips: [
+      'Organisez la visite plusieurs jours avant votre départ auprès de la Commission du patrimoine ou d’un guide agréé : le site n’est pas en accès libre comme Jubbah.',
+      'Consacrez-lui une journée entière et non une simple étape : l’aller-retour à lui seul demande environ six heures.',
+      'Emportez plus de carburant et d’eau qu’il ne vous en faut : la dernière station avant le site est loin et le réseau disparaît dans les vallées.',
+      'On marche entre les panneaux sur du gravier et de la roche inégale : ici, les chaussures fermées sont une nécessité et non un choix.',
+    ],
+    narration: {
+      voice: 'La voix d’Athr — narration générée par IA',
+      segments: [
+        { at: 0, text: 'Bienvenue à Shuwaymis. Vous avez fait un long chemin pour arriver ici : reprenez votre souffle et regardez autour de vous.' },
+        { at: 13, text: 'Ces vallées sont l’autre moitié de l’inscription de l’UNESCO que Jubbah partage avec elles — et la moins visitée.' },
+        { at: 28, text: 'Ce petit nombre de visiteurs est une bénédiction pour la pierre : ce que vous voyez ici est plus intact que partout ailleurs.' },
+        { at: 43, text: 'Marchez lentement dans la vallée : les panneaux n’apparaissent pas d’un coup, mais l’un après l’autre.' },
+        { at: 58, text: 'Cherchez la scène du chasseur entouré de chiens aux oreilles dressées et à la queue enroulée.' },
+        { at: 73, text: 'Elle compte parmi les plus anciennes représentations connues de chiens domestiqués, gravée il y a huit mille ans.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Art rupestre dans une vallée · Shuwaymis',
+      evidence: [
+        'Percussion sur la paroi d’une vallée et non sur une façade dégagée',
+        'Scènes de chasse composées plutôt que figures éparses',
+        'Vernis désertique sombre entaillé par la percussion',
+      ],
+    },
+  },
+}
+
+/* Les panneaux vont dans un export nommé distinct : l’export par défaut est
+   une carte « identifiant de site → contenu », et tout ce qui est structurel
+   (sujet, époque, inscriptions) reste dans panels.js. */
+export const panels = {
+  'jubbah-p1': {
+    name: 'La caravane de chameaux',
+    story:
+      'Des chameaux gravés les uns derrière les autres sur une même paroi : c’est ce que l’on voit le plus à Jubbah, et c’est aussi le plus récent. Sur les 1 944 gravures animales recensées à Umm Sinman, 1 378 sont des chameaux — sept sur dix. Ce ne fut pas affaire de goût : le chameau est entré tard dans la vie des hommes ici, il fut domestiqué il y a environ trois mille ans, et il devint l’animal que l’on gravait parce qu’il était devenu l’animal dont on vivait.',
+    look:
+      'Suivez le tracé des pattes : les chameaux tardifs sont gravés d’un trait rapide et sommaire, sans la précision anatomique que vous voyez chez les bœufs sauvages, antérieurs de plusieurs milliers d’années.',
+  },
+
+  'jubbah-p2': {
+    name: 'Le roi de Jubbah',
+    story:
+      'Ce qu’il y a de plus célèbre à Jubbah, et des visiteurs viennent du bout du monde pour le voir. Une grande figure humaine gravée avec un réalisme rare dans l’art rupestre : une lance dans la main droite, sur la tête quelque chose qui ressemble à une couronne, un collier au cou, une ceinture à la taille — et devant lui une figure plus petite que l’on a lue comme un serviteur ou un suivant. Les gens du lieu l’appellent « le roi » et les archéologues le décrivent comme « un personnage d’autorité », formule plus exacte : la gravure ne nous dit pas qui il était, elle nous dit seulement que celui qui l’a taillée voulait qu’on le reconnaisse comme n’étant pas comme les autres.',
+    look:
+      'Comparez sa taille à celle de la figure qui se tient devant lui. L’écart d’échelle n’est pas une maladresse de dessin mais un langage : le plus grand est le plus haut placé — la plus ancienne manière qu’ait trouvée l’homme de dire « ceci compte ».',
+  },
+
+  'jubbah-p3': {
+    name: 'Le bouquetin aux longues cornes',
+    story:
+      'Un bouquetin aux deux longues cornes recourbées vers l’arrière en un large arc. Le bouquetin est l’un des animaux les plus gravés de toute l’Arabie, et il ne fut jamais un simple gibier : son image revient aux points d’eau et sur les hauteurs avec une telle insistance que les chercheurs pensent qu’il avait pour ceux qui le gravaient un sens dépassant la viande — la fécondité, la survie, ou quelque chose que nous ne savons pas nommer. Le bouquetin nubien vit encore aujourd’hui dans les montagnes de la région : c’est l’une des rares créatures gravées ici qui ne se soit pas éteinte.',
+    look:
+      'Regardez la longueur des cornes par rapport au corps : l’exagération est voulue, car c’est la corne qui définit l’animal aux yeux du graveur, et non ses proportions réelles.',
+  },
+
+  'jubbah-p4': {
+    name: 'Le chameau solitaire',
+    story:
+      'Un seul chameau occupe toute la paroi. Or une gravure isolée n’est pas la même chose qu’un chameau pris dans une caravane : la caravane annonce une richesse ou un voyage, tandis que l’animal seul tient plutôt de la signature — une bête précise que son propriétaire connaissait. Beaucoup des chameaux de Jubbah ont à côté d’eux des inscriptions thamoudéennes portant des noms, au point que certains ressemblent à un titre de propriété taillé dans la pierre.',
+    look:
+      'Cherchez autour du chameau de petites lettres dispersées. Là où il y a un chameau à Jubbah, il y a le plus souvent un nom.',
+  },
+
+  'jubbah-p5': {
+    name: 'La figure non tranchée',
+    story:
+      'Une figure sur le nom de laquelle on ne s’accorde pas. Ce n’est pas une lacune de la documentation mais une situation courante dans l’art rupestre : certaines gravures ont été rongées par l’érosion, d’autres ont été taillées par-dessus une gravure plus ancienne jusqu’à ce que les traits se mêlent, d’autres encore ont été faites dans un style dont nous n’avons plus la clé. Ici l’honnêteté sert mieux que la conjecture : ce que nous ignorons fait partie du savoir, et la moitié de ce qui se trouve à Jubbah n’a pas encore été étudiée à fond.',
+    look:
+      'Approchez-vous, puis reculez. Beaucoup de formes obscures de près se clarifient de loin, car elles ont été gravées pour être vues à distance.',
+  },
+
+  'jubbah-p6': {
+    name: 'Le lion et son dompteur',
+    story:
+      'Un lion et, à côté de lui, une figure humaine qui lui fait face. Le lion d’Asie a bel et bien vécu dans le nord de l’Arabie jusqu’à en disparaître il y a des siècles : cette gravure est donc un témoignage oculaire et non une invention. Quant à la scène elle-même — un homme debout devant un prédateur, et qui ne fuit pas — elle est l’une des plus discutées : chasse, dressage, ou rite où le graveur se prétend maître de la bête ? Aucun texte ne l’explique. La gravure est le seul récit.',
+    look:
+      'Observez la position des bras de la figure humaine. Leur direction — vers le lion ou à l’opposé — c’est toute la distance entre l’affrontement et la fuite.',
+  },
+
+  'jubbah-p7': {
+    name: 'Les trois chameaux et le cavalier',
+    story:
+      'Trois chameaux, et tout à gauche un homme monté sur l’un d’eux, avec des inscriptions thamoudéennes à côté ; sur le même panneau apparaît la scène du lion et de son dompteur. Cette superposition, c’est Jubbah tout entière dans une seule roche : une scène du temps des lions, des chameaux gravés des milliers d’années plus tard, et des lettres écrites par un troisième passant. Trois époques que rien ne réunit sinon la paroi.',
+    look:
+      'Cherchez la différence de couleur des piquetages : le plus ancien tire vers la couleur de la roche environnante, car le vernis désertique sombre l’a recouvert de nouveau ; le plus récent est plus clair, car le temps ne l’a pas encore rattrapé.',
+  },
+
+  'jubbah-p8': {
+    name: 'Le lanceur et la vache',
+    story:
+      'Une figure humaine grandeur nature tient un bâton courbe semblable à un boomerang, et devant elle se tient une vache. Le bâton courbe est une arme de jet bien connue dans les gravures de la péninsule : on le lance pour atteindre le gibier ou pour le déséquilibrer. Quant à la vache, c’est la vache du temps humide : lorsque Jubbah était un lac bordé de prairies, y paissaient des troupeaux dont il ne reste rien dans ce désert. Le panneau est donc une scène de subsistance, non un ornement.',
+    look:
+      'Mesurez vous-même la figure humaine : les figures néolithiques de Jubbah atteignent la taille d’un homme debout, et c’est ce qui rend le fait de se tenir devant elles tout autre que celui d’en regarder une photographie.',
+  },
+
+  'jubbah-p9': {
+    name: 'Un chameau et une inscription',
+    story:
+      'Un chameau bordé d’inscriptions thamoudéennes. À Umm Sinman seulement, on a recensé 5 431 inscriptions thamoudéennes — plus que l’ensemble des gravures animales. Le thamoudéen est une ancienne écriture arabique du Nord, et ce que l’on y a le plus écrit ici, ce sont des noms, des généalogies et des formules de passage : un tel, fils d’un tel, est passé par ici. Autrement dit, la plus ancienne chose que les hommes aient écrite sur cette montagne est la plus simple que les hommes écrivent toujours : j’étais là.',
+    look:
+      'Les lettres sont bien plus petites que les figures et bien moins profondes : cherchez-les dans les vides entre les animaux, et non au centre du panneau.',
+  },
+
+  'jubbah-p10': {
+    name: 'La troupe d’autruches',
+    story:
+      'Un groupe d’autruches gravées ensemble, entourées d’inscriptions thamoudéennes. L’autruche d’Arabie a vécu des milliers d’années dans ce désert avant de s’éteindre au XXe siècle : la dernière connue fut chassée dans les années quarante. Ce panneau est donc l’image d’un animal qui n’existe plus, gravée par quelqu’un qui le voyait tous les jours et à qui il n’est jamais venu à l’esprit qu’il consignait une fin.',
+    look:
+      'Comptez les oiseaux : les autruches sont gravées en groupes et non isolément, parce que c’est ainsi qu’on les voyait — le graveur dessine ce dont il a l’habitude, non ce qu’il imagine.',
   },
 }

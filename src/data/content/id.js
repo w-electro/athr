@@ -58,58 +58,116 @@ export default {
     },
   },
 
-  qishlah: {
-    name: 'Benteng Aarif dan Qishlah',
-    shortName: 'Aarif & Qishlah',
-    subtitle: 'Jantung sejarah Hail · dua tetangga bersejarah',
-    tagline: 'Benteng tanah yang mengawasi kota dari ketinggian, dan kubu berisi 142 ruang yang menjaganya dari bawah.',
-    era: 'Aarif: lebih dari 200 tahun · Qishlah: 1941',
+  aarif: {
+    name: 'Benteng Aarif',
+    shortName: 'Aarif',
+    subtitle: 'Benteng di atas bukit · lebih dari dua abad',
+    tagline: 'Benteng tanah di puncak bukit berbatu, tempat setiap jalan yang masuk ke Hail terawasi.',
+    era: 'Lebih dari 200 tahun',
     city: 'Pusat Kota Hail',
-    ticket: 'Masuk gratis · Qishlah buka menjelang petang',
+    ticket: 'Masuk gratis',
     story: [
       {
         heading: 'Mata Hail yang tak pernah terpejam',
-        body: 'Di atas bukit berbatu yang menghadap kota berdiri Benteng Aarif, dibangun penduduk Hail lebih dari dua abad silam untuk mengawasi jalan-jalan yang menuju ke sana; dari menaranya para penjaga mengikuti kafilah yang datang melalui Darb Zubaidah, dan menyalakan api pada malam Ramadan untuk mengabarkan waktu berbuka — kebiasaan yang hingga kini hidup dalam meriam yang ditembakkan dari bukit yang sama.',
+        body: 'Di atas sebuah bukit berbatu yang menghadap Kota Hail berdiri Benteng Aarif, yang dibangun penduduknya lebih dari dua abad silam agar menjadi mata yang tak pernah terpejam atas jalan-jalan menuju kota; dari menaranya para penjaga mengawasi kafilah yang datang melalui Darb Zubaidah, dan menyalakan api pada malam-malam Ramadan untuk mengabarkan waktu berbuka — kebiasaan yang hingga hari ini masih hidup dalam meriam yang ditembakkan dari bukit yang sama.',
       },
       {
         heading: 'Tanah yang bertahan dua abad',
-        body: 'Benteng ini dibangun dari tanah yang diaduk bersama jerami, berdinding lebih tebal dari satu meter dan diperkuat batang cemara gurun, dan tekniknya tidaklah sesederhana penampakannya: dinding tanah yang tebal menahan sejuk malam hingga siang dan panas siang hingga malam, sehingga menciptakan pendingin alami di jantung gurun yang pada musim panas melampaui lima puluh derajat.',
+        body: 'Benteng ini dibangun dari tanah yang diaduk bersama jerami, berdinding lebih tebal dari satu meter dan ditopang batang cemara gurun, dan tekniknya tidaklah sesederhana penampakannya: dinding tanah yang tebal menahan sejuk malam hingga siang dan panas siang hingga malam, sehingga menciptakan pendingin alami di jantung gurun yang pada musim panas melampaui lima puluh derajat.',
       },
       {
-        heading: 'Qishlah: sebuah kota di dalam dinding',
-        body: 'Turunlah dari bukit ke arah timur dan Anda akan menemukan kebalikan benteng itu: Qishlah adalah kubu persegi panjang raksasa yang dibangun atas perintah Raja Abdulaziz pada 1941 sebagai barak, memuat 142 ruang di dua lantai, delapan menara pengawas di sudut dan sisinya, sebuah masjid di dalam, serta halaman luas yang dilintasi serambi; berjalan menyusuri lorong-lorong tanahnya yang panjang terasa seperti menembus sebuah kota mini.',
+        heading: 'Tujuh puluh anak tangga menuju pemandangan terbaik',
+        body: 'Benteng ini hanya dapat dicapai dengan berjalan kaki, sebab tangga yang dipahat pada lereng bukit berjumlah sekitar tujuh puluh anak tangga yang Anda daki dalam beberapa menit; dan begitu tiba di atas, Hail terhampar utuh di bawah Anda: Qishlah tampak di sebelah barat sebagai persegi panjang tanah yang tegas garisnya, Pegunungan Aja menutup cakrawala di belakangnya, dan kota modern membentang di antara keduanya.',
       },
       {
-        heading: 'Dari barak menjadi ingatan',
-        body: 'Setelah peran militernya usai, Qishlah menjadi salah satu situs warisan terpenting di Hail, dan kini halamannya menjadi tempat acara budaya serta pasar tradisional; ada satu perincian yang patut disimak: setiap jendela pada delapan menaranya dibuka dengan sudut yang berbeda, sehingga bersama-sama semuanya menutup setiap arah menuju kubu tanpa menyisakan satu pun titik buta.',
+        heading: 'Bukit yang memilih dirinya sendiri',
+        body: 'Pemilihan bukit ini bukanlah soal selera arsitektur, melainkan karena ia satu-satunya ketinggian alami di tengah dataran Hail; tiga puluh meter di atas dataran sudah cukup untuk merangkum cakrawala ke segala arah, sedangkan alasnya adalah batu padat yang tak dapat digali dari bawah dan tak dapat disandari tangga ataupun menara pengepungan. Kemudian zaman berputar: kota meluas mengelilingi bukit itu lalu melampauinya, hingga benteng yang dibangun untuk mengawasi padang pasir kini justru menghadap jalan-jalan yang padat — tempatnya tetap sama, fungsinya yang terbalik.',
       },
     ],
     facts: [
-      { label: 'Ruang di Qishlah', value: '142' },
-      { label: 'Menara pengawas', value: '8' },
-      { label: 'Pembangunan Qishlah', value: '1941 (1360 H)' },
+      { label: 'Perkiraan usia', value: 'lebih dari 200 tahun' },
+      { label: 'Ketinggian di atas kota', value: 'sekitar 30 meter' },
+      { label: 'Pendakian', value: 'hanya tangga · tanpa jalan kendaraan' },
       { label: 'Bahan bangunan', value: 'tanah, jerami, batang cemara gurun' },
     ],
     tips: [
-      'Naiklah ke Benteng Aarif setengah jam sebelum matahari terbenam: pemandangan kota dari atas adalah foto terbaik yang akan Anda ambil di Hail.',
-      'Pada bulan Ramadan meriam ditembakkan dari bukit ini; bila berkunjung saat itu, datanglah lebih awal karena tempatnya cepat penuh.',
-      'Lantai tanah Qishlah tidak rata — berhati-hatilah bila membawa anak-anak atau pengunjung lanjut usia.',
+      'Naiklah setengah jam sebelum matahari terbenam: pemandangan kota dari puncaknya adalah foto terbaik yang akan Anda ambil di Hail.',
+      'Pada bulan Ramadan meriam ditembakkan dari bukit ini; bila berkunjung pada musim itu, datanglah lebih awal karena tempatnya cepat penuh.',
+      'Tidak ada lift maupun jalan untuk kendaraan, dan bagian akhir tangganya cukup curam — perhitungkan hal ini bila Anda bersama pengunjung lanjut usia.',
     ],
     narration: {
       voice: 'Suara Athr — narasi hasil kecerdasan buatan',
       segments: [
-        { at: 0, text: 'Anda kini berada di kaki Bukit Aarif; tangganya ada di depan, dan tujuh puluh anak tangga memisahkan Anda dari pemandangan terindah di Hail.' },
-        { at: 14, text: 'Sambil menaiki, perhatikan ketebalan dinding di sebelah kiri: lebih dari satu meter tanah dan jerami.' },
-        { at: 28, text: 'Ketebalan itu bukan sekadar untuk pertahanan, melainkan pendinginan alami: sejuk malam tersimpan dalam tanah sampai tengah hari.' },
-        { at: 44, text: 'Dari menara ini seorang penjaga dahulu mengintai kafilah, dan dari sini pula meriam Ramadan masih ditembakkan hingga kini.' },
-        { at: 60, text: 'Sekarang berpalinglah ke timur: persegi panjang tanah yang besar itu adalah Qishlah, dengan 142 ruang dan delapan menaranya.' },
-        { at: 76, text: 'Saat masuk, hitunglah sudut jendela-jendelanya: di sekeliling kubu itu tak ada satu pun titik buta.' },
+        { at: 0, text: 'Anda kini berada di kaki bukit Benteng Aarif; tangganya ada di depan Anda, dan tujuh puluh anak tangga memisahkan Anda dari pemandangan terbaik di Hail.' },
+        { at: 14, text: 'Sambil menaiki, perhatikan ketebalan dinding di sebelah kiri Anda: lebih dari satu meter tanah dan jerami.' },
+        { at: 28, text: 'Ketebalan itu bukan untuk pertahanan semata, melainkan pendinginan alami: sejuk malam tersimpan di dalamnya sampai tengah hari.' },
+        { at: 44, text: 'Dari menara inilah penjaga dahulu mengintai kafilah, dan dari sini pula meriam Ramadan ditembakkan hingga hari ini.' },
+        { at: 60, text: 'Sekarang berpalinglah ke barat: persegi panjang tanah yang besar itu adalah Qishlah, hanya satu setengah kilometer dari tempat Anda berdiri.' },
+        { at: 76, text: 'Di belakangnya Pegunungan Aja menutup cakrawala, dan di antara keduanya terhampar seluruh Kota Hail di depan mata Anda.' },
       ],
     },
     scan: {
-      matchLabel: 'Arsitektur pertahanan tanah · Qishlah / Benteng Aarif',
+      matchLabel: 'Benteng tanah di puncak bukit berbatu · Aarif',
       evidence: [
+        'Fondasi batu alami yang menjadi tumpuan bangunan',
         'Dinding tanah dengan kemiringan menyempit ke atas',
+        'Parapet bergerigi khas arsitektur Najd',
+      ],
+    },
+  },
+
+  qishlah: {
+    name: 'Benteng Qishlah',
+    shortName: 'Qishlah',
+    subtitle: '142 ruang · 1360 H / 1941 M',
+    tagline: 'Bangunan tanah terbesar di Jazirah Arab: sebuah kota utuh di dalam satu dinding.',
+    era: '1360 H / 1941 M',
+    city: 'Pusat Kota Hail',
+    ticket: 'Masuk gratis · buka menjelang petang',
+    story: [
+      {
+        heading: 'Sebuah kota di dalam dinding',
+        body: 'Qishlah adalah kubu persegi panjang raksasa yang dibangun atas perintah Raja Abdulaziz pada 1360 H sebagai barak militer, memuat 142 ruang di dua lantai, delapan menara pengawas di sudut dan sisinya, sebuah masjid di dalam, serta halaman luas yang dilintasi serambi-serambi; berjalan menyusuri lorong-lorong tanahnya yang panjang terasa seperti menjelajahi sebuah kota mini, bukan sekadar memasuki satu bangunan.',
+      },
+      {
+        heading: 'Tanah yang dibangun dengan penggaris',
+        body: 'Yang membedakan Qishlah dari arsitektur tanah yang lebih tua ialah bahwa ia dibangun menurut rancangan geometris yang ketat, bukan tumbuh sedikit demi sedikit: serambinya sejajar, ruangnya seragam ukuran, dan menaranya tersebar teratur; dengan demikian ia berdiri tepat di garis batas antara arsitektur Najd yang tradisional dan arsitektur modern yang terencana — dibangun dari tanah, jerami, dan batang cemara gurun yang sama dengan Aarif dua abad sebelumnya.',
+      },
+      {
+        heading: 'Delapan menara tanpa titik buta',
+        body: 'Yang menarik pada delapan menaranya ialah bahwa setiap jendela dirancang dengan sudut yang berbeda dari tetangganya, sehingga bersama-sama semuanya menutup setiap arah di sekeliling kubu tanpa menyisakan satu pun titik buta; itu adalah perhitungan visual yang cermat, dicapai tanpa alat ukur modern, dan Anda dapat membuktikannya sendiri bila berdiri di halaman lalu mengikuti garis pandang dari satu menara ke menara berikutnya.',
+      },
+      {
+        heading: 'Dari barak menjadi ingatan',
+        body: 'Setelah peran militernya usai, Qishlah berubah menjadi salah satu tujuan wisata terpenting di Hail: halamannya kini menjadi panggung acara budaya, pasar warisan, dan kegiatan Festival Hail; maka bangunan yang dahulu didirikan untuk menutup diri dari orang banyak kini tidak lagi bermakna tanpa mereka.',
+      },
+    ],
+    facts: [
+      { label: 'Jumlah ruang', value: '142 ruang' },
+      { label: 'Menara pengawas', value: '8 menara' },
+      { label: 'Tahun pembangunan', value: '1360 H / 1941 M' },
+      { label: 'Bahan bangunan', value: 'tanah, jerami, batang cemara gurun' },
+    ],
+    tips: [
+      'Qishlah umumnya buka menjelang petang; jadikanlah ia penutup hari Anda seusai menuruni Aarif — jarak keduanya hanya satu setengah kilometer.',
+      'Lantai tanahnya tidak rata dan lorong-lorongnya remang; perhatikan langkah Anda bila membawa anak-anak atau pengunjung lanjut usia.',
+      'Halaman dalam adalah tempat terbaik untuk memotret seusai magrib, ketika dinding tanah disorot dari bawah sehingga tekstur tanahnya menonjol.',
+    ],
+    narration: {
+      voice: 'Suara Athr — narasi hasil kecerdasan buatan',
+      segments: [
+        { at: 0, text: 'Anda kini berdiri di hadapan Qishlah, dan yang Anda lihat bukanlah satu bangunan, melainkan sebuah kota utuh di dalam dinding.' },
+        { at: 12, text: 'Seratus empat puluh dua ruang di dua lantai, delapan menara, sebuah masjid, dan sebuah halaman di tengahnya.' },
+        { at: 26, text: 'Masuklah melalui gerbang dan berhentilah sejenak di halaman: perhatikan serambinya yang sejajar dan ruangnya yang seragam.' },
+        { at: 41, text: 'Inilah keistimewaannya: tanah yang dibangun dengan penggaris, bukan yang tumbuh sedikit demi sedikit seperti kelaziman.' },
+        { at: 56, text: 'Sekarang telusuri jendela-jendela menaranya dengan pandangan Anda: setiap jendela membuka pada sudut yang berbeda dari tetangganya.' },
+        { at: 70, text: 'Hitunglah bila Anda mau — di sekeliling kubu ini takkan Anda temukan satu pun titik buta.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Kubu tanah berdenah persegi panjang · Qishlah',
+      evidence: [
+        'Fasad tanah memanjang dengan irama jendela yang teratur',
         'Menara sudut silindris berlubang tembak segitiga',
         'Parapet bergerigi khas arsitektur Najd',
       ],
@@ -230,5 +288,140 @@ export default {
         'Bejana tembikar berhias geometris Najd',
       ],
     },
+  },
+
+  shuwaymis: {
+    name: 'Petroglif Shuwaymis',
+    shortName: 'Shuwaymis',
+    subtitle: 'Gunung al-Manjur dan Raat · Warisan Dunia UNESCO',
+    tagline: 'Separuh lain dari pencatatan UNESCO: lembah yang hanya dicapai oleh yang sengaja menujunya.',
+    era: '±10.000 tahun lalu (Neolitikum)',
+    city: 'Shuwaymis, barat daya Hail',
+    ticket: 'Kunjungan bersama pemandu resmi · penjadwalan lebih dahulu wajib',
+    story: [
+      {
+        heading: 'Separuh yang terlupakan dari pencatatan',
+        body: 'Ketika UNESCO mencatatkan «seni cadas di wilayah Hail» pada 2015, pencatatan itu bukan untuk Jubbah semata, melainkan untuk dua situs sekaligus: Jabal Umm Sinman di Jubbah, serta Gunung al-Manjur dan Raat di Shuwaymis; hanya saja Shuwaymis tetap yang paling jarang dikunjungi karena jauh letaknya dan berat jalannya, sehingga pahatannya justru paling utuh dan paling sedikit dirusak — dan kini ia termasuk peninggalan seni Neolitikum yang paling terjaga di seluruh Jazirah Arab.',
+      },
+      {
+        heading: 'Lembah yang terbaca bagai halaman',
+        body: 'Pahatan Shuwaymis tidak terkumpul pada satu dinding seperti di Jubbah, melainkan tersebar pada tebing lembah-lembah sempit nan dalam yang Anda susuri sehingga satu panel tersingkap setelah panel yang lain: kawanan sapi liar, singa, macan tutul, dan burung unta; sosok manusia yang berburu dengan busur; serta adegan-adegan utuh, bukan lambang yang berserak — bahkan ada panel yang menceritakan satu peristiwa dari awal hingga akhirnya.',
+      },
+      {
+        heading: 'Anjing yang mengubah sejarah',
+        body: 'Justru di Shuwaymis ditemukan apa yang dianggap salah satu penggambaran tertua di dunia atas anjing yang telah dijinakkan: anjing bertelinga tegak dan berekor melingkar yang mengelilingi seorang pemburu yang menarik busurnya, sebagian di antaranya terikat kepadanya oleh garis yang ditafsirkan sebagai tali penuntun; dan bila tafsir itu benar, maka dinding-dinding ini merekam salah satu momen terpenting dalam hubungan manusia dengan hewan, lebih dari delapan ribu tahun silam.',
+      },
+      {
+        heading: 'Mengapa di sini',
+        body: 'Sebab berkumpulnya sedemikian banyak pahatan pada dinding tertentu ialah bahwa Shuwaymis dahulu merupakan tempat bertemunya air: lembah-lembah menurun dari hamparan lava vulkanik lalu berpadu pada alur yang menahan air seusai hujan, sehingga hewan berdatangan dan para pemburu pun mengikutinya; maka pahatan itu tidak lain adalah catatan tentang mereka yang pernah berdiri di sini menunggu — dan dinding yang mereka pahati adalah dinding yang menaungi mereka.',
+      },
+    ],
+    facts: [
+      { label: 'Pencatatan UNESCO', value: '2015 (bersama Jubbah)' },
+      { label: 'Dua komponennya', value: 'Gunung al-Manjur · Gunung Raat' },
+      { label: 'Jarak dari Hail', value: '250 km ke barat daya' },
+      { label: 'Akses', value: 'pemandu resmi · sebagian jalan masih tanah' },
+    ],
+    tips: [
+      'Aturlah kunjungan beberapa hari sebelum berangkat bersama Komisi Warisan atau pemandu resmi, sebab situs ini tidak terbuka bagi kunjungan bebas seperti Jubbah.',
+      'Sediakan satu hari penuh tersendiri, bukan sekadar persinggahan dalam satu hari: perjalanan pergi dan pulang saja memakan waktu sekitar enam jam.',
+      'Bawalah bahan bakar dan air melebihi kebutuhan Anda, sebab pompa terakhir sebelum situs jauh letaknya dan sinyal terputus di dalam lembah.',
+      'Berjalan di antara panel berarti melangkah di atas kerikil dan batu yang tidak rata — sepatu tertutup di sini adalah keharusan, bukan pilihan.',
+    ],
+    narration: {
+      voice: 'Suara Athr — narasi hasil kecerdasan buatan',
+      segments: [
+        { at: 0, text: 'Selamat datang di Shuwaymis. Anda telah menempuh jalan yang panjang untuk tiba; tariklah napas dan pandangi sekeliling Anda.' },
+        { at: 13, text: 'Lembah-lembah ini adalah separuh lain dari pencatatan UNESCO yang dibaginya bersama Jubbah, sekaligus yang paling jarang dikunjungi.' },
+        { at: 28, text: 'Sedikitnya pengunjung adalah berkah bagi batu: apa yang Anda lihat di sini lebih utuh daripada di situs mana pun.' },
+        { at: 43, text: 'Susurilah lembah ini perlahan, sebab panelnya tidak tampil sekaligus, melainkan satu demi satu.' },
+        { at: 58, text: 'Carilah adegan seorang pemburu yang dikelilingi anjing bertelinga tegak dan berekor melingkar.' },
+        { at: 73, text: 'Itulah salah satu penggambaran tertua di dunia atas anjing yang telah dijinakkan, dipahat delapan ribu tahun silam.' },
+      ],
+    },
+    scan: {
+      matchLabel: 'Seni cadas di sebuah lembah · Shuwaymis',
+      evidence: [
+        'Pahatan pada dinding lembah, bukan pada tebing terbuka',
+        'Adegan perburuan yang tersusun, bukan sosok yang berserak',
+        'Lapisan vernis gurun gelap yang terpotong oleh pahatan',
+      ],
+    },
+  },
+}
+
+/*
+  Panel — teks yang lebih rinci daripada situs, dipisahkan dari ekspor utama
+  agar peta «id situs → konten» tetap murni berisi situs.
+*/
+export const panels = {
+  'jubbah-p1': {
+    name: 'Kafilah unta',
+    story:
+      'Unta beriringan dipahat pada satu dinding — pemandangan yang paling sering terlihat di Jubbah sekaligus yang paling muda. Dari 1.944 pahatan hewan yang tercatat di Umm Sinman, 1.378 di antaranya adalah unta — tujuh dari setiap sepuluh. Itu bukan soal selera, melainkan karena unta baru masuk ke dalam kehidupan manusia di sini pada masa belakangan: ia dijinakkan sekitar tiga ribu tahun lalu, lalu menjadi hewan yang dipahat karena ia telah menjadi hewan yang menghidupi.',
+    look: 'Ikuti garis kakinya: unta dari masa belakangan dipahat dengan goresan cepat dan ringkas, bukan dengan ketepatan anatomi yang Anda lihat pada sapi liar yang ribuan tahun lebih tua.',
+  },
+
+  'jubbah-p2': {
+    name: 'Raja Jubbah',
+    story:
+      'Yang paling termasyhur di Jubbah, didatangi orang dari ujung-ujung bumi. Sesosok manusia jangkung yang dipahat dengan kesetiaan pada kenyataan yang langka dalam seni cadas: tombak di tangan kanannya, sesuatu menyerupai mahkota di kepalanya, kalung di lehernya, ikat pinggang di pinggangnya — dan di hadapannya berdiri sosok yang lebih kecil, yang orang baca sebagai pelayan atau pengikut. Penduduk setempat menyebutnya «sang raja», para arkeolog menyebutnya «sosok yang berkuasa», dan sebutan kedua lebih cermat: pahatan ini tidak memberi tahu kita siapa dia, ia hanya mengatakan bahwa pemahatnya ingin orang tahu bahwa dia tidak seperti yang lain.',
+    look: 'Bandingkan ukurannya dengan sosok yang berdiri di hadapannya. Selisih ukuran di sini bukan kekeliruan menggambar melainkan bahasa: yang lebih besar lebih tinggi kedudukannya — cara tertua yang dikenal manusia untuk berkata «yang ini penting».',
+  },
+
+  'jubbah-p3': {
+    name: 'Kambing gunung bertanduk panjang',
+    story:
+      'Seekor kambing gunung dengan dua tanduk panjang yang melengkung ke belakang dalam busur lebar. Kambing gunung termasuk yang paling banyak dipahat di seluruh Jazirah Arab, dan ia bukan sekadar buruan: gambarnya berulang di tempat-tempat berair dan di ketinggian, sampai para peneliti menduga bahwa bagi para pemahatnya ia menyimpan makna yang melampaui daging — kesuburan, keberlangsungan, atau sesuatu yang tidak kita ketahui. Kambing gunung Nubia masih hidup di pegunungan kawasan ini hingga hari ini, dan ia termasuk sedikit makhluk yang dipahat di sini namun tidak punah.',
+    look: 'Perhatikan panjang tanduk dibandingkan tubuhnya: pembesarannya disengaja, sebab tanduklah yang menentukan hewan itu di mata pemahat, bukan ukurannya yang sebenarnya.',
+  },
+
+  'jubbah-p4': {
+    name: 'Unta tunggal',
+    story:
+      'Seekor unta mengisi dinding seorang diri. Pahatan tunggal berbeda dari pahatan di dalam kafilah: kafilah adalah kabar tentang kekayaan atau perjalanan, sedangkan yang tunggal lebih menyerupai tanda tangan — seekor hewan tertentu yang dikenali pemiliknya. Banyak unta Jubbah dipahat berdampingan dengan inskripsi Tsamudik yang memuat nama, sampai sebagiannya tampak seperti surat kepemilikan yang dipahat pada batu.',
+    look: 'Carilah huruf-huruf kecil yang berserak di sekeliling unta itu. Di Jubbah, di mana ada unta, di situ biasanya ada nama.',
+  },
+
+  'jubbah-p5': {
+    name: 'Sosok yang belum dipastikan',
+    story:
+      'Sesosok bentuk yang namanya tidak disepakati. Ini bukan kekurangan dalam pendokumentasian melainkan keadaan yang lazim dalam seni cadas: sebagian pahatan rusak oleh pelapukan, sebagian dipahat menimpa pahatan yang lebih tua sehingga garisnya berbaur, dan sebagian digambar dengan gaya yang kuncinya tidak lagi kita miliki. Kejujuran di sini lebih berguna daripada terkaan — sebab apa yang tidak kita ketahui pun bagian dari pengetahuan, dan separuh dari apa yang ada di Jubbah belum diteliti secara memadai.',
+    look: 'Mendekatlah, lalu mundurlah. Banyak sosok yang kabur dari dekat justru menjadi jelas dari jauh, sebab ia dipahat untuk dilihat dari kejauhan.',
+  },
+
+  'jubbah-p6': {
+    name: 'Singa dan penjinaknya',
+    story:
+      'Seekor singa, dan di sampingnya sesosok manusia yang menghadapinya. Singa Asia memang pernah hidup di utara Jazirah Arab hingga punah dari sana beberapa abad lalu, jadi pahatan ini kesaksian mata, bukan khayalan. Adapun adegannya sendiri — manusia berdiri di hadapan pemangsa tanpa lari darinya — termasuk yang paling diperdebatkan: perburuankah ini, penjinakan, atau ritual yang di dalamnya si pemahat mengaku berkuasa atas binatang buas? Tidak ada teks yang menjelaskannya; pahatan itu sendirilah satu-satunya riwayat.',
+    look: 'Perhatikan letak kedua lengan pada sosok manusia itu. Arahnya — menuju singa atau menjauhinya — adalah seluruh jarak antara menghadapi dan melarikan diri.',
+  },
+
+  'jubbah-p7': {
+    name: 'Tiga unta dan si penunggang',
+    story:
+      'Tiga ekor unta, dan di ujung kiri seorang lelaki menunggangi seekor unta, di sampingnya inskripsi Tsamudik, sementara pada panel yang sama tampak pula adegan singa dan penjinaknya. Tumpang tindih inilah Jubbah seutuhnya di dalam satu batu: sebuah adegan dari zaman singa, unta-unta yang dipahat ribuan tahun sesudahnya, dan huruf-huruf yang ditulis seorang pelintas ketiga. Tiga masa yang tidak dipersatukan oleh apa pun selain dinding ini.',
+    look: 'Carilah perbedaan warna pahatannya: yang lebih tua cenderung sewarna dengan batu di sekelilingnya karena lapisan vernis gurun yang gelap telah kembali menutupinya, sedangkan yang lebih muda tampak lebih terang karena waktu belum sempat menjangkaunya.',
+  },
+
+  'jubbah-p8': {
+    name: 'Si pelempar dan sapi liar',
+    story:
+      'Sesosok manusia seukuran tubuh sebenarnya menggenggam tongkat melengkung menyerupai bumerang, dan di hadapannya seekor sapi liar. Tongkat melengkung adalah senjata lempar yang dikenal dalam pahatan Jazirah Arab: ia dilontarkan untuk mengenai buruan atau mengacaukannya. Adapun sapi itu adalah sapi dari masa basah: ketika Jubbah masih berupa danau yang dikelilingi padang rumput, kawanan yang kini tak bersisa sedikit pun di gurun ini merumput di sana. Maka panel ini adegan penghidupan, bukan hiasan.',
+    look: 'Ukurlah sendiri sosok manusia itu: sosok Neolitikum di Jubbah sebesar manusia yang sedang berdiri, dan itulah yang membuat berdiri di hadapannya berbeda dari sekadar memandang fotonya.',
+  },
+
+  'jubbah-p9': {
+    name: 'Unta dan tulisan',
+    story:
+      'Seekor unta dengan inskripsi Tsamudik di sisinya. Di Umm Sinman saja tercatat 5.431 inskripsi Tsamudik — lebih banyak daripada seluruh pahatan hewan. Tsamudik adalah aksara Arab utara kuno, dan yang paling banyak ditulis dengannya di sini adalah nama, nasab, dan kalimat perlintasan: «si anu bin si anu pernah lewat di sini». Artinya, hal tertua yang ditulis orang di gunung ini adalah hal paling sederhana yang selalu ditulis orang: aku pernah di sini.',
+    look: 'Hurufnya jauh lebih kecil daripada gambarnya dan tidak sedalam itu; carilah di sela-sela antara hewan, bukan di tengah panel.',
+  },
+
+  'jubbah-p10': {
+    name: 'Kawanan burung unta',
+    story:
+      'Sekawanan burung unta dipahat bersama, dan di sekelilingnya inskripsi Tsamudik. Burung unta Arab hidup di gurun ini selama ribuan tahun lalu punah pada abad kedua puluh; yang terakhir diketahui darinya diburu pada tahun 1940-an. Panel ini karena itu adalah potret hewan yang tidak lagi ada, dipahat oleh manusia yang melihatnya setiap hari dan tidak pernah terpikir olehnya bahwa ia sedang mencatat sebuah akhir.',
+    look: 'Hitunglah burungnya: burung unta dipahat berkelompok, bukan sendirian, sebab begitulah ia dilihat — dan pemahat menggambar apa yang biasa dilihatnya, bukan apa yang dibayangkannya.',
   },
 }
