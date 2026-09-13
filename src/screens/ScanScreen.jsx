@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { createRecognitionSession, scanStill, recognizeSite, getActiveProviderName, ANALYSIS_STAGES } from '../lib/recognition.js'
+import { createRecognitionSession, scanStill, getActiveProviderName, ANALYSIS_STAGES } from '../lib/recognition.js'
 import { getSiteById, getAllSites } from '../data/sites.js'
 import { getPanelById, isPanelId, SUBJECTS } from '../data/panels.js'
 import SiteArt from '../components/SiteArt.jsx'
@@ -41,6 +41,15 @@ const MAX_SCAN_FRAMES = 40
 /** كم محاولة التقاطٍ فاشلة نحتمل قبل أن نُقرّ بأنّ الكاميرا لا تسلّم إطارًا */
 const MAX_STALLED_FRAMES = 40
 
+/**
+ * أقلّ مدّةٍ تظهر فيها شاشة التحليل.
+ *
+ * حين يكون النموذج محمَّلًا والمطابقة واثقةً من أوّل مشهد، ينتهي الرفع في
+ * أجزاء من الثانية — فتومض الشاشة ومضةً تُقرأ خللًا لا سرعة. وثلثا ثانية
+ * تكفي ليُرى أنّ عملًا جرى، ولا تُشعر بانتظار.
+ */
+const MIN_ANALYSIS_MS = 650
+
 export default function ScanScreen() {
   const { t, contentLanguage, contentDir } = useI18n()
   const [state, setState] = useState(STATES.idle)
@@ -52,7 +61,6 @@ export default function ScanScreen() {
   // يصير صحيحًا حين تُرسل الكاميرا أول إطار فعلي، لا حين يُمنح الإذن
   const [frameReady, setFrameReady] = useState(false)
   const [scanFrames, setScanFrames] = useState(0)
-  const [scanProbe, setScanProbe] = useState(null)
   const scanAbortRef = useRef(false)
 
   const videoRef = useRef(null)
@@ -149,7 +157,6 @@ export default function ScanScreen() {
   async function runLiveScan() {
     setState(STATES.scanning)
     setScanFrames(0)
-    setScanProbe(null)
     scanAbortRef.current = false
 
     /*
@@ -207,9 +214,6 @@ export default function ScanScreen() {
       if (scanAbortRef.current) return
 
       setScanFrames(outcome.frames)
-      if (outcome.status === 'searching') {
-        setScanProbe({ best: outcome.best, id: outcome.bestId, margin: outcome.margin })
-      }
 
       // «الأرجح» نتيجةٌ أيضًا: النظام يعرف، فيقول موسومًا
       if (outcome.status === 'match' || outcome.status === 'probable') {
@@ -266,31 +270,6 @@ export default function ScanScreen() {
     return { dataUrl, base64: dataUrl.split(',')[1] }
   }
 
-  async function analyze(image) {
-    // لا نحلّل عدمًا — الزرّ معطّل حتى تجهز الكاميرا، وهذا حارس أخير
-    if (!image) return
-
-    setSnapshot(image.dataUrl)
-    setState(STATES.analyzing)
-    setStageIndex(0)
-
-    let elapsed = 0
-    const timers = ANALYSIS_STAGES.map((stage, index) => {
-      elapsed += stage.ms
-      return setTimeout(() => setStageIndex(index + 1), elapsed)
-    })
-
-    const outcome = await recognizeSite({
-      imageBase64: image?.base64,
-      siteId: demoTarget === 'auto' ? undefined : demoTarget,
-    })
-
-    timers.forEach(clearTimeout)
-    setResult(outcome)
-    setState(STATES.result)
-    stopCamera()
-  }
-
   /*
     الصورة المرفوعة تُمسح بعدّة مشاهد لا بمقارنةٍ واحدة.
 
@@ -309,8 +288,8 @@ export default function ScanScreen() {
       setSnapshot(dataUrl)
       setState(STATES.analyzing)
       setStageIndex(0)
-      setScanProbe(null)
 
+      const startedAt = Date.now()
       let outcome
       try {
         outcome = await scanStill({
@@ -320,12 +299,15 @@ export default function ScanScreen() {
         }, (done, total, frame) => {
           // نُحرّك مراحل التحليل بتقدّمٍ حقيقي لا بمؤقّتٍ يتظاهر
           setStageIndex(Math.min(ANALYSIS_STAGES.length, Math.ceil((done / total) * ANALYSIS_STAGES.length)))
-          if (frame) {
-            setScanProbe({ best: frame.topScore, id: frame.topSiteId, margin: frame.margin })
-          }
         })
       } catch (error) {
         outcome = { status: 'no-match', siteId: null, confidence: 0, evidence: [error.message] }
+      }
+
+      // لا تومض شاشة التحليل: تبقى حدًّا أدنى يُرى
+      const spent = Date.now() - startedAt
+      if (spent < MIN_ANALYSIS_MS) {
+        await new Promise((r) => setTimeout(r, MIN_ANALYSIS_MS - spent))
       }
 
       setResult(outcome)
@@ -476,18 +458,12 @@ export default function ScanScreen() {
         <div className="mt-6 flex flex-col items-center gap-3">
           <p className="text-body text-sand-dim">{t('scan.moving')}</p>
           {/*
-            قراءةٌ حيّة لأقرب لوحةٍ ودرجتها.
+            لا معرّفات ولا أرقام هنا.
 
-            ليست زينة: هي الطريقة الوحيدة لمعرفة ما يجري على جهاز المستخدم
-            فعلًا. ولا تُقاس اللقطات الحيّة — بما فيها اهتزاز اليد وبحث
-            العدسة عن التركيز — إلا على جهازٍ حقيقي أمام صخرةٍ حقيقية.
+            «jubbah-p1 · 0.814» لغةُ من يبني لا من يزور. وقد أدّت غرضها
+            في التشخيص، فلمّا انتهت صارت ضوضاء على شاشةِ زائرٍ يريد أن
+            يعرف ما أمامه لا كيف يعمل النظام.
           */}
-          {scanProbe?.id && (
-            <p className="font-mono text-micro text-sand-faint" dir="ltr">
-              {scanProbe.id} · {scanProbe.best?.toFixed(3)}
-              {scanProbe.margin != null && ` · Δ${scanProbe.margin.toFixed(3)}`}
-            </p>
-          )}
           <button
             type="button"
             onClick={stopLiveScan}
@@ -592,10 +568,17 @@ function Corner({ className }) {
  * لا فاصلًا عنه.
  */
 function AnalysisOverlay({ snapshot, stageIndex, t }) {
+  const progress = Math.min(1, stageIndex / ANALYSIS_STAGES.length)
   return (
-    <div className="absolute inset-0 flex flex-col justify-between bg-basalt/75 backdrop-blur-[2px]">
+    <div className="absolute inset-0 flex flex-col justify-between bg-basalt/70 backdrop-blur-[2px]">
+      {/*
+        صورة المستخدم تظهر خلف الانتظار لا تكاد تُرى.
+
+        عند الرفع لا كاميرا خلف هذه الطبقة، فلو بقيت الصورة عند 15%
+        لواجه المستخدمُ مستطيلًا أسود ولم يعرف أنّ صورته وصلت أصلًا.
+      */}
       {snapshot && (
-        <img src={snapshot} alt="" className="absolute inset-0 h-full w-full object-cover opacity-15" />
+        <img src={snapshot} alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
       )}
       {/* ضوء مائل يمر على السطح — كشروق يكشف النقش */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -604,6 +587,14 @@ function AnalysisOverlay({ snapshot, stageIndex, t }) {
 
       <div className="relative flex flex-1 items-center justify-center">
         <Petroglyph shape="ibex" className="h-28 w-40 text-terracotta-bright" loop duration={2.4} />
+      </div>
+
+      {/* شريطٌ يملأ بقدر ما أُنجز فعلًا، فالانتظار له نهاية مرئية */}
+      <div className="relative mx-5 h-0.5 overflow-hidden rounded-full bg-sand/15">
+        <div
+          className="h-full bg-terracotta transition-[width] duration-300 ease-athr"
+          style={{ width: `${progress * 100}%` }}
+        />
       </div>
 
       <div className="relative space-y-2 p-5">

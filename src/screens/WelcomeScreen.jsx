@@ -54,11 +54,11 @@ export default function WelcomeScreen({ onDone }) {
         <div className="absolute inset-0 bg-gradient-to-b from-basalt/55 via-basalt/85 to-basalt" />
       </div>
 
-      <div className="relative flex min-h-0 flex-1 flex-col px-6 pb-6 pt-10">
-        <header className="mb-6 shrink-0">
+      <div className="relative flex min-h-0 flex-1 flex-col px-6 pb-6 pt-7">
+        <header className="mb-5 shrink-0">
           <Petroglyph
             shape="ibex"
-            className="mb-4 h-20 w-32 text-terracotta-bright"
+            className="mb-3 h-14 w-24 text-terracotta-bright"
             strokeWidth={3}
             duration={2.8}
             loop
@@ -66,10 +66,10 @@ export default function WelcomeScreen({ onDone }) {
           />
           {/* العلامة تبقى بالعربية دائمًا (اسم علم لا يُترجم)، لكن قارئ
               الشاشة ينطقها باسمها في لغة المستخدم بدل تهجئة حروف عربية */}
-          <h1 aria-label={t('welcome.title')} className="font-display text-monument leading-none text-sand">
+          <h1 aria-label={t('welcome.title')} className="font-display text-hero leading-none text-sand">
             أثر
           </h1>
-          <p className="mt-3 max-w-[21rem] text-body text-sand-dim">{t('welcome.subtitle')}</p>
+          <p className="mt-2 max-w-[21rem] text-body text-sand-dim">{t('welcome.subtitle')}</p>
         </header>
 
         {/* لغة الجهاز — الطريق السريع */}
@@ -77,7 +77,7 @@ export default function WelcomeScreen({ onDone }) {
           <button
             type="button"
             onClick={() => choose(detected.code)}
-            className={`mb-5 flex shrink-0 items-center justify-between gap-3 rounded-2xl border p-4 text-start transition-all duration-200 ease-athr ${
+            className={`mb-4 flex shrink-0 items-center justify-between gap-3 rounded-2xl border p-3.5 text-start transition-all duration-200 ease-athr ${
               selected === detected.code
                 ? 'border-terracotta bg-terracotta/12 shadow-glow'
                 : 'border-night-500 bg-night-800/70'
