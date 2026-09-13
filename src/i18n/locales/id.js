@@ -74,6 +74,7 @@ export default {
     moving: 'Gerakkan kamera perlahan di atas ukiran',
     stop: 'Hentikan pemindaian',
     matched: 'Dikenali',
+    tentative: 'Kemungkinan besar',
     confidence: 'Keyakinan',
     evidence: 'Dasar analisis',
     readMore: 'Baca kisah lengkap dan dengarkan',

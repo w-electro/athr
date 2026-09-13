@@ -82,6 +82,7 @@ export default {
     moving: 'Move the camera slowly over the engraving',
     stop: 'Stop scanning',
     matched: 'Identified',
+    tentative: 'Most likely',
     confidence: 'Confidence',
     evidence: 'What the analysis used',
     readMore: 'Read the full story and listen',

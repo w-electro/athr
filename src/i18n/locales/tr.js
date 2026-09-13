@@ -74,6 +74,7 @@ export default {
     moving: 'Kamerayı kaya resminin üzerinde yavaşça gezdirin',
     stop: 'Taramayı durdur',
     matched: 'Tanındı',
+    tentative: 'Büyük olasılıkla',
     confidence: 'Güven',
     evidence: 'Analiz neye dayandı',
     readMore: 'Tüm hikâyeyi oku ve dinle',

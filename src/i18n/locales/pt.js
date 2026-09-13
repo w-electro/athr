@@ -74,6 +74,7 @@ export default {
     moving: 'Mova a câmera lentamente sobre a gravura',
     stop: 'Parar leitura',
     matched: 'Identificado',
+    tentative: 'Provavelmente',
     confidence: 'Confiança',
     evidence: 'Em que se baseou a análise',
     readMore: 'Ler a história completa e ouvir',

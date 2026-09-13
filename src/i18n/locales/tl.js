@@ -74,6 +74,7 @@ export default {
     moving: 'Dahan-dahang igalaw ang camera sa ibabaw ng ukit',
     stop: 'Itigil ang pag-scan',
     matched: 'Nakilala',
+    tentative: 'Malamang',
     confidence: 'Tiwala',
     evidence: 'Batayan ng pagsusuri',
     readMore: 'Basahin ang buong kuwento at makinig',

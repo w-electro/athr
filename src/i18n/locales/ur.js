@@ -74,6 +74,7 @@ export default {
     moving: 'کیمرہ آہستہ آہستہ نقش کے اوپر حرکت دیں',
     stop: 'اسکین روکیں',
     matched: 'پہچان لیا',
+    tentative: 'غالباً',
     confidence: 'اعتماد',
     evidence: 'تجزیہ کس پر مبنی ہے',
     readMore: 'پوری کہانی پڑھیں اور سنیں',

@@ -74,6 +74,7 @@ export default {
     moving: 'Bewegen Sie die Kamera langsam über die Gravur',
     stop: 'Scan stoppen',
     matched: 'Erkannt',
+    tentative: 'Wahrscheinlich',
     confidence: 'Konfidenz',
     evidence: 'Worauf die Analyse beruht',
     readMore: 'Ganze Geschichte lesen und anhören',

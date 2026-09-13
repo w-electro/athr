@@ -74,6 +74,7 @@ export default {
     moving: 'Muovi lentamente la fotocamera sull\'incisione',
     stop: 'Ferma scansione',
     matched: 'Riconosciuto',
+    tentative: 'Probabilmente',
     confidence: 'Affidabilità',
     evidence: 'Su cosa si basa l’analisi',
     readMore: 'Leggi la storia completa e ascolta',

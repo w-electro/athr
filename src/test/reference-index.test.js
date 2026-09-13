@@ -340,14 +340,28 @@ describe('قرار المسح المتّصل', () => {
     expect(decideFromFrames(wide)?.siteId).toBe('jubbah-p7')
   })
 
-  it('يرفض الدرجة نفسها حين يضيق الهامش', () => {
+  it('ينزل إلى الترجيح حين يضيق الهامش ولا يصمت', () => {
     const narrow = Array.from({ length: 6 }, () => frame('jubbah-p7', 0.895, 0.042))
-    expect(decideFromFrames(narrow)).toBeNull()
+    const d = decideFromFrames(narrow)
+    expect(d?.status).toBe('probable')
+    expect(d?.siteId).toBe('jubbah-p7')
   })
 
-  it('لا يقبل هامشًا دون الأرضيّة مهما بلغت الدرجة', () => {
+  it('لا يرقى إلى اليقين بهامشٍ دون الأرضيّة', () => {
     const tight = Array.from({ length: 6 }, () => frame('jubbah-p7', 0.99, 0.03))
-    expect(decideFromFrames(tight)).toBeNull()
+    expect(decideFromFrames(tight)?.status).toBe('probable')
+  })
+
+  /*
+    الترجيح ليس تخمينًا: دون حدّه يبقى الصمت. وإلّا سمّى التطبيق
+    لوحةً لكلّ رملةٍ توجّه إليها الكاميرا.
+  */
+  it('يصمت حين تنزل الدرجة دون حدّ الترجيح', () => {
+    expect(decideFromFrames(Array.from({ length: 6 }, () => frame('jubbah-p1', 0.72, 0.06)))).toBeNull()
+  })
+
+  it('يصمت حين ينعدم الهامش تقريبًا', () => {
+    expect(decideFromFrames(Array.from({ length: 6 }, () => frame('jubbah-p6', 0.96, 0.005)))).toBeNull()
   })
 
   it('يتجاهل إطارًا شاذًّا واحدًا ما دامت الهيمنة قائمة', () => {

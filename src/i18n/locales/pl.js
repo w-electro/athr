@@ -74,6 +74,7 @@ export default {
     moving: 'Przesuwaj aparat powoli nad rytem',
     stop: 'Zatrzymaj skanowanie',
     matched: 'Rozpoznano',
+    tentative: 'Prawdopodobnie',
     confidence: 'Pewność',
     evidence: 'Na czym oparto analizę',
     readMore: 'Przeczytaj całą historię i posłuchaj',

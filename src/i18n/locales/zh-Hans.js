@@ -74,6 +74,7 @@ export default {
     moving: '请让镜头在岩画上缓慢移动',
     stop: '停止扫描',
     matched: '已识别',
+    tentative: '很可能是',
     confidence: '置信度',
     evidence: '分析依据',
     readMore: '阅读完整故事并收听',

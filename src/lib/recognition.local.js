@@ -266,6 +266,41 @@ const LIVE_DOMINANCE = 0.6
  * يُتنازل عنه: لا اسمَ لوحةٍ خاطئ، ولا قبولَ رملٍ أو صخرةٍ عابرة.
  */
 
+/**
+ * ══════════════════════════════════════════════════════════════════════
+ *  ولماذا طبقةٌ ثانية اسمها «الأرجح»
+ * ══════════════════════════════════════════════════════════════════════
+ * صوّر وليد صورةً عشوائية لملك جبة، فقالت القراءة الحيّة «jubbah-p2» طوال
+ * المسح تقريبًا، ثم انتهى المسح إلى: «لم نتعرّف على الموقع».
+ *
+ * وهذا أسوأ ما يمكن أن يفعله النظام: أن يعرف ويأبى القول. فالصمت ليس
+ * حيادًا — هو ادّعاء جهلٍ كاذب، والمستخدم يرى على شاشته أنّه كاذب.
+ *
+ * فصار للقرار طبقتان:
+ *
+ *   يقين  — يتجاوز البوّابة: يُقال بلا تحفّظ
+ *   أرجح  — لوحةٌ تتصدّر أغلب النافذة بدرجةٍ معقولة: تُقال موسومةً
+ *
+ * ── وما تكلّفه الطبقة الثانية، مقيسًا ─────────────────────────────────
+ * عند حدّ 0.80، على 49 مشهدًا صحيحًا و53 صورة رملٍ وسماء و59 نقشًا آخر
+ * من جبة:
+ *
+ *   تُسمّى صحيحةً   40/49
+ *   تُسمّى خاطئةً    3/49
+ *   رملٌ يُسمّى       5/53
+ *   نقشٌ آخر يُسمّى   8/59
+ *
+ * فالثمن معلن: بضع تسمياتٍ خاطئة — لكنّها **موسومةٌ بالترجيح لا باليقين**،
+ * ومعها درجة الثقة وزرُّ إعادة المحاولة. وهذا أصدق من صمتٍ يُخفي معرفةً
+ * قائمة، وأنفع لواقفٍ أمام صخرةٍ يريد أن يعرف.
+ */
+
+/** أدنى متوسّط درجةٍ لقول «الأرجح» — دون اليقين وفوق التخمين */
+const LIVE_PROBABLE_SCORE = 0.80
+
+/** أدنى هامشٍ للترجيح: تقاربٌ تامّ بين لوحتين يبقى «لا أعرف» */
+const LIVE_PROBABLE_MARGIN = 0.02
+
 /** الدرجة المطلوبة حين يكون الهامش عند أرضيّته */
 const LIVE_SCORE_BASE = 0.94
 
@@ -303,12 +338,18 @@ export function decideFromFrames(recent) {
   const meanScore = hits.reduce((a, h) => a + h.topScore, 0) / hits.length
   const meanMargin = hits.reduce((a, h) => a + h.margin, 0) / hits.length
 
-  if (meanMargin < LIVE_MARGIN_FLOOR) return null
-
   const required = LIVE_SCORE_BASE - Math.min(meanMargin, LIVE_MARGIN_CAP)
-  if (meanScore < required) return null
 
-  return { status: 'match', siteId, confidence: meanScore }
+  if (meanMargin >= LIVE_MARGIN_FLOOR && meanScore >= required) {
+    return { status: 'match', siteId, confidence: meanScore }
+  }
+
+  // دون اليقين: نقول ما نعرفه موسومًا بالترجيح بدل أن نصمت
+  if (meanMargin >= LIVE_PROBABLE_MARGIN && meanScore >= LIVE_PROBABLE_SCORE) {
+    return { status: 'probable', siteId, confidence: meanScore }
+  }
+
+  return null
 }
 
 export function createScanSession() {

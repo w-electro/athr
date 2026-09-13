@@ -74,6 +74,7 @@ export default {
     moving: 'カメラを岩絵の上でゆっくり動かしてください',
     stop: 'スキャンを停止',
     matched: '識別しました',
+    tentative: 'おそらく',
     confidence: '確信度',
     evidence: '解析の根拠',
     readMore: '全文を読んで聴く',

@@ -74,6 +74,7 @@ export default {
     moving: '카메라를 암각화 위로 천천히 움직이세요',
     stop: '스캔 중지',
     matched: '인식 완료',
+    tentative: '아마도',
     confidence: '신뢰도',
     evidence: '분석 근거',
     readMore: '전체 이야기 읽고 듣기',

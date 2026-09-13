@@ -74,6 +74,7 @@ export default {
     moving: 'Di chuyển máy ảnh chậm rãi trên hình khắc',
     stop: 'Dừng quét',
     matched: 'Đã nhận ra',
+    tentative: 'Nhiều khả năng',
     confidence: 'Độ tin cậy',
     evidence: 'Cơ sở phân tích',
     readMore: 'Đọc toàn bộ câu chuyện và nghe',

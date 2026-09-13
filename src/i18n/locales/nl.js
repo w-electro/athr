@@ -74,6 +74,7 @@ export default {
     moving: 'Beweeg de camera langzaam over de gravure',
     stop: 'Scannen stoppen',
     matched: 'Herkend',
+    tentative: 'Waarschijnlijk',
     confidence: 'Betrouwbaarheid',
     evidence: 'Waarop de analyse zich baseert',
     readMore: 'Lees het hele verhaal en luister',

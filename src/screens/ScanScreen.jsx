@@ -211,7 +211,8 @@ export default function ScanScreen() {
         setScanProbe({ best: outcome.best, id: outcome.bestId, margin: outcome.margin })
       }
 
-      if (outcome.status === 'match') {
+      // «الأرجح» نتيجةٌ أيضًا: النظام يعرف، فيقول موسومًا
+      if (outcome.status === 'match' || outcome.status === 'probable') {
         setSnapshot(image.dataUrl)
         setResult(outcome)
         setState(STATES.result)
@@ -644,6 +645,15 @@ function ResultPanel({ result, site, panel, snapshot, onRetry, t, contentDir }) 
   const percent = Math.round(result.confidence * 100)
 
   /*
+    النتيجة المرجّحة تُعرض باسمها لا بالصمت.
+
+    فحين تتصدّر لوحةٌ أغلبَ المسح، كان التطبيق يقول «لم نتعرّف» — وهو
+    ادّعاء جهلٍ يكذّبه ما يراه المستخدم على شاشته. فنقولها الآن، ونضع
+    عليها وسم الترجيح وزرّ إعادة المحاولة: صدقٌ في الاتجاهين.
+  */
+  const tentative = result.status === 'probable'
+
+  /*
    * من أين يأتي النص؟
    * مزوّد يولّد وصفًا حرًّا بلغة المستخدم نعرض نصّه كما هو. أما المحاكاة
    * والتعرّف المحلي فيُرجعان المعرّف فقط، فنقرأ الاسم والأدلة من بيانات
@@ -685,8 +695,18 @@ function ResultPanel({ result, site, panel, snapshot, onRetry, t, contentDir }) 
               className="absolute bottom-3 end-3 h-20 w-16 rounded-lg border border-sand/25 object-cover"
             />
           )}
-          <span className="absolute top-3 start-3 chip border border-terracotta/50 bg-basalt/70 text-terracotta-bright backdrop-blur-sm">
-            ✓ {t('scan.matched')}
+          {/*
+            وسمُ الترجيح بلون الذهب لا الطين، وبعلامة استفهامٍ لا صحّ:
+            فرقٌ بصريّ يُدرَك قبل قراءة الكلمة، فلا يُقرأ الظنّ يقينًا.
+          */}
+          <span
+            className={`absolute top-3 start-3 chip border backdrop-blur-sm ${
+              tentative
+                ? 'border-gold/50 bg-basalt/70 text-gold'
+                : 'border-terracotta/50 bg-basalt/70 text-terracotta-bright'
+            }`}
+          >
+            {tentative ? `؟ ${t('scan.tentative')}` : `✓ ${t('scan.matched')}`}
           </span>
         </SiteArt>
 

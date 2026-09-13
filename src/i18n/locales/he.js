@@ -74,6 +74,7 @@ export default {
     moving: 'הזיזו את המצלמה לאט מעל התחריט',
     stop: 'עצור סריקה',
     matched: 'זוהה',
+    tentative: 'ככל הנראה',
     confidence: 'רמת ביטחון',
     evidence: 'על מה התבסס הניתוח',
     readMore: 'קרא את הסיפור המלא והאזן',

@@ -74,6 +74,7 @@ export default {
     moving: 'Sogeza kamera polepole juu ya nakshi',
     stop: 'Simamisha kuchanganua',
     matched: 'Imetambuliwa',
+    tentative: 'Yaelekea ni',
     confidence: 'Uhakika',
     evidence: 'Uchanganuzi ulitegemea nini',
     readMore: 'Soma simulizi kamili na usikilize',
