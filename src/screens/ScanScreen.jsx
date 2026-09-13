@@ -38,6 +38,9 @@ const STATES = {
  */
 const MAX_SCAN_FRAMES = 40
 
+/** كم محاولة التقاطٍ فاشلة نحتمل قبل أن نُقرّ بأنّ الكاميرا لا تسلّم إطارًا */
+const MAX_STALLED_FRAMES = 40
+
 export default function ScanScreen() {
   const { t, contentLanguage, contentDir } = useI18n()
   const [state, setState] = useState(STATES.idle)
@@ -85,7 +88,18 @@ export default function ScanScreen() {
    * عنصر يظهر شرطيًا.
    */
   useEffect(() => {
-    if (state !== STATES.live && state !== STATES.analyzing) return undefined
+    /*
+      حالات العرض الثلاث لا اثنتان.
+
+      نسيان scanning هنا يُعيد العلّة التي أُصلحت من قبل حرفًا بحرف:
+      البثّ يُربط والحالة غير معروضة، فيكون المرجع null ويُتخطّى الربط
+      بصمت — وتبقى الشاشة سوداء بلا خطأ في الطرفيّة.
+    */
+    if (
+      state !== STATES.live
+      && state !== STATES.scanning
+      && state !== STATES.analyzing
+    ) return undefined
     const video = videoRef.current
     const stream = streamRef.current
     if (!video || !stream || video.srcObject === stream) return undefined
@@ -138,12 +152,26 @@ export default function ScanScreen() {
 
     const session = await createRecognitionSession()
 
+    let stalled = 0
+
     while (!scanAbortRef.current) {
       const image = captureFrame()
+
+      /*
+        الكاميرا قد لا تسلّم إطارًا: إذنٌ سُحب، أو لسانٌ آخر أخذ الجهاز،
+        أو بثٌّ تجمّد. وبلا حدٍّ هنا تدور الحلقة أبدًا بلا التقاطٍ ولا
+        خطأ — فيرى المستخدم شاشةً واقفة ويظنّ التطبيق يفكّر.
+      */
       if (!image) {
+        stalled += 1
+        if (stalled > MAX_STALLED_FRAMES) {
+          setState(STATES.live)
+          return
+        }
         await new Promise((r) => setTimeout(r, 120))
         continue
       }
+      stalled = 0
 
       let outcome
       try {
@@ -314,7 +342,17 @@ export default function ScanScreen() {
         />
       )}
 
-      {(state === STATES.live || state === STATES.analyzing) && (
+      {/*
+        عنصر الفيديو يبقى مركَّبًا طوال المسح المتّصل.
+
+        وإسقاط scanning من هذا الشرط لا يُخفي الصورة فحسب: يُفكَّك العنصر
+        فيصير videoRef.current معدومًا، فيُرجع captureFrame قيمة null في
+        كلّ دورة، فتدور الحلقة أبدًا بلا التقاطٍ ولا خطأ — شاشةٌ فارغة
+        وتطبيقٌ يبدو معلّقًا.
+      */}
+      {(state === STATES.live
+        || state === STATES.scanning
+        || state === STATES.analyzing) && (
         <div className="relative overflow-hidden rounded-2xl border border-night-600 bg-basalt">
           <video
             ref={videoRef}

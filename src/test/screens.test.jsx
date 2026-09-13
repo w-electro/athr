@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, within, waitFor } from '@testing-library/react'
+import { render, screen, within, waitFor, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import App from '../App.jsx'
@@ -326,6 +326,46 @@ describe('شاشة المسح', () => {
     const video = container.querySelector('video')
     expect(video).toBeTruthy()
     expect(video.srcObject).toBe(stream)
+  })
+
+  /**
+   * حارس لعلّة شُحنت فعلًا: «المسح الذكي فارغ على جوّالي».
+   *
+   * حالة scanning أُضيفت ولم تُضَف إلى شرط عرض الفيديو، فكان العنصر
+   * يُفكَّك لحظة بدء المسح. ولم تكن النتيجة صورةً مخفيّة فحسب: يصير
+   * videoRef.current معدومًا، فيُرجع captureFrame قيمة null في كلّ دورة،
+   * فتدور الحلقة أبدًا بلا التقاطٍ ولا خطأ — شاشةٌ فارغة وتطبيقٌ معلّق.
+   *
+   * وهي العلّة نفسها التي أُصلحت من قبل في حالة live، عادت بإضافة حالةٍ
+   * جديدة ونسيان حرّاسها. فالاختبار يتحقّق من بقاء العنصر مركَّبًا
+   * والبثّ مربوطًا **بعد** بدء المسح، لا من ظهور الأزرار.
+   */
+  it('يُبقي الفيديو مركَّبًا والبثّ مربوطًا بعد بدء المسح المتّصل', async () => {
+    const user = userEvent.setup()
+    const stream = { getTracks: () => [{ stop: vi.fn() }], id: 'live-stream' }
+    Object.defineProperty(navigator, 'mediaDevices', {
+      configurable: true,
+      value: { getUserMedia: vi.fn().mockResolvedValue(stream) },
+    })
+
+    const { container } = renderApp('/scan')
+    await user.click(screen.getByRole('button', { name: 'افتح الكاميرا' }))
+
+    /*
+      jsdom لا يطلق loadedmetadata ولا يعطي مقاسًا للفيديو،
+      والغالق معطّل حتّى يصل أوّل إطار فعلي. فنصطنع الاثنين.
+    */
+    const video = container.querySelector('video')
+    Object.defineProperty(video, 'videoWidth', { configurable: true, value: 640 })
+    Object.defineProperty(video, 'videoHeight', { configurable: true, value: 480 })
+    fireEvent.loadedMetadata(video)
+    await user.click(await screen.findByLabelText('ابدأ المسح'))
+
+    // زرّ الإيقاف يعني أنّنا فعلًا في حالة المسح المتّصل
+    expect(await screen.findByRole('button', { name: 'أوقف المسح' })).toBeInTheDocument()
+
+    expect(container.querySelector('video')).toBeTruthy()
+    expect(container.querySelector('video').srcObject).toBe(stream)
   })
 
   it('تعود إلى أي كاميرا إن رفض الجهاز قيد الكاميرا الخلفية', async () => {

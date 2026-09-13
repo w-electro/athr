@@ -31,9 +31,15 @@ if (!window.matchMedia) {
 window.HTMLMediaElement.prototype.play = vi.fn().mockResolvedValue(undefined)
 window.HTMLMediaElement.prototype.pause = vi.fn()
 
-if (!window.HTMLCanvasElement.prototype.getContext) {
-  window.HTMLCanvasElement.prototype.getContext = vi.fn(() => ({ drawImage: vi.fn() }))
-}
+/*
+  jsdom يعرّف getContext لكنه يُرجع null بلا حزمة canvas، وtoDataURL يرمي
+  "not implemented". فالشرط `if (!...)` لا يُفعّل البديل أبدًا — وهي العلّة
+  نفسها الموثّقة أعلاه في play(). نستبدلهما دائمًا لا عند الغياب.
+*/
+window.HTMLCanvasElement.prototype.getContext = vi.fn(() => ({ drawImage: vi.fn() }))
+window.HTMLCanvasElement.prototype.toDataURL = vi.fn(
+  () => 'data:image/jpeg;base64,dGVzdA==',
+)
 
 /**
  * jsdom لا يطبّق srcObject، وهو تحديدًا ما يربط بثّ الكاميرا بعنصر الفيديو.
