@@ -137,6 +137,27 @@ const PROVIDERS = {
  * وفي المحاكاة نُرجع جلسةً تتعرّف بعد بضعة إطارات، كي تعمل الشاشة في
  * التطوير بلا تنزيل نموذجٍ بحجم ٢٢ ميغابايت عند كل تجربة.
  */
+/**
+ * مسح صورةٍ مرفوعة بعدّة مشاهد — بقرار المسح الحيّ نفسه.
+ *
+ * كان الرفع مقارنةً واحدة، فيخضع لحظّ قصّةٍ واحدة بينما المسح الحيّ يجمع
+ * أدلّة. فصار المساران واحدًا في المنطق، ويبقى الفرق في مصدر الصورة لا
+ * في ذكاء القرار.
+ */
+export async function scanStill(input = {}, onProgress, options = {}) {
+  const name = options.provider || getActiveProviderName()
+  if (name === 'local') {
+    const { scanStillImage } = await import('./recognition.local.js')
+    return scanStillImage(input, onProgress)
+  }
+  // المحاكاة: نُظهر تقدّمًا ثم نُرجع نتيجةً، كي تُجرَّب الشاشة بلا نموذج
+  for (let i = 1; i <= 6; i += 1) {
+    onProgress?.(i, 6)
+    await new Promise((r) => setTimeout(r, 90))
+  }
+  return mockProvider(input)
+}
+
 export async function createRecognitionSession(options = {}) {
   const name = options.provider || getActiveProviderName()
 

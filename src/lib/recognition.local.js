@@ -316,6 +316,31 @@ const LIVE_DOMINANCE = 0.6
  * وللرجوع: أعِد الشرطين إلى decideFromFrames.
  */
 
+/**
+ * ── تشتّت المرشّحين: فكرة وليد ─────────────────────────────────────────
+ *
+ * لاحظ وليد وهو يحرّك الكاميرا أنّ التصويب على شيءٍ عابر يُخرج أسماءً
+ * متفرّقة — p1 ثم p3 ثم p4 — بينما اللوحة الحقيقية تُخرج مجموعةً ضيّقة
+ * كـ p2 وp3، وهما لوحتان متجاورتان على الصخرة نفسها.
+ *
+ * والفكرة أدقّ من عتبة درجة: هي تسأل **هل تتّفق الأدلّة مع نفسها**، لا
+ * كم بلغ رقمٌ واحد. فالتباسُ لوحتين متجاورتين اشتباهٌ معقول، أمّا القفز
+ * بين لوحاتٍ لا رابط بينها فبحثٌ عن شبهٍ غير موجود.
+ *
+ * ── وما قيس ──────────────────────────────────────────────────────────
+ * عدد الأسماء المختلفة في ثماني إطارات:
+ *
+ *   اسمٌ واحد   : 63% من المشاهد الصحيحة · 34% من الرمل
+ *   ثلاثة فأكثر :  4% من المشاهد الصحيحة · 13% من الرمل · 17% من نقوشٍ أخرى
+ *
+ * فاشتراطُ اسمين فأقلّ يكلّف 4% من الصحيح ويمنع سُبعَ السوالب تقريبًا.
+ *
+ * والقياس هنا أضعف ممّا يستحقّ: محاكاتي تقصّ صورةً واحدة، فلا تُنتج
+ * التفرّق الذي يراه من يمسح غرفةً بكاميرته. وملاحظة وليد الميدانية أصدق
+ * في هذه الحالة من أرقامي، ولذلك بُني الشرط عليها.
+ */
+const LIVE_MAX_DISTINCT = 2
+
 /** أدنى حصّةٍ من النافذة تجعل اللوحة «متصدّرة» فيُقال اسمها */
 const LIVE_PROBABLE_SHARE = 0.5
 
@@ -368,11 +393,103 @@ export function decideFromFrames(recent) {
     ولا نحكم قبل امتلاء النافذة: أوّل إطارين قد يلتقطان زاويةً رديئة،
     والانتظار حتى تمتلئ يكلّف ثوانيَ ويشتري اسمًا أفضل.
   */
-  if (recent.length >= LIVE_WINDOW && hits.length / recent.length >= LIVE_PROBABLE_SHARE) {
+  /*
+    التشتّت يؤجّل الحكم ولا يُعجّله.
+
+    فحين تتفرّق الأسماء نُرجع null، فيستمرّ المسح ويأخذ وقتًا أطول —
+    وهو المطلوب: مزيدٌ من الأدلّة لا قرارٌ متسرّع. وإن بقي التفرّق حتى
+    آخر إطار، فالصمت هو الجواب الصادق.
+  */
+  const distinct = byPanel.size
+
+  if (
+    recent.length >= LIVE_WINDOW
+    && hits.length / recent.length >= LIVE_PROBABLE_SHARE
+    && distinct <= LIVE_MAX_DISTINCT
+  ) {
     return { status: 'probable', siteId, confidence: meanScore }
   }
 
   return null
+}
+
+/**
+ * كم مشهدًا نستخرجه من صورةٍ مرفوعة.
+ *
+ * الصورة الساكنة لا تعطي إطاراتٍ جديدة كما تفعل الكاميرا، لكنّها تعطي
+ * **مشاهد** مختلفة: قصّاتٌ بمقاساتٍ ومواضعَ متعدّدة. وهو ما يجعل قرار
+ * الرفع يمرّ بالمنطق نفسه الذي يمرّ به المسح الحيّ — لا بمسارٍ ثانٍ
+ * ينحرف عنه بصمت.
+ */
+const STILL_VIEWS = 10
+
+/** مشهدٌ من صورةٍ ساكنة: قصّةٌ دوّارة المقاس والموضع، كاهتزاز يدٍ محسوب */
+async function stillView(image, i) {
+  const frac = Math.min(1, CROP_LADDER[i % CROP_LADDER.length] * (0.94 + 0.04 * ((i * 7) % 3)))
+  const w = Math.round(image.width * frac)
+  const h = Math.round(image.height * frac)
+  const mx = image.width - w
+  const my = image.height - h
+  const x = Math.max(0, Math.min(mx, Math.round(mx / 2 + mx * 0.2 * Math.sin(i * 1.7))))
+  const y = Math.max(0, Math.min(my, Math.round(my / 2 + my * 0.2 * Math.cos(i * 2.3))))
+  return image.crop([x, y, x + w - 1, y + h - 1])
+}
+
+/**
+ * مسح صورةٍ مرفوعة بعدّة مشاهد، بقرار المسح الحيّ نفسه.
+ *
+ * كان الرفع يقارن مرّةً واحدة، فيخضع لحظّ قصّةٍ واحدة. والآن يجمع أدلّة
+ * عشرة مشاهد ويحتكم إلى decideFromFrames — فيتساوى المساران في السلوك،
+ * ولا يبقى للمستخدم مسارٌ «ذكيّ» وآخر ساذج.
+ *
+ * onProgress(done, total) لتحريك الواجهة، فالانتظار هنا مقصود.
+ */
+export async function scanStillImage(input = {}, onProgress) {
+  const started = Date.now()
+  const source =
+    input.imageUrl || (input.imageBase64 ? `data:image/jpeg;base64,${input.imageBase64}` : null)
+  if (!source) throw new Error('scanStillImage يحتاج صورة')
+
+  const extractor = await getExtractor(input.onModelProgress)
+  const index = await getIndex(extractor)
+  if (index.length === 0) {
+    return { status: 'no-match', siteId: null, confidence: 0, provider: 'local', elapsedMs: 0 }
+  }
+
+  const { RawImage } = await import('@huggingface/transformers')
+  const image = await RawImage.read(source)
+
+  const recent = []
+  let best = 0
+  let bestId = null
+
+  for (let i = 0; i < STILL_VIEWS; i += 1) {
+    const r = matchVector(toVector(await extractor(await stillView(image, i))), index)
+    recent.push(r)
+    if (recent.length > LIVE_WINDOW) recent.shift()
+    if (r.topScore > best) { best = r.topScore; bestId = r.topSiteId }
+
+    onProgress?.(i + 1, STILL_VIEWS, r)
+
+    // اليقين يوقف البحث مبكّرًا؛ الترجيح ينتظر كلّ المشاهد
+    const early = decideFromFrames(recent)
+    if (early?.status === 'match') {
+      return { ...early, provider: 'local', elapsedMs: Date.now() - started, views: i + 1 }
+    }
+  }
+
+  const decided = decideFromFrames(recent)
+  if (decided) {
+    return { ...decided, provider: 'local', elapsedMs: Date.now() - started, views: STILL_VIEWS }
+  }
+  return {
+    status: 'no-match',
+    siteId: null,
+    confidence: best,
+    bestId,
+    provider: 'local',
+    elapsedMs: Date.now() - started,
+  }
 }
 
 export function createScanSession() {

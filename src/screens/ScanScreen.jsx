@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { createRecognitionSession, recognizeSite, getActiveProviderName, ANALYSIS_STAGES } from '../lib/recognition.js'
+import { createRecognitionSession, scanStill, recognizeSite, getActiveProviderName, ANALYSIS_STAGES } from '../lib/recognition.js'
 import { getSiteById, getAllSites } from '../data/sites.js'
 import { getPanelById, isPanelId, SUBJECTS } from '../data/panels.js'
 import SiteArt from '../components/SiteArt.jsx'
@@ -223,17 +223,11 @@ export default function ScanScreen() {
       if (outcome.frames >= MAX_SCAN_FRAMES) {
         setSnapshot(image.dataUrl)
         /*
-          حتى عند نفاد المحاولات نقول أقرب لوحة.
-
-          فالمسح لا ينتهي بلا حكمٍ إلا إذا تقلّب المتصدّر حتى النهاية،
-          ولو وقع ذلك فالأقرب في آخر إطارٍ أنفعُ من «لم نتعرّف» — وهو
-          ما طلبه وليد صراحةً.
+          نفاد المحاولات بعد كلّ هذا الوقت يعني أنّ الأسماء ظلّت متفرّقة:
+          لا مرشّحَ ثابتًا أصلًا. والصمت هنا هو الجواب الصادق، لا اسمٌ
+          يُنتزع من آخر إطارٍ عابر.
         */
-        setResult(
-          outcome.bestId
-            ? { status: 'probable', siteId: outcome.bestId, confidence: outcome.best ?? 0 }
-            : { status: 'no-match', siteId: null, confidence: outcome.best ?? 0 },
-        )
+        setResult({ status: 'no-match', siteId: null, confidence: outcome.best ?? 0 })
         setState(STATES.result)
         stopCamera()
         return
@@ -297,13 +291,45 @@ export default function ScanScreen() {
     stopCamera()
   }
 
+  /*
+    الصورة المرفوعة تُمسح بعدّة مشاهد لا بمقارنةٍ واحدة.
+
+    فالرفع كان يخضع لحظّ قصّةٍ واحدة بينما المسح الحيّ يجمع أدلّة عشرة
+    إطارات — فكان مسارٌ أذكى من مسار. والآن يحتكمان إلى القرار نفسه،
+    ويستغرق الرفع ثوانيَ معدودة عن قصد: هي ثمن الأدلّة لا بطءٌ عارض.
+  */
   function handleFile(event) {
     const file = event.target.files?.[0]
     if (!file) return
     const reader = new FileReader()
-    reader.onload = () => {
+    reader.onload = async () => {
       const dataUrl = String(reader.result)
-      analyze({ dataUrl, base64: dataUrl.split(',')[1] })
+      const base64 = dataUrl.split(',')[1]
+
+      setSnapshot(dataUrl)
+      setState(STATES.analyzing)
+      setStageIndex(0)
+      setScanProbe(null)
+
+      let outcome
+      try {
+        outcome = await scanStill({
+          imageBase64: base64,
+          // تثبيت العرض التوضيحي يبقى نافذًا في مسار الرفع أيضًا
+          siteId: demoTarget === 'auto' ? undefined : demoTarget,
+        }, (done, total, frame) => {
+          // نُحرّك مراحل التحليل بتقدّمٍ حقيقي لا بمؤقّتٍ يتظاهر
+          setStageIndex(Math.min(ANALYSIS_STAGES.length, Math.ceil((done / total) * ANALYSIS_STAGES.length)))
+          if (frame) {
+            setScanProbe({ best: frame.topScore, id: frame.topSiteId, margin: frame.margin })
+          }
+        })
+      } catch (error) {
+        outcome = { status: 'no-match', siteId: null, confidence: 0, evidence: [error.message] }
+      }
+
+      setResult(outcome)
+      setState(STATES.result)
     }
     reader.readAsDataURL(file)
   }

@@ -374,6 +374,31 @@ describe('قرار المسح المتّصل', () => {
     ويبقى الصمت حين لا متصدّر أصلاً: اسمٌ يتقلّب مع كلّ إطار
     ليس جوابًا بل ضوضاء.
   */
+  /*
+    قاعدة وليد: تشتّت المرشّحين يؤجّل الحكم.
+
+    التباس لوحتين متجاورتين (p2 وp3) اشتباهٌ معقول، أمّا ظهور
+    اسمٍ ثالث لا رابط له فبحثٌ عن شبهٍ غير موجود — فنواصل المسح
+    بدل أن نحكم.
+  */
+  it('يؤجّل الحكم حين تكثر الأسماء المختلفة ولو وُجد متصدّر', () => {
+    const scattered = [
+      ...Array.from({ length: 5 }, () => frame('jubbah-p2', 0.88, 0.05)),
+      frame('jubbah-p3', 0.85, 0.04),
+      frame('jubbah-p6', 0.84, 0.04),
+      frame('jubbah-p1', 0.83, 0.04),
+    ]
+    expect(decideFromFrames(scattered)).toBeNull()
+  })
+
+  it('يقبل التباس لوحتين متجاورتين', () => {
+    const twoOnly = [
+      ...Array.from({ length: 5 }, () => frame('jubbah-p2', 0.88, 0.05)),
+      ...Array.from({ length: 3 }, () => frame('jubbah-p3', 0.85, 0.04)),
+    ]
+    expect(decideFromFrames(twoOnly)?.siteId).toBe('jubbah-p2')
+  })
+
   it('يصمت حين يتقلّب المتصدّر بلا أغلبية', () => {
     const noisy = ['jubbah-p1', 'jubbah-p2', 'jubbah-p3', 'jubbah-p4',
                    'jubbah-p5', 'jubbah-p6', 'jubbah-p7', 'jubbah-p8']
