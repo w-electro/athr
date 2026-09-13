@@ -9,6 +9,7 @@ import {
   MIN_MARGIN,
   CROP_LADDER,
   matchVector,
+  decideFromFrames,
 } from '../lib/recognition.local.js'
 import { PANELS, isPanelId, siteIdOfPanel } from '../data/panels.js'
 import { getAllSites } from '../data/sites.js'
@@ -268,5 +269,70 @@ describe('اختيار الأفضل لكل موقع', () => {
     const { topScore, margin } = matchVector([1, 0], pool)
     expect(topScore).toBeCloseTo(1, 5)
     expect(margin).toBeCloseTo(0.4, 5)
+  })
+})
+
+/**
+ * حرّاس المسح المتّصل.
+ *
+ * المسح الحيّ يقلب حساب الأخطاء: عتبة 0.91 عُوِيرت على محاولةٍ واحدة،
+ * والمسح أربعون محاولة. فأربعون فرصة لتجاوزها — للرمل كما للّوحة. وقد
+ * قيس ذلك فعلًا: بقاعدة «إطارٌ واحد يكفي» تسرّبت صورة سالبة عند الإطار
+ * الأول، وهي لم تتسرّب قطّ في المسح باللقطة الواحدة.
+ */
+describe('قرار المسح المتّصل', () => {
+  const frame = (siteId, score, margin = 0.06) => ({
+    topSiteId: siteId, topScore: score, margin,
+  })
+  const repeat = (n, f) => Array.from({ length: n }, () => f)
+
+  /*
+    شكل القاعدة هو ما حسم، لا ضبط أرقامها.
+
+    «أيّ إطارين يتجاوزان العتبة» كافأ الحظّ: يكفي أن تصادف قصّتان
+    محظوظتان من صخرةٍ عابرة فتُقبل. والهيمنة تطلب أن تتصدّر اللوحةُ
+    أغلبَ النافذة — وهو ما لا يصادفه الحظّ.
+  */
+  it('لا يقبل إطارًا واحدًا مهما علت درجته', () => {
+    expect(decideFromFrames([frame('jubbah-p1', 0.99)])).toBeNull()
+  })
+
+  it('لا يحكم قبل اكتمال أدنى عدد من الإطارات', () => {
+    expect(decideFromFrames(repeat(3, frame('jubbah-p1', 0.97)))).toBeNull()
+  })
+
+  it('يقبل لوحةً تهيمن على النافذة بدرجةٍ وهامشٍ كافيين', () => {
+    const d = decideFromFrames(repeat(4, frame('jubbah-p6', 0.92)))
+    expect(d?.siteId).toBe('jubbah-p6')
+    expect(d?.confidence).toBeCloseTo(0.92, 5)
+  })
+
+  /*
+    من يصوّب على الرمل يحصل على إطاراتٍ متّسقة أيضًا — فالإصرار وحده
+    ليس دليلًا. ولهذا تُشترط الدرجة مع الهيمنة.
+  */
+  it('لا يقبل الإصرار وحده حين تكون الدرجات منخفضة', () => {
+    expect(decideFromFrames(repeat(6, frame('jubbah-p1', 0.72)))).toBeNull()
+  })
+
+  it('لا يقبل هامشًا ضيّقًا ولو هيمنت وعلت الدرجة', () => {
+    // لوحتان متجاورتان على الصخرة نفسها: الدرجة عالية والاختيار بينهما عشوائي
+    expect(decideFromFrames(repeat(6, frame('jubbah-p6', 0.96, 0.005)))).toBeNull()
+  })
+
+  it('لا يقبل حين تتقاسم لوحتان النافذة بلا متصدّرٍ واضح', () => {
+    const split = [
+      ...repeat(3, frame('jubbah-p6', 0.95)),
+      ...repeat(3, frame('jubbah-p7', 0.94)),
+    ]
+    expect(decideFromFrames(split)).toBeNull()
+  })
+
+  it('يتجاهل إطارًا شاذًّا واحدًا ما دامت الهيمنة قائمة', () => {
+    const mostly = [
+      ...repeat(5, frame('jubbah-p2', 0.93)),
+      frame('jubbah-p9', 0.99),
+    ]
+    expect(decideFromFrames(mostly)?.siteId).toBe('jubbah-p2')
   })
 })

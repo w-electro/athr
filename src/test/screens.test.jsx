@@ -320,7 +320,7 @@ describe('شاشة المسح', () => {
     await user.click(screen.getByRole('button', { name: 'افتح الكاميرا' }))
 
     // نصل إلى حالة التصوير
-    expect(await screen.findByLabelText('التقط وحلّل')).toBeInTheDocument()
+    expect(await screen.findByLabelText('ابدأ المسح')).toBeInTheDocument()
 
     // والأهم: البثّ مرتبط فعلًا بالعنصر
     const video = container.querySelector('video')
@@ -344,7 +344,7 @@ describe('شاشة المسح', () => {
     renderApp('/scan')
     await user.click(screen.getByRole('button', { name: 'افتح الكاميرا' }))
 
-    expect(await screen.findByLabelText('التقط وحلّل')).toBeInTheDocument()
+    expect(await screen.findByLabelText('ابدأ المسح')).toBeInTheDocument()
     expect(getUserMedia).toHaveBeenCalledTimes(2)
   })
 

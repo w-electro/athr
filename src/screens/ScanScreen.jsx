@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { recognizeSite, getActiveProviderName, ANALYSIS_STAGES } from '../lib/recognition.js'
+import { createRecognitionSession, recognizeSite, getActiveProviderName, ANALYSIS_STAGES } from '../lib/recognition.js'
 import { getSiteById, getAllSites } from '../data/sites.js'
 import { getPanelById, isPanelId, SUBJECTS } from '../data/panels.js'
 import SiteArt from '../components/SiteArt.jsx'
@@ -23,10 +23,20 @@ const STATES = {
   idle: 'idle',
   starting: 'starting',
   live: 'live',
+  scanning: 'scanning',   // مسحٌ متّصل: الكاميرا تلتقط والمستخدم يحرّك يده
   analyzing: 'analyzing',
   result: 'result',
   denied: 'denied',
 }
+
+/**
+ * حدّ المحاولة: بعده نتوقّف ونقول «لم أتعرّف».
+ *
+ * بلا حدٍّ يظلّ المسح دائرًا إلى أن تفرغ البطارية، ويظنّ الواقف أمام
+ * صخرةٍ خطأ أنّ التطبيق يفكّر. أربعون إطارًا ≈ من عشرين إلى ثلاثين ثانية
+ * على جوّالٍ متوسّط — وهي مهلةٌ يحرّك فيها المستخدم يده كثيرًا.
+ */
+const MAX_SCAN_FRAMES = 40
 
 export default function ScanScreen() {
   const { t, contentLanguage, contentDir } = useI18n()
@@ -38,6 +48,8 @@ export default function ScanScreen() {
   const [showDemo, setShowDemo] = useState(false)
   // يصير صحيحًا حين تُرسل الكاميرا أول إطار فعلي، لا حين يُمنح الإذن
   const [frameReady, setFrameReady] = useState(false)
+  const [scanFrames, setScanFrames] = useState(0)
+  const scanAbortRef = useRef(false)
 
   const videoRef = useRef(null)
   const canvasRef = useRef(null)
@@ -111,6 +123,62 @@ export default function ScanScreen() {
 
     // رفض الإذن أو غياب الكاميرا — شائع على أجهزة لجان التحكيم
     setState(STATES.denied)
+  }
+
+  /*
+    المسح المتّصل: نلتقط إطارًا، نسلّمه للجلسة، ونكرّر حتى تتعرّف أو ننفد
+    من المحاولات. ولا نستعمل setInterval: الاستدلال قد يطول أكثر من
+    الفاصل الزمني فتتراكم النداءات وتخنق الجوّال. نُطلق التالي بعد انتهاء
+    السابق فعلًا.
+  */
+  async function runLiveScan() {
+    setState(STATES.scanning)
+    setScanFrames(0)
+    scanAbortRef.current = false
+
+    const session = await createRecognitionSession()
+
+    while (!scanAbortRef.current) {
+      const image = captureFrame()
+      if (!image) {
+        await new Promise((r) => setTimeout(r, 120))
+        continue
+      }
+
+      let outcome
+      try {
+        outcome = await session.push({ imageBase64: image.base64 })
+      } catch {
+        break   // فشل النموذج: نخرج إلى مسار اللقطة الواحدة
+      }
+      if (scanAbortRef.current) return
+
+      setScanFrames(outcome.frames)
+
+      if (outcome.status === 'match') {
+        setSnapshot(image.dataUrl)
+        setResult(outcome)
+        setState(STATES.result)
+        stopCamera()
+        return
+      }
+
+      if (outcome.frames >= MAX_SCAN_FRAMES) {
+        setSnapshot(image.dataUrl)
+        setResult({ status: 'no-match', siteId: null, confidence: outcome.best ?? 0 })
+        setState(STATES.result)
+        stopCamera()
+        return
+      }
+
+      // نفس للمتصفّح كي تبقى الواجهة حيّة والفيديو سلسًا
+      await new Promise((r) => setTimeout(r, 60))
+    }
+  }
+
+  function stopLiveScan() {
+    scanAbortRef.current = true
+    setState(STATES.live)
   }
 
   function captureFrame() {
@@ -262,6 +330,9 @@ export default function ScanScreen() {
             }`}
           />
           {state === STATES.live && <Viewfinder hint={t('scan.hint')} />}
+          {state === STATES.scanning && (
+            <Viewfinder hint={t('scan.moving')} scanning frames={scanFrames} max={MAX_SCAN_FRAMES} />
+          )}
           {state === STATES.analyzing && <AnalysisOverlay snapshot={snapshot} stageIndex={stageIndex} t={t} />}
         </div>
       )}
@@ -278,7 +349,7 @@ export default function ScanScreen() {
           </button>
           <button
             type="button"
-            onClick={() => analyze(captureFrame())}
+            onClick={runLiveScan}
             disabled={!frameReady}
             aria-label={t('scan.shutter')}
             className="flex h-[68px] w-[68px] items-center justify-center rounded-full border-[3px] border-terracotta
@@ -293,6 +364,20 @@ export default function ScanScreen() {
             className="flex h-11 w-11 items-center justify-center rounded-xl border border-night-500 text-sand-dim"
           >
             <CloseIcon />
+          </button>
+        </div>
+      )}
+
+      {state === STATES.scanning && (
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <p className="text-body text-sand-dim">{t('scan.moving')}</p>
+          <button
+            type="button"
+            onClick={stopLiveScan}
+            className="rounded-xl border border-night-500 px-5 py-2.5 text-body text-sand-dim
+                       transition-colors duration-200 hover:text-sand"
+          >
+            {t('scan.stop')}
           </button>
         </div>
       )}
@@ -345,11 +430,19 @@ function IdlePanel({ state, onStart, onPickFile }) {
   )
 }
 
-function Viewfinder({ hint }) {
+function Viewfinder({ hint, scanning = false, frames = 0, max = 1 }) {
   return (
     <>
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-x-9 inset-y-16 rounded-2xl border border-sand/20">
+        {/*
+          أثناء المسح المتّصل تنبض الزوايا: إشارةٌ حيّة بأنّ التطبيق يعمل
+          الآن، لا ينتظر ضغطة. وبلا نصٍّ إضافي — الحركة وحدها تكفي.
+        */}
+        <div
+          className={`absolute inset-x-9 inset-y-16 rounded-2xl border transition-colors duration-300 ${
+            scanning ? 'animate-pulse border-terracotta/40' : 'border-sand/20'
+          }`}
+        >
           <Corner className="-top-px -start-px border-s-2 border-t-2 rounded-ss-2xl" />
           <Corner className="-top-px -end-px border-e-2 border-t-2 rounded-se-2xl" />
           <Corner className="-bottom-px -start-px border-s-2 border-b-2 rounded-es-2xl" />
@@ -357,6 +450,15 @@ function Viewfinder({ hint }) {
         </div>
       </div>
       <p className="absolute inset-x-0 bottom-4 text-center text-micro text-sand/70">{hint}</p>
+      {scanning && (
+        /* شريطٌ رفيع يوضّح أنّ للمحاولة نهاية، فلا ينتظر الواقف بلا حدّ */
+        <div className="absolute inset-x-9 bottom-2 h-px overflow-hidden rounded-full bg-sand/15">
+          <div
+            className="h-full bg-terracotta transition-[width] duration-300 ease-athr"
+            style={{ width: `${Math.min(100, (frames / max) * 100)}%` }}
+          />
+        </div>
+      )}
     </>
   )
 }

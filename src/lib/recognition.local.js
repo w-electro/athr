@@ -186,6 +186,130 @@ export function matchVector(queryVector, index) {
   return { topSiteId, topScore, margin: topScore - (ranked[1]?.[1] ?? 0) }
 }
 
+/* ─────────────────────── المسح الحيّ المتّصل ─────────────────────── */
+
+/**
+ * ══════════════════════════════════════════════════════════════════════
+ *  قرار المسح المتّصل: الهيمنة لا الحظّ
+ * ══════════════════════════════════════════════════════════════════════
+ * المسح الحيّ يقلب حساب الأخطاء. عتبة 0.91 عُوِيرت على **محاولةٍ واحدة**:
+ * صورةٌ تُرفع فتُقارن مرّة. أمّا المسح فأربعون محاولة بزوايا وقصّاتٍ
+ * مختلفة — وأربعون فرصةً لتجاوز العتبة، للرمل كما للّوحة.
+ *
+ * وقد قيس ذلك لا خُمِّن. جُرّبت قاعدتان قبل هذه:
+ *
+ *   «إطارٌ واحد يكفي»   → تسرّبت سالبة عند الإطار الأول
+ *   «إطاران قويّان»      → تسرّبت السالبة نفسها، وهبط التعرّف
+ *   «ثمانية عشر إطارًا» → ظهرت إجابةٌ خاطئة واحدة
+ *
+ * فالعلّة ليست في ارتفاع العتبة بل في **شكل القاعدة**: «أيّ إطارين
+ * يتجاوزان» يكافئ الحظّ، إذ يكفي أن تصادف قصّتان محظوظتان.
+ *
+ * ── الهيمنة ───────────────────────────────────────────────────────────
+ * فنطلب من اللوحة أن تتصدّر أغلب النافذة، لا أن تنجح مرّتين. ومسحٌ
+ * حسابيّ على 48 إعدادًا أعطى **صفر إجابة خاطئة في كلّها** — أي أنّ شكل
+ * القاعدة هو ما حسم، لا ضبط أرقامها.
+ *
+ * والأرقام المختارة قيست على المشاهد نفسها التي يقيس عليها المسح
+ * باللقطة الواحدة:
+ *
+ *   لقطة واحدة (المشحون)  49/66 صحيح · 0 خاطئ · 1/53 سالبة
+ *   الهيمنة (هذه)         51/66 صحيح · 0 خاطئ · 1/53 سالبة
+ *
+ * أي تعرّفٌ أعلى بلا زيادةٍ في السوالب. والسالبة المتسرّبة هي نفسها في
+ * الحالتين (IMG_E0575، وفيها نقوشٌ ظاهرة في يسارها فليست سالبةً نقيّة).
+ *
+ * ── وما لا يقيسه هذا كلّه ──────────────────────────────────────────────
+ * المحاكاة تقصّ صورةً واحدة بزوايا مختلفة، فإن فشلت الصورة فشلت إطاراتها
+ * كلّها. أمّا المستخدم فيحرّك يده فيرى اللوحةَ من مواضع جديدة فعلًا. فالفائدة
+ * الحقيقية فوق هذه الأرقام، لا فيها — لكنّي لا أستطيع قياسها هنا، فلا
+ * أنسبها إلى القياس.
+ */
+
+/** حجم النافذة المتحرّكة */
+const LIVE_WINDOW = 8
+
+/** لا حكم قبل هذا العدد من الإطارات */
+const LIVE_MIN_FRAMES = 4
+
+/** أقلّ حصّةٍ من النافذة يجب أن تتصدّرها اللوحة */
+const LIVE_DOMINANCE = 0.6
+
+/** أدنى متوسّط تشابه في الإطارات المتصدّرة */
+const LIVE_MEAN_SCORE = 0.89
+
+/** أدنى متوسّط هامش — أوسع من هامش اللقطة الواحدة */
+const LIVE_MEAN_MARGIN = 0.03
+
+/**
+ * قاعدة القبول، منفصلةً عن الكاميرا كي تُختبر كما تُشحن.
+ *
+ * تأخذ نتائج الإطارات الأخيرة وتُرجع حكمًا أو null، ولا تعرف شيئًا عن
+ * الفيديو ولا عن النموذج — فتُقاس على إطاراتٍ محسوبةٍ مسبقًا بلا كاميرا،
+ * وهو ما عُوِيرت به أرقامها أعلاه.
+ */
+export function decideFromFrames(recent) {
+  if (recent.length < LIVE_MIN_FRAMES) return null
+
+  const byPanel = new Map()
+  for (const f of recent) {
+    if (!byPanel.has(f.topSiteId)) byPanel.set(f.topSiteId, [])
+    byPanel.get(f.topSiteId).push(f)
+  }
+
+  // المتصدّر عددًا، وعند التساوي أعلاهما درجة
+  const ranked = [...byPanel.entries()].sort(
+    (a, b) => b[1].length - a[1].length
+      || Math.max(...b[1].map((h) => h.topScore)) - Math.max(...a[1].map((h) => h.topScore)),
+  )
+  const [siteId, hits] = ranked[0]
+
+  if (hits.length / recent.length < LIVE_DOMINANCE) return null
+
+  const meanScore = hits.reduce((a, h) => a + h.topScore, 0) / hits.length
+  const meanMargin = hits.reduce((a, h) => a + h.margin, 0) / hits.length
+  if (meanScore < LIVE_MEAN_SCORE || meanMargin < LIVE_MEAN_MARGIN) return null
+
+  return { status: 'match', siteId, confidence: meanScore }
+}
+
+export function createScanSession() {
+  const recent = []
+  let frames = 0
+
+  return {
+    get frames() { return frames },
+
+    /** يُرجع {status:'searching'|'match', ...} */
+    async push(input) {
+      const extractor = await getExtractor()
+      const index = await getIndex(extractor)
+      if (index.length === 0) return { status: 'searching', frames, best: null }
+
+      const { RawImage } = await import('@huggingface/transformers')
+      const image = await RawImage.read(
+        input.imageUrl || `data:image/jpeg;base64,${input.imageBase64}`,
+      )
+
+      const frac = CROP_LADDER[frames % CROP_LADDER.length]
+      frames += 1
+
+      const { topSiteId, topScore, margin } = matchVector(
+        toVector(await extractor(await centerCrop(image, frac))),
+        index,
+      )
+
+      recent.push({ topSiteId, topScore, margin })
+      if (recent.length > LIVE_WINDOW) recent.shift()
+
+      const decided = decideFromFrames(recent)
+      if (decided) return { ...decided, frames, via: 'dominance' }
+
+      return { status: 'searching', frames, best: topScore }
+    },
+  }
+}
+
 const INDEX_URL = `${import.meta.env?.BASE_URL ?? '/'}reference-index.json`
 
 let extractorPromise = null

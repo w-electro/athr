@@ -127,6 +127,37 @@ const PROVIDERS = {
   local: localProvider,
 }
 
+/**
+ * جلسة مسحٍ حيّة: تبتلع إطارات الكاميرا تباعًا حتى تتعرّف.
+ *
+ * لماذا جلسة لا نداءٌ متكرّر: القرار يعتمد على الإطارات السابقة، لا على
+ * الإطار الحالي وحده. فاللوحة التي تتصدّر أربعة إطاراتٍ متتابعة دليلٌ
+ * أقوى من إطارٍ واحد، وهذا ما يحتاج ذاكرةً بين النداءات.
+ *
+ * وفي المحاكاة نُرجع جلسةً تتعرّف بعد بضعة إطارات، كي تعمل الشاشة في
+ * التطوير بلا تنزيل نموذجٍ بحجم ٢٢ ميغابايت عند كل تجربة.
+ */
+export async function createRecognitionSession(options = {}) {
+  const name = options.provider || getActiveProviderName()
+
+  if (name === 'local') {
+    const { createScanSession } = await import('./recognition.local.js')
+    return createScanSession()
+  }
+
+  // محاكاة: تتعرّف عند الإطار الرابع لتُظهر سلوك التراكم في التطوير
+  let frames = 0
+  return {
+    get frames() { return frames },
+    async push(input) {
+      frames += 1
+      if (frames < 4) return { status: 'searching', frames, best: 0.6 + frames * 0.08 }
+      const outcome = await mockProvider(input)
+      return { ...outcome, frames, via: 'fusion' }
+    },
+  }
+}
+
 /** المزوّد الافتراضي من متغيرات البيئة، مع الرجوع إلى المحاكاة. */
 export function getActiveProviderName() {
   const configured = import.meta.env?.VITE_RECOGNITION_PROVIDER
