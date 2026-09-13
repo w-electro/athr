@@ -341,14 +341,14 @@ describe('قرار المسح المتّصل', () => {
   })
 
   it('ينزل إلى الترجيح حين يضيق الهامش ولا يصمت', () => {
-    const narrow = Array.from({ length: 6 }, () => frame('jubbah-p7', 0.895, 0.042))
+    const narrow = Array.from({ length: 8 }, () => frame('jubbah-p7', 0.895, 0.042))
     const d = decideFromFrames(narrow)
     expect(d?.status).toBe('probable')
     expect(d?.siteId).toBe('jubbah-p7')
   })
 
   it('لا يرقى إلى اليقين بهامشٍ دون الأرضيّة', () => {
-    const tight = Array.from({ length: 6 }, () => frame('jubbah-p7', 0.99, 0.03))
+    const tight = Array.from({ length: 8 }, () => frame('jubbah-p7', 0.99, 0.03))
     expect(decideFromFrames(tight)?.status).toBe('probable')
   })
 
@@ -356,12 +356,29 @@ describe('قرار المسح المتّصل', () => {
     الترجيح ليس تخمينًا: دون حدّه يبقى الصمت. وإلّا سمّى التطبيق
     لوحةً لكلّ رملةٍ توجّه إليها الكاميرا.
   */
-  it('يصمت حين تنزل الدرجة دون حدّ الترجيح', () => {
+  /*
+    قرار وليد: لا عتبة درجةٍ للترجيح. ما دامت لوحةٌ تتصدّر
+    النافذة المكتملة، يُقال اسمها موسومًا — ولو كانت الدرجة متواضعة.
+  */
+  it('يسمّي المتصدّرة ولو انخفضت الدرجة', () => {
+    const low = Array.from({ length: 8 }, () => frame('jubbah-p1', 0.72, 0.06))
+    expect(decideFromFrames(low)?.status).toBe('probable')
+    expect(decideFromFrames(low)?.siteId).toBe('jubbah-p1')
+  })
+
+  it('لا يحكم قبل امتلاء النافذة', () => {
     expect(decideFromFrames(Array.from({ length: 6 }, () => frame('jubbah-p1', 0.72, 0.06)))).toBeNull()
   })
 
-  it('يصمت حين ينعدم الهامش تقريبًا', () => {
-    expect(decideFromFrames(Array.from({ length: 6 }, () => frame('jubbah-p6', 0.96, 0.005)))).toBeNull()
+  /*
+    ويبقى الصمت حين لا متصدّر أصلاً: اسمٌ يتقلّب مع كلّ إطار
+    ليس جوابًا بل ضوضاء.
+  */
+  it('يصمت حين يتقلّب المتصدّر بلا أغلبية', () => {
+    const noisy = ['jubbah-p1', 'jubbah-p2', 'jubbah-p3', 'jubbah-p4',
+                   'jubbah-p5', 'jubbah-p6', 'jubbah-p7', 'jubbah-p8']
+      .map((id) => frame(id, 0.80, 0.05))
+    expect(decideFromFrames(noisy)).toBeNull()
   })
 
   it('يتجاهل إطارًا شاذًّا واحدًا ما دامت الهيمنة قائمة', () => {

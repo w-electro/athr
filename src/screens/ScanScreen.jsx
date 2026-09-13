@@ -222,7 +222,18 @@ export default function ScanScreen() {
 
       if (outcome.frames >= MAX_SCAN_FRAMES) {
         setSnapshot(image.dataUrl)
-        setResult({ status: 'no-match', siteId: null, confidence: outcome.best ?? 0 })
+        /*
+          حتى عند نفاد المحاولات نقول أقرب لوحة.
+
+          فالمسح لا ينتهي بلا حكمٍ إلا إذا تقلّب المتصدّر حتى النهاية،
+          ولو وقع ذلك فالأقرب في آخر إطارٍ أنفعُ من «لم نتعرّف» — وهو
+          ما طلبه وليد صراحةً.
+        */
+        setResult(
+          outcome.bestId
+            ? { status: 'probable', siteId: outcome.bestId, confidence: outcome.best ?? 0 }
+            : { status: 'no-match', siteId: null, confidence: outcome.best ?? 0 },
+        )
         setState(STATES.result)
         stopCamera()
         return
