@@ -52,6 +52,7 @@ export default function ScanScreen() {
   // يصير صحيحًا حين تُرسل الكاميرا أول إطار فعلي، لا حين يُمنح الإذن
   const [frameReady, setFrameReady] = useState(false)
   const [scanFrames, setScanFrames] = useState(0)
+  const [scanProbe, setScanProbe] = useState(null)
   const scanAbortRef = useRef(false)
 
   const videoRef = useRef(null)
@@ -148,6 +149,7 @@ export default function ScanScreen() {
   async function runLiveScan() {
     setState(STATES.scanning)
     setScanFrames(0)
+    setScanProbe(null)
     scanAbortRef.current = false
 
     const session = await createRecognitionSession()
@@ -182,6 +184,9 @@ export default function ScanScreen() {
       if (scanAbortRef.current) return
 
       setScanFrames(outcome.frames)
+      if (outcome.status === 'searching') {
+        setScanProbe({ best: outcome.best, id: outcome.bestId, margin: outcome.margin })
+      }
 
       if (outcome.status === 'match') {
         setSnapshot(image.dataUrl)
@@ -409,6 +414,19 @@ export default function ScanScreen() {
       {state === STATES.scanning && (
         <div className="mt-6 flex flex-col items-center gap-3">
           <p className="text-body text-sand-dim">{t('scan.moving')}</p>
+          {/*
+            قراءةٌ حيّة لأقرب لوحةٍ ودرجتها.
+
+            ليست زينة: هي الطريقة الوحيدة لمعرفة ما يجري على جهاز المستخدم
+            فعلًا. ولا تُقاس اللقطات الحيّة — بما فيها اهتزاز اليد وبحث
+            العدسة عن التركيز — إلا على جهازٍ حقيقي أمام صخرةٍ حقيقية.
+          */}
+          {scanProbe?.id && (
+            <p className="font-mono text-micro text-sand-faint" dir="ltr">
+              {scanProbe.id} · {scanProbe.best?.toFixed(3)}
+              {scanProbe.margin != null && ` · Δ${scanProbe.margin.toFixed(3)}`}
+            </p>
+          )}
           <button
             type="button"
             onClick={stopLiveScan}

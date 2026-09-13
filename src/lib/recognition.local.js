@@ -305,7 +305,14 @@ export function createScanSession() {
       const decided = decideFromFrames(recent)
       if (decided) return { ...decided, frames, via: 'dominance' }
 
-      return { status: 'searching', frames, best: topScore }
+      /*
+        نُرجع أقرب لوحةٍ وهامشها لا الدرجة وحدها.
+
+        فحين يقول المستخدم «لا يتعرّف» يكون السؤال: أهي 0.88 قريبةً من
+        العتبة، أم 0.35 فيكون شيءٌ آخر معطوبًا؟ والفرق بين الجوابين هو
+        الفرق بين معايرةٍ وإصلاحِ عطب.
+      */
+      return { status: 'searching', frames, best: topScore, bestId: topSiteId, margin }
     },
   }
 }
