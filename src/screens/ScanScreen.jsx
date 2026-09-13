@@ -152,7 +152,30 @@ export default function ScanScreen() {
     setScanProbe(null)
     scanAbortRef.current = false
 
-    const session = await createRecognitionSession()
+    /*
+      تحميل محرّك التعرّف قد يفشل، وأشهر أسبابه ليس نادرًا:
+
+      التطبيق يعمل بلا إنترنت عبر عامل خدمة، فإن نُشرت نسخةٌ جديدة بقيت
+      صفحةٌ قديمة تشير إلى حزمةٍ تغيّر اسمها — فيردّ الخادم 404 ويفشل
+      الاستيراد الديناميكي. وقد وقع هذا فعلًا في أوّل تجربةٍ في متصفّح.
+
+      وبلا هذا الالتقاط يبقى الوعد مرفوضًا بلا معالج، والحالة scanning
+      إلى الأبد: شريطٌ لا يمتلئ وشاشةٌ لا تقول شيئًا.
+    */
+    let session
+    try {
+      session = await createRecognitionSession()
+    } catch {
+      setResult({
+        status: 'no-match',
+        siteId: null,
+        confidence: 0,
+        evidence: ['engine-unavailable'],
+      })
+      setState(STATES.result)
+      stopCamera()
+      return
+    }
 
     let stalled = 0
 

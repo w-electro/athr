@@ -328,6 +328,28 @@ describe('قرار المسح المتّصل', () => {
     expect(decideFromFrames(split)).toBeNull()
   })
 
+  /*
+    العقد الجديد: الدرجةُ والهامش يُقرَآن معًا.
+
+    وهي العلّة التي ظهرت في أوّل تجربةٍ حقيقية في متصفّح: «jubbah-p7 ·
+    0.895 · Δ0.053» — اللوحة الصحيحة بهامشٍ مريح، مرفوضةً لأنّ الدرجة
+    دون عتبةٍ ثابتة. فالدرجة نفسها تُقبل باتّساع الهامش وتُرفض بضيقه.
+  */
+  it('يقبل درجةً أدنى حين يتّسع الهامش', () => {
+    const wide = Array.from({ length: 6 }, () => frame('jubbah-p7', 0.895, 0.06))
+    expect(decideFromFrames(wide)?.siteId).toBe('jubbah-p7')
+  })
+
+  it('يرفض الدرجة نفسها حين يضيق الهامش', () => {
+    const narrow = Array.from({ length: 6 }, () => frame('jubbah-p7', 0.895, 0.042))
+    expect(decideFromFrames(narrow)).toBeNull()
+  })
+
+  it('لا يقبل هامشًا دون الأرضيّة مهما بلغت الدرجة', () => {
+    const tight = Array.from({ length: 6 }, () => frame('jubbah-p7', 0.99, 0.03))
+    expect(decideFromFrames(tight)).toBeNull()
+  })
+
   it('يتجاهل إطارًا شاذًّا واحدًا ما دامت الهيمنة قائمة', () => {
     const mostly = [
       ...repeat(5, frame('jubbah-p2', 0.93)),

@@ -235,11 +235,45 @@ const LIVE_MIN_FRAMES = 4
 /** أقلّ حصّةٍ من النافذة يجب أن تتصدّرها اللوحة */
 const LIVE_DOMINANCE = 0.6
 
-/** أدنى متوسّط تشابه في الإطارات المتصدّرة */
-const LIVE_MEAN_SCORE = 0.89
+/**
+ * ══════════════════════════════════════════════════════════════════════
+ *  حدٌّ ثنائيّ: الدرجة والهامش معًا لا كلٌّ على حدة
+ * ══════════════════════════════════════════════════════════════════════
+ * عتبةٌ ثابتة للدرجة تسأل السؤال الخطأ. فتطابقٌ عند 0.895 يتقدّم على
+ * تاليه بـ0.053 أوثقُ من تطابقٍ عند 0.92 يتقدّم بـ0.01 — والقاعدة
+ * الثابتة تقبل الثاني وترفض الأول، وهو عكس الصواب.
+ *
+ * وهذا ما ظهر في أوّل تجربةٍ حقيقية في متصفّح: صورةٌ لم يرها الفهرس قطّ
+ * للوحة p7 أعطت «jubbah-p7 · 0.895 · Δ0.053» — اللوحة الصحيحة بهامشٍ
+ * مريح، ثم رُفضت لأنّ 0.895 دون 0.91.
+ *
+ * فصارت الدرجةُ المطلوبة تنخفض بقدر الهامش:
+ *
+ *     المطلوب = LIVE_SCORE_BASE − min(الهامش، LIVE_MARGIN_CAP)
+ *
+ *   هامش 0.04 → يكفي 0.90
+ *   هامش 0.06 → يكفي 0.88
+ *
+ * ── والأرقام مقيسة على إطاراتٍ تشبه الكاميرا ──────────────────────────
+ * 49 مشهدًا صحيحًا و53 سالبًا، بدقّة 720 بكسل وبضبابٍ في ثلث الإطارات —
+ * لا على صور المرجع عالية الدقّة كما كان يُقاس قبل اليوم. ومن 360
+ * إعدادًا:
+ *
+ *   أفضل حدٍّ ثابت        24/49   صفر خطأ · صفر سوالب
+ *   الحدّ الثنائي (هذا)   33/49   صفر خطأ · صفر سوالب
+ *
+ * أي زيادةٌ في التعرّف بالثلث تقريبًا، بلا أيّ تنازلٍ عن الشرط الذي لا
+ * يُتنازل عنه: لا اسمَ لوحةٍ خاطئ، ولا قبولَ رملٍ أو صخرةٍ عابرة.
+ */
 
-/** أدنى متوسّط هامش — أوسع من هامش اللقطة الواحدة */
-const LIVE_MEAN_MARGIN = 0.03
+/** الدرجة المطلوبة حين يكون الهامش عند أرضيّته */
+const LIVE_SCORE_BASE = 0.94
+
+/** أدنى هامشٍ مقبول مهما علت الدرجة — تقاربُ لوحتين يعني «لا أعرف» */
+const LIVE_MARGIN_FLOOR = 0.04
+
+/** الحدّ الذي يتوقّف عنده خصمُ الهامش، فلا يُشترى القبول بهامشٍ وحده */
+const LIVE_MARGIN_CAP = 0.06
 
 /**
  * قاعدة القبول، منفصلةً عن الكاميرا كي تُختبر كما تُشحن.
@@ -268,7 +302,11 @@ export function decideFromFrames(recent) {
 
   const meanScore = hits.reduce((a, h) => a + h.topScore, 0) / hits.length
   const meanMargin = hits.reduce((a, h) => a + h.margin, 0) / hits.length
-  if (meanScore < LIVE_MEAN_SCORE || meanMargin < LIVE_MEAN_MARGIN) return null
+
+  if (meanMargin < LIVE_MARGIN_FLOOR) return null
+
+  const required = LIVE_SCORE_BASE - Math.min(meanMargin, LIVE_MARGIN_CAP)
+  if (meanScore < required) return null
 
   return { status: 'match', siteId, confidence: meanScore }
 }
@@ -276,6 +314,7 @@ export function decideFromFrames(recent) {
 export function createScanSession() {
   const recent = []
   let frames = 0
+  const startedAt = Date.now()
 
   return {
     get frames() { return frames },
@@ -303,7 +342,19 @@ export function createScanSession() {
       if (recent.length > LIVE_WINDOW) recent.shift()
 
       const decided = decideFromFrames(recent)
-      if (decided) return { ...decided, frames, via: 'dominance' }
+      if (decided) {
+        /*
+          نُكمل الحقول التي تعرضها الشاشة. وبدونها كانت تقول «المزوّد: ·
+          زمن التحليل NaN ms» — وهو ما ظهر في أوّل تجربةٍ حقيقية في متصفّح.
+        */
+        return {
+          ...decided,
+          frames,
+          via: 'dominance',
+          provider: 'local',
+          elapsedMs: Date.now() - startedAt,
+        }
+      }
 
       /*
         نُرجع أقرب لوحةٍ وهامشها لا الدرجة وحدها.
