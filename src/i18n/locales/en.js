@@ -114,6 +114,36 @@ export default {
     },
   },
 
+  thamudic: {
+
+    title: 'Thamudic writing',
+
+    notRead: 'This inscription has not been read yet. The letter chart below lets you match the shapes yourself.',
+
+    readBy: 'Read by',
+
+    showChart: 'Show the letter chart',
+
+    hideChart: 'Hide the chart',
+
+    source: 'Source',
+
+    chartAlt: 'Chart of Jubbah\'s Thamudic letters',
+
+    fact: {
+
+      abjad: 'The script writes consonants only — no vowels — so one word can be read several ways.',
+
+      direction: 'Direction varies: usually right to left, sometimes alternating line by line, sometimes vertical.',
+
+      spacing: 'Words are usually not separated, so deciding where one ends is a judgement call.',
+
+      content: 'Most inscriptions are personal names and short lineage: \'X son of Y\'.',
+
+    },
+
+  },
+
   trip: {
     title: 'My trip',
     subtitle: 'Answer three questions and Athr builds your route around your interests and the weather.',

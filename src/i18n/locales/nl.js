@@ -105,6 +105,21 @@ export default {
       verify: 'Historische context controleren',
     },
   },
+  thamudic: {
+    title: 'Thamudisch schrift',
+    notRead: 'Deze inscriptie is nog niet gelezen. Met de lettertabel hieronder kunt u de vormen zelf vergelijken.',
+    readBy: 'Gelezen door',
+    showChart: 'Toon de lettertabel',
+    hideChart: 'Verberg de tabel',
+    source: 'Bron',
+    chartAlt: 'Tabel van Jubbah\'s Thamudische letters',
+    fact: {
+      abjad: 'Het schrift noteert alleen medeklinkers — geen klinkers — dus een woord kan meerdere lezingen hebben.',
+      direction: 'De richting wisselt: meestal van rechts naar links, soms om en om, soms verticaal.',
+      spacing: 'Woorden worden meestal niet gescheiden; bepalen waar er een eindigt is een inschatting.',
+      content: 'De meeste inscripties zijn persoonsnamen en een korte afstamming: \'X zoon van Y\'.',
+    },
+  },
   trip: {
     title: 'Mijn reis',
     subtitle: 'Beantwoord drie vragen en Athr bouwt je route op basis van je interesses en het weer.',

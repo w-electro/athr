@@ -105,6 +105,21 @@ export default {
       verify: 'Historischer Kontext wird geprüft',
     },
   },
+  thamudic: {
+    title: 'Thamudische Schrift',
+    notRead: 'Diese Inschrift wurde noch nicht gelesen. Mit der Zeichentabelle unten können Sie die Formen selbst vergleichen.',
+    readBy: 'Gelesen von',
+    showChart: 'Zeichentabelle zeigen',
+    hideChart: 'Tabelle ausblenden',
+    source: 'Quelle',
+    chartAlt: 'Tabelle der thamudischen Zeichen von Jubbah',
+    fact: {
+      abjad: 'Die Schrift notiert nur Konsonanten — keine Vokale — ein Wort lässt daher mehrere Lesungen zu.',
+      direction: 'Die Richtung wechselt: meist von rechts nach links, manchmal zeilenweise wechselnd, manchmal senkrecht.',
+      spacing: 'Wörter werden meist nicht getrennt; wo eines endet, ist Ermessenssache.',
+      content: 'Die meisten Inschriften sind Personennamen und eine kurze Abstammung: „X Sohn des Y“.',
+    },
+  },
   trip: {
     title: 'Meine Reise',
     subtitle: 'Beantworte drei Fragen und Athr baut deine Route nach Interessen und Wetter.',

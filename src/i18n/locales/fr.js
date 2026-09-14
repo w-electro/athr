@@ -105,6 +105,21 @@ export default {
       verify: 'Vérification du contexte historique',
     },
   },
+  thamudic: {
+    title: 'Écriture thamoudéenne',
+    notRead: 'Cette inscription n\'a pas encore été lue. Le tableau ci-dessous vous permet de comparer les formes vous-même.',
+    readBy: 'Lu par',
+    showChart: 'Afficher le tableau',
+    hideChart: 'Masquer le tableau',
+    source: 'Source',
+    chartAlt: 'Tableau des lettres thamoudéennes de Jubbah',
+    fact: {
+      abjad: 'L\'écriture ne note que les consonnes — sans voyelles — un mot peut donc se lire de plusieurs façons.',
+      direction: 'La direction varie : souvent de droite à gauche, parfois en alternance, parfois verticale.',
+      spacing: 'Les mots ne sont généralement pas séparés ; découper le texte relève du jugement.',
+      content: 'La plupart des inscriptions sont des noms de personnes et une filiation brève : « X fils de Y ».',
+    },
+  },
   trip: {
     title: 'Mon voyage',
     subtitle: 'Répondez à trois questions et Athr construit votre itinéraire selon vos intérêts et la météo.',

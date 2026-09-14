@@ -105,6 +105,21 @@ export default {
       verify: 'Mengesahkan konteks sejarah',
     },
   },
+  thamudic: {
+    title: 'Tulisan Thamud',
+    notRead: 'Inskripsi ini belum dibaca. Jadual huruf di bawah membolehkan anda memadankan bentuknya sendiri.',
+    readBy: 'Dibaca oleh',
+    showChart: 'Tunjukkan jadual huruf',
+    hideChart: 'Sembunyikan jadual',
+    source: 'Sumber',
+    chartAlt: 'Jadual huruf Thamud Jubbah',
+    fact: {
+      abjad: 'Tulisan ini hanya merakam konsonan — tanpa vokal — jadi satu perkataan boleh dibaca beberapa cara.',
+      direction: 'Arah berubah: biasanya kanan ke kiri, kadang berselang baris, kadang menegak.',
+      spacing: 'Perkataan biasanya tidak dipisahkan, jadi menentukan sempadannya satu pertimbangan.',
+      content: 'Kebanyakan inskripsi ialah nama orang dan nasab ringkas: \'X bin Y\'.',
+    },
+  },
   trip: {
     title: 'Perjalanan saya',
     subtitle: 'Jawab tiga soalan dan Athr akan menyusun laluan mengikut minat anda dan cuaca.',

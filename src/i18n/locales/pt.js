@@ -105,6 +105,21 @@ export default {
       verify: 'A verificar o contexto histórico',
     },
   },
+  thamudic: {
+    title: 'Escrita tamúdica',
+    notRead: 'Esta inscrição ainda não foi lida. A tabela de letras abaixo permite comparar as formas você mesmo.',
+    readBy: 'Lida por',
+    showChart: 'Mostrar a tabela',
+    hideChart: 'Ocultar a tabela',
+    source: 'Fonte',
+    chartAlt: 'Tabela das letras tamúdicas de Jubbah',
+    fact: {
+      abjad: 'A escrita registra apenas consoantes — sem vogais — então uma palavra admite várias leituras.',
+      direction: 'A direção varia: em geral da direita para a esquerda, às vezes alternada, às vezes vertical.',
+      spacing: 'As palavras costumam não ser separadas; decidir onde uma termina é julgamento.',
+      content: 'A maioria são nomes de pessoas e uma filiação breve: «X filho de Y».',
+    },
+  },
   trip: {
     title: 'Minha viagem',
     subtitle: 'Responda a três perguntas e o Athr constrói o seu percurso segundo os seus interesses e o tempo.',

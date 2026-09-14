@@ -4,6 +4,7 @@ import { createRecognitionSession, scanStill, getActiveProviderName, ANALYSIS_ST
 import { rememberCorrection, countLearned } from '../lib/learning.js'
 import { getSiteById, getAllSites } from '../data/sites.js'
 import { getPanelById, getAllPanels, isPanelId, SUBJECTS, NOT_A_PANEL } from '../data/panels.js'
+import { ALPHABET_CHART, SCRIPT_FACTS, getInscription } from '../data/thamudic.js'
 import SiteArt from '../components/SiteArt.jsx'
 import Petroglyph from '../components/Petroglyph.jsx'
 import { useI18n } from '../i18n/index.jsx'
@@ -730,6 +731,78 @@ function FeedbackAsk({ mode = 'match', done, learnedCount, siteId, contentLangua
   )
 }
 
+/**
+ * قراءة الخطّ الثموديّ على لوحةٍ بعينها.
+ *
+ * ══════════════════════════════════════════════════════════════════════
+ *  ما يُعرض وما لا يُعرض
+ * ══════════════════════════════════════════════════════════════════════
+ * القراءة تُعرض فقط إن قرأها إنسان وسُجّلت. وما عدا ذلك نقول صراحةً إنّ
+ * النقش لم يُقرأ بعد، ونفتح جدول الحروف.
+ *
+ * ولا يخمّن النظام حرفًا واحدًا: الخطّ صوامتُ بلا حركات ولا فواصل،
+ * واتّجاهه متقلّب — فالتخمين يُنتج نصًّا يبدو صحيحًا ولا أصل له. وأمام
+ * لجنةٍ فيها من يقرأ الخطّ، ذاك أسوأ من الاعتراف بالجهل.
+ */
+function ThamudicReading({ panelId, t }) {
+  const [open, setOpen] = useState(false)
+  const inscription = getInscription(panelId)
+
+  return (
+    <div className="rounded-xl border border-gold/30 bg-gold/[0.05] p-3.5">
+      <p className="eyebrow mb-2 text-gold-bright">✎ {t('thamudic.title')}</p>
+
+      {inscription ? (
+        <div className="space-y-2">
+          <p className="font-display text-title text-sand" dir="rtl">{inscription.reading}</p>
+          <p className="text-body text-sand-dim">{inscription.meaning}</p>
+          <p className="text-micro text-sand-faint">
+            {t('thamudic.readBy')}: {inscription.readBy}
+          </p>
+        </div>
+      ) : (
+        <p className="text-micro leading-relaxed text-sand-dim">{t('thamudic.notRead')}</p>
+      )}
+
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="mt-3 text-micro text-gold-bright underline"
+      >
+        {open ? t('thamudic.hideChart') : t('thamudic.showChart')}
+      </button>
+
+      {open && (
+        <div className="mt-3 space-y-3">
+          {/*
+            حقائق الخطّ قبل الجدول لا بعده.
+
+            من لا يعرف أنّ الخطّ بلا حركات ولا فواصل سيقرؤه كالعربية
+            ويفشل، ثم يظنّ العطب في التطبيق لا في توقّعه.
+          */}
+          <ul className="space-y-1.5">
+            {SCRIPT_FACTS.map((key) => (
+              <li key={key} className="text-micro leading-relaxed text-sand-dim">
+                · {t(key)}
+              </li>
+            ))}
+          </ul>
+
+          <img
+            src={`${import.meta.env.BASE_URL}${ALPHABET_CHART.src}`}
+            alt={t('thamudic.chartAlt')}
+            className="w-full rounded-lg border border-night-600"
+            loading="lazy"
+          />
+          <p className="text-[0.625rem] text-sand-faint">
+            {t('thamudic.source')}: {ALPHABET_CHART.source}
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
+
 function Corner({ className }) {
   return <span className={`absolute h-6 w-6 border-terracotta ${className}`} aria-hidden="true" />
 }
@@ -834,6 +907,15 @@ function PanelBody({ panel, t, contentDir }) {
       </div>
 
       <p className="text-body leading-relaxed text-sand-dim">{panel.story}</p>
+
+      {/*
+        قراءة الكتابة: تظهر فقط للّوحات التي تحمل نقشًا.
+
+        وهي الموضع الذي يلتقي فيه التعرّفُ بالقراءة: عرفنا اللوحة، فإن
+        كان عليها خطٌّ ثموديّ عرضنا قراءته الموثّقة إن وُجدت، ووضعنا
+        جدول الحروف بين يدي الزائر ليطابق بنفسه.
+      */}
+      {panel.hasInscriptions && <ThamudicReading panelId={panel.id} t={t} />}
 
       <div className="rounded-xl border-s-2 border-terracotta bg-terracotta/[0.07] p-3.5">
         <p className="eyebrow mb-1.5 text-terracotta-bright">{t('panel.look')}</p>

@@ -105,6 +105,21 @@ export default {
       verify: 'Weryfikacja kontekstu historycznego',
     },
   },
+  thamudic: {
+    title: 'Pismo tamudyjskie',
+    notRead: 'Ta inskrypcja nie została jeszcze odczytana. Tabela poniżej pozwala samodzielnie porównać kształty.',
+    readBy: 'Odczytał',
+    showChart: 'Pokaż tabelę liter',
+    hideChart: 'Ukryj tabelę',
+    source: 'Źródło',
+    chartAlt: 'Tabela liter tamudyjskich z Dżubby',
+    fact: {
+      abjad: 'Pismo zapisuje tylko spółgłoski — bez samogłosek — więc słowo można czytać na kilka sposobów.',
+      direction: 'Kierunek bywa różny: zwykle od prawej, czasem naprzemiennie, czasem pionowo.',
+      spacing: 'Słów zwykle się nie rozdziela, więc ustalenie granic to kwestia oceny.',
+      content: 'Większość inskrypcji to imiona i krótki rodowód: „X syn Y”.',
+    },
+  },
   trip: {
     title: 'Moja podróż',
     subtitle: 'Odpowiedz na trzy pytania, a Athr ułoży trasę według Twoich zainteresowań i pogody.',

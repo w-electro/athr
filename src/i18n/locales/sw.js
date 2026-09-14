@@ -105,6 +105,21 @@ export default {
       verify: 'Inathibitisha muktadha wa kihistoria',
     },
   },
+  thamudic: {
+    title: 'Maandishi ya Kithamudi',
+    notRead: 'Maandishi haya bado hayajasomwa. Jedwali la herufi hapa chini linakuwezesha kulinganisha maumbo mwenyewe.',
+    readBy: 'Alisoma',
+    showChart: 'Onyesha jedwali la herufi',
+    hideChart: 'Ficha jedwali',
+    source: 'Chanzo',
+    chartAlt: 'Jedwali la herufi za Kithamudi za Jubbah',
+    fact: {
+      abjad: 'Maandishi haya yanaandika konsonanti pekee — bila vokali — hivyo neno moja laweza kusomwa kwa njia kadhaa.',
+      direction: 'Mwelekeo hubadilika: mara nyingi kulia kwenda kushoto, wakati mwingine mstari baada ya mstari, wakati mwingine wima.',
+      spacing: 'Maneno mara nyingi hayatenganishwi, hivyo kuamua mpaka ni suala la busara.',
+      content: 'Maandishi mengi ni majina ya watu na nasaba fupi: \'X mwana wa Y\'.',
+    },
+  },
   trip: {
     title: 'Safari yangu',
     subtitle: 'Jibu maswali matatu na Athr atajenga njia yako kulingana na mapendeleo yako na hali ya hewa.',

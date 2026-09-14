@@ -105,6 +105,21 @@ export default {
       verify: 'Verifica del contesto storico',
     },
   },
+  thamudic: {
+    title: 'Scrittura tamudea',
+    notRead: 'Questa iscrizione non è ancora stata letta. La tabella qui sotto permette di confrontare le forme da soli.',
+    readBy: 'Letta da',
+    showChart: 'Mostra la tabella',
+    hideChart: 'Nascondi la tabella',
+    source: 'Fonte',
+    chartAlt: 'Tabella delle lettere tamudee di Jubbah',
+    fact: {
+      abjad: 'La scrittura annota solo consonanti — senza vocali — perciò una parola ammette più letture.',
+      direction: 'La direzione varia: di solito da destra a sinistra, a volte alternata, a volte verticale.',
+      spacing: 'Le parole di solito non sono separate: decidere dove finisce una è una valutazione.',
+      content: 'La maggior parte sono nomi di persona e una breve filiazione: «X figlio di Y».',
+    },
+  },
   trip: {
     title: 'Il mio viaggio',
     subtitle: 'Rispondi a tre domande e Athr costruisce il percorso in base ai tuoi interessi e al meteo.',

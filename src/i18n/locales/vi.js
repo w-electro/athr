@@ -105,6 +105,21 @@ export default {
       verify: 'Đang kiểm chứng bối cảnh lịch sử',
     },
   },
+  thamudic: {
+    title: 'Chữ Thamud',
+    notRead: 'Văn khắc này chưa được đọc. Bảng chữ cái bên dưới cho phép bạn tự đối chiếu hình dạng.',
+    readBy: 'Người đọc',
+    showChart: 'Hiện bảng chữ cái',
+    hideChart: 'Ẩn bảng',
+    source: 'Nguồn',
+    chartAlt: 'Bảng chữ Thamud của Jubbah',
+    fact: {
+      abjad: 'Chữ chỉ ghi phụ âm — không có nguyên âm — nên một từ có thể đọc theo nhiều cách.',
+      direction: 'Hướng viết thay đổi: thường từ phải sang trái, đôi khi đổi chiều từng dòng, đôi khi dọc.',
+      spacing: 'Các từ thường không tách rời, nên xác định ranh giới là việc phán đoán.',
+      content: 'Phần lớn văn khắc là tên người và gia phả ngắn: «X con của Y».',
+    },
+  },
   trip: {
     title: 'Chuyến đi',
     subtitle: 'Trả lời ba câu hỏi và Athr sẽ dựng lộ trình theo sở thích của bạn và thời tiết.',

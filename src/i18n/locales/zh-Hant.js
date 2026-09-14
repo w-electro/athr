@@ -105,6 +105,21 @@ export default {
       verify: '正在核驗歷史背景',
     },
   },
+  thamudic: {
+    title: '薩姆德文字',
+    notRead: '這處銘文尚未被釋讀。下方字母表可供您自行比對字形。',
+    readBy: '釋讀者',
+    showChart: '顯示字母表',
+    hideChart: '隱藏字母表',
+    source: '來源',
+    chartAlt: '朱巴薩姆德字母表',
+    fact: {
+      abjad: '這種文字只記輔音，不記元音，因此一個詞可有多種讀法。',
+      direction: '方向不定：多為從右向左，有時逐行交替，有時豎寫。',
+      spacing: '詞與詞通常不分隔，因此如何斷讀需要判斷。',
+      content: '多數銘文是人名與簡短世系：「某某之子某某」。',
+    },
+  },
   trip: {
     title: '我的行程',
     subtitle: '回答三個問題，Athr 便會依據您的興趣與天氣規劃路線。',

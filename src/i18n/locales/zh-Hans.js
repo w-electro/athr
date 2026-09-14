@@ -105,6 +105,21 @@ export default {
       verify: '正在核验历史背景',
     },
   },
+  thamudic: {
+    title: '萨姆德文字',
+    notRead: '这处铭文尚未被释读。下方字母表可供您自行比对字形。',
+    readBy: '释读者',
+    showChart: '显示字母表',
+    hideChart: '隐藏字母表',
+    source: '来源',
+    chartAlt: '朱巴萨姆德字母表',
+    fact: {
+      abjad: '这种文字只记辅音，不记元音，因此一个词可有多种读法。',
+      direction: '方向不定：多为从右向左，有时逐行交替，有时竖写。',
+      spacing: '词与词通常不分隔，因此如何断读需要判断。',
+      content: '多数铭文是人名与简短世系：「某某之子某某」。',
+    },
+  },
   trip: {
     title: '我的行程',
     subtitle: '回答三个问题，Athr 便会依据您的兴趣与天气规划路线。',

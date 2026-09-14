@@ -105,6 +105,21 @@ export default {
       verify: 'Tarihsel bağlam doğrulanıyor',
     },
   },
+  thamudic: {
+    title: 'Semud yazısı',
+    notRead: 'Bu yazıt henüz okunmadı. Aşağıdaki harf tablosu şekilleri kendiniz karşılaştırmanızı sağlar.',
+    readBy: 'Okuyan',
+    showChart: 'Harf tablosunu göster',
+    hideChart: 'Tabloyu gizle',
+    source: 'Kaynak',
+    chartAlt: 'Cübbe\'nin Semud harfleri tablosu',
+    fact: {
+      abjad: 'Yazı yalnızca ünsüzleri gösterir — ünlü yoktur — bu yüzden bir kelime birkaç türlü okunabilir.',
+      direction: 'Yön değişkendir: genelde sağdan sola, bazen satır satır dönüşümlü, bazen dikey.',
+      spacing: 'Kelimeler genellikle ayrılmaz; birinin nerede bittiğine karar vermek yorum ister.',
+      content: 'Yazıtların çoğu kişi adları ve kısa soy bilgisidir: \'X oğlu Y\'.',
+    },
+  },
   trip: {
     title: 'Gezim',
     subtitle: 'Üç soruyu yanıtlayın, Athr ilgi alanlarınıza ve havaya göre rotanızı kursun.',

@@ -105,6 +105,21 @@ export default {
       verify: 'Sinusuri ang konteksto sa kasaysayan',
     },
   },
+  thamudic: {
+    title: 'Sulat Thamudic',
+    notRead: 'Hindi pa nababasa ang inskripsiyong ito. Sa talahanayan ng mga titik sa ibaba, maitutugma mo mismo ang mga hugis.',
+    readBy: 'Binasa ni',
+    showChart: 'Ipakita ang talahanayan',
+    hideChart: 'Itago ang talahanayan',
+    source: 'Pinagmulan',
+    chartAlt: 'Talahanayan ng mga titik Thamudic ng Jubbah',
+    fact: {
+      abjad: 'Katinig lamang ang isinusulat — walang patinig — kaya maraming posibleng basa ang isang salita.',
+      direction: 'Nagbabago ang direksyon: madalas kanan pakaliwa, minsan salitan bawat linya, minsan patayo.',
+      spacing: 'Karaniwang hindi pinaghihiwalay ang mga salita, kaya pagpapasya ang hangganan.',
+      content: 'Karamihan ay pangalan ng tao at maikling angkan: \'X anak ni Y\'.',
+    },
+  },
   trip: {
     title: 'Aking biyahe',
     subtitle: 'Sagutin ang tatlong tanong at bubuo ang Athr ng ruta ayon sa iyong interes at panahon.',

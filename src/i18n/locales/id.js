@@ -105,6 +105,21 @@ export default {
       verify: 'Memeriksa konteks sejarah',
     },
   },
+  thamudic: {
+    title: 'Aksara Tsamud',
+    notRead: 'Prasasti ini belum dibaca. Tabel huruf di bawah memungkinkan Anda mencocokkan bentuknya sendiri.',
+    readBy: 'Dibaca oleh',
+    showChart: 'Tampilkan tabel huruf',
+    hideChart: 'Sembunyikan tabel',
+    source: 'Sumber',
+    chartAlt: 'Tabel huruf Tsamud Jubbah',
+    fact: {
+      abjad: 'Aksara ini hanya menulis konsonan — tanpa vokal — sehingga satu kata bisa dibaca beberapa cara.',
+      direction: 'Arah berubah-ubah: umumnya kanan ke kiri, kadang berselang baris, kadang tegak.',
+      spacing: 'Kata biasanya tidak dipisah, jadi menentukan batasnya adalah pertimbangan.',
+      content: 'Sebagian besar prasasti adalah nama orang dan nasab singkat: \'X bin Y\'.',
+    },
+  },
   trip: {
     title: 'Perjalanan saya',
     subtitle: 'Jawab tiga pertanyaan dan Athr menyusun rute sesuai minat Anda dan cuaca.',
