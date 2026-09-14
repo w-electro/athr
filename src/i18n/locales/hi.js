@@ -77,6 +77,7 @@ export default {
     wasRight: 'क्या यह सही था?',
     yesRight: 'हाँ, सही है',
     notRight: 'नहीं, यह नहीं',
+    notAPanel: 'यह शिलाचित्र है ही नहीं',
     whichPanel: 'यह कौन सा शिलाचित्र है?',
     cancel: 'रद्द करें',
     learned: 'धन्यवाद — हमने सीखा',

@@ -77,6 +77,7 @@ export default {
     wasRight: 'இது சரியா இருந்ததா?',
     yesRight: 'ஆம், சரி',
     notRight: 'இல்லை, இது அல்ல',
+    notAPanel: 'இது செதுக்கலே அல்ல',
     whichPanel: 'இது எந்த செதுக்கல்?',
     cancel: 'ரத்து',
     learned: 'நன்றி — கற்றுக்கொண்டோம்',

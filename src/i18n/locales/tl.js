@@ -77,6 +77,7 @@ export default {
     wasRight: 'Tama ba ito?',
     yesRight: 'Oo, tama',
     notRight: 'Hindi, hindi ito',
+    notAPanel: 'Hindi ito ukit',
     whichPanel: 'Aling ukit ito?',
     cancel: 'Kanselahin',
     learned: 'Salamat — natuto kami',

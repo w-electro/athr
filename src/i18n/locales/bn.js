@@ -77,6 +77,7 @@ export default {
     wasRight: 'এটি কি ঠিক ছিল?',
     yesRight: 'হ্যাঁ, ঠিক',
     notRight: 'না, এটি নয়',
+    notAPanel: 'এটি খোদাই-ই নয়',
     whichPanel: 'এটি কোন খোদাই?',
     cancel: 'বাতিল',
     learned: 'ধন্যবাদ — শিখলাম',

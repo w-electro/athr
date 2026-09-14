@@ -77,6 +77,7 @@ export default {
     wasRight: 'Apakah ini benar?',
     yesRight: 'Ya, benar',
     notRight: 'Bukan yang ini',
+    notAPanel: 'Bukan ukiran sama sekali',
     whichPanel: 'Ukiran yang mana?',
     cancel: 'Batal',
     learned: 'Terima kasih — kami belajar',

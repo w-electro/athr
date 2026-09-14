@@ -28,6 +28,15 @@ import { getLoadedPanels } from './content/index.js'
 /**
  * تصنيف موضوع اللوحة — لأيقونةٍ وتجميعٍ في الواجهة لا لنصّ بشري.
  */
+/**
+ * صنف «ليست لوحة»: معرّفٌ لما يتعلّمه النظام أنّه ليس نقشًا.
+ *
+ * موضعه هنا لا في recognition.local.js عمدًا: تلك وحدةٌ ثقيلة تُحمَّل
+ * كسولًا كي لا يدخل محرّك النماذج في الحزمة الأولى، واستيرادها من
+ * الشاشة لمجرّد نصٍّ ثابت يُبطل ذلك التقسيم.
+ */
+export const NOT_A_PANEL = '__not-a-panel__'
+
 export const SUBJECTS = {
   camel: { id: 'camel', icon: '🐪' },
   human: { id: 'human', icon: '🧍' },

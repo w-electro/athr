@@ -77,6 +77,7 @@ export default {
     wasRight: '이것이 맞았나요?',
     yesRight: '네, 맞습니다',
     notRight: '아니요, 아닙니다',
+    notAPanel: '애초에 암각화가 아닙니다',
     whichPanel: '어느 암각화인가요?',
     cancel: '취소',
     learned: '감사합니다 — 학습했습니다',

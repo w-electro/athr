@@ -77,6 +77,7 @@ export default {
     wasRight: 'War das richtig?',
     yesRight: 'Ja, richtig',
     notRight: 'Nein, nicht dieses',
+    notAPanel: 'Gar keine Gravur',
     whichPanel: 'Welche Tafel ist es?',
     cancel: 'Abbrechen',
     learned: 'Danke — daraus gelernt',

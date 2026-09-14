@@ -77,6 +77,7 @@ export default {
     wasRight: 'کیا یہ درست تھا؟',
     yesRight: 'جی ہاں، درست',
     notRight: 'نہیں، یہ نہیں',
+    notAPanel: 'یہ نقش ہے ہی نہیں',
     whichPanel: 'یہ کون سا نقش ہے؟',
     cancel: 'منسوخ',
     learned: 'شکریہ — ہم نے سیکھا',

@@ -77,6 +77,7 @@ export default {
     wasRight: 'Це було правильно?',
     yesRight: 'Так, правильно',
     notRight: 'Ні, не ця',
+    notAPanel: 'Це взагалі не петрогліф',
     whichPanel: 'Яка це панель?',
     cancel: 'Скасувати',
     learned: 'Дякуємо — ми навчилися',

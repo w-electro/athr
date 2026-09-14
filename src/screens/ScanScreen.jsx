@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { createRecognitionSession, scanStill, getActiveProviderName, ANALYSIS_STAGES } from '../lib/recognition.js'
 import { rememberCorrection, countLearned } from '../lib/learning.js'
 import { getSiteById, getAllSites } from '../data/sites.js'
-import { getPanelById, getAllPanels, isPanelId, SUBJECTS } from '../data/panels.js'
+import { getPanelById, getAllPanels, isPanelId, SUBJECTS, NOT_A_PANEL } from '../data/panels.js'
 import SiteArt from '../components/SiteArt.jsx'
 import Petroglyph from '../components/Petroglyph.jsx'
 import { useI18n } from '../i18n/index.jsx'
@@ -650,6 +650,20 @@ function FeedbackAsk({ done, learnedCount, siteId, contentLanguage, onCorrect, t
             </li>
           ))}
         </ul>
+        {/*
+          مخرجٌ صادق لمن ليس أمامه نقشٌ أصلًا.
+
+          وبدونه كان على من صوّر حاسوبه أن يختار لوحةً ليقول «أخطأت» —
+          فيُدخل كذبةً إلى الفهرس وهو يحاول إصلاحه.
+        */}
+        <button
+          type="button"
+          onClick={() => onCorrect(NOT_A_PANEL)}
+          className="w-full rounded-lg border border-night-500 px-3 py-2 text-start text-micro
+                     text-sand-faint transition-colors duration-200 hover:border-sand/30 hover:text-sand-dim"
+        >
+          {t('scan.notAPanel')}
+        </button>
         <button
           type="button"
           onClick={() => setPicking(false)}

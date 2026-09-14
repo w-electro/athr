@@ -77,6 +77,7 @@ export default {
     wasRight: 'Это было верно?',
     yesRight: 'Да, верно',
     notRight: 'Нет, не этот',
+    notAPanel: 'Это вообще не петроглиф',
     whichPanel: 'Какая это панель?',
     cancel: 'Отмена',
     learned: 'Спасибо — мы научились',

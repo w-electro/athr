@@ -77,6 +77,7 @@ export default {
     wasRight: 'האם זה היה נכון?',
     yesRight: 'כן, נכון',
     notRight: 'לא, לא זה',
+    notAPanel: 'זה בכלל לא תחריט',
     whichPanel: 'איזה לוח זה?',
     cancel: 'ביטול',
     learned: 'תודה — למדנו מזה',

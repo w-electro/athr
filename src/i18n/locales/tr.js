@@ -77,6 +77,7 @@ export default {
     wasRight: 'Bu doğru muydu?',
     yesRight: 'Evet, doğru',
     notRight: 'Hayır, bu değil',
+    notAPanel: 'Zaten bir kaya resmi değil',
     whichPanel: 'Hangi panel bu?',
     cancel: 'İptal',
     learned: 'Teşekkürler — bundan öğrendik',

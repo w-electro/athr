@@ -77,6 +77,7 @@ export default {
     wasRight: 'Klopte dit?',
     yesRight: 'Ja, klopt',
     notRight: 'Nee, deze niet',
+    notAPanel: 'Helemaal geen gravure',
     whichPanel: 'Welk paneel is het?',
     cancel: 'Annuleren',
     learned: 'Dank je — hiervan geleerd',

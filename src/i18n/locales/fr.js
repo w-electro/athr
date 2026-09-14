@@ -77,6 +77,7 @@ export default {
     wasRight: 'Était-ce correct ?',
     yesRight: 'Oui, correct',
     notRight: 'Non, pas celui-ci',
+    notAPanel: 'Ce n\'est pas une gravure',
     whichPanel: 'Quel panneau est-ce ?',
     cancel: 'Annuler',
     learned: 'Merci — appris de ceci',

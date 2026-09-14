@@ -77,6 +77,7 @@ export default {
     wasRight: 'آیا این درست بود؟',
     yesRight: 'بله، درست است',
     notRight: 'نه، این نیست',
+    notAPanel: 'اصلاً سنگ‌نگاره نیست',
     whichPanel: 'کدام سنگ‌نگاره است؟',
     cancel: 'انصراف',
     learned: 'سپاس — از این آموختیم',

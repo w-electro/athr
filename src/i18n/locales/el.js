@@ -77,6 +77,7 @@ export default {
     wasRight: 'Ήταν σωστό;',
     yesRight: 'Ναι, σωστό',
     notRight: 'Όχι, δεν είναι αυτό',
+    notAPanel: 'Δεν είναι χάραξη',
     whichPanel: 'Ποιο πάνελ είναι;',
     cancel: 'Άκυρο',
     learned: 'Ευχαριστούμε — μάθαμε',

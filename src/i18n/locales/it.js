@@ -77,6 +77,7 @@ export default {
     wasRight: 'Era corretto?',
     yesRight: 'Sì, corretto',
     notRight: 'No, non questo',
+    notAPanel: 'Non è un\'incisione',
     whichPanel: 'Quale pannello è?',
     cancel: 'Annulla',
     learned: 'Grazie — imparato',

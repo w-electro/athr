@@ -77,6 +77,7 @@ export default {
     wasRight: '辨識正確嗎？',
     yesRight: '是，正確',
     notRight: '不是這個',
+    notAPanel: '根本不是岩畫',
     whichPanel: '這是哪一幅岩畫？',
     cancel: '取消',
     learned: '謝謝 — 已從中學習',

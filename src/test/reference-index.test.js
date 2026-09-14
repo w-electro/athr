@@ -11,6 +11,7 @@ import {
   matchVector,
   decideFromFrames,
 } from '../lib/recognition.local.js'
+import { NOT_A_PANEL } from '../data/panels.js'
 import { PANELS, isPanelId, siteIdOfPanel } from '../data/panels.js'
 import { getAllSites } from '../data/sites.js'
 
@@ -389,6 +390,26 @@ describe('قرار المسح المتّصل', () => {
       frame('jubbah-p1', 0.83, 0.04),
     ]
     expect(decideFromFrames(scattered)).toBeNull()
+  })
+
+  /*
+    السلبيّ جوابٌ متعلّم لا عجز.
+
+    حين يقول الزائرون إنّ ما يشبه هذا ليس نقشًا، يصير «لم أتعرّف»
+    حكمًا مبنيًّا على أمثلة. وبلا هذا كان من صوّر حاسوبه مضطرًّا إلى
+    اختيار لوحةٍ ليقول «أخطأت» — فيُفسد الفهرس وهو يحاول إصلاحه.
+  */
+  it('يرفض حين يتصدّر صنف «ليست لوحة»', () => {
+    const negs = Array.from({ length: 8 }, () => frame(NOT_A_PANEL, 0.97, 0.09))
+    expect(decideFromFrames(negs)).toBeNull()
+  })
+
+  it('لا يمنع لوحةً حقيقية ينازعها سلبيٌّ أقلّ', () => {
+    const mixed = [
+      ...Array.from({ length: 6 }, () => frame('jubbah-p2', 0.93, 0.06)),
+      ...Array.from({ length: 2 }, () => frame(NOT_A_PANEL, 0.80, 0.03)),
+    ]
+    expect(decideFromFrames(mixed)?.siteId).toBe('jubbah-p2')
   })
 
   it('يقبل التباس لوحتين متجاورتين', () => {

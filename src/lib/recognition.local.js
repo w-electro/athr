@@ -43,6 +43,7 @@
  */
 
 import { getAllSites } from '../data/sites.js'
+import { NOT_A_PANEL } from '../data/panels.js'
 
 /**
  * النموذج والدقّة — يجب أن يطابقا ما في دفتر Kaggle حرفًا بحرف.
@@ -375,6 +376,14 @@ export function decideFromFrames(recent) {
       || Math.max(...b[1].map((h) => h.topScore)) - Math.max(...a[1].map((h) => h.topScore)),
   )
   const [siteId, hits] = ranked[0]
+
+  /*
+    تصدُّرُ الصنف السلبيّ جوابٌ لا فراغ.
+
+    فحين يقول الزائرون إنّ ما يشبه هذا ليس نقشًا، يصير «لم أتعرّف» حكمًا
+    مبنيًّا على أمثلة — لا عجزًا عن بلوغ عتبة.
+  */
+  if (siteId === NOT_A_PANEL) return null
 
   if (hits.length / recent.length < LIVE_DOMINANCE) return null
 

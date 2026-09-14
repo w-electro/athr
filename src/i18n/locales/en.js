@@ -85,6 +85,7 @@ export default {
     wasRight: 'Was this right?',
     yesRight: 'Yes, correct',
     notRight: 'No, not this one',
+    notAPanel: 'Not a carving at all',
     whichPanel: 'Which panel is it?',
     cancel: 'Cancel',
     learned: 'Thanks — learned from this',

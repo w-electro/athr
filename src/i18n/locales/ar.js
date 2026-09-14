@@ -91,6 +91,7 @@ export default {
     wasRight: 'هل كان هذا صحيحًا؟',
     yesRight: 'نعم، صحيح',
     notRight: 'لا، ليست هذه',
+    notAPanel: 'ليست نقشًا أصلًا',
     whichPanel: 'أيّ لوحةٍ هي؟',
     cancel: 'إلغاء',
     learned: 'شكرًا — تعلّمنا من هذه',

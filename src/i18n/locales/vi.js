@@ -77,6 +77,7 @@ export default {
     wasRight: 'Điều này có đúng không?',
     yesRight: 'Đúng rồi',
     notRight: 'Không, không phải',
+    notAPanel: 'Không phải hình khắc',
     whichPanel: 'Đây là hình khắc nào?',
     cancel: 'Hủy',
     learned: 'Cảm ơn — đã học được',

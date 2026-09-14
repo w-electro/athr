@@ -77,6 +77,7 @@ export default {
     wasRight: 'Je, hii ilikuwa sahihi?',
     yesRight: 'Ndiyo, sahihi',
     notRight: 'Hapana, si hii',
+    notAPanel: 'Si nakshi kabisa',
     whichPanel: 'Ni nakshi ipi?',
     cancel: 'Ghairi',
     learned: 'Asante — tumejifunza',

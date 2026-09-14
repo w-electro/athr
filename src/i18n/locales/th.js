@@ -77,6 +77,7 @@ export default {
     wasRight: 'ถูกต้องไหม',
     yesRight: 'ใช่ ถูกต้อง',
     notRight: 'ไม่ใช่อันนี้',
+    notAPanel: 'ไม่ใช่ภาพสลักเลย',
     whichPanel: 'เป็นภาพสลักใด',
     cancel: 'ยกเลิก',
     learned: 'ขอบคุณ — เราได้เรียนรู้',

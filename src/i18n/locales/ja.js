@@ -77,6 +77,7 @@ export default {
     wasRight: 'これは正しかったですか？',
     yesRight: 'はい、正しい',
     notRight: 'いいえ、違います',
+    notAPanel: 'そもそも岩絵ではありません',
     whichPanel: 'どの岩絵ですか？',
     cancel: 'キャンセル',
     learned: 'ありがとうございます — 学習しました',
