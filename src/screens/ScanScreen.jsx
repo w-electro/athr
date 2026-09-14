@@ -235,7 +235,12 @@ export default function ScanScreen() {
           لا مرشّحَ ثابتًا أصلًا. والصمت هنا هو الجواب الصادق، لا اسمٌ
           يُنتزع من آخر إطارٍ عابر.
         */
-        setResult({ status: 'no-match', siteId: null, confidence: outcome.best ?? 0 })
+        setResult({
+          status: 'no-match',
+          siteId: null,
+          confidence: outcome.best ?? 0,
+          queryVectors: outcome.queryVectors,
+        })
         setState(STATES.result)
         stopCamera()
         return
@@ -617,7 +622,7 @@ function Viewfinder({ hint, scanning = false, frames = 0, max = 1 }) {
  * زرّ «ليست هذه» يفتح قائمة اللوحات، ولا يُلزم أحدًا. ومن لا يعرف الجواب
  * يمضي — فتغذيةٌ راجعة مفروضة تُنتج بياناتٍ مغشوشة، وهي أسوأ من لا شيء.
  */
-function FeedbackAsk({ done, learnedCount, siteId, contentLanguage, onCorrect, t }) {
+function FeedbackAsk({ mode = 'match', done, learnedCount, siteId, contentLanguage, onCorrect, t }) {
   const [picking, setPicking] = useState(false)
 
   if (done) {
@@ -675,17 +680,27 @@ function FeedbackAsk({ done, learnedCount, siteId, contentLanguage, onCorrect, t
     )
   }
 
+  /*
+    الوضعان يسألان سؤالين مختلفين.
+
+    بعد إجابةٍ: أكانت صحيحة؟ — وبعد صمتٍ: أكان أمامك نقشٌ أصلًا؟ والثاني
+    هو ما يُعلّم النظام السلبيّ، وهو أندر ما في الفهرس وأقلّه جمعًا.
+  */
+  const nomatch = mode === 'nomatch'
+
   return (
     <div className="rounded-xl border border-night-500 bg-night-800/60 p-3.5">
-      <p className="mb-2.5 text-micro text-sand-dim">{t('scan.wasRight')}</p>
+      <p className="mb-2.5 text-micro text-sand-dim">
+        {nomatch ? t('scan.wasCarving') : t('scan.wasRight')}
+      </p>
       <div className="flex gap-2">
         <button
           type="button"
-          onClick={() => onCorrect(siteId)}
+          onClick={() => (nomatch ? onCorrect(NOT_A_PANEL) : onCorrect(siteId))}
           className="flex-1 rounded-lg border border-terracotta/50 px-3 py-2 text-micro
                      text-terracotta-bright transition-colors duration-200 hover:bg-terracotta/10"
         >
-          {t('scan.yesRight')}
+          {nomatch ? t('scan.noCarving') : t('scan.yesRight')}
         </button>
         <button
           type="button"
@@ -693,7 +708,7 @@ function FeedbackAsk({ done, learnedCount, siteId, contentLanguage, onCorrect, t
           className="flex-1 rounded-lg border border-night-500 px-3 py-2 text-micro
                      text-sand-dim transition-colors duration-200 hover:text-sand"
         >
-          {t('scan.notRight')}
+          {nomatch ? t('scan.yesCarving') : t('scan.notRight')}
         </button>
       </div>
     </div>
@@ -851,6 +866,24 @@ function ResultPanel({
               <li key={item}>· {item}</li>
             ))}
           </ul>
+        )}
+        {/*
+          «لم نتعرّف» ليست نهاية الحديث.
+
+          إن لم يكن أمام الزائر نقشٌ أصلًا، فالصمت كان صوابًا — وقولُه
+          ذلك يُعلّم النظام شكلَ ما ليس نقشًا، وهو أندر ما في الفهرس.
+          وإن كان أمامه نقشٌ فقد أخطأنا، فيسمّيه إن عرفه أو يعيد المحاولة.
+        */}
+        {result.queryVectors?.length > 0 && (
+          <FeedbackAsk
+            mode="nomatch"
+            done={feedbackDone}
+            learnedCount={learnedCount}
+            siteId={null}
+            contentLanguage={contentLanguage}
+            onCorrect={onCorrect}
+            t={t}
+          />
         )}
         <button type="button" onClick={onRetry} className="btn-primary">
           {t('scan.retry')}

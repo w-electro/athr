@@ -561,7 +561,21 @@ export function createScanSession() {
         العتبة، أم 0.35 فيكون شيءٌ آخر معطوبًا؟ والفرق بين الجوابين هو
         الفرق بين معايرةٍ وإصلاحِ عطب.
       */
-      return { status: 'searching', frames, best: topScore, bestId: topSiteId, margin }
+      /*
+        نمرّر متجهات النافذة مع حالة البحث أيضًا.
+
+        فحين تنفد المحاولات تقول الشاشة «لم نتعرّف» وتسأل: أكان أمامك
+        نقش؟ ولا يمكنها أن تتعلّم الجواب بلا متجهات — وهذه آخر نافذةٍ
+        رآها النظام قبل أن يستسلم.
+      */
+      return {
+        status: 'searching',
+        frames,
+        best: topScore,
+        bestId: topSiteId,
+        margin,
+        queryVectors: viewVectors.slice(),
+      }
     },
   }
 }
