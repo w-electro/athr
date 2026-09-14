@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { createRecognitionSession, scanStill, getActiveProviderName, ANALYSIS_STAGES } from '../lib/recognition.js'
+import { rememberCorrection, countLearned } from '../lib/learning.js'
 import { getSiteById, getAllSites } from '../data/sites.js'
-import { getPanelById, isPanelId, SUBJECTS } from '../data/panels.js'
+import { getPanelById, getAllPanels, isPanelId, SUBJECTS } from '../data/panels.js'
 import SiteArt from '../components/SiteArt.jsx'
 import Petroglyph from '../components/Petroglyph.jsx'
 import { useI18n } from '../i18n/index.jsx'
@@ -62,6 +63,8 @@ export default function ScanScreen() {
   const [frameReady, setFrameReady] = useState(false)
   const [scanFrames, setScanFrames] = useState(0)
   const scanAbortRef = useRef(false)
+  const [learnedCount, setLearnedCount] = useState(0)
+  const [feedbackDone, setFeedbackDone] = useState(false)
 
   const videoRef = useRef(null)
   const canvasRef = useRef(null)
@@ -155,6 +158,7 @@ export default function ScanScreen() {
     السابق فعلًا.
   */
   async function runLiveScan() {
+    setFeedbackDone(false)
     setState(STATES.scanning)
     setScanFrames(0)
     scanAbortRef.current = false
@@ -247,6 +251,30 @@ export default function ScanScreen() {
     setState(STATES.live)
   }
 
+  /*
+    عدد ما تعلّمه الجهاز يُقرأ مرّةً عند الفتح.
+
+    ويُعرض للمستخدم: رؤيةُ الرقم يرتفع بتصحيحاته هي ما يجعل التعلّم
+    محسوسًا لا مزعومًا.
+  */
+  useEffect(() => {
+    let alive = true
+    countLearned().then((n) => { if (alive) setLearnedCount(n) })
+    return () => { alive = false }
+  }, [])
+
+  /** يحفظ تصحيحًا ثم يُنسي الفهرس نسخته كي يعمل التصحيح فورًا */
+  async function saveCorrection(siteId) {
+    if (!result?.queryVectors?.length || !siteId) return
+    const ok = await rememberCorrection({ vectors: result.queryVectors, siteId })
+    if (ok) {
+      const { refreshIndex } = await import('../lib/recognition.local.js')
+      refreshIndex()
+      setLearnedCount((n) => n + 1)
+    }
+    setFeedbackDone(true)
+  }
+
   function captureFrame() {
     const video = videoRef.current
     const canvas = canvasRef.current
@@ -280,11 +308,22 @@ export default function ScanScreen() {
   function handleFile(event) {
     const file = event.target.files?.[0]
     if (!file) return
+
+    /*
+      نُفرِغ قيمة الحقل فور القراءة.
+
+      وإلا لم يُطلق المتصفّح حدث change عند اختيار **الملفّ نفسه** مرّةً
+      ثانية — لأنّ القيمة لم تتغيّر — فيضغط المستخدم ويختار صورته ولا
+      يحدث شيء، ويظنّ الزرّ معطّلًا. وهو ما وقع في أوّل تجربة إعادة رفع.
+    */
+    event.target.value = ''
+
     const reader = new FileReader()
     reader.onload = async () => {
       const dataUrl = String(reader.result)
       const base64 = dataUrl.split(',')[1]
 
+      setFeedbackDone(false)
       setSnapshot(dataUrl)
       setState(STATES.analyzing)
       setStageIndex(0)
@@ -317,6 +356,7 @@ export default function ScanScreen() {
   }
 
   function reset() {
+    setFeedbackDone(false)
     setResult(null)
     setSnapshot(null)
     setState(STATES.idle)
@@ -482,6 +522,10 @@ export default function ScanScreen() {
           panel={matchedPanel}
           snapshot={snapshot}
           onRetry={reset}
+          onCorrect={saveCorrection}
+          feedbackDone={feedbackDone}
+          learnedCount={learnedCount}
+          contentLanguage={contentLanguage}
           t={t}
           contentDir={contentDir}
         />
@@ -553,6 +597,92 @@ function Viewfinder({ hint, scanning = false, frames = 0, max = 1 }) {
         </div>
       )}
     </>
+  )
+}
+
+/**
+ * سؤال التصحيح — وهو موضع التعلّم في التطبيق كلّه.
+ *
+ * ══════════════════════════════════════════════════════════════════════
+ *  لماذا يُسأل حتى عند الإصابة
+ * ══════════════════════════════════════════════════════════════════════
+ * قد يبدو السؤال بعد إجابةٍ صحيحة عبثًا. وليس كذلك: الفهرس المشحون كلّه
+ * من زيارةٍ ميدانية واحدة — يومٌ واحد وجوّالٌ واحد وإضاءةٌ واحدة. وصورةُ
+ * الزائر من يومٍ آخر بجهازٍ آخر هي **أثمن** ما يمكن أن يُضاف إليه، سواءٌ
+ * أكانت الإجابة صحيحة أم خاطئة.
+ *
+ * فالتأكيد ليس مجاملة: هو مثالٌ جديد للّوحة نفسها من ظرفٍ جديد.
+ *
+ * ── والتصحيح لا يُفرض ─────────────────────────────────────────────────
+ * زرّ «ليست هذه» يفتح قائمة اللوحات، ولا يُلزم أحدًا. ومن لا يعرف الجواب
+ * يمضي — فتغذيةٌ راجعة مفروضة تُنتج بياناتٍ مغشوشة، وهي أسوأ من لا شيء.
+ */
+function FeedbackAsk({ done, learnedCount, siteId, contentLanguage, onCorrect, t }) {
+  const [picking, setPicking] = useState(false)
+
+  if (done) {
+    return (
+      <p className="rounded-xl border border-terracotta/30 bg-terracotta/5 px-4 py-3 text-micro text-sand-dim">
+        {t('scan.learned')}
+        {learnedCount > 0 && (
+          <span className="num text-sand-faint"> · {learnedCount}</span>
+        )}
+      </p>
+    )
+  }
+
+  if (picking) {
+    const panels = getAllPanels(contentLanguage)
+    return (
+      <div className="space-y-2 rounded-xl border border-night-500 bg-night-800/60 p-3.5">
+        <p className="text-micro text-sand-dim">{t('scan.whichPanel')}</p>
+        <ul className="max-h-52 space-y-1.5 overflow-y-auto">
+          {panels.map((p) => (
+            <li key={p.id}>
+              <button
+                type="button"
+                onClick={() => onCorrect(p.id)}
+                className="w-full rounded-lg border border-night-500 px-3 py-2 text-start text-micro
+                           text-sand-dim transition-colors duration-200 hover:border-terracotta/50 hover:text-sand"
+              >
+                {p.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <button
+          type="button"
+          onClick={() => setPicking(false)}
+          className="text-micro text-sand-faint underline"
+        >
+          {t('scan.cancel')}
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="rounded-xl border border-night-500 bg-night-800/60 p-3.5">
+      <p className="mb-2.5 text-micro text-sand-dim">{t('scan.wasRight')}</p>
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={() => onCorrect(siteId)}
+          className="flex-1 rounded-lg border border-terracotta/50 px-3 py-2 text-micro
+                     text-terracotta-bright transition-colors duration-200 hover:bg-terracotta/10"
+        >
+          {t('scan.yesRight')}
+        </button>
+        <button
+          type="button"
+          onClick={() => setPicking(true)}
+          className="flex-1 rounded-lg border border-night-500 px-3 py-2 text-micro
+                     text-sand-dim transition-colors duration-200 hover:text-sand"
+        >
+          {t('scan.notRight')}
+        </button>
+      </div>
+    </div>
   )
 }
 
@@ -669,7 +799,10 @@ function PanelBody({ panel, t, contentDir }) {
   )
 }
 
-function ResultPanel({ result, site, panel, snapshot, onRetry, t, contentDir }) {
+function ResultPanel({
+  result, site, panel, snapshot, onRetry, onCorrect,
+  feedbackDone, learnedCount, contentLanguage, t, contentDir,
+}) {
   const percent = Math.round(result.confidence * 100)
 
   /*
@@ -785,6 +918,24 @@ function ResultPanel({ result, site, panel, snapshot, onRetry, t, contentDir }) 
               ))}
             </ul>
           </div>
+
+          {/*
+            سؤال التصحيح: هنا يتعلّم التطبيق.
+
+            كلّ إجابةٍ تُضيف إلى الفهرس متجهًا للّوحة نفسها من يومٍ آخر
+            وجهازٍ آخر — وهو التنوّع الذي ينقص فهرسًا كلّه من زيارةٍ
+            واحدة. فالتأكيد يقوّيه كما يقوّيه التصحيح، والاثنان تعلُّم.
+          */}
+          {result.queryVectors?.length > 0 && (
+            <FeedbackAsk
+              done={feedbackDone}
+              learnedCount={learnedCount}
+              siteId={result.siteId}
+              contentLanguage={contentLanguage}
+              onCorrect={onCorrect}
+              t={t}
+            />
+          )}
 
           <Link to={`/site/${site.id}`} className="btn-primary">
             {t('scan.readMore')}

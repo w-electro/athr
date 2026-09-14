@@ -462,11 +462,14 @@ export async function scanStillImage(input = {}, onProgress) {
   const recent = []
   let best = 0
   let bestId = null
+  const viewVectors = []
 
   for (let i = 0; i < STILL_VIEWS; i += 1) {
-    const r = matchVector(toVector(await extractor(await stillView(image, i))), index)
+    const queryVector = toVector(await extractor(await stillView(image, i)))
+    const r = matchVector(queryVector, index)
     recent.push(r)
     if (recent.length > LIVE_WINDOW) recent.shift()
+    viewVectors.push(queryVector)
     if (r.topScore > best) { best = r.topScore; bestId = r.topSiteId }
 
     onProgress?.(i + 1, STILL_VIEWS, r)
@@ -474,13 +477,13 @@ export async function scanStillImage(input = {}, onProgress) {
     // اليقين يوقف البحث مبكّرًا؛ الترجيح ينتظر كلّ المشاهد
     const early = decideFromFrames(recent)
     if (early?.status === 'match') {
-      return { ...early, provider: 'local', elapsedMs: Date.now() - started, views: i + 1 }
+      return { ...early, provider: 'local', elapsedMs: Date.now() - started, views: i + 1, queryVectors: viewVectors.slice() }
     }
   }
 
   const decided = decideFromFrames(recent)
   if (decided) {
-    return { ...decided, provider: 'local', elapsedMs: Date.now() - started, views: STILL_VIEWS }
+    return { ...decided, provider: 'local', elapsedMs: Date.now() - started, views: STILL_VIEWS, queryVectors: viewVectors.slice() }
   }
   return {
     status: 'no-match',
@@ -489,12 +492,14 @@ export async function scanStillImage(input = {}, onProgress) {
     bestId,
     provider: 'local',
     elapsedMs: Date.now() - started,
+    queryVectors: viewVectors.slice(),
   }
 }
 
 export function createScanSession() {
   const recent = []
   let frames = 0
+  let viewVectors = []
   const startedAt = Date.now()
 
   return {
@@ -514,10 +519,12 @@ export function createScanSession() {
       const frac = CROP_LADDER[frames % CROP_LADDER.length]
       frames += 1
 
-      const { topSiteId, topScore, margin } = matchVector(
-        toVector(await extractor(await centerCrop(image, frac))),
-        index,
-      )
+      const queryVector = toVector(await extractor(await centerCrop(image, frac)))
+      const { topSiteId, topScore, margin } = matchVector(queryVector, index)
+
+      // نحتفظ بمتجهات آخر نافذة: هي ما يُحفظ إن صحّح المستخدم النتيجة
+      viewVectors.push(queryVector)
+      if (viewVectors.length > LIVE_WINDOW) viewVectors.shift()
 
       recent.push({ topSiteId, topScore, margin })
       if (recent.length > LIVE_WINDOW) recent.shift()
@@ -534,6 +541,7 @@ export function createScanSession() {
           via: 'dominance',
           provider: 'local',
           elapsedMs: Date.now() - startedAt,
+          queryVectors: viewVectors.slice(),
         }
       }
 
@@ -613,12 +621,31 @@ function dot(a, b) {
 async function getIndex(extractor) {
   if (!indexPromise) {
     indexPromise = (async () => {
-      const prebuilt = await fetchPrebuiltIndex()
-      if (prebuilt) return prebuilt
-      return buildIndexInBrowser(extractor)
+      const prebuilt = (await fetchPrebuiltIndex()) ?? (await buildIndexInBrowser(extractor))
+
+      /*
+        التصحيحات المتعلَّمة تُضَمّ إلى الفهرس المشحون.
+
+        وهي أثمن ما فيه: المشحون كلّه من زيارةٍ ميدانية واحدة، وكلّ
+        تصحيحٍ صورةٌ للّوحة نفسها من يومٍ آخر وجهازٍ آخر — أي التنوّع
+        الذي ينقص الفهرس أصلًا، وسببُ ضعفه أمام الصور الغريبة عنه.
+      */
+      const { loadLearned } = await import('./learning.js')
+      const learned = await loadLearned()
+      return learned.length ? [...prebuilt, ...learned] : prebuilt
     })()
   }
   return indexPromise
+}
+
+/**
+ * يُنسي الفهرسَ نسخته المخبّأة فيُعاد بناؤه بالتصحيح الجديد.
+ *
+ * بدونه لا يظهر أثر التصحيح إلا بعد إعادة تحميل الصفحة — والمستخدم
+ * الذي صحّح للتوّ ينتظر أن يعمل الآن، لا في الجلسة القادمة.
+ */
+export function refreshIndex() {
+  indexPromise = null
 }
 
 async function fetchPrebuiltIndex() {
