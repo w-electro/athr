@@ -641,7 +641,14 @@ function FeedbackAsk({ mode = 'match', done, learnedCount, siteId, contentLangua
     return (
       <div className="space-y-2 rounded-xl border border-night-500 bg-night-800/60 p-3.5">
         <p className="text-micro text-sand-dim">{t('scan.whichPanel')}</p>
-        <ul className="max-h-52 space-y-1.5 overflow-y-auto">
+        {/*
+          العشر كلّها ظاهرة، بلا تمرير.
+
+          كانت قائمةً بارتفاعٍ محدود وتمريرٍ خفيّ، فكان آخرها — سِرب
+          النعام — لا يُرى أصلًا: يفتح الزائر القائمة فيظنّ لوحته غير
+          موجودة. وعمودان يُظهران الصفّ كاملًا في مساحةٍ أقلّ.
+        */}
+        <ul className="grid grid-cols-2 gap-1.5">
           {panels.map((p) => (
             <li key={p.id}>
               <button

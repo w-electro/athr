@@ -98,7 +98,7 @@ export default {
     whichPanel: 'أيّ لوحةٍ هي؟',
     cancel: 'إلغاء',
     learned: 'شكرًا — تعلّمنا من هذه',
-    tentative: 'الأرجح أنّها',
+    tentative: 'تعرُّفٌ مرجَّح',
     confidence: 'درجة الثقة',
     evidence: 'على ماذا اعتمد التحليل',
     readMore: 'اقرأ القصة كاملة واستمع للسرد',
