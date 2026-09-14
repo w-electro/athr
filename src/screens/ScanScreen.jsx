@@ -456,7 +456,15 @@ export default function ScanScreen() {
             muted
             // أول إطار وصل فعلًا: الآن فقط صارت videoWidth حقيقية
             onLoadedMetadata={() => setFrameReady(true)}
-            className={`h-[26rem] w-full object-cover transition-opacity duration-500 ${
+            /*
+              ارتفاعٌ يتبع الشاشة لا رقمٌ ثابت.
+
+              26rem ثابتةً لا تسع هاتفًا بارتفاع 667 بكسل: تدفع زرّ
+              الغالق تحت شريط التنقّل فيُغطّى نصفُه، والصفحة لا تُمرَّر
+              لكشفه. فصار الارتفاع يتقلّص مع الشاشة القصيرة ويقف عند
+              26rem على الطويلة، فلا يُقصّ الزرّ ولا تكبر الصورة بلا داعٍ.
+            */
+            className={`h-[clamp(13rem,46dvh,26rem)] w-full object-cover transition-opacity duration-500 ${
               state === STATES.analyzing ? 'opacity-25' : ''
             }`}
           />
