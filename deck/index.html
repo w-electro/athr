@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>أثر — عرض الهاكاثون</title>
+
+<!--
+  عرضٌ على الويب لا في PowerPoint.
+
+  ثلاثة أسباب: أنّ الحركة هنا حقيقية لا شرائحُ تتبدّل، وأنّ التطبيق نفسه
+  يُدرَج حيًّا داخل الشريحة فلا تُغادر العرض لتُريَهم إيّاه، وأنّ التصميم
+  هو تصميم التطبيق نفسه — البازلت والطين والرمل — فيبدو العرض امتدادًا
+  للمنتج لا غلافًا مستعارًا له.
+
+  وreveal.js مُضمَّنٌ محلّيًا (vendor/) لا من شبكة توزيع: قاعةُ هاكاثونٍ
+  بلا إنترنت تُسقط أيّ عرضٍ يعتمد على CDN.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="vendor/reveal.css" />
+
+<style>
+  :root {
+    --basalt: #0B0F17;
+    --night: #151D2C;
+    --night-hi: #232D42;
+    --terra: #C97A4A;
+    --terra-bright: #DD8C58;
+    --gold: #EFAE6E;
+    --sand: #E8DCC8;
+    --sand-dim: #A2977F;
+    --sand-faint: #6E6757;
+
+    /* خطّان لا خطّ: ريم كوفي هندسيّ الحروف كأنّه منقوش، وتجوّال للقراءة */
+    --display: 'Reem Kufi', 'Tajawal', system-ui, sans-serif;
+    --body: 'Tajawal', system-ui, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  .reveal, body, html { background: var(--basalt); }
+  /*
+    مقاس الأساس: 38 بكسل لا 16.
+
+    reveal يأخذ مقاسه من ملفّ السمة، ونحن لم نُحمّل سمةً — فبقي على
+    افتراضيّ المتصفّح (16)، وكلّ قياساتنا بالـem مبنيّة عليه، فخرج
+    العرض كلّه بحجم صفحة وِب لا بحجم شريحة تُقرأ من آخر القاعة.
+  */
+  .reveal { font-family: var(--body); color: var(--sand); font-size: 38px; }
+  .reveal .slides { text-align: right; }
+  /*
+    لا ارتفاعَ مفروضًا على الشريحة.
+
+    كان section بارتفاع 100% فيُبطل توسيط reveal الرأسيّ، فيلتصق
+    المحتوى بأعلى الشاشة ويبقى النصف الأسفل فارغًا.
+  */
+
+  /*
+    أسبقيةٌ أعلى من reveal.css.
+
+    ذاك يضبط font-family للعناوين بنفس أسبقيتنا عبر متغيّرٍ من السمة
+    التي لم نُحمّلها، فيسقط الخطّ إلى sans-serif. وإضافة .slides ترفع
+    الأسبقية فيثبت ريم كوفي.
+  */
+  .reveal .slides h1, .reveal .slides h2, .reveal .slides h3 {
+    font-family: var(--display);
+    color: var(--sand);
+    text-transform: none;
+    letter-spacing: 0;
+    margin: 0;
+    line-height: 1.2;
+  }
+  .reveal .slides h1 { font-size: 3.4em; font-weight: 700; }
+  .reveal .slides h2 { font-size: 1.85em; font-weight: 600; }
+  .reveal .slides h3 { font-weight: 600; }
+  .reveal .slides p  { margin: 0; line-height: 1.7; font-family: var(--body); }
+  .reveal .slides section { font-family: var(--body); }
+
+  .lede { color: var(--sand-dim); font-size: 0.82em; }
+  .muted { color: var(--sand-dim); }
+  .faint { color: var(--sand-faint); }
+  .gold { color: var(--gold); }
+  .terra { color: var(--terra-bright); }
+  .num { font-family: var(--mono); font-feature-settings: 'tnum'; }
+
+  /* ── الشبكة ───────────────────────────────────────────────────── */
+  .wrap { padding: 0 2.2rem; }
+  .row { display: flex; gap: 1.1rem; align-items: stretch; }
+  .col { flex: 1; }
+
+  .card {
+    background: var(--night);
+    border: 1px solid var(--night-hi);
+    border-radius: 14px;
+    padding: 1.15rem 1.25rem;
+    text-align: right;
+  }
+  .card.hi { background: var(--night-hi); }
+  .card h3 { font-size: 1.05em; margin-bottom: .35rem; }
+  .card p { font-size: .62em; color: var(--sand-dim); line-height: 1.65; }
+
+  /* ── الزخرفة المتكرّرة: النقش يرتسم بنفسه ─────────────────────── */
+  .glyph { color: var(--terra); display: block; }
+  .glyph path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+  }
+  /*
+    يرتسم فقط حين تصل شريحته — لا عند التحميل.
+
+    الرسم هو الفكرة: الضوء المائل عند الفجر يكشف نقشًا كان غير مرئيّ،
+    فالحركة تحكي الموضوع لا تزيّنه.
+  */
+  .present .glyph path {
+    animation: draw 1.1s linear forwards;
+  }
+  .present .glyph path:nth-child(1) { animation-delay: .05s }
+  .present .glyph path:nth-child(2) { animation-delay: .16s }
+  .present .glyph path:nth-child(3) { animation-delay: .27s }
+  .present .glyph path:nth-child(4) { animation-delay: .38s }
+  .present .glyph path:nth-child(5) { animation-delay: .49s }
+  .present .glyph path:nth-child(6) { animation-delay: .60s }
+  .present .glyph path:nth-child(7) { animation-delay: .71s }
+  .present .glyph path:nth-child(8) { animation-delay: .82s }
+  .present .glyph path:nth-child(9) { animation-delay: .93s }
+  .present .glyph path:nth-child(10){ animation-delay: 1.04s }
+  @keyframes draw { to { stroke-dashoffset: 0 } }
+
+  /* ── الضوء المائل ─────────────────────────────────────────────── */
+  .rake { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .rake::after {
+    content: '';
+    position: absolute; top: -25%; bottom: -25%; width: 18%;
+    /* ضيّقٌ وخافت: إيحاءُ ضوءٍ يمرّ، لا مستطيلٌ يعبر الشاشة */
+    background: linear-gradient(100deg, transparent, rgba(239,174,110,.055), transparent);
+    filter: blur(14px);
+    transform: translateX(-200%) skewX(-8deg);
+  }
+  .present .rake::after { animation: rake 5s ease-in-out .3s infinite; }
+  @keyframes rake { 0% { transform: translateX(-200%) skewX(-8deg) } 100% { transform: translateX(600%) skewX(-8deg) } }
+
+  /* ── الأرقام الكبيرة ──────────────────────────────────────────── */
+  .stat { text-align: center; }
+  .stat .n {
+    font-family: var(--display); font-weight: 700; font-size: 2.5em;
+    line-height: 1; color: var(--terra-bright);
+  }
+  .stat .n.g { color: var(--gold); }
+  .stat .l { font-size: .58em; color: var(--sand-dim); margin-top: .4rem; }
+
+  /* ── شريط المقارنة ────────────────────────────────────────────── */
+  .bar { background: var(--night-hi); border-radius: 99px; height: 15px; overflow: hidden; direction: ltr; }
+  .bar > i { display: block; height: 100%; border-radius: 99px; width: 0; transition: width 1.1s cubic-bezier(.2,.7,.3,1) .25s; }
+  .present .bar > i { width: var(--w); }
+
+  /* ── التطبيق الحيّ داخل الشريحة ───────────────────────────────── */
+  .phone {
+    /*
+      المقاس محكومٌ بارتفاع الشريحة لا بشكل الجوّال.
+
+      720 ناقص الهوامش يترك نحو 630 بكسل، فإطارٌ بارتفاع 660 يُقصّ
+      من أسفله. و580 يسع ويبقى هواء.
+    */
+    width: 290px; height: 580px; border-radius: 26px; overflow: hidden;
+    border: 7px solid #2A3244; background: #000; box-shadow: 0 30px 70px -20px rgba(0,0,0,.85);
+  }
+  .phone iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+  .qr { background: #fff; padding: 14px; border-radius: 14px; display: inline-block; line-height: 0; }
+  .qr img { width: 210px; height: 210px; display: block; }
+
+  .reveal .progress { color: var(--terra); height: 3px; }
+  .reveal .controls { color: var(--terra); }
+
+  .kicker {
+    font-family: var(--mono); font-size: .42em; letter-spacing: .22em;
+    color: var(--sand-faint); text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ═══ 1 · الغلاف: الضوء يكشف النقش ═══════════════════════════════ -->
+<section data-auto-animate data-background-color="#0B0F17">
+  <div class="rake"></div>
+  <div class="row wrap" style="align-items:center; gap:2.5rem">
+    <div class="col" style="flex:1.35">
+      <h1 data-id="name" style="color:var(--terra); font-size:3.6em; line-height:1.05">أثر</h1>
+      <h2 style="margin-top:.85rem; font-size:1.42em; line-height:1.35">دليلٌ تراثيّ يعمل حيث يقع التراث</h2>
+      <p class="lede" style="margin-top:1rem; font-size:.72em">
+        بلا إنترنت · داخل الجوّال · بتسعٍ وعشرين لغة
+      </p>
+      <p class="kicker" style="margin-top:2.4rem">
+        هاكاثون أجا للذكاء الاصطناعي · حائل
+      </p>
+    </div>
+    <div class="col" style="flex:0 0 34%">
+      <svg class="glyph" viewBox="0 0 100 70" style="width:100%; height:auto" aria-hidden="true">
+        <path pathLength="100" d="M18 44 Q20 32 34 30 L62 30 Q74 31 76 44"/>
+        <path pathLength="100" d="M76 38 L86 26"/>
+        <path pathLength="100" d="M86 26 L92 20"/>
+        <path pathLength="100" d="M86 24 Q78 10 66 12"/>
+        <path pathLength="100" d="M89 23 Q82 8 70 9"/>
+        <path pathLength="100" d="M22 44 L22 60"/>
+        <path pathLength="100" d="M34 44 L34 60"/>
+        <path pathLength="100" d="M58 44 L58 60"/>
+        <path pathLength="100" d="M70 44 L70 60"/>
+        <path pathLength="100" d="M18 42 L10 50"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 2 · المشكلة ═══════════════════════════════════════════════ -->
+<section data-auto-animate>
+  <div class="wrap">
+    <h2 data-id="head">زائرٌ يقف أمام نقش</h2>
+    <p class="lede" style="margin-top:.5rem">ولا شيء يقول له ما هو.</p>
+    <div class="row" style="margin-top:1.8rem">
+      <div class="card col fragment fade-up">
+        <h3 class="terra">لا لافتة</h3>
+        <p>أكثر اللوحات بلا تعريف، والصخرة لا تشرح نفسها.</p>
+      </div>
+      <div class="card col fragment fade-up">
+        <h3 class="terra">لا مرشد</h3>
+        <p>المرشدون قليل، ولا أحد منهم يتكلّم لغة كلّ زائر.</p>
+      </div>
+      <div class="card col fragment fade-up">
+        <h3 class="terra">لا شبكة</h3>
+        <p>الموقع في الصحراء المفتوحة، فكلّ ما يعتمد على السحابة يسقط.</p>
+      </div>
+    </div>
+    <p class="fragment fade-up gold" style="margin-top:1.6rem; font-size:.72em; font-style:italic">
+      الحلّ السحابيّ هو الجواب البديهيّ — وهو الجواب الذي لا يعمل هنا.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ 3 · التطبيق حيًّا ═════════════════════════════════════════ -->
+<section data-auto-animate>
+  <div class="row wrap" style="align-items:center; gap:2.6rem">
+    <div class="col" style="flex:0 0 auto">
+      <!--
+        التطبيق نفسه داخل الشريحة.
+
+        فلا تخرج من العرض لتفتحه، ولا تُقطع الحركة. وهو أقوى ما في
+        الملفّ: منتجٌ يعمل، لا صورةٌ له.
+      -->
+      <div class="phone"><iframe src="../" title="أثر" loading="lazy"></iframe></div>
+    </div>
+    <div class="col">
+      <h2 data-id="head">وجّه الكاميرا. واسمع القصّة.</h2>
+      <div style="margin-top:1.4rem; display:flex; flex-direction:column; gap:1rem">
+        <div class="fragment fade-right">
+          <h3 class="terra" style="font-size:1.05em">وجّه</h3>
+          <p class="lede" style="font-size:.62em">الكاميرا تمسح باستمرار وأنت تحرّك يدك — لا تحتاج لقطةً واحدة مثالية.</p>
+        </div>
+        <div class="fragment fade-right">
+          <h3 class="terra" style="font-size:1.05em">يتعرّف</h3>
+          <p class="lede" style="font-size:.62em">يسمّي اللوحة التي أمامك بعينها، لا «نقوشًا صخرية» فحسب.</p>
+        </div>
+        <div class="fragment fade-right">
+          <h3 class="terra" style="font-size:1.05em">اسمع</h3>
+          <p class="lede" style="font-size:.62em">تُروى القصّة بلغتك، مسموعةً، ومعها تاريخ الموقع.</p>
+        </div>
+      </div>
+      <div class="row fragment fade-up" style="margin-top:1.6rem; gap:1.6rem">
+        <div class="stat"><div class="n num">٢٩</div><div class="l">لغة</div></div>
+        <div class="stat"><div class="n g num">١٠</div><div class="l">لوحات موثّقة</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4 · النموذج ═══════════════════════════════════════════════ -->
+<section data-auto-animate>
+  <div class="wrap">
+    <h2 data-id="head">النموذج: <span style="font-family:var(--mono); color:var(--terra-bright)">DINOv3</span></h2>
+    <div class="row" style="margin-top:1.5rem; align-items:flex-start">
+      <div class="col" style="flex:1.25">
+        <div class="card" style="padding:1.4rem 1.5rem">
+          <p style="font-size:.68em; line-height:1.8; color:var(--sand-dim)">
+            محوّلٌ بصريّ من Meta، دُرّب تدريبًا <strong style="color:var(--sand)">ذاتيَّ الإشراف</strong>
+            على نحو مليارٍ وسبعمئة مليون صورة — بلا تسميةٍ بشرية واحدة.
+          </p>
+          <p class="fragment fade-up" style="font-size:.68em; line-height:1.8; margin-top:1rem; color:var(--sand)">
+            ويحوّل أيّ صورة إلى <span class="num gold">٣٨٤</span> رقمًا — بصمةٌ عددية تتقارب فيها المتشابهات.
+          </p>
+          <p class="fragment fade-up" style="font-size:.62em; line-height:1.75; margin-top:1rem; color:var(--sand-dim)">
+            ونحن نستعمل تمثيلاته كما هي: نخزّن بصمات <span class="num">٢٠١</span> صورةٍ مرجعية من تصويرنا
+            الميداني، ونبحث عن أقربها.
+          </p>
+        </div>
+      </div>
+      <div class="col" style="display:flex; flex-direction:column; gap:.7rem">
+        <div class="card hi fragment fade-left"><h3 class="gold" style="font-size:.82em">يميّز الأمثلة</h3><p style="font-size:.55em">هذه الصخرة بعينها لا صخرةً ما</p></div>
+        <div class="card hi fragment fade-left"><h3 class="gold" style="font-size:.82em">بلا تسميات</h3><p style="font-size:.55em">تعلّم الشكل والملمس دون معلّم</p></div>
+        <div class="card hi fragment fade-left"><h3 class="gold" style="font-size:.82em"><span class="num">٢١</span> مليون معامل</h3><p style="font-size:.55em">و<span class="num">٢٢</span> ميغابايت بعد التكميم</p></div>
+        <div class="card hi fragment fade-left"><h3 class="gold" style="font-size:.82em">يعمل بلا ضبط</h3><p style="font-size:.55em">لم يرَ جبة قطّ، ويعرف لوحاتها</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 5 · على الجهاز ════════════════════════════════════════════ -->
+<section data-auto-animate data-background-color="#0B0F17">
+  <div class="rake"></div>
+  <div class="wrap">
+    <h2 data-id="head">يعمل داخل الجوّال. كلّه.</h2>
+    <p class="lede" style="margin-top:.5rem">لا خادم، ولا مفتاح واجهة، ولا إنترنت بعد أوّل تحميل.</p>
+    <div class="row" style="margin-top:2.2rem; gap:1rem">
+      <div class="card col stat fragment zoom-in"><div class="n num">٢٢</div><div class="l">ميغابايت — النموذج كلّه</div></div>
+      <div class="card col stat fragment zoom-in"><div class="n g">صفر</div><div class="l">خوادم تُدار</div></div>
+      <div class="card col stat fragment zoom-in"><div class="n">صفر</div><div class="l">تكلفة لكلّ زائر</div></div>
+      <div class="card col stat fragment zoom-in"><div class="n g num">١٠٠٪</div><div class="l">يعمل بلا اتّصال</div></div>
+    </div>
+    <div class="card hi fragment fade-up" style="margin-top:1.8rem">
+      <p style="font-size:.7em; color:var(--sand); line-height:1.75">
+        أكثر المشاريع تتوقّف حين تتوقّف الشبكة، أو حين ينفد رصيد الواجهة.
+        وهذا يعمل في وسط النفود — وتكلفته لزائرٍ واحد كتكلفته لمليون.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 6 · يتعلّم ════════════════════════════════════════════════ -->
+<section data-auto-animate>
+  <div class="wrap">
+    <div class="row" style="align-items:center; gap:1.6rem">
+      <div style="flex:0 0 150px">
+        <svg class="glyph" viewBox="0 0 100 70" style="width:100%; height:auto; color:var(--gold)" aria-hidden="true">
+          <path pathLength="100" d="M50 22 L50 44"/>
+          <path pathLength="100" d="M50 20 m -6 0 a 6 6 0 1 0 12 0 a 6 6 0 1 0 -12 0"/>
+          <path pathLength="100" d="M36 26 L64 26"/>
+          <path pathLength="100" d="M50 28 L34 36"/>
+          <path pathLength="100" d="M50 28 L66 36"/>
+          <path pathLength="100" d="M50 44 L40 64"/>
+          <path pathLength="100" d="M50 44 L60 64"/>
+        </svg>
+      </div>
+      <div style="flex:1">
+        <h2 data-id="head">ويتعلّم — داخل الجهاز</h2>
+        <p class="lede" style="margin-top:.5rem; font-size:.72em">
+          تعلُّمٌ إشرافيّ بالأمثلة: كلّ تصحيحٍ مثالٌ مُعنون يدخل النموذج فيتغيّر قراره فورًا.
+        </p>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:1.5rem; gap:.8rem">
+      <div class="card col fragment fade-up"><h3 class="terra" style="font-size:.9em">١ · يمسح</h3><p style="font-size:.55em">فيسمّي اللوحة</p></div>
+      <div class="card col fragment fade-up"><h3 class="terra" style="font-size:.9em">٢ · تصحّح</h3><p style="font-size:.55em">تضغط «ليست هذه»</p></div>
+      <div class="card col fragment fade-up"><h3 class="terra" style="font-size:.9em">٣ · يتعلّم</h3><p style="font-size:.55em">يُحفظ في جوّالك</p></div>
+      <div class="card col fragment fade-up"><h3 class="terra" style="font-size:.9em">٤ · يصيب</h3><p style="font-size:.55em">في المسح التالي</p></div>
+    </div>
+
+    <div class="row" style="margin-top:1.1rem; gap:1rem">
+      <div class="card col fragment fade-up">
+        <h3 style="font-size:.9em">لماذا يهمّ هذا</h3>
+        <p style="font-size:.56em">كلّ الصور المرجعية من زيارةٍ ميدانية واحدة: يومٌ وجوّالٌ وإضاءةٌ واحدة. وتصحيحُ الزائر صورةٌ من يومٍ آخر وجهازٍ آخر — وهو ما ينقص الفهرس.</p>
+      </div>
+      <div class="card hi col fragment fade-up">
+        <h3 class="gold" style="font-size:.9em">ويتعلّم السلبيّ أيضًا</h3>
+        <p style="font-size:.56em">صوّب على حاسوبك واضغط «ليست نقشًا أصلًا». فيصير الرفضُ جوابًا تعلّمه النظام من إنسان، لا عجزًا عن بلوغ عتبة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7 · الأرقام الأمينة ═══════════════════════════════════════ -->
+<section data-auto-animate>
+  <div class="wrap">
+    <h2 data-id="head">قياسنا الأوّل كذب علينا</h2>
+    <p class="lede" style="margin-top:.5rem; font-size:.74em">
+      قال <span class="num">٩٦٫٥٪</span>، والصادق <span class="num gold">٧٩٫٣٪</span> — وكشفُ السبب أثمنُ ما أنجزناه.
+    </p>
+
+    <div class="row" style="margin-top:1.6rem; gap:1.1rem; align-items:stretch">
+      <div class="card col" style="flex:1.2">
+        <h3 style="font-size:.92em; margin-bottom:1rem">ما قِيس</h3>
+        <div style="margin-bottom:1.1rem">
+          <div style="display:flex; justify-content:space-between; font-size:.55em; color:var(--sand-dim); margin-bottom:.35rem">
+            <span class="num">٩٦٫٥٪</span><span>بترك واحدة — قياسٌ متساهل</span>
+          </div>
+          <div class="bar"><i style="--w:96.5%; background:var(--sand-faint)"></i></div>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:.55em; color:var(--sand-dim); margin-bottom:.35rem">
+            <span class="num gold">٧٩٫٣٪</span><span>صورةٌ جديدة — قياسٌ أمين</span>
+          </div>
+          <div class="bar"><i style="--w:79.3%; background:var(--terra)"></i></div>
+        </div>
+      </div>
+      <div class="card hi col">
+        <h3 class="gold" style="font-size:.92em">العلّة التي وجدناها</h3>
+        <p style="font-size:.56em; margin-top:.5rem">
+          الصور المرجعية كلّها من زيارةٍ واحدة، فالمتتابعتان شبه متطابقتين. فكان الاختبار
+          يسأل: هل تطابق الصورةُ أختَها الملتقطة قبل ثانيتين؟
+        </p>
+        <p style="font-size:.56em; margin-top:.7rem">
+          وذاك <strong style="color:var(--sand)">تسرّبُ بيانات</strong>. فأعدنا بناء طبقة القرار على الرقم الصادق.
+        </p>
+      </div>
+    </div>
+
+    <p class="fragment fade-up gold" style="margin-top:1.5rem; font-size:.66em; font-style:italic">
+      صفر إجابة خاطئة على <span class="num">٥٣</span> صورة رملٍ وسماء،
+      و<span class="num">١٢٢</span> صورة مستقلّة لنقوشٍ أخرى في جبة.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ 8 · الختام ════════════════════════════════════════════════ -->
+<section data-auto-animate data-background-color="#0B0F17">
+  <div class="rake"></div>
+  <div class="row wrap" style="align-items:center; gap:3rem">
+    <div class="col" style="flex:0 0 auto; text-align:center">
+      <div class="qr"><img src="qr.png" alt="رمز يفتح التطبيق" /></div>
+      <p class="faint" style="font-size:.5em; margin-top:.7rem">امسح الرمز</p>
+    </div>
+    <div class="col">
+      <h1 data-id="name" style="color:var(--terra); font-size:2.6em">أثر</h1>
+      <h2 style="margin-top:.5rem; font-size:1.5em">جرّبه على جوّالك</h2>
+      <p class="num terra" style="margin-top:.7rem; font-size:.78em; direction:ltr; text-align:right">
+        w-electro.github.io/athr
+      </p>
+      <p class="lede" style="margin-top:.5rem; font-size:.6em">
+        افتحه مرّةً على الشبكة، ثم يعمل والجوّال في وضع الطيران.
+      </p>
+      <div class="row" style="margin-top:1.5rem; gap:.7rem">
+        <div class="card col fragment fade-up"><h3 class="terra" style="font-size:.8em">بلا إنترنت</h3><p style="font-size:.52em">النموذج داخل الجوّال</p></div>
+        <div class="card col fragment fade-up"><h3 class="terra" style="font-size:.8em"><span class="num">٢٩</span> لغة</h3><p style="font-size:.52em">لكلّ زائرٍ لسانه</p></div>
+        <div class="card col fragment fade-up"><h3 class="terra" style="font-size:.8em">يتعلّم</h3><p style="font-size:.52em">يقوى بكلّ تصحيح</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+</div>
+
+<script src="vendor/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    width: 1280,
+    height: 720,
+    margin: 0.06,
+    rtl: true,
+    hash: true,
+    controls: true,
+    progress: true,
+    // الانتقال المنزلق مع auto-animate يعطي الإحساس الذي يُطلب:
+    // العناصر المشتركة تنزلق بين الشريحتين بدل أن تُقطع وتُستبدل
+    transition: 'slide',
+    transitionSpeed: 'slow',
+    backgroundTransition: 'fade',
+    autoAnimateEasing: 'cubic-bezier(.2,.7,.3,1)',
+    autoAnimateDuration: 0.85,
+  })
+</script>
+</body>
+</html>
