@@ -1,6 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import { getAllSites, getSiteById, CATEGORIES, INTERESTS } from '../data/sites.js'
 import { haversineKm, HAIL_CENTER } from '../lib/geo.js'
+import { readdirSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
+
+const ROOT = process.cwd()
 
 /**
  * حارس سلامة البيانات.
@@ -118,5 +122,41 @@ describe('بيانات المواقع', () => {
   it('يعلّم جبة والشويمس كموقعَي تراث عالمي', () => {
     const unesco = sites.filter((site) => site.unesco)
     expect(unesco.map((site) => site.id)).toEqual(['jubbah', 'shuwaymis'])
+  })
+})
+
+/**
+ * حارس النسب.
+ *
+ * صور الموقع كلّها من ويكيميديا كومنز، وأكثرها CC BY-SA — ورخصةٌ كهذه
+ * تُلزم بذكر المصوّر والرخصة. والنسب هنا في موضعين: `credits.json` الذي
+ * تقرأه الشاشة، و`CREDITS.md` الذي يقرأه الإنسان.
+ *
+ * وقد تباعدا فعلًا: أُضيفت أربع صور إلى المجلّد وإلى الـjson ولم تُضف إلى
+ * الملفّ — ومنها `jubbah-02.jpg` التي صارت غلاف العرض التقديمي. وهذا
+ * تقصيرٌ في شرط رخصة، لا مجرّد نقصٍ في توثيق.
+ */
+describe('نسب الصور', () => {
+  const photos = readdirSync(join(ROOT, 'public/photos'))
+    .filter((f) => f.toLowerCase().endsWith('.jpg'))
+  const credits = JSON.parse(
+    readFileSync(join(ROOT, 'public/photos/credits.json'), 'utf8'),
+  )
+  const markdown = readFileSync(join(ROOT, 'CREDITS.md'), 'utf8')
+
+  it('كل صورة في المجلّد لها مدخل في credits.json', () => {
+    const listed = new Set(credits.map((c) => c.file))
+    expect(photos.filter((f) => !listed.has(f))).toEqual([])
+  })
+
+  it('كل مدخل يحمل مصوّرًا ورخصةً ومصدرًا', () => {
+    const incomplete = credits
+      .filter((c) => !c.author || !c.license || !c.source)
+      .map((c) => c.file)
+    expect(incomplete).toEqual([])
+  })
+
+  it('كل صورة مذكورة في CREDITS.md أيضًا', () => {
+    expect(photos.filter((f) => !markdown.includes(f))).toEqual([])
   })
 })

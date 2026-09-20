@@ -64,8 +64,12 @@ export default function ScanScreen() {
   const [frameReady, setFrameReady] = useState(false)
   const [scanFrames, setScanFrames] = useState(0)
   const scanAbortRef = useRef(false)
+  // رقم الجولة الحالية: كل جولةٍ تُبطل ما قبلها ولو لم تنتبه القديمة بعد
+  const scanRunRef = useRef(0)
   const [learnedCount, setLearnedCount] = useState(0)
   const [feedbackDone, setFeedbackDone] = useState(false)
+  // التخزين قد يكون محجوبًا؛ لا نقول «تعلّمت» ونحن لم نحفظ شيئًا
+  const [learnFailed, setLearnFailed] = useState(false)
 
   const videoRef = useRef(null)
   const canvasRef = useRef(null)
@@ -74,8 +78,17 @@ export default function ScanScreen() {
 
   const provider = getActiveProviderName()
 
-  // إيقاف الكاميرا عند مغادرة الشاشة — وإلا بقي ضوء الكاميرا مضاءً
-  useEffect(() => stopCamera, [])
+  /*
+    مغادرة الشاشة تُطفئ الكاميرا وتُنهي حلقة المسح معًا.
+
+    وقفُ البثّ وحده لا يكفي: حلقة runLiveScan تقرأ scanAbortRef، ولو
+    غادر الزائر أثناء المسح ظلّت تدور على التقاطاتٍ فارغة خمس ثوانٍ
+    (أربعون محاولة) ثمّ تستدعي setState على مكوّنٍ مفكوك.
+  */
+  useEffect(() => () => {
+    scanAbortRef.current = true
+    stopCamera()
+  }, [])
 
   function stopCamera() {
     streamRef.current?.getTracks().forEach((track) => track.stop())
@@ -128,6 +141,8 @@ export default function ScanScreen() {
   }, [state])
 
   async function startCamera() {
+    // بثٌّ سابق لم يُغلق يبقى حيًّا إلى الأبد لو كتبنا فوق مرجعه
+    stopCamera()
     setState(STATES.starting)
     setFrameReady(false)
 
@@ -160,9 +175,24 @@ export default function ScanScreen() {
   */
   async function runLiveScan() {
     setFeedbackDone(false)
+    setLearnFailed(false)
     setState(STATES.scanning)
     setScanFrames(0)
     scanAbortRef.current = false
+
+    /*
+      رقمُ جولةٍ يُبطل الجولة السابقة.
+
+      إيقافُ المسح يرفع scanAbortRef، لكنّ الحلقة لا تراه إلا بعد أن
+      ينتهي الاستدلال الجاري — وهو ثانيتان أحيانًا. فلو ضغط الزائر
+      «امسح» ثانيةً في تلك الفجوة، صفّرت الجولةُ الجديدة العلمَ قبل أن
+      تقرأه القديمة، فتستأنف القديمةُ بجلستها البائدة: حلقتان تكتبان
+      في الحالة نفسها، وشريطُ تقدّمٍ يقفز، ونتيجةٌ قد تُفرض على زائرٍ
+      عاد لتوّه إلى المعاينة.
+    */
+    const run = scanRunRef.current + 1
+    scanRunRef.current = run
+    const cancelled = () => scanAbortRef.current || scanRunRef.current !== run
 
     /*
       تحميل محرّك التعرّف قد يفشل، وأشهر أسبابه ليس نادرًا:
@@ -174,24 +204,30 @@ export default function ScanScreen() {
       وبلا هذا الالتقاط يبقى الوعد مرفوضًا بلا معالج، والحالة scanning
       إلى الأبد: شريطٌ لا يمتلئ وشاشةٌ لا تقول شيئًا.
     */
-    let session
-    try {
-      session = await createRecognitionSession()
-    } catch {
+    /** فشلُ المحرّك جوابٌ صريح، لا شاشةٌ واقفة */
+    const engineFailed = () => {
+      if (cancelled()) return
       setResult({
-        status: 'no-match',
+        status: 'engine-error',
         siteId: null,
         confidence: 0,
         evidence: ['engine-unavailable'],
       })
       setState(STATES.result)
       stopCamera()
+    }
+
+    let session
+    try {
+      session = await createRecognitionSession()
+    } catch {
+      engineFailed()
       return
     }
 
     let stalled = 0
 
-    while (!scanAbortRef.current) {
+    while (!cancelled()) {
       const image = captureFrame()
 
       /*
@@ -214,9 +250,22 @@ export default function ScanScreen() {
       try {
         outcome = await session.push({ imageBase64: image.base64 })
       } catch {
-        break   // فشل النموذج: نخرج إلى مسار اللقطة الواحدة
+        /*
+          هنا يُنزَّل النموذج أوّل مرّة، لا عند إنشاء الجلسة.
+
+          createScanSession تعود فورًا بلا شبكة، وأوّل push هو ما يجلب
+          الاثنين والعشرين ميغابايت. فكان الالتقاط أعلاه يحرس البابَ
+          الخطأ: يمسك 404 الحزمة، ويفلت منه فشلُ تنزيل الأوزان — وهو
+          الأرجح بكثير: زائرٌ خارج التغطية، أو شبكةٌ تنقطع.
+
+          وكان الخروج هنا `break` إلى ما بعد الحلقة، وليس بعدها شيء:
+          تعود الدالّة والحالة scanning، فيبقى الشريط فارغًا والعدسة
+          تنبض إلى الأبد.
+        */
+        engineFailed()
+        return
       }
-      if (scanAbortRef.current) return
+      if (cancelled()) return
 
       setScanFrames(outcome.frames)
 
@@ -254,6 +303,8 @@ export default function ScanScreen() {
 
   function stopLiveScan() {
     scanAbortRef.current = true
+    // ورقمُ الجولة يتقدّم أيضًا: الحلقة القديمة تموت ولو عادت الراية صفرًا
+    scanRunRef.current += 1
     setState(STATES.live)
   }
 
@@ -269,15 +320,33 @@ export default function ScanScreen() {
     return () => { alive = false }
   }, [])
 
-  /** يحفظ تصحيحًا ثم يُنسي الفهرس نسخته كي يعمل التصحيح فورًا */
+  /**
+   * يحفظ تصحيحًا ثم يُنسي الفهرس نسخته كي يعمل التصحيح فورًا.
+   *
+   * وإن تعذّر الحفظ قلناها. كان الرمز يقلب الشاشة إلى «تعلّمت» مهما
+   * كانت النتيجة، فيُطمئن زائرًا في تصفّحٍ خاصّ إلى أنّ الجهاز تعلّم
+   * وهو لم يكتب حرفًا — وهو أسوأ من الفشل الصريح: يظنّ أنّه أفاد.
+   */
   async function saveCorrection(siteId) {
     if (!result?.queryVectors?.length || !siteId) return
     const ok = await rememberCorrection({ vectors: result.queryVectors, siteId })
     if (ok) {
-      const { refreshIndex } = await import('../lib/recognition.local.js')
-      refreshIndex()
-      setLearnedCount((n) => n + 1)
+      try {
+        const { refreshIndex } = await import('../lib/recognition.local.js')
+        refreshIndex()
+      } catch {
+        // الحزمة قد تكون بائدة؛ التصحيح محفوظ ويظهر أثره بعد التحديث
+      }
+      /*
+        نعيد العدّ ولا نزيد واحدًا.
+
+        rememberCorrection تحفظ صفًّا لكلّ مشهد — ثمانيةً أو عشرة لا
+        واحدًا — بينما countLearned تعدّ الصفوف. فكان الرقم المعروض
+        يتخلّف عن الحقيقة، ثم يقفز عند إعادة التحميل.
+      */
+      countLearned().then(setLearnedCount).catch(() => {})
     }
+    setLearnFailed(!ok)
     setFeedbackDone(true)
   }
 
@@ -314,6 +383,17 @@ export default function ScanScreen() {
   function handleFile(event) {
     const file = event.target.files?.[0]
     if (!file) return
+
+    /*
+      الرفع يُنهي جلسة الكاميرا.
+
+      يمكن بلوغ هذا من حالة live (أيقونة المعرض بجوار الغالق)، وكانت
+      الكاميرا تبقى تعمل طوال التحليل وشاشة النتيجة بعده: ضوءٌ مضاء
+      وبطاريةٌ تُستهلك في بثٍّ لا يراه أحد.
+    */
+    scanAbortRef.current = true
+    scanRunRef.current += 1
+    stopCamera()
 
     /*
       نُفرِغ قيمة الحقل فور القراءة.
@@ -361,8 +441,18 @@ export default function ScanScreen() {
     reader.readAsDataURL(file)
   }
 
+  /*
+    العودة إلى البداية تُطفئ الكاميرا أيضًا.
+
+    كانت reset تُعيد الحالة إلى idle فيختفي عنصر الفيديو، بينما مسارات
+    البثّ باقيةٌ حيّة: ضوء الكاميرا مضاءٌ والزائر ينظر إلى شاشةٍ لا كاميرا
+    فيها. وكلّ فتحٍ بعدها يُنشئ بثًّا جديدًا فوق القديم، فتتراكم المسارات
+    إلى أن تُغلق الصفحة — لأنّ كانس الذاكرة لا يوقف مسارًا.
+  */
   function reset() {
+    stopCamera()
     setFeedbackDone(false)
+    setLearnFailed(false)
     setResult(null)
     setSnapshot(null)
     setState(STATES.idle)
@@ -538,6 +628,7 @@ export default function ScanScreen() {
           onRetry={reset}
           onCorrect={saveCorrection}
           feedbackDone={feedbackDone}
+          learnFailed={learnFailed}
           learnedCount={learnedCount}
           contentLanguage={contentLanguage}
           t={t}
@@ -631,10 +722,18 @@ function Viewfinder({ hint, scanning = false, frames = 0, max = 1 }) {
  * زرّ «ليست هذه» يفتح قائمة اللوحات، ولا يُلزم أحدًا. ومن لا يعرف الجواب
  * يمضي — فتغذيةٌ راجعة مفروضة تُنتج بياناتٍ مغشوشة، وهي أسوأ من لا شيء.
  */
-function FeedbackAsk({ mode = 'match', done, learnedCount, siteId, contentLanguage, onCorrect, t }) {
+function FeedbackAsk({ mode = 'match', done, failed, learnedCount, siteId, contentLanguage, onCorrect, t }) {
   const [picking, setPicking] = useState(false)
 
   if (done) {
+    // التخزين محجوب (تصفّحٌ خاصّ غالبًا): نقولها بدل أن نشكره على لا شيء
+    if (failed) {
+      return (
+        <p className="rounded-xl border border-night-500 bg-night-800/60 px-4 py-3 text-micro text-sand-dim">
+          {t('scan.learnFailed')}
+        </p>
+      )
+    }
     return (
       <p className="rounded-xl border border-terracotta/30 bg-terracotta/5 px-4 py-3 text-micro text-sand-dim">
         {t('scan.learned')}
@@ -927,7 +1026,7 @@ function PanelBody({ panel, t, contentDir }) {
 
 function ResultPanel({
   result, site, panel, snapshot, onRetry, onCorrect,
-  feedbackDone, learnedCount, contentLanguage, t, contentDir,
+  feedbackDone, learnFailed, learnedCount, contentLanguage, t, contentDir,
 }) {
   const percent = Math.round(result.confidence * 100)
 
@@ -949,6 +1048,26 @@ function ResultPanel({
   const label = result.label ?? site?.scan.matchLabel
   const evidence = result.evidence?.length ? result.evidence : (site?.scan.evidence ?? [])
 
+  /*
+    عطبُ المحرّك ليس «لم نتعرّف».
+
+    كان الاثنان يُعرضان شاشةً واحدة: «لم نتعرّف على الموقع · الثقة 0%».
+    فمن فشل عنده تنزيلُ النموذج يقرأ أنّ صخرته مجهولة، فيعيد المسح على
+    اللوحة نفسها مرّةً بعد مرّة — والعلّة أنّ الأوزان لم تصل أصلًا.
+    والفرق عمليّ: هذه تُحلّ بالاتصال، وتلك بتغيير الزاوية.
+  */
+  if (result.status === 'engine-error') {
+    return (
+      <div className="surface animate-rise-in space-y-4 p-5">
+        <p className="font-display text-title text-sand">{t('scan.engineFailed')}</p>
+        <p className="text-body text-sand-dim">{t('scan.engineHint')}</p>
+        <button type="button" onClick={onRetry} className="btn-primary">
+          {t('scan.retry')}
+        </button>
+      </div>
+    )
+  }
+
   if (!site) {
     return (
       <div className="surface animate-rise-in space-y-4 p-5">
@@ -957,7 +1076,7 @@ function ResultPanel({
         <p className="num text-micro text-sand-faint">
           {t('scan.confidence')}: {percent}%
         </p>
-        {result.error && (
+        {evidence.length > 0 && result.error && (
           <ul className="space-y-1.5 text-micro text-sand-faint">
             {evidence.map((item) => (
               <li key={item}>· {item}</li>
@@ -975,6 +1094,7 @@ function ResultPanel({
           <FeedbackAsk
             mode="nomatch"
             done={feedbackDone}
+            failed={learnFailed}
             learnedCount={learnedCount}
             siteId={null}
             contentLanguage={contentLanguage}
@@ -1073,6 +1193,7 @@ function ResultPanel({
           {result.queryVectors?.length > 0 && (
             <FeedbackAsk
               done={feedbackDone}
+              failed={learnFailed}
               learnedCount={learnedCount}
               siteId={result.siteId}
               contentLanguage={contentLanguage}

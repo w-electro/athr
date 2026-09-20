@@ -342,8 +342,13 @@ const LIVE_DOMINANCE = 0.6
  */
 const LIVE_MAX_DISTINCT = 2
 
-/** أدنى حصّةٍ من النافذة تجعل اللوحة «متصدّرة» فيُقال اسمها */
-const LIVE_PROBABLE_SHARE = 0.5
+/*
+  حُذف LIVE_PROBABLE_SHARE (كان 0.5).
+
+  كان يُقارَن بعد بوّابة LIVE_DOMINANCE (0.6)، فلا يصله إلا من اجتاز
+  الأعلى — شرطٌ صادقٌ دائمًا، أي ميّت. وتركُه يوهم القارئ بحدٍّ ثانٍ
+  لا وجود له. والحدّ الفعلي للدرجتين هو الهيمنة وحدها.
+*/
 
 /** الدرجة المطلوبة حين يكون الهامش عند أرضيّته */
 const LIVE_SCORE_BASE = 0.94
@@ -385,7 +390,17 @@ export function decideFromFrames(recent) {
   */
   if (siteId === NOT_A_PANEL) return null
 
-  if (hits.length / recent.length < LIVE_DOMINANCE) return null
+  /*
+    بوّابةٌ واحدة للدرجتين: الهيمنة.
+
+    كان أدناه شرطٌ ثانٍ بحصّةٍ أدنى (0.5)، وهو ميّتٌ لأنّ من يبلغه قد
+    اجتاز 0.6 أصلًا. وخفضُ البوّابة إليه يغيّر سلوكًا مقيسًا: الكلفة
+    المعلنة أعلاه (رملٌ يُسمّى 5/53) قِيست عند 0.6، ولا نملك إعادة
+    القياس الآن. فالحدّ واحدٌ صريح، والدرجتان تفترقان بالدرجة والهامش
+    لا بالحصّة.
+  */
+  const share = hits.length / recent.length
+  if (share < LIVE_DOMINANCE) return null
 
   const meanScore = hits.reduce((a, h) => a + h.topScore, 0) / hits.length
   const meanMargin = hits.reduce((a, h) => a + h.margin, 0) / hits.length
@@ -411,11 +426,7 @@ export function decideFromFrames(recent) {
   */
   const distinct = byPanel.size
 
-  if (
-    recent.length >= LIVE_WINDOW
-    && hits.length / recent.length >= LIVE_PROBABLE_SHARE
-    && distinct <= LIVE_MAX_DISTINCT
-  ) {
+  if (recent.length >= LIVE_WINDOW && distinct <= LIVE_MAX_DISTINCT) {
     return { status: 'probable', siteId, confidence: meanScore }
   }
 
@@ -596,6 +607,16 @@ export async function getExtractor(onProgress) {
         progress_callback: onProgress,
       })
     })()
+    /*
+      وعدٌ مرفوض لا يُحتفظ به.
+
+      أوزان النموذج تُنزَّل من الشبكة، وأوّل محاولةٍ قد تفشل: الزائر خارج
+      التغطية لحظةً، أو الشبكة بطيئة فتنقطع. ولو بقي الوعد المرفوض في
+      الذاكرة لفشلت كلّ محاولةٍ بعده فورًا وبالخطأ نفسه — حتى بعد عودة
+      الاتصال — ولا سبيل للزائر إلا إعادة تحميل الصفحة، وهو ما لا يخطر
+      له. فنُسقطه، ليبدأ ما بعده من جديد.
+    */
+    extractorPromise.catch(() => { extractorPromise = null })
   }
   return extractorPromise
 }
@@ -657,6 +678,8 @@ async function getIndex(extractor) {
       const learned = await loadLearned()
       return learned.length ? [...prebuilt, ...learned] : prebuilt
     })()
+    // كما في getExtractor: لا نُبقي وعدًا مرفوضًا يُفشل كلّ ما بعده
+    indexPromise.catch(() => { indexPromise = null })
   }
   return indexPromise
 }

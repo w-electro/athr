@@ -164,13 +164,20 @@ export default function AudioPlayer({ narration, siteName, siteId }) {
     }
   }, [contentLanguage, siteId, stop])
 
-  // إيقاف كل شيء عند مغادرة الشاشة أو تغيير الموقع/اللغة
+  /*
+    إيقاف كل شيء عند مغادرة الشاشة أو تغيير الموقع/اللغة.
+
+    والاعتماد على siteId واللغة لا على كائن narration: الكائن مرجعُه
+    يتغيّر مع كل إعادة عرضٍ للشاشة الأب، فكان هذا الأثر يُعاد تشغيله
+    أثناء التمرير فيقطع السرد ويعيده إلى أوّله. وهذان هما ما يعنيه
+    الشرط فعلًا — تغيّر الموقع أو اللغة.
+  */
   useEffect(() => {
     setSegIndex(0)
     setSegFraction(0)
     stop()
     return stop
-  }, [narration, stop])
+  }, [siteId, contentLanguage, stop])
 
   /* ──────────────────────────── التشغيل ──────────────────────────── */
 

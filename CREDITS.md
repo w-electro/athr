@@ -9,6 +9,10 @@ licences, resized and compressed for the web. No image content was altered.
 | الملف | الموقع | المصوّر / الجهة | الرخصة |
 |---|---|---|---|
 | `jubbah-01.jpg` | نقوش جبة الصخرية — جبل أم سنمان | Heritage Commission (هيئة التراث) | CC BY-SA 4.0 |
+| `jubbah-02.jpg` | النقوش الصخرية في جبة، حائل | Heritage Commission (هيئة التراث) | CC BY-SA 4.0 |
+| `shuwaymis-01.jpg` | الرسوم الصخرية في الشويمس، حائل | Heritage Commission (هيئة التراث) | CC BY-SA 4.0 |
+| `aarif-01.jpg` | قلعة أَعَيْرِف، حائل | ‫معلومات حائل‬‎ (عبر panoramio) | CC BY 3.0 |
+| `aarif-02.jpg` | قلعة أَعَيْرِف، حائل | Aldhamadi | CC BY-SA 4.0 |
 | `qishlah-01.jpg` | قصر القشلة، حائل | Heritage Commission (هيئة التراث) | CC BY-SA 4.0 |
 | `qishlah-02.jpg` | برج القشلة، حائل | saudipics | CC BY-SA 4.0 |
 | `qishlah-03.jpg` | القشلة، حائل | saudipics | CC BY-SA 4.0 |

@@ -46,7 +46,7 @@ export default {
       },
       fontFamily: {
         // Noto Sans اختيار مقصود لا افتراضي: اسمها من "no more tofu"،
-        // وهي العائلة الوحيدة التي تغطي الـ28 لغة دون مربعات فارغة.
+        // وهي العائلة الوحيدة التي تغطي الـ29 لغة دون مربعات فارغة.
         sans: ['Noto Sans', 'Tajawal', 'system-ui', 'sans-serif'],
         // Tajawal للعربية (طلب العميل)
         arabic: ['Tajawal', 'Noto Naskh Arabic', 'sans-serif'],

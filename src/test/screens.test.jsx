@@ -368,6 +368,63 @@ describe('شاشة المسح', () => {
     expect(container.querySelector('video').srcObject).toBe(stream)
   })
 
+  /**
+   * حارس لتسرّبٍ حقيقي: زرّ الإغلاق كان يترك الكاميرا تعمل.
+   *
+   * reset تُعيد الحالة إلى idle فيختفي عنصر الفيديو، وكانت لا تستدعي
+   * stopCamera — فتبقى مسارات البثّ حيّة وضوء الكاميرا مضاءً على شاشةٍ
+   * لا كاميرا فيها. وكانسُ الذاكرة لا يوقف مسارًا، فكلّ فتحٍ بعدها
+   * يضيف بثًّا جديدًا فوق القديم إلى أن تُغلق الصفحة.
+   *
+   * ولا يكفي التحقّق من اختفاء الفيديو: هو يختفي في الحالتين.
+   */
+  it('تُطفئ الكاميرا فعلًا عند إغلاق المعاينة', async () => {
+    const user = userEvent.setup()
+    const track = { stop: vi.fn() }
+    const stream = { getTracks: () => [track], id: 'closing-stream' }
+    Object.defineProperty(navigator, 'mediaDevices', {
+      configurable: true,
+      value: { getUserMedia: vi.fn().mockResolvedValue(stream) },
+    })
+
+    const { container } = renderApp('/scan')
+    await user.click(screen.getByRole('button', { name: 'افتح الكاميرا' }))
+    expect(container.querySelector('video')).toBeTruthy()
+
+    await user.click(await screen.findByLabelText('إغلاق الكاميرا'))
+
+    expect(track.stop).toHaveBeenCalled()
+    expect(await screen.findByRole('button', { name: 'افتح الكاميرا' })).toBeInTheDocument()
+  })
+
+  /**
+   * حارس لتسرّبٍ ثانٍ: فتحٌ فوق فتح.
+   *
+   * كانت startCamera تكتب البثّ الجديد فوق المرجع دون إيقاف القديم،
+   * فيبقى الأوّل حيًّا بلا مرجعٍ يوقفه.
+   */
+  it('توقف البثّ السابق قبل فتح بثٍّ جديد', async () => {
+    const user = userEvent.setup()
+    const first = { stop: vi.fn() }
+    const second = { stop: vi.fn() }
+    const getUserMedia = vi
+      .fn()
+      .mockResolvedValueOnce({ getTracks: () => [first], id: 'one' })
+      .mockResolvedValueOnce({ getTracks: () => [second], id: 'two' })
+    Object.defineProperty(navigator, 'mediaDevices', {
+      configurable: true,
+      value: { getUserMedia },
+    })
+
+    renderApp('/scan')
+    await user.click(screen.getByRole('button', { name: 'افتح الكاميرا' }))
+    await user.click(await screen.findByLabelText('إغلاق الكاميرا'))
+    await user.click(await screen.findByRole('button', { name: 'افتح الكاميرا' }))
+
+    expect(first.stop).toHaveBeenCalled()
+    expect(getUserMedia).toHaveBeenCalledTimes(2)
+  })
+
   it('تعود إلى أي كاميرا إن رفض الجهاز قيد الكاميرا الخلفية', async () => {
     const user = userEvent.setup()
     const stream = { getTracks: () => [{ stop: vi.fn() }] }

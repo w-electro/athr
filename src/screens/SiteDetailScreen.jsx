@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import SiteArt from '../components/SiteArt.jsx'
 import AudioPlayer from '../components/AudioPlayer.jsx'
@@ -22,8 +22,27 @@ export default function SiteDetailScreen() {
   const { siteId } = useParams()
   const navigate = useNavigate()
   const { t, contentLanguage, contentDir, hasFullContent, language, isRtl } = useI18n()
-  const site = getSiteById(siteId, contentLanguage)
-  const panels = getPanelsForSite(siteId, contentLanguage)
+  /*
+    الحفظ هنا ليس تحسينًا للأداء بل تصحيحٌ لعطب.
+
+    localize في sites.js تبني كائنًا جديدًا كلّما وُجدت ترجمةٌ محمّلة —
+    ومعه كائن narration جديد. وهذه الشاشة تُعيد العرض مع كلّ إطار تمرير
+    (setOffset في مستمع scroll)، فيتغيّر مرجع narration في كلّ مرّة،
+    فيُعاد تشغيل أثرُ التصفير في AudioPlayer: يتوقّف الصوت ويعود إلى
+    الجملة الأولى.
+
+    أي: الزائر يشغّل السرد، ثمّ ينزل ليقرأ، فيسكت الصوت ويرجع للبداية.
+    ولا يظهر بالعربية أصلًا، لأنّ localize تُرجع الكائن نفسه حين لا
+    تكون هناك ترجمةٌ فوقه — ولذلك مرّ على الاختبارات كلّها.
+  */
+  const site = useMemo(
+    () => getSiteById(siteId, contentLanguage),
+    [siteId, contentLanguage],
+  )
+  const panels = useMemo(
+    () => getPanelsForSite(siteId, contentLanguage),
+    [siteId, contentLanguage],
+  )
 
   const scrollRef = useRef(null)
   const [offset, setOffset] = useState(0)
