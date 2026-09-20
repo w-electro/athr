@@ -131,6 +131,14 @@ export default defineConfig({
         // فلا نُدرجه هنا حتى لا نُضاعف التخزين
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         navigateFallback: `${BASE}index.html`,
+        /*
+          العرض التقديمي صفحةٌ قائمة بذاتها لا مسارًا في التطبيق.
+
+          وبلا هذا الاستثناء يبتلعه navigateFallback: يطلب الزائر
+          /deck/ فيردّ عامل الخدمة بصفحة التطبيق — فلا يُفتح العرض
+          أصلًا ما دام العامل مسجّلًا. وقد وقع هذا في أوّل تجربة.
+        */
+        navigateFallbackDenylist: [/^\/athr\/deck\//],
         runtimeCaching: [
           {
             // الخطوط: تُطلب من نطاق خارجي، فنخزّنها عند أول زيارة
