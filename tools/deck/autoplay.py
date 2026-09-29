@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
-"""تشغيلٌ ذاتيّ متكرّر لشاشة الجناح.
+"""خصائص عرض شاشة الجناح.
 
-   pptxgenjs لا يكتب توقيت التقدّم ولا التكرار، فيُضافان إلى XML بعد
-   التوليد:
+   يكتب `loop="1"` في presProps.xml — فالضغطةُ بعد آخر شريحة تعود إلى
+   الأولى بدل أن تُنهي العرض. pptxgenjs لا يكتبه.
 
-     · advTm على انتقال كلّ شريحة — كم تمكث قبل التالية (بالمللي ثانية)
-     · loop="1" في presProps.xml — فتعود إلى الأولى بعد الأخيرة
+   **والتقدّم بالضغط لا بالوقت** ما لم يُطلب غيره. فإن أردت شاشةً تمشي
+   وحدها بلا يد:
 
-   وadvClick يبقى مرفوعًا: الشاشة تمشي وحدها، ومن أراد التقديم بيده
-   فله ذلك. وهذا ما يفرّق present عن kiosk — الأخير يمنع اللمس أصلًا.
+       python tools/deck/autoplay.py --auto
+       python tools/deck/autoplay.py --auto --qr 15 --panel 8
 
-     python tools/deck/autoplay.py [ملفّ.pptx] [--qr ثوانٍ] [--panel ثوانٍ]
+   وحينها يُكتب advTm على انتقال كلّ شريحة، ويبقى advClick مرفوعًا فتظلّ
+   اليد قادرةً على التقديم. ولذلك present لا kiosk — الأخيرة تمنع اللمس.
 """
 import io
 import os
@@ -24,25 +25,27 @@ sys.stdout.reconfigure(encoding='utf-8')
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, os.pardir, os.pardir))
 
+FLAGS = {'--auto'}
 args = [a for a in sys.argv[1:] if not a.startswith('--')]
+# قيمُ الخيارات ليست ملفّات
+for name in ('--qr', '--panel'):
+    if name in sys.argv:
+        v = sys.argv[sys.argv.index(name) + 1]
+        if v in args:
+            args.remove(v)
+
 SRC = args[0] if args else os.path.join(REPO, 'athr-screen-ar.pptx')
+AUTO = '--auto' in sys.argv
 
 
 def opt(name, default):
-    if name in sys.argv:
-        return float(sys.argv[sys.argv.index(name) + 1])
-    return default
+    return float(sys.argv[sys.argv.index(name) + 1]) if name in sys.argv else default
 
 
 QR_SECONDS = opt('--qr', 12)        # الرمز يمكث أطول: المارّ يحتاج وقتًا ليمسحه
 PANEL_SECONDS = opt('--panel', 6)
 
 WORK = os.path.join(HERE, '.pack')
-
-TRANSITION = (
-    '<p:transition xmlns:p14="http://schemas.microsoft.com/office/powerpoint/2010/main"'
-    ' spd="slow" p14:dur="900" advClick="1" advTm="{ms}"><p:fade/></p:transition>'
-)
 
 if os.path.isdir(WORK):
     shutil.rmtree(WORK)
@@ -60,22 +63,34 @@ for i, rel in enumerate(slides):
     p = os.path.join(WORK, rel.replace('/', os.sep))
     s = io.open(p, encoding='utf-8').read()
     assert s.endswith('</p:sld>'), 'ذيلٌ غير متوقّع في ' + rel
-    # انتقالٌ سابق يُستبدل، فلا يجتمع اثنان ويرفضهما باوربوينت
+    # انتقالٌ سابق يُزال أوّلًا، فلا يجتمع اثنان ويرفضهما باوربوينت
     s = re.sub(r'<p:transition[^>]*>.*?</p:transition>', '', s, flags=re.S)
     s = re.sub(r'<p:transition[^>]*/>', '', s)
-    ms = int((QR_SECONDS if i == 0 else PANEL_SECONDS) * 1000)
-    s = s[:-len('</p:sld>')] + TRANSITION.format(ms=ms) + '</p:sld>'
+
+    if AUTO:
+        ms = int((QR_SECONDS if i == 0 else PANEL_SECONDS) * 1000)
+        adv = ' advClick="1" advTm="%d"' % ms
+    else:
+        adv = ''
+    trans = (
+        '<p:transition xmlns:p14="http://schemas.microsoft.com/office/powerpoint/2010/main"'
+        ' spd="slow" p14:dur="900"%s><p:fade/></p:transition>' % adv
+    )
+    s = s[:-len('</p:sld>')] + trans + '</p:sld>'
     io.open(p, 'w', encoding='utf-8', newline='').write(s)
 
-# التكرار في presProps.xml لا في presentation.xml: هناك موضع خصائص العرض
+# خصائص العرض في presProps.xml لا في presentation.xml
 props = os.path.join(WORK, 'ppt', 'presProps.xml')
 s = io.open(props, encoding='utf-8').read()
-assert '<p:showPr' not in s, 'خصائص عرضٍ موجودةٌ سلفًا'
-show = '<p:showPr loop="1" showNarration="1" useTimings="1"><p:present/><p:sldAll/></p:showPr>'
+s = re.sub(r'<p:showPr\b.*?</p:showPr>', '', s, flags=re.S)
+s = re.sub(r'<p:showPr\b[^>]*/>', '', s)
+
+timing = ' useTimings="1"' if AUTO else ' useTimings="0"'
+show = ('<p:showPr loop="1" showNarration="1"%s><p:present/><p:sldAll/></p:showPr>'
+        % timing)
 
 # pptxgenjs يكتب العنصر مغلقًا على نفسه: <p:presentationPr .../>
-# فالإدراج بعده يعطي جذرين في مستندٍ واحد — وهو ما رفضه المدقّق.
-# فنفتحه أوّلًا ثمّ نضع showPr داخله.
+# فالإدراج بعده يعطي جذرين في مستندٍ واحد. فنفتحه ثمّ نضع showPr داخله.
 if re.search(r'<p:presentationPr\b[^>]*/>', s):
     s = re.sub(r'(<p:presentationPr\b[^>]*?)\s*/>',
                r'\1>' + show + '</p:presentationPr>', s, count=1)
@@ -83,7 +98,6 @@ else:
     s = re.sub(r'(<p:presentationPr\b[^>]*>)', r'\1' + show, s, count=1)
 assert '<p:showPr' in s and s.rstrip().endswith('</p:presentationPr>'), \
     'تعذّر إدراج خصائص العرض'
-
 io.open(props, 'w', encoding='utf-8', newline='').write(s)
 
 if os.path.exists(SRC):
@@ -93,5 +107,9 @@ with zipfile.ZipFile(SRC, 'w', zipfile.ZIP_DEFLATED) as z:
         z.write(os.path.join(WORK, n.replace('/', os.sep)), n)
 shutil.rmtree(WORK)
 
-print('تشغيلٌ ذاتيّ: %d شريحة — الرمز %gث، واللوحات %gث، ثمّ يعود إلى الأولى'
-      % (len(slides), QR_SECONDS, PANEL_SECONDS))
+if AUTO:
+    print('%d شريحة — تقدّمٌ تلقائي: الرمز %gث واللوحات %gث، ثمّ يعود إلى الأولى'
+          % (len(slides), QR_SECONDS, PANEL_SECONDS))
+else:
+    print('%d شريحة — التقدّم بالضغط، والضغطةُ بعد الأخيرة تعود إلى الأولى'
+          % len(slides))
