@@ -53,9 +53,16 @@ const LAT = 'Calibri'
 const ar = (o = {}) => ({ fontFace: BODY, rtlMode: true, align: 'right', margin: 0, ...o })
 const mark = (o = {}) => ar({ fontFace: DISP, bold: true, ...o })
 
+/*
+  ثمانٍ من عشر.
+
+  أُسقطت jubbah-p7 (الجِمال الثلاثة والراكب) وjubbah-p9 (جملٌ وكتابة) —
+  وهما الشريحتان الثامنة والعاشرة في العرض. وصورتاهما ما تزالان في
+  assets/screen، فإعادتُهما سطرٌ واحد.
+*/
 const PANELS = [
-  'jubbah-p1', 'jubbah-p2', 'jubbah-p3', 'jubbah-p4', 'jubbah-p5',
-  'jubbah-p6', 'jubbah-p7', 'jubbah-p8', 'jubbah-p9', 'jubbah-p10',
+  'jubbah-p1', 'jubbah-p2', 'jubbah-p3', 'jubbah-p4',
+  'jubbah-p5', 'jubbah-p6', 'jubbah-p8', 'jubbah-p10',
 ]
 
 /* ── ١ · الرمز ────────────────────────────────────────────────── */
