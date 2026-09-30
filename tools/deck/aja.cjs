@@ -148,7 +148,7 @@ function stat(s, x, y, w, num, label, color) {
   const tx = M + pw * 2 + 0.9
   s.addText(lines([
     'أثر دليل تراثي ذكي',
-    'يرسم مسار الرحلة كاملا، ومعه ماسح ذكي بنموذج DINOv3',
+    'يرسم مسار الرحلة كاملا، ويشمل ماسحا ذكيا بنموذج DINOv3',
     'يصور السائح النقش، فيسميه الماسح ويروي قصته بلغته',
   ], 16), ar({
     x: tx, y: 1.5, w: W - M - lg - 0.35 - tx, h: 2.6, fontSize: 15, color: BODYC, lineSpacing: 27,
