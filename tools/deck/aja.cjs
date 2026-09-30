@@ -140,9 +140,10 @@ function stat(s, x, y, w, num, label, color) {
   s.addImage({ data: media('screens', '04-scan.jpg'), x: M, y: 1.5, w: pw, h: ph })
   s.addImage({ data: media('screens', '03-site.jpg'), x: M + pw + 0.3, y: 1.5, w: pw, h: ph })
 
-  /* شعار أثر تحت العنوان، والنص إلى يساره */
-  const lg = 1.4
-  s.addImage({ data: media('athr-logo.png'), x: W - M - lg, y: 1.5, w: lg, h: lg })
+  /* كلمة أثر بخطها الكوفي تحت العنوان، والنص إلى يسارها */
+  const lh = 1.3
+  const lg = lh * (365 / 517)
+  s.addImage({ data: media('athr-logo.png'), x: W - M - lg, y: 1.5, w: lg, h: lh })
 
   const tx = M + pw * 2 + 0.9
   s.addText(lines([
