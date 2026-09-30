@@ -140,13 +140,17 @@ function stat(s, x, y, w, num, label, color) {
   s.addImage({ data: media('screens', '04-scan.jpg'), x: M, y: 1.5, w: pw, h: ph })
   s.addImage({ data: media('screens', '03-site.jpg'), x: M + pw + 0.3, y: 1.5, w: pw, h: ph })
 
+  /* شعار أثر تحت العنوان، والنص إلى يساره */
+  const lg = 1.4
+  s.addImage({ data: media('athr-logo.png'), x: W - M - lg, y: 1.5, w: lg, h: lg })
+
   const tx = M + pw * 2 + 0.9
   s.addText(lines([
     'أثر دليل تراثي ذكي لمنطقة حائل، يعمل دون اتصال بالإنترنت',
-    'يرسم مسار رحلة السائح كاملا، ومعه ماسح ذكي يعمل بنموذج DINOv3',
+    'يرسم مسار الرحلة كاملا، ومعه ماسح ذكي بنموذج DINOv3',
     'يصور السائح النقش، فيسميه الماسح ويروي قصته بلغته',
   ], 16), ar({
-    x: tx, y: 1.6, w: W - M - tx, h: 2.5, fontSize: 15, color: BODYC, lineSpacing: 27,
+    x: tx, y: 1.5, w: W - M - lg - 0.35 - tx, h: 2.6, fontSize: 15, color: BODYC, lineSpacing: 27,
   }))
 
   const sw = (W - M - tx - 0.24 * 2) / 3
