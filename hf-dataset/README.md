@@ -100,6 +100,12 @@ sites = load_dataset("WaleedAlshammari/hail-heritage-qa", "sites", split="train"
 
 </div>
 
+## Contact · للتواصل
+Questions, corrections, or want to collaborate on Arabic / Saudi AI evaluation?
+
+- 💬 **Open a discussion** in this dataset's [Community tab](https://huggingface.co/datasets/WaleedAlshammari/hail-heritage-qa/discussions) — public, and I'm notified
+- ✉️ **Email:** mrwaleed0f88@gmail.com
+
 ## Citation & credit
-Created by **Waleed AlOudah** (Hail, Saudi Arabia), from the [Athr project](https://github.com/w-electro/athr). Site texts © Athr, released here under
-CC BY 4.0 — please credit "Hail Heritage QA — Waleed AlOudah". Photos are not included.
+Created by **Waleed Alshammari** (Hail, Saudi Arabia), from the [Athr project](https://github.com/w-electro/athr). Site texts © Athr, released here under
+CC BY 4.0 — please credit "Hail Heritage QA — Waleed Alshammari". Photos are not included.
