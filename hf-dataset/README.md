@@ -58,7 +58,9 @@ Arabic models are often tested on Arabic in general, rarely on **local Saudi kno
 
 Grounding with verified local text took the model from about half right to **24 / 24, with nothing invented**.
 
-**Style (translationese)** — English calques per 100 words (e.g. `بالتأكيد،` · `إليك` · `مما يجعلها` · `ليست مجرد… بل` · `أتمنى أن يكون مفيدًا`) and sentence breaks per 100 words.
+**Style (translationese)** — English calques per 100 words and sentence breaks per 100 words. Calques counted include:
+
+<p dir="rtl" align="right"><b>بالتأكيد</b> ـ <b>إليك</b> ـ <b>مما يجعلها</b> ـ <b>ليست مجرد… بل</b> ـ <b>أتمنى أن يكون مفيدًا</b></p>
 
 | Text | Calques / 100 words | Sentence breaks / 100 words |
 |---|---|---|
@@ -78,7 +80,7 @@ come from training data rather than prompting. Small sample (4 long answers) —
 | `evaluate_allam.ipynb` | runs the whole evaluation on Kaggle (T4 ×2) or Colab (T4, 8-bit) |
 
 Scoring: a numeric answer is correct when every number in the reference answer appears in the model's answer
-(Arabic-Indic digits and the word `آلاف` normalised). Non-numeric answers were checked by hand.
+(Arabic-Indic digits and the Arabic word for thousands normalised). Non-numeric answers were checked by hand.
 
 ## Use
 ```python
