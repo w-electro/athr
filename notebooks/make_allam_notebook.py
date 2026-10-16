@@ -20,17 +20,24 @@ cells = [
 Does **ALLaM-7B** (SDAIA / HUMAIN, Apache-2.0) know Hail's heritage? This asks it 24 questions built from
 Athr's own verified site facts (`src/data/sites.js`), scores the answers, then asks 3 open "tour guide" questions.
 
-**Kaggle setup (once):** ⚙️ *Settings* → **Accelerator: GPU T4 x2** · **Internet: On**. Then *Run All*.
+**Kaggle:** verify your phone first (profile → Settings → Phone verification), then ⚙️ *Settings* → **Accelerator: GPU T4 x2** (or any GPU) · **Internet: On** → *Run All*.
+**Colab:** *Runtime → Change runtime type → T4 GPU* → *Run all*. On a single 15–16 GB GPU the model loads in 8-bit automatically.
 First run downloads ~15 GB (≈5–10 min). Results land in `/kaggle/working/` — download them from the *Output* tab."""),
-    code(r'''!pip -q install -U "transformers>=4.40.1" accelerate'''),
+    code(r'''!pip -q install -U "transformers>=4.40.1" accelerate bitsandbytes'''),
     code(r'''import torch, json, re, time
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
+assert torch.cuda.is_available(), "No GPU: Settings -> Accelerator -> GPU (Kaggle) / Runtime -> Change runtime type -> T4 (Colab)"
 MODEL = "humain-ai/ALLaM-7B-Instruct-preview"
+gpu_gb = sum(torch.cuda.get_device_properties(i).total_memory for i in range(torch.cuda.device_count())) / 1e9
 tok = AutoTokenizer.from_pretrained(MODEL)
-model = AutoModelForCausalLM.from_pretrained(MODEL, torch_dtype=torch.float16, device_map="auto")  # T4 = fp16
+if gpu_gb >= 20:   # Kaggle T4 x2 (~30 GB): full fp16 quality
+    model = AutoModelForCausalLM.from_pretrained(MODEL, torch_dtype=torch.float16, device_map="auto")
+else:              # one 15-16 GB GPU (Kaggle single T4 / P100, Colab T4): 8-bit fits with room to generate
+    model = AutoModelForCausalLM.from_pretrained(MODEL, device_map="auto",
+                                                 quantization_config=BitsAndBytesConfig(load_in_8bit=True))
 model.eval()
-print("loaded on", {str(p.device) for p in model.parameters()})'''),
+print(f"GPU memory {gpu_gb:.0f} GB -> {'fp16' if gpu_gb >= 20 else '8-bit'}; loaded on", {str(p.device) for p in model.parameters()})'''),
     code(r'''def ask(question, max_new_tokens=200):
     msgs = [{"role": "user", "content": question}]
     text = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
