@@ -45,7 +45,7 @@ cells = [
     md(r"""# أثر × ALLaM — Hail heritage test
 
 Does **ALLaM-7B** (SDAIA / HUMAIN, Apache-2.0) know Hail's heritage? This asks it 24 questions built from
-Athr's own verified site facts (`src/data/sites.js`), scores the answers **twice** — ALLaM alone, then ALLaM given Athr's verified site text (grounded) — and asks 3 open "tour guide" questions.
+Athr's own verified site facts (`src/data/sites.js`), scores the answers **twice** — ALLaM alone, then ALLaM given Athr's verified site text (grounded) — asks 3 open "tour guide" questions, then measures how *translated* its Arabic sounds (default vs. told to write natural Arabic).
 
 **Kaggle:** verify your phone first (profile → Settings → Phone verification), then ⚙️ *Settings* → **Accelerator: GPU T4 x2** (or any GPU) · **Internet: On** → *Run All*.
 **Colab:** *Runtime → Change runtime type → T4 GPU* → *Run all*. On a single 15–16 GB GPU the model loads in 8-bit automatically.
@@ -152,16 +152,82 @@ a = ask(GROUNDED.format(context=jubbah["context"], q=OPEN[0]), max_new_tokens=50
 open_answers.append({"q": OPEN[0] + "  [grounded]", "answer": a})
 print("Q (grounded):", OPEN[0])
 print(a)'''),
+    md(r"""## Style run — does ALLaM sound translated?
+Counts phrases that are English calques ("translationese") per 100 words, then asks the same open questions again
+with an instruction to write natural Arabic. Athr's own story text is the native-Arabic reference."""),
+    code(r'''CALQUES = {   # Arabic phrase pattern -> the English it mirrors
+    r"^\s*بالتأكيد": "Certainly,",
+    r"بكل سرور": "Sure / with pleasure",
+    r"\bإليك\b": "Here's …",
+    r"أتمنى أن (يكون|تكون)": "Hope this helps",
+    r"لا تتردد": "Don't hesitate to …",
+    r"مما يجعل(ها|ه)?": "…, making it …",
+    r"بما في ذلك": "including …",
+    r"(ليس|ليست)\s+مجرد": "not just … but",
+    r"حيث يمكن(ك|ك أن)?": "where you can …",
+    r"(يُعتبر|يعتبر|تُعتبر|تعتبر)": "is considered",
+    r"عبارة عن": "is basically",
+    r"من خلال": "through …",
+    r"بشكل (كبير|رائع|خاص)": "…-ly (adverb calque)",
+    r"وجهة مثالية": "ideal destination",
+    r"في الختام": "In conclusion",
+}
+
+def translationese(text):
+    words = max(1, len(text.split()))
+    hits = {eng: len(re.findall(p, text, re.M)) for p, eng in CALQUES.items()}
+    hits = {k: v for k, v in hits.items() if v}
+    periods = len(re.findall(r"\.(?!\d)", text))
+    return {"per100": round(100 * sum(hits.values()) / words, 2), "periods_per100": round(100 * periods / words, 2),
+            "words": words, "hits": hits}
+
+STYLE = ("اكتب بعربيةٍ فصيحةٍ أصيلة كما يكتبها كاتبٌ عربيّ، لا كنصٍّ مترجَم: صِلِ الجملَ بالواو والفاء وإذ، "
+         "وابدأ بالفعل حين يحسن ذلك، ولا تفتتح بـ«بالتأكيد» أو «بكل سرور» أو «إليك»، "
+         "ولا تختم بتمنّياتٍ مثل «أتمنى أن يكون مفيدًا».\n\n")
+
+reference = "\n".join(s["context"] for s in EVAL["sites"])
+ref = translationese(reference)
+
+styled = []
+for item in open_answers:
+    q = item["q"]
+    if q.endswith("[grounded]"):
+        prompt = STYLE + GROUNDED.format(context=jubbah["context"], q=OPEN[0])
+    else:
+        prompt = STYLE + q
+    a = ask(prompt, max_new_tokens=500)
+    styled.append({"q": q, "default": item["answer"], "styled": a,
+                   "default_score": translationese(item["answer"]), "styled_score": translationese(a)})
+    print("Q:", q)
+    print("STYLED:", a[:600])
+    print("-" * 60)'''),
+    code(r'''def avg(key, sub):
+    vals = [s[key][sub] for s in styled]
+    return round(sum(vals) / len(vals), 2)
+
+print(f"{'':28}calques/100 words   periods/100 words")
+print(f"{'Athr native text (reference)':28}{ref['per100']:>8}            {ref['periods_per100']:>8}")
+print(f"{'ALLaM default':28}{avg('default_score','per100'):>8}            {avg('default_score','periods_per100'):>8}")
+print(f"{'ALLaM + style instruction':28}{avg('styled_score','per100'):>8}            {avg('styled_score','periods_per100'):>8}")
+from collections import Counter
+total = Counter()
+for s in styled:
+    total.update(s["default_score"]["hits"])
+print("\nMost common calques in default answers:", total.most_common(6))'''),
     code(r'''import os
 OUT = "/kaggle/working" if os.path.isdir("/kaggle/working") else "."   # Kaggle or Colab
 with open(f"{OUT}/allam_athr_results.json", "w", encoding="utf-8") as f:
     json.dump({"model": MODEL, "alone": baseline, "grounded": grounded, "open": open_answers,
-               "score_alone": base_score, "score_grounded": g_score}, f, ensure_ascii=False, indent=1)
+               "score_alone": base_score, "score_grounded": g_score,
+               "style": styled, "style_reference": ref}, f, ensure_ascii=False, indent=1)
 lines = [f"**Alone:** {base_score[0]}/{base_score[1]} · **Grounded:** {g_score[0]}/{g_score[1]}", "",
          "| Site | Expected | Alone | Grounded |", "|---|---|---|---|"]
 for b, g in zip(baseline, grounded):
     cut = lambda r: r["score"] + " " + r["answer"][:90].replace("|", "/").replace("\n", " ")
     lines.append(f"| {b['site']} | {b['expected']} | {cut(b)} | {cut(g)} |")
+lines += ["", "## Style (calques per 100 words — lower = more native)",
+          f"- Athr native text: {ref['per100']}", f"- ALLaM default: {avg('default_score','per100')}",
+          f"- ALLaM + style instruction: {avg('styled_score','per100')}"]
 with open(f"{OUT}/allam_athr_results.md", "w", encoding="utf-8") as f:
     f.write("\n".join(lines))
 print(f"Saved -> {OUT}/allam_athr_results.json + .md")'''),
