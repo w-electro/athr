@@ -35,6 +35,13 @@ content of [Athr (أثر)](https://w-electro.github.io/athr/), an on-device AI h
 - **6 grounding passages** (`sites.jsonl`) — the verified text for each site — for testing retrieval-augmented answers.
 - **Results for ALLaM-7B-Instruct-preview** and the **evaluation notebook** to reproduce them on a free GPU.
 
+> ### 🏛️ Try Athr · جرّب «أثر»
+> **Athr** turns your phone into a heritage guide for Hail: point the camera at a rock inscription and an on-device AI
+> recognises it and tells its story — in 29 languages, no internet needed at the site.
+> «أثر» يحوّل هاتفك إلى مرشد تراثي في حائل: وجّه الكاميرا نحو النقش ليتعرّف عليه ويروي قصته.
+>
+> **▶ App:** https://w-electro.github.io/athr/ · **Code:** https://github.com/w-electro/athr
+
 ## Why
 Arabic models are often tested on Arabic in general, rarely on **local Saudi knowledge**. Two questions:
 1. **Facts:** does a model know Hail's heritage — or invent it?
@@ -82,12 +89,12 @@ sites = load_dataset("WaleedAlshammari/hail-heritage-qa", "sites", split="train"
 ```
 
 ## الملخص بالعربية
-مجموعة أسئلة موثّقة عن مواقع التراث في **منطقة حائل**، مأخوذة من محتوى تطبيق «أثر»: ٢٤ سؤالًا بإجابات قصيرة موثّقة عن
+مجموعة أسئلة موثّقة عن مواقع التراث في **منطقة حائل**، مأخوذة من محتوى تطبيق «أثر» (https://w-electro.github.io/athr/): ٢٤ سؤالًا بإجابات قصيرة موثّقة عن
 ستة مواقع، مع نصوص موثّقة لكل موقع لاختبار الإجابة المستندة إلى المصادر.
 في اختبار نموذج «علّام» ALLaM-7B: أجاب وحده عن ٧ من ١٤ معلومة رقمية واختلق تفاصيل، وحين زُوّد بالنص الموثّق أجاب عن
 الأسئلة الأربعة والعشرين كلها بلا اختلاق. أما الأسلوب فما زال يحمل إيقاع الإنجليزية المترجمة، ولم تُصلحه التعليمات
 وحدها — وهي ملاحظة نرجو أن تفيد في تطوير النماذج العربية.
 
 ## Citation & credit
-Created by **Waleed AlOudah** (Hail, Saudi Arabia), from the Athr project. Site texts © Athr, released here under
+Created by **Waleed AlOudah** (Hail, Saudi Arabia), from the [Athr project](https://github.com/w-electro/athr). Site texts © Athr, released here under
 CC BY 4.0 — please credit "Hail Heritage QA — Waleed AlOudah". Photos are not included.
