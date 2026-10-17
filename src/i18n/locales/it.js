@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'La tua guida al patrimonio di Ha’il — nella tua lingua.',
-    detected: 'Lingua del tuo dispositivo',
     choose: 'Scegli la tua lingua',
-    search: 'Cerca una lingua',
-    noResults: 'Nessuna lingua con questo nome.',
     start: 'Inizia',
     count: '{count} lingue',
     changeHint: 'Puoi cambiarla in qualsiasi momento.',

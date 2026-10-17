@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'Pemandu Anda menyusuri warisan Hail — dalam bahasa Anda.',
-    detected: 'Bahasa perangkat Anda',
     choose: 'Pilih bahasa Anda',
-    search: 'Cari bahasa',
-    noResults: 'Tidak ada bahasa dengan nama itu.',
     start: 'Mulai',
     count: '{count} bahasa',
     changeHint: 'Anda dapat mengubahnya kapan saja.',

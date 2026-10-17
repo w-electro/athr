@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'Tu guía del patrimonio de Hail — en tu idioma.',
-    detected: 'Idioma de tu dispositivo',
     choose: 'Elige tu idioma',
-    search: 'Buscar un idioma',
-    noResults: 'No hay ningún idioma con ese nombre.',
     start: 'Comenzar',
     count: '{count} idiomas',
     changeHint: 'Puedes cambiarlo en cualquier momento.',

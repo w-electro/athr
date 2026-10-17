@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'হাইলের ঐতিহ্যে আপনার পথপ্রদর্শক — আপনার ভাষায়।',
-    detected: 'আপনার ডিভাইসের ভাষা',
     choose: 'আপনার ভাষা বেছে নিন',
-    search: 'ভাষা খুঁজুন',
-    noResults: 'এই নামে কোনো ভাষা নেই।',
     start: 'শুরু করুন',
     count: '{count}টি ভাষা',
     changeHint: 'আপনি যেকোনো সময় এটি বদলাতে পারেন।',

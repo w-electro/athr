@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'Ваш путівник спадщиною Хаїля — вашою мовою.',
-    detected: 'Мова вашого пристрою',
     choose: 'Оберіть мову',
-    search: 'Знайти мову',
-    noResults: 'Мови з такою назвою немає.',
     start: 'Почати',
     count: '{count} мов',
     changeHint: 'Ви можете змінити це будь-коли.',

@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'اثر',
     subtitle: 'راهنمای شما در میراث حائل — به زبان خودتان.',
-    detected: 'زبان دستگاه شما',
     choose: 'زبان خود را انتخاب کنید',
-    search: 'جست‌وجوی زبان',
-    noResults: 'زبانی با این نام یافت نشد.',
     start: 'شروع',
     count: '{count} زبان',
     changeHint: 'هر زمان می‌توانید آن را تغییر دهید.',

@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: '帶您走進哈伊勒的遺產——用您的語言。',
-    detected: '您的裝置語言',
     choose: '選擇您的語言',
-    search: '搜尋語言',
-    noResults: '沒有這個名稱的語言。',
     start: '開始',
     count: '{count} 種語言',
     changeHint: '您可以隨時更改。',

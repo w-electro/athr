@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'Ваш путеводитель по наследию Хаиля — на вашем языке.',
-    detected: 'Язык вашего устройства',
     choose: 'Выберите язык',
-    search: 'Найти язык',
-    noResults: 'Языка с таким названием нет.',
     start: 'Начать',
     count: '{count} языков',
     changeHint: 'Вы можете изменить это в любой момент.',

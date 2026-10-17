@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'המדריך שלך למורשת חאיל — בשפה שלך.',
-    detected: 'שפת המכשיר שלך',
     choose: 'בחר את שפתך',
-    search: 'חיפוש שפה',
-    noResults: 'אין שפה בשם הזה.',
     start: 'התחלה',
     count: '{count} שפות',
     changeHint: 'אפשר לשנות זאת בכל רגע.',

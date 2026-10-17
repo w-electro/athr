@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: '하일의 유산을 안내합니다 — 당신의 언어로.',
-    detected: '기기 언어',
     choose: '언어를 선택하세요',
-    search: '언어 검색',
-    noResults: '그런 이름의 언어가 없습니다.',
     start: '시작하기',
     count: '{count}개 언어',
     changeHint: '언제든지 바꿀 수 있습니다.',

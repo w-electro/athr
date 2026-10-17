@@ -63,8 +63,7 @@ describe('شاشة اختيار اللغة', () => {
     expect(screen.getByRole('button', { name: /தமிழ்/ })).toBeInTheDocument()
   })
 
-  it('تصفّي اللغات بالبحث', async () => {
-    const user = userEvent.setup()
+  it('لا تعرض بطاقة لغة الجهاز ولا خانة بحث: الشبكة وحدها وزرّ البدء', () => {
     render(
       <I18nProvider>
         <MemoryRouter>
@@ -72,11 +71,10 @@ describe('شاشة اختيار اللغة', () => {
         </MemoryRouter>
       </I18nProvider>,
     )
-
-    const search = screen.getAllByRole('searchbox')[0]
-    await user.type(search, 'türk')
-    expect(screen.getByRole('button', { name: /Türkçe/ })).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: /日本語/ })).not.toBeInTheDocument()
+    expect(screen.queryByRole('searchbox')).not.toBeInTheDocument()
+    expect(screen.queryByText(/Your device language|لغة جهازك/)).not.toBeInTheDocument()
+    // كل لغة تظهر مرة واحدة فقط (بلا بطاقة مكرّرة للغة الجهاز)
+    expect(screen.getAllByRole('button', { name: /English/ })).toHaveLength(1)
   })
 
   it('تبدّل الواجهة فور اختيار لغة، ثم تدخل التطبيق', async () => {

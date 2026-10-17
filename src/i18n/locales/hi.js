@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'हाइल की विरासत में आपका मार्गदर्शक — आपकी भाषा में।',
-    detected: 'आपके उपकरण की भाषा',
     choose: 'अपनी भाषा चुनें',
-    search: 'भाषा खोजें',
-    noResults: 'इस नाम की कोई भाषा नहीं।',
     start: 'शुरू करें',
     count: '{count} भाषाएँ',
     changeHint: 'आप इसे कभी भी बदल सकते हैं।',

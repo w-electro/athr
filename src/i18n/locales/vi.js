@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'Người dẫn đường của bạn đến di sản Hail — bằng ngôn ngữ của bạn.',
-    detected: 'Ngôn ngữ thiết bị của bạn',
     choose: 'Chọn ngôn ngữ của bạn',
-    search: 'Tìm ngôn ngữ',
-    noResults: 'Không có ngôn ngữ nào tên như vậy.',
     start: 'Bắt đầu',
     count: '{count} ngôn ngữ',
     changeHint: 'Bạn có thể đổi bất cứ lúc nào.',

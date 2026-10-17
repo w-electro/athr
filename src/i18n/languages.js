@@ -18,7 +18,7 @@
  * الحقول:
  *   code    رمز BCP-47 (يطابق ما يعيده navigator.language)
  *   native  اسم اللغة بلغتها هي — هذا ما يراه المستخدم، دائمًا
- *   english الاسم بالإنجليزية، للبحث فقط
+ *   english الاسم بالإنجليزية، للمرجع
  *   dir     اتجاه الكتابة
  *   sample  كلمة "مرحبًا" بتلك اللغة — تُستخدم في شاشة الترحيب
  */
@@ -112,16 +112,4 @@ export function detectDeviceLanguage() {
   if (typeof navigator === 'undefined') return null
   const candidates = [...(navigator.languages || []), navigator.language]
   return matchDeviceLanguage(candidates)
-}
-
-/** بحث بسيط في القائمة بالاسم الأصلي أو الإنجليزي أو الرمز. */
-export function searchLanguages(query) {
-  const needle = query.trim().toLowerCase()
-  if (!needle) return LANGUAGES
-  return LANGUAGES.filter(
-    (language) =>
-      language.native.toLowerCase().includes(needle) ||
-      language.english.toLowerCase().includes(needle) ||
-      language.code.toLowerCase().includes(needle),
-  )
 }

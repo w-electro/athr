@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'Mwongozo wako katika urithi wa Hail — kwa lugha yako.',
-    detected: 'Lugha ya kifaa chako',
     choose: 'Chagua lugha yako',
-    search: 'Tafuta lugha',
-    noResults: 'Hakuna lugha yenye jina hilo.',
     start: 'Anza',
     count: 'Lugha {count}',
     changeHint: 'Unaweza kubadilisha wakati wowote.',

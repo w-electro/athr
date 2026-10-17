@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'Dein Guide zum Kulturerbe von Hail — in deiner Sprache.',
-    detected: 'Sprache deines Geräts',
     choose: 'Wähle deine Sprache',
-    search: 'Sprache suchen',
-    noResults: 'Keine Sprache mit diesem Namen.',
     start: 'Starten',
     count: '{count} Sprachen',
     changeHint: 'Du kannst sie jederzeit ändern.',

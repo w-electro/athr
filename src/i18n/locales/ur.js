@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'اثر',
     subtitle: 'حائل کے ورثے میں آپ کا رہنما — آپ کی زبان میں۔',
-    detected: 'آپ کے آلے کی زبان',
     choose: 'اپنی زبان منتخب کریں',
-    search: 'زبان تلاش کریں',
-    noResults: 'اس نام کی کوئی زبان نہیں۔',
     start: 'شروع کریں',
     count: '{count} زبانیں',
     changeHint: 'آپ اسے کسی بھی وقت بدل سکتے ہیں۔',

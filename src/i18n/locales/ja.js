@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'ハーイルの遺産へのガイド — あなたの言語で。',
-    detected: 'お使いの端末の言語',
     choose: '言語を選んでください',
-    search: '言語を検索',
-    noResults: 'その名前の言語はありません。',
     start: 'はじめる',
     count: '{count} 言語',
     changeHint: 'いつでも変更できます。',

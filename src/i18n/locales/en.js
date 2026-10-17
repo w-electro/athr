@@ -6,10 +6,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'Your guide to the heritage of Hail — in your language.',
-    detected: 'Your device language',
     choose: 'Choose your language',
-    search: 'Search for a language',
-    noResults: 'No language by that name.',
     start: 'Start',
     count: '{count} languages',
     changeHint: 'You can change this at any time.',

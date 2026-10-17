@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'Votre guide du patrimoine de Haïl — dans votre langue.',
-    detected: 'Langue de votre appareil',
     choose: 'Choisissez votre langue',
-    search: 'Rechercher une langue',
-    noResults: 'Aucune langue de ce nom.',
     start: 'Commencer',
     count: '{count} langues',
     changeHint: 'Vous pourrez la changer à tout moment.',

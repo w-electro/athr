@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'Hail’in mirasında rehberiniz — kendi dilinizde.',
-    detected: 'Cihazınızın dili',
     choose: 'Dilinizi seçin',
-    search: 'Dil ara',
-    noResults: 'Bu adda bir dil yok.',
     start: 'Başla',
     count: '{count} dil',
     changeHint: 'Bunu istediğiniz zaman değiştirebilirsiniz.',

@@ -12,10 +12,7 @@ export default {
   welcome: {
     title: 'أثر',
     subtitle: 'دليلك في تراث حائل، بلغتك أنت.',
-    detected: 'لغة جهازك',
     choose: 'اختر لغتك',
-    search: 'ابحث عن لغة',
-    noResults: 'لا توجد لغةٌ بهذا الاسم',
     start: 'ابدأ',
     count: '{count} لغة',
     changeHint: 'ويمكنك تغييرها في أيّ وقت.',

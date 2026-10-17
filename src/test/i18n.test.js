@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { LOCALES } from '../i18n/locales/index.js'
-import { LANGUAGES, matchDeviceLanguage, searchLanguages, getLanguage } from '../i18n/languages.js'
+import { LANGUAGES, matchDeviceLanguage, getLanguage } from '../i18n/languages.js'
 import ar from '../i18n/locales/ar.js'
 
 /** يسطّح كائنًا متداخلًا إلى قائمة مفاتيح منقّطة. */
@@ -182,21 +182,3 @@ describe('مطابقة لغة الجهاز', () => {
   })
 })
 
-describe('البحث في اللغات', () => {
-  it('يبحث بالاسم الأصلي', () => {
-    expect(searchLanguages('日本').map((l) => l.code)).toEqual(['ja'])
-  })
-
-  it('يبحث بالاسم الإنجليزي ولا يفرّق بين الحالات', () => {
-    expect(searchLanguages('GERMAN').map((l) => l.code)).toEqual(['de'])
-  })
-
-  it('يعيد القائمة كاملة عند بحث فارغ', () => {
-    expect(searchLanguages('   ')).toHaveLength(LANGUAGES.length)
-  })
-
-  it('يجلب لغة بالرمز', () => {
-    expect(getLanguage('sw').native).toBe('Kiswahili')
-    expect(getLanguage('nope')).toBeUndefined()
-  })
-})

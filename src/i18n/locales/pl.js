@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'Twój przewodnik po dziedzictwie Hail — w Twoim języku.',
-    detected: 'Język Twojego urządzenia',
     choose: 'Wybierz swój język',
-    search: 'Szukaj języka',
-    noResults: 'Brak języka o tej nazwie.',
     start: 'Rozpocznij',
     count: '{count} języków',
     changeHint: 'Możesz to zmienić w dowolnej chwili.',

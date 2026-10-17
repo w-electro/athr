@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'ผู้นำทางสู่มรดกแห่งฮาอิล — ในภาษาของคุณ',
-    detected: 'ภาษาของอุปกรณ์คุณ',
     choose: 'เลือกภาษาของคุณ',
-    search: 'ค้นหาภาษา',
-    noResults: 'ไม่มีภาษาชื่อนี้',
     start: 'เริ่ม',
     count: '{count} ภาษา',
     changeHint: 'คุณเปลี่ยนได้ทุกเมื่อ',

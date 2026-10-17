@@ -4,10 +4,7 @@ export default {
   welcome: {
     title: 'Athr',
     subtitle: 'Jouw gids voor het erfgoed van Hail — in jouw taal.',
-    detected: 'Taal van je apparaat',
     choose: 'Kies je taal',
-    search: 'Zoek een taal',
-    noResults: 'Geen taal met die naam.',
     start: 'Beginnen',
     count: '{count} talen',
     changeHint: 'Je kunt dit altijd wijzigen.',
