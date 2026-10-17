@@ -21,7 +21,8 @@
  * و normalize من recognition.local.js مباشرةً. نسخةٌ واحدة من المنطق، فلا
  * مجال لانحرافٍ بين ما يُبنى وما يُطابَق.
  */
-import { existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
+import { mergeLearned } from './learned-lib.mjs'
 import { basename, join, resolve } from 'node:path'
 
 import {
@@ -258,6 +259,17 @@ writeFileSync(
   }),
   'utf8',
 )
+
+// تصحيحات الزوّار المضمومة سابقًا (learned/) تبقى بعد إعادة البناء من الصور
+const LEARNED_DIR = join(ROOT, 'learned')
+if (existsSync(LEARNED_DIR)) {
+  const built = JSON.parse(readFileSync(OUT_PATH, 'utf8'))
+  for (const f of readdirSync(LEARNED_DIR).filter((n) => n.endsWith('.json'))) {
+    const { added } = mergeLearned(built, JSON.parse(readFileSync(join(LEARNED_DIR, f), 'utf8')), f)
+    console.log(`  + ${added} من تصحيحات ${f}`)
+  }
+  writeFileSync(OUT_PATH, JSON.stringify(built), 'utf8')
+}
 
 const sizeKb = statSync(OUT_PATH).size / 1024
 console.log(`\n✓ public/reference-index.json`)

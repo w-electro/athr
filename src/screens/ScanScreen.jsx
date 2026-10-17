@@ -738,7 +738,8 @@ function FeedbackAsk({ mode = 'match', done, failed, learnedCount, siteId, conte
       <p className="rounded-xl border border-terracotta/30 bg-terracotta/5 px-4 py-3 text-micro text-sand-dim">
         {t('scan.learned')}
         {learnedCount > 0 && (
-          <span className="num text-sand-faint"> · {learnedCount}</span>
+          // الرقم بابٌ خفيّ لإرسال التصحيحات إلى الحاسوب (/learning)
+          <Link to="/learning" className="num text-sand-faint underline"> · {learnedCount}</Link>
         )}
       </p>
     )

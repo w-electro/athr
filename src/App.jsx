@@ -5,6 +5,7 @@ import SiteDetailScreen from './screens/SiteDetailScreen.jsx'
 import ScanScreen from './screens/ScanScreen.jsx'
 import TripScreen from './screens/TripScreen.jsx'
 import WelcomeScreen from './screens/WelcomeScreen.jsx'
+import LearningExport from './screens/LearningExport.jsx'
 import { useI18n } from './i18n/index.jsx'
 
 /**
@@ -30,6 +31,7 @@ export default function App() {
       </Route>
       <Route path="/site/:siteId" element={<SiteDetailScreen />} />
       <Route path="/language" element={<LanguageRoute />} />
+      <Route path="/learning" element={<LearningExport />} />
       <Route path="*" element={<Navigate to="/explore" replace />} />
     </Routes>
   )

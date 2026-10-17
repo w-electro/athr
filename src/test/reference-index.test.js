@@ -70,6 +70,7 @@ describe('فهرس التعرّف', () => {
     const panelIds = new Set(PANELS.map((panel) => panel.id))
 
     for (const label of new Set(index.entries.map((entry) => entry.siteId))) {
+      if (label === NOT_A_PANEL) continue // أمثلةٌ سلبية من تصحيحات الزوّار
       const known = isPanelId(label) ? panelIds.has(label) : siteIds.has(label)
       expect(known, `تسمية مجهولة في الفهرس: ${label}`).toBe(true)
 
@@ -80,7 +81,8 @@ describe('فهرس التعرّف', () => {
 
   it('يعطي كل تسمية عدّة صور مرجعية لا صورة واحدة', () => {
     const counts = {}
-    for (const entry of index.entries) {
+    // يخصّ صور الزيارة الميدانية؛ تصحيحات الزوّار إضافةٌ فوقها
+    for (const entry of index.entries.filter((e) => !e.learned)) {
       counts[entry.siteId] = (counts[entry.siteId] ?? 0) + 1
     }
     for (const [label, count] of Object.entries(counts)) {
@@ -144,10 +146,11 @@ describe('سلوك المطابقة على الفهرس المشحون', () => {
     return topScore >= SIMILARITY_THRESHOLD && margin >= MIN_MARGIN ? topSiteId : null
   }
 
-  const results = index.entries.map((entry, i) => ({
+  // نسأل بصور الزيارة الميدانية؛ تصحيحات الزوّار تبقى في المجمّع تساعد ولا تُسأل
+  const results = index.entries.flatMap((entry, i) => (entry.learned ? [] : [{
     expected: entry.siteId,
     got: classify(i),
-  }))
+  }]))
 
   /**
    * الشرط الذي لا يُتنازل عنه: لا إجابة واثقة خاطئة. «لم أتعرّف» إزعاج
@@ -184,7 +187,8 @@ describe('سلوك المطابقة على الفهرس المشحون', () => {
    * المتساهل بعد اليوم.
    */
   it('يقيس التعرّف على لقطة جديدة لا على أختها من اللقطة نفسها', () => {
-    const numbered = index.entries.map((e) => ({
+    // تصحيحات الزوّار بلا ترقيم جلسة: نقيس على صور الزيارة الميدانية وحدها
+    const numbered = index.entries.filter((e) => !e.learned).map((e) => ({
       ...e,
       num: Number((e.photo.match(/(\d+)/) || [0, 0])[1]),
     }))
