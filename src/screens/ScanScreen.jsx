@@ -548,14 +548,17 @@ export default function ScanScreen() {
             // أول إطار وصل فعلًا: الآن فقط صارت videoWidth حقيقية
             onLoadedMetadata={() => setFrameReady(true)}
             /*
-              ارتفاعٌ يتبع الشاشة لا رقمٌ ثابت.
+              كادرٌ طوليّ (3:4) لا مربّع.
 
-              26rem ثابتةً لا تسع هاتفًا بارتفاع 667 بكسل: تدفع زرّ
-              الغالق تحت شريط التنقّل فيُغطّى نصفُه، والصفحة لا تُمرَّر
-              لكشفه. فصار الارتفاع يتقلّص مع الشاشة القصيرة ويقف عند
-              26rem على الطويلة، فلا يُقصّ الزرّ ولا تكبر الصورة بلا داعٍ.
+              اللوحات الصخرية تُصوَّر والجوّال قائم، وإطار الكاميرا الخلفية
+              في الوضع القائم طوليّ أصلًا، فالكادر الطوليّ يُري الزائر معظم
+              ما يلتقطه فعلًا. والسقف يتبع الشاشة: على هاتفٍ قصير يتقلّص
+              الارتفاع فلا يُدفع زرّ الغالق تحت شريط التنقّل.
+
+              التعرّف لا يتأثّر: captureFrame يرسم إطار الكاميرا كاملًا،
+              وقصّات المركز في recognition.local.js نسبيّة لا مربّعة.
             */
-            className={`h-[clamp(13rem,46dvh,26rem)] w-full object-cover transition-opacity duration-500 ${
+            className={`aspect-[3/4] max-h-[calc(100dvh-15rem)] min-h-[13rem] w-full object-cover transition-opacity duration-500 ${
               state === STATES.analyzing ? 'opacity-25' : ''
             }`}
           />
@@ -1030,6 +1033,9 @@ function ResultPanel({
   feedbackDone, learnFailed, learnedCount, contentLanguage, t, contentDir,
 }) {
   const percent = Math.round(result.confidence * 100)
+  // علامة الاستفهام العربية «؟» للعربية والفارسية والأردية فقط، واللاتينية لبقية اللغات
+  const { language } = useI18n()
+  const question = ['ar', 'fa', 'ur'].includes(language) ? '؟' : '?'
 
   /*
     النتيجة المرجّحة تُعرض باسمها لا بالصمت.
@@ -1132,7 +1138,7 @@ function ResultPanel({
                 : 'border-terracotta/50 bg-basalt/70 text-terracotta-bright'
             }`}
           >
-            {tentative ? `؟ ${t('scan.tentative')}` : `✓ ${t('scan.matched')}`}
+            {tentative ? `${question} ${t('scan.tentative')}` : `✓ ${t('scan.matched')}`}
           </span>
         </SiteArt>
 
